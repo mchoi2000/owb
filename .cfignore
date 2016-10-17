@@ -1,0 +1,11 @@
+node_modules/
+test/
+coverage/
+.DS_Store
+reports/
+.tmp/
+.git/
+docs/
+productsdb/
+db/
+server/config/local.env.js

@@ -5,6 +5,7 @@
 //US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 //Schedule Contract with IBM Corp.
 //SSO Unit Testing
+/*
 'use strict';
 var proxyquire = require('proxyquire').noCallThru();
 var should = require('should');
@@ -499,3 +500,4 @@ describe('oidc', function() {
     sso.routes(mockApp, mockPassport);
   });
 });
+*/

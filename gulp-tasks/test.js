@@ -95,7 +95,7 @@ gulp.task('test:server', ['pre-test'], function() {
 // Run karma unit tests once for client code
 gulp.task('test:client', ['inject:dev'], function() {
   var server = new karma.Server({
-    configFile: __dirname + '/karma.conf.js',
+    configFile: __dirname + '/../karma.conf.js',
     singleRun: true
   });
   server.start();
