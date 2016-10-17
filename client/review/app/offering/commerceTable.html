@@ -1,0 +1,78 @@
+<table class="table table-bordered commerce_review_details_table center_text">
+  <thead>
+    <tr>
+      <th class="center_text table_side_column"></th>
+      <th class="center_text" ng-repeat="plan in $ctrl.plans">Edition {{$index + 1}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Edition Name</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">{{plan.name}}</td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Description</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">{{plan.description}}</td>
+    </tr>
+    <tr ng-repeat="index in $ctrl.maxDetails">
+      <td class="table_header text_align_left table_side_column"><strong>Detail {{index + 1}}</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">
+        <div ng-show="plan.planDetails.length > index && plan.planDetails[index].value !== ''">{{plan.planDetails[index].value}}</div>
+        <em ng-show="(plan.planDetails.length > index && plan.planDetails[index].value === '') || plan.planDetails.length <= index" class="ibmGray-40">No content provided</em>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Edition Type</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">{{$ctrl.typeMap[plan.planType]}}</td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Free Edition URL</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">
+        <a target="_blank" ng-show="plan.freePlanURL.length > 0" href="{{plan.freePlanURL}}">{{plan.freePlanURL}}</a>
+        <em class="ibmGray-40" ng-hide="plan.freePlanURL.length > 0">N/A</em>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Has Configuration Options</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">{{plan.customerConfiguredOptions ? 'Yes' : 'No'}}</td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Display price?</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">
+        <em class="ibmGray-40" ng-show="plan.planType === $ctrl.types.FREE_EDITION || plan.planType === $ctrl.types.FREE_TRIAL">N/A</em>
+        <div ng-hide="plan.planType === $ctrl.types.FREE_EDITION || plan.planType === $ctrl.types.FREE_TRIAL">
+          <em class="ibmGray-40" ng-show="(plan.planType === $ctrl.types.SELF_SERVICE ||
+                                           plan.planType === $ctrl.types.SALES_SUPPORT) &&
+                                           (plan.priceRequired === undefined || plan.priceRequired === '')">N/A</em>
+          <div ng-show="plan.priceRequired !== undefined && plan.priceRequired !== ''">{{plan.priceRequired}}</div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Pricing Label</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">
+        <em class="ibmGray-40" ng-show="plan.planType === $ctrl.types.FREE_EDITION || plan.planType === $ctrl.types.FREE_TRIAL">N/A</em>
+        <div ng-hide="plan.planType === $ctrl.types.FREE_EDITION || plan.planType === $ctrl.types.FREE_TRIAL">
+          <em class="ibmGray-40" ng-show="(plan.planType === $ctrl.types.SELF_SERVICE ||
+                                           plan.planType === $ctrl.types.SALES_SUPPORT) &&
+                                           (plan.pricingLabel === undefined || plan.pricingLabel === '')">No content provided</em>
+          <div ng-show="plan.pricingLabel !== undefined && plan.pricingLabel !== ''">{{plan.pricingLabel}}</div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Free Trial URL</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">
+        <a target="_blank" ng-show="plan.freeTrialURL.length > 0" href="{{plan.freeTrialURL}}">{{plan.freeTrialURL}}</a>
+        <em class="ibmGray-40" ng-hide="plan.freeTrialURL.length > 0">N/A</em>
+      </td>
+    </tr>
+    <tr>
+      <td class="table_header text_align_left table_side_column"><strong>Length of Free Trial</strong></td>
+      <td ng-repeat="plan in $ctrl.plans">
+        <div ng-show="plan.freeTrialLength.length > 0">{{plan.freeTrialLength}}</div>
+        <em class="ibmGray-40" ng-hide="plan.freeTrialLength.length > 0">N/A</em>
+      </td>
+    </tr>
+  </tbody>
+</table>

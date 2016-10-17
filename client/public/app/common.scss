@@ -1,0 +1,1476 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+/* Common Styles */
+
+/* Fonts */
+.light-font { font-family: $ibmHelvLight, arial, sans-serif; font-weight: normal !important; }
+.regular-font { font-family: $ibmHelvRegular, arial, sans-serif; font-weight: normal !important;}
+.bold-font { font-family: $ibmHelvBold, arial, sans-serif; font-weight: normal !important; }
+
+/* Sprites */
+.icon_sprite, .large_icon_sprite, .btn.icon_sprite, .btn.large_icon_sprite {
+  background-image: url($iconsSprite);
+  background-repeat: no-repeat;
+}
+.large_icon_sprite {
+  background-image: url($largeIconsSprite)
+}
+
+/* Colors */
+
+/* IBM Grays */
+.ibmGray-80 { color: $ibmGray-80 !important; }
+.ibmGray-70 { color: $ibmGray-70 !important; }
+.ibmGray-60 { color: $ibmGray-60 !important; }
+.ibmGray-50 { color: $ibmGray-50 !important; }
+.ibmGray-40 { color: $ibmGray-40 !important; }
+.ibmGray-30 { color: $ibmGray-30 !important; }
+.ibmGray-20 { color: $ibmGray-20 !important; }
+.ibmGray-10 { color: $ibmGray-10 !important; }
+.ibmNeutral-2 { color: $ibmNeutral-2 !important; }
+.ibmWhite { color: $ibmWhite !important; }
+
+/* IBM Blues */
+.ibmBlue-60 { color: $ibmBlue-60 !important; }
+.ibmBlue-50 { color: $ibmBlue-50 !important; }
+.ibmBlue-40 { color: $ibmBlue-40 !important; }
+.ibmBlue-30 { color: $ibmBlue-30 !important; }
+.ibmBlue-20 { color: $ibmBlue-20 !important; }
+.lightestBlue { color: $lightestBlue !important; }
+
+/* IBM Greens */
+.ibm-Green60 { color: $ibm-Green60 !important; }
+.ibm-Green50 { color: $ibm-Green50 !important; }
+.ibm-Green40 { color: $ibm-Green40 !important; }
+.ibm-Green30 { color: $ibm-Green30 !important; }
+.ibm-Green10 { color: $ibm-Green10 !important; }
+
+/* IBM Magentas */
+.ibmMagenta-60 { color: $ibmMagenta-60 !important; }
+.ibmMagenta-50 { color: $ibmMagenta-50 !important; }
+.ibmMagenta-30 { color: $ibmMagenta-30 !important; }
+.ibmMagenta-20 { color: $ibmMagenta-20 !important; }
+
+/* IBM Oranges */
+.ibmOrange-60 { color: $ibmOrange-60 !important; }
+.ibmOrange-50 { color: $ibmOrange-50 !important; }
+.ibmOrange-40 { color: $ibmOrange-40 !important; }
+.ibmOrange-30 { color: $ibmOrange-30 !important; }
+
+/* IBM Purples */
+.ibmPurple-70 { color: $ibmPurple-70 !important; }
+.ibmPurple-60 { color: $ibmPurple-60 !important; }
+.ibmPurple-50 { color: $ibmPurple-50 !important; }
+.ibmPurple-30 { color: $ibmPurple-30 !important; }
+.ibmPurple-20 { color: $ibmPurple-20 !important; }
+
+/* IBM Reds */
+.ibmRed-70 { color: $ibmRed-70 !important; }
+.ibmRed-60 { color: $ibmRed-60 !important; }
+.ibmRed-50 { color: $ibmRed-50 !important; }
+.ibmRed-40 { color: $ibmRed-40 !important; }
+.ibmRed-30 { color: $ibmRed-30 !important; }
+
+/* IBM Teals */
+.ibmTeal-60 { color: $ibmTeal-60 !important; }
+.ibmTeal-50 { color: $ibmTeal-50 !important; }
+.ibmTeal-40 { color: $ibmTeal-40 !important; }
+.ibmTeal-30 { color: $ibmTeal-30 !important; }
+
+/* IBM Yellows */
+.ibmYellow-50 { color: $ibmYellow-50 !important; }
+.ibmYellow-30 { color: $ibmYellow-30 !important; }
+.ibmYellow-10 { color: $ibmYellow-10 !important; }
+
+// Reset to overwrite v18 styles
+ol, dl, dt, dd, input, textarea, label, ol > li::before, ul > li::before, .ibm-type ul > li::before, .ibm-type ol > li::before  {
+  font-size: $baseSize;
+  font-family: $ibmHelvRegular;
+	color: $textColor;
+  @include noBoxShadow();
+}
+div, legend {
+  font-size: $baseSize;
+}
+label, legend, .label {
+  margin-bottom: 12px;
+  color: $ibmGray-60;
+  font-family: $ibmHelvBold;
+  line-height: 1.2em;
+}
+
+.label_line_height {
+  line-height: 1.2em;
+}
+
+fieldset {
+  border: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+input[type="button"] {
+  color: $ibmGray-60;
+}
+input[type="button"].btn-primary {
+  color: $ibmWhite;
+}
+
+input[type="button"].btn-primary:disabled {
+  color: $ibmGray-50;
+}
+a, a:visited {
+    color: $linkColor;
+    cursor: pointer;
+    text-decoration: none;
+    @include standardTransitions(0.5s, 0s);
+}
+a:hover {
+    color: $ibmBlue-50;
+    text-decoration: underline;
+}
+
+.link_inverse_color {
+  color: $inverseLinkColor;
+  &:hover {
+    color: $ibmWhite;
+  }
+}
+
+
+// Added for AngularUI Bootstrap support
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* Typography */
+.p_font, p {
+  font-size: $baseSize;
+  font-family: $ibmHelvRegular;
+	color: $textColor;
+	margin: 0;
+	padding-bottom: 10px;
+	line-height: 1.3em;
+}
+
+.hero_header {
+  font-size: $heroHeaderSize;
+}
+
+.bold_text {
+    font-weight: normal;
+    font-family: $ibmHelvBold;
+}
+.small_text {
+  font-size: $smallSize;
+}
+.smaller_text {
+  font-size: $smallerSize;
+}
+.medium_text {
+  font-size: $mediumSize;
+}
+.large_text {
+  font-size: $largeSize;
+}
+.larger_text {
+  font-size: $largerSize;
+}
+
+.uneditable_link {
+  cursor: default !important;
+  h4, p {
+    cursor: default !important;
+  }
+}
+
+.pwb_btn, .btn-primary {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.pwb_btn {
+  background-color: transparent;
+  border: 2px solid $ibmGray-10;
+  color: $ibmGray-60 !important;
+
+  &:hover, &:focus {
+    border: 2px solid $ibmGray-80;
+    color: $ibmGray-80;
+  }
+
+  &[disabled] {
+    border: 2px solid $ibmGray-10 !important;
+  }
+
+}
+
+.lang-preview-link {
+  width: 130px;
+  top: 5px;
+  position: relative;
+
+  .ibm-view-link:before {
+    height: 30px;
+    position: absolute;
+    top: -1px;
+    left: 14px;
+    color: $ibmPurple-60;
+  }
+  a {
+    width: 100%;
+    text-align: right;
+  }
+}
+
+.content-preview-link {
+  top: 12px;
+  position: relative;
+  margin-left: 50px;
+  .ibm-view-link {
+    position: relative;
+
+    &:before {
+      height: 30px;
+      position: absolute;
+      top: -11px;
+      left: -28px;
+      color: $ibmPurple-60;
+    }
+  }
+}
+
+.view_sonar_link {
+  font-size: 14px;
+  color: $ibmBlue-50;
+  margin-left: 20px;
+}
+
+.view_preview_link:hover {
+  background-color: $linkHoverColor;
+  color: white;
+  text-decoration: none;
+}
+
+.preview-sticky-nav {
+  position: absolute;
+  top: -50px;
+  float: right;
+  right: 0px;
+}
+
+fieldset[disabled] {
+  .pwb_btn {
+    opacity: .6;
+    &:hover, &:focus {
+      border: 2px solid $ibmGray-10;
+      color: $ibmGray-60;
+    }
+
+  }
+}
+
+.pwb_btn_inverse, .pwb_btn_inverse_darker {
+  border: 1px solid $ibmGray-50;
+  background-color: $ibmGray-50;
+  color: $ibmWhite !important;
+
+  &:hover, &:focus {
+    border: 1px solid $ibmGray-80;
+    background-color: $ibmGray-80;
+    color: $ibmWhite;
+  }
+}
+
+.pwb_btn_inverse_darker {
+  background-color: $ibmGray-60;
+}
+
+.btn-primary, .btn-primary:visited {
+  border-width: 2px;
+  color: $ibmWhite;
+}
+
+.btn-primary:disabled, .btn-primary:disabled:hover {
+  background-color: $ibmGray-10;
+  color: $ibmGray-50;
+  border-color: $ibmGray-40;
+  opacity: 1;
+}
+
+.pwb_small_primary_btn {
+  padding: 2px 12px 0px;
+  font-size: $smallerSize;
+}
+
+.close_icon_btn {
+  background-image: url($closeIcon);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 54px;
+  height: 54px;
+  background-color: transparent;
+  border: none;
+}
+
+// Hide Text for Sprites, etc.
+.hidden_text {
+    position: absolute !important;
+    font-size: 1px !important;
+    text-align: left !important;
+    opacity: 0 !important;
+}
+
+.hidden_text.focused {
+  position: relative !important;
+  font-size: $baseSize !important;
+  opacity: 1 !important;
+}
+
+// Center text align
+.center_text {
+  text-align: center;
+}
+// Right align
+.right_nav_container, .text_align_right {
+  text-align: right;
+}
+// Left align
+.text_align_left {
+  text-align: left;
+}
+// Center align
+.text_align_center {
+  text-align: center;
+}
+
+// Headings Styles
+h1, .h1 {
+  font-size: $h1Size;
+  color: $ibmGray-80;
+  margin: 0;
+  padding: 0;
+}
+
+h2, .h2 {
+  color: $ibmGray-80;
+  font-size: $h2Size;
+  margin: 0;
+  padding: 0;
+}
+
+h3, .h3 {
+  color: $ibmGray-80;
+  font-size: $h3Size;
+  margin: 0;
+  padding: 0;
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+  color: $ibmGray-80;
+  font-size: $h4Size;
+  margin: 0;
+  padding: 0;
+}
+
+// Spaced HR seperater - used to give space between sections with a line.
+.horizontal_seperator {
+  display: block;
+  border: none;
+  border-top: 1px solid $defaultBorderColor;
+  margin: 14px 0 0 0;
+  padding: 0 0 8px 0;
+  height: 2px;
+  width: 100%;
+  background-color: transparent;
+  clear: both;
+}
+
+.border_bottom, .dotted_border_bottom {
+  border-bottom: 1px solid $defaultBorderColor;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.dotted_border_bottom {
+  border-bottom: 1px dotted $defaultBorderColor;
+  margin-bottom: 18px;
+}
+
+.border_top {
+  border-top: 1px solid $defaultBorderColor;
+}
+.dashed_border_top {
+  border-top: 1px dashed $defaultBorderColor;
+  padding-top: 18px;
+}
+
+.dashed_border_bottom {
+  border-bottom: 1px dashed $defaultBorderColor;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.no_border_bottom {
+  border-bottom: none !important;
+}
+
+.clear_both {
+  clear: both;
+}
+
+.left_navs_seperator {
+  float: left;
+  width: 80px;
+}
+
+.dropdown_nav {
+  @include standardBoxShadow();
+  background-color: $ibmWhite;
+  font-size: $baseSize;
+  text-align: left;
+  box-sizing: border-box;
+  li, button, option {
+    text-align: left;
+    border-bottom: 1px solid $defaultBorderColor;
+  }
+}
+
+
+// Clearfix
+.clearfix:before, .clearfix:after { content: " "; /* 1 */ display: table; /* 2 */ }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+.circle_bg {
+  padding: 10px;
+  border-radius: 50% 50%;
+  text-align: center;
+  display: block;
+}
+
+// Background colors
+.light_gray_bg {
+  background-color: $ibmNeutral-2;
+}
+.white_bg {
+  background-color: $ibmWhite;
+}
+
+.red_bg {
+  background-color: $ibmRed-60 !important;
+}
+
+.disabled, .disabled:hover {
+  background-color: $ibmNeutral-2;
+  cursor: not-allowed;
+  border: 1px solid $defaultBorderColor;
+}
+// Layout
+.page-section-container {
+    width: 100%;
+    position: relative;
+    clear: both;
+}
+.page-section, .page-content {
+    width: $desktopSiteWidth;
+    display: block;
+    background-repeat: no-repeat;
+    clear: both;
+    position: relative;
+    margin: 0 auto;
+}
+.page-content {
+    width: auto;
+}
+
+// Non padded/margined container - Can set it's parent with this class to add padding and margin as needed
+.container {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  position: relative;
+}
+// Standard padded container
+.padded_container {
+    padding: $containerPadding;
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+
+// Standard margin spacing styles
+.margin_left {
+  margin-left: 20px;
+}
+.margin_left_small {
+  margin-left: 10px;
+}
+.margin_left_large {
+  margin-left: 30px;
+}
+.margin_right_small {
+  margin-right: 10px;
+}
+.margin_right {
+  margin-right: 20px;
+}
+.no_margin_bottom {
+  margin-bottom: 0px !important;
+}
+.standard_margin_bottom {
+  margin-bottom: 6px !important;
+}
+
+.larger_margin_top {
+  margin-top: 20px !important;
+}
+.larger_margin_bottom {
+  margin-bottom: 20px !important;
+}
+.largest_margin_bottom {
+  margin-bottom: 40px !important;
+}
+
+// Standard padding spacing styles
+
+.padding_right {
+  padding-right: 15px;
+}
+
+.padding_left {
+  padding-left: 15px;
+}
+
+.padding_top {
+  padding-top: 15px;
+}
+
+.no_padding_bottom {
+  padding-bottom: 0px !important;
+}
+
+.padding_bottom {
+  padding-bottom: 15px !important;
+}
+
+.larger_padding_bottom {
+  padding-bottom: 25px !important;
+}
+
+.one_third_left {
+  padding-right: 2%;
+}
+
+.one_third_middle {
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.one_third_right {
+  padding-right: 0;
+  padding-left: 2%;
+}
+
+
+// Zero out classes are used to remove default padding and margin to elements like list tags
+.zero_margin_padding {
+    margin: 0px;
+    padding: 0px;
+}
+.zero_padding_margin_list {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+
+    list-style-type: disc;
+    list-style-position: outside;
+    list-style-image: inherit;
+
+    li, dt, dd {
+      display: list-item;
+      margin: 10px 0 10px 14px;
+      padding: 0px;
+      list-style-type: disc;
+      list-style-position: outside;
+      list-style-image: inherit;
+    }
+}
+.zero_out_block_list {
+  display: block;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+
+  li, dt, dd {
+    display: block;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+// List Styles - For unordered and ordered lists
+.bulleted_list {
+  list-style-type: disc;
+  padding: 0px;
+  margin: 0px 0px 0px 0px;
+  li {
+    margin: 0px 0 0 15px;
+    padding: 0 10px 0 0;
+  }
+  ul {
+    margin-top: 0;
+    list-style-type: circle;
+  }
+}
+
+.ordered_list {
+  margin: 5px 0px 10px;
+  position: relative;
+}
+
+.alphabetical_lowercase_list {
+  li {
+    list-style-type: lower-alpha;
+  }
+}
+
+.roman_lowercase_list {
+  li {
+    list-style-type: lower-roman;
+  }
+}
+
+.alphabetical_lowercase_list, .roman_lowercase_list {
+  li::before {
+    content: none !important;
+  }
+}
+
+// Navigation Lists - Lists that are used specifically for navigation links
+.nav_list {
+  width: 100%;
+  margin: 0;
+  font-size: $baseSize;
+  line-height: 1.3em;
+
+  li, dt, dd {
+    width: 100%;
+    clear: both;
+    margin-bottom: 4px;
+    padding: 4px 0;
+    display: inline-block;
+    a {
+      cursor: pointer;
+    }
+  }
+  dt {
+    margin-bottom: 0;
+    font-weight: normal;
+    font-family: $ibmHelvBold;
+  }
+  dd {
+    margin-bottom: 10px;
+  }
+}
+
+.sub_nav_list {
+  margin: 0;
+  padding-left: 15px;
+  li, dt, dd {
+    list-style-type: disc;
+    list-style-position: outside;
+    list-style-image: inherit;
+    a {
+      padding-left: 8px;
+    }
+  }
+}
+
+.sub_nav_list>li:before {
+  display: inline;
+  content: attr() !important;
+  position: relative;
+  font-size: $baseSize;
+  margin-left: 10px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+// Descriptive list container with a dt and dd format
+.info_list_container {
+  dt {
+    padding: 16px 0 4px;
+    color: $ibmGray-60;
+  }
+  dd {
+    border-bottom: 1px solid $defaultBorderColor;
+    padding: 0px 0 16px;
+    color: $ibmGray-60;
+  }
+
+}
+
+.paragraph_in_list {
+  padding: 15px 0px 10px;
+  text-indent: -20px;
+}
+
+// Top section Styles - Used for different top sections including the page title
+.pwb_landing_page_container, .pwb_page_container {
+  .header_view {
+    margin-bottom: 0px;
+  }
+  .form_submit_btns_container {
+    margin: 40px 0 50px;
+  }
+}
+
+.page_title {
+  padding-bottom: 24px;
+}
+.page-title-container {
+  margin-top: 20px;
+  margin-bottom: 35px;
+  a {
+    color: $linkColor;
+  }
+}
+.page-title-container_alt {
+  margin-bottom: 15px;
+  h1 {
+    margin-top: 0;
+    padding: 8px 0 0 0;
+  }
+}
+
+.end_row {
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+}
+
+.last_list_item {
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+}
+
+.pwb_right_section_container {
+  padding-left: 30px;
+  border-left: 1px solid $defaultBorderColor;
+
+  h4 {
+    margin-bottom: 14px;
+  }
+}
+
+// Grid - Only includes desktop size for now. Only used for the Dashboard pages for now.
+.desktop_col_one_fourth, .desktop_col_three_fourth {
+  float: left;
+  position: relative;
+}
+// Hard set for now. When responsive, will need to rework.
+.desktop_col_one_fourth { width: 300px; }
+.desktop_col_three_fourth { width: 880px; }
+
+/* Form Styles */
+
+// Input Text Field Styles with Errors
+.form-control {
+  margin-bottom: 0;
+  @include standardTransitions(.25s, .25s);
+}
+
+.form-control[disabled], textarea.form-control[disabled],
+.form-control[disabled]:hover, textarea.form-control[disabled]:hover,
+.btn[disabled], .btn[disabled]:hover {
+  background-color: $ibmNeutral-2;
+  color: $ibmGray-30;
+  border: 1px solid $defaultBorderColor;
+  opacity: 1;
+}
+
+.has-error, span.required_form_field {
+  color: $ibmRed-50;
+}
+
+.form-control.has-error, button.has-error, .textarea_container.has-error, .general_multi_select.has-error {
+  color: $ibmGray-60 !important;
+  border: 1px solid $ibmRed-50 !important;
+  background-color: $ibmWhite;
+}
+.form-control.has-error:focus, button.has-error:focus, .textarea_container.has-error:focus, .general_multi_select.has-error:focus {
+  border: 1px solid $ibmGray-80 !important;
+  background-color: $ibmWhite;
+  color: $ibmGray-60 !important;
+}
+
+// Search Box
+.search_box {
+  background-position: right -2395px;
+}
+
+// Radio Buttons - Built to extend the standard v18 Radio Buttons
+.radio-inline {
+  padding-left: 0;
+  padding-right: 40px;
+}
+label.iradio_square-blue {
+  text-indent: 28px;
+  padding-top: 5px;
+  @include turnOffTransitions();
+  font-family: $ibmHelvRegular;
+  font-weight: normal;
+}
+
+.radio_checked_bg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: -2px;
+  left: 0px;
+}
+
+label.iradio_square-blue:hover,
+.ibm_radio_button:hover ~ label .radio_checked_bg,
+.ibm_radio_button:hover ~ .radio_checked_bg{
+  background-position: -144px 0px;
+}
+
+.ibm_radio_button:checked ~ label,
+.ibm_radio_button:checked ~ label .radio_checked_bg,
+.ibm_radio_button:checked ~ .radio_checked_bg,
+.ibm_radio_button.radio_checked ~ label,
+.ibm_radio_button.radio_checked ~ label .radio_checked_bg,
+.ibm_radio_button.radio_checked ~ .radio_checked_bg
+{
+  background-position: -168px 0px !important;
+  &:focus {
+    background-position: -168px 0px !important;
+  }
+}
+
+.ibm_radio_button:hover ~ label,
+.ibm_radio_button:hover ~ label .radio_checked_bg,
+.ibm_radio_button:hover ~ .radio_checked_bg {
+  background-position: -144px 0px;
+}
+
+.ibm_radio_button:focus ~ label .radio_checked_bg,
+.ibm_radio_button:focus ~ .radio_checked_bg {
+  background-position: -168px 0px !important;
+}
+
+fieldset[disabled] {
+  label.iradio_square-blue,
+  label.iradio_square-blue:hover,
+  .ibm_radio_button ~ label .radio_checked_bg,
+  .ibm_radio_button ~ .radio_checked_bg {
+    cursor: not-allowed;
+    background-position: -192px 0px !important;
+  }
+
+  .ibm_radio_button:checked ~ label,
+  .ibm_radio_button:checked ~ label .radio_checked_bg,
+  .ibm_radio_button:checked ~ .radio_checked_bg {
+    background-position: -216px 0px !important;
+  }
+
+  .radio_label {
+    cursor: not-allowed;
+  }
+}
+
+.radio_error {
+  label.iradio_square-blue,
+  .ibm_radio_button ~ label .radio_checked_bg,
+  .ibm_radio_button ~ .radio_checked_bg {
+    background-position: -240px 0px !important;
+  }
+
+  label.iradio_square-blue:hover,
+  .ibm_radio_button:hover ~ label .radio_checked_bg,
+  .ibm_radio_button:hover ~ .radio_checked_bg {
+    background-position: -144px 0px !important;
+  }
+}
+
+.ibm_radio_no_option {
+  .popover {
+    left: 360px !important;
+    width: 276px !important;
+    height: auto !important;
+  }
+}
+.ibm_radio_button, .ibm_radio_button_alt {
+  display: block;
+  position: absolute;
+  width: 60px;
+  height: 24px;
+  opacity: 0;
+  margin: 0 !important;
+  cursor: pointer;
+}
+
+.ibm_radio_button_alt {
+  width: 100%;
+}
+
+.radio_label {
+  cursor: pointer;
+  font-weight: normal;
+  font-family: $ibmHelvRegular;
+  position: relative;
+  padding-left: 30px;
+}
+
+
+//v18 checkboxes
+li.checkbox_container, .checkbox_container {
+  margin-bottom: 18px;
+
+  label {
+    cursor: pointer;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    position: relative;
+    top: -2px;
+
+    &:hover + .icheckbox_square-blue {
+      background-position: -24px 0px;
+    }
+
+    &:hover + .icheckbox_square-blue.checked {
+      background-position: -48px 0px;
+    }
+
+  }
+
+  &.disabled, &.disabled:hover {
+    background-color: transparent;
+    border: none;
+  }
+
+}
+
+.icheckbox_square-blue {
+  float: left;
+  position: relative;
+
+  input {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    display: block;
+    width: 140%;
+    height: 140%;
+    margin: 0px;
+    padding: 0px;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    border: 0px none;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &:hover, input:focus {
+    background-position: -24px 0px;
+  }
+
+  &.checked:hover {
+    background-position: -48px 0;
+  }
+  &[disabled] {
+    background-position: -96px 0;
+  }
+  &.checkbox_focused {
+    background-position: -24px 0px;
+  }
+  &.checked.checkbox_focused {
+    background-position: -48px 0px;
+  }
+}
+
+.checkbox_error {
+  .icheckbox_square-blue {
+    background-position: -265px 0px;
+
+    &:hover, input:focus {
+      background-position: -24px 0px;
+    }
+
+  }
+}
+
+.checkbox_container.disabled, fieldset[disabled] .checkbox_container {
+  label, label:hover {
+    cursor: not-allowed !important;
+  }
+
+  .icheckbox_square-blue {
+    background-position: -72px 0px !important;
+    input, input:hover {
+      cursor: not-allowed !important;
+    }
+
+    &.checked {
+      background-position: -96px 0px !important;
+    }
+  }
+
+  &.checkbox_focused {
+    background-position: -72px 0px !important;
+  }
+}
+
+.file_upload_name {
+  border: 1px solid $defaultBorderColor;
+  padding: 5px 16px;
+  color: $ibmGray-20;
+  position: relative;
+  line-height: 28px;
+  border-left: none;
+  border-right: none;
+  .btn {
+    padding: 6px 14px;
+    background-color: #FFFFFF;
+    color: #000000 !important;
+    font-size: 12px;
+  }
+  span.black {
+    color: #000000;
+  }
+  span{
+    padding-right: 150px;
+  }
+  i {
+    color: black;
+    font-size: 20px;
+  }
+}
+
+.file_upload_container {
+    position: relative;
+    overflow: hidden;
+    margin: 0px 0 10px 0;
+
+    input.upload_btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 40px;
+      margin: 0;
+      padding: 0;
+      font-size: 20px;
+      cursor: pointer;
+      opacity: 0;
+      filter: alpha(opacity=0);
+    }
+}
+
+// Video directive CSS
+.video_directive {
+  .remove_uploaded_file_btn{
+    color: #4178be;
+    font-size: 16px;
+    float: left;
+  }
+  a{
+    padding-top: 8px;
+    padding-bottom: 25px;
+    display: block;
+  }
+}
+
+// Text Areas
+.textarea_container {
+  position: relative;
+  .hide_default_text_resize {
+    width: 11px;
+    height: 11px;
+    background-color: $ibmWhite;
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+  }
+}
+fieldset[disabled] {
+  .textarea_container {
+    textarea.form-control {
+      background-image: none;
+    }
+    .hide_default_text_resize {
+      background-color: $ibmNeutral-2;
+      right: 1px;
+      bottom: 1px;
+    }
+  }
+}
+
+textarea.form-control {
+  margin: 0px;
+  padding: 10px;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  min-height: 100px;
+  width: 100% !important;
+  padding: 15px;
+  border: 1px solid $defaultBorderColor;
+  margin-bottom: 0px;
+  background-image: url($webRoot + 'images/textarea_bg.png');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  @include standardTransitions(.25s, .25s);
+}
+
+textarea.medium_textarea {
+  min-height: 150px;
+}
+
+textarea.large_textarea {
+  min-height: 200px;
+}
+
+textarea.larger_textarea {
+  min-height: 400px;
+}
+
+textarea.largest_textarea {
+  min-height: 600px;
+}
+
+textarea.form-control:focus {
+  border: 1px solid $ibmGray-80;
+}
+
+// Submit Buttons
+
+.submit_offering_btn {
+
+}
+fieldset[disabled] .submit_offering_btn,
+.submit_offering_btn[disabled],
+.submit_offering_btn[disabled]:hover {
+  color: $ibmWhite !important;
+  opacity: .6 !important;
+}
+
+select[multiple] {
+  min-height: 80px;
+  border: 1px solid $defaultBorderColor;
+}
+
+// Dropdown Menus - Built off Bootstrap UI dropdown directives - Don't work with select tag.
+.dropdown-menu {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  top: 78px !important;
+
+  li {
+    margin: 0;
+    padding: 0;
+    height: 42px;
+    width: 100%;
+    a {
+      margin: 0;
+      padding: 10px 14px;
+      display: block;
+      width: 100%;
+      height: 42px;
+      border-bottom: 1px solid $defaultBorderColor;
+    }
+    a:hover {
+      background-color: $ibmGray-5;
+    }
+  }
+  .divider {
+    height: 2px;
+    background-color: $defaultBorderColor;
+    margin: 0px 0px 4px;
+  }
+
+  li {
+    &:last-child {
+      a {
+        border-bottom: none;
+      }
+    }
+  }
+
+}
+
+.max_height_dropdown {
+  max-height: 400px;
+}
+
+.truncated_select_show {
+  width: 92%;
+  overflow: hidden;
+  display: block;
+}
+
+.dropdown_menu_display_options {
+  @include standardBoxShadow();
+}
+
+// Alert info boxes used to call out information
+.alert_info_box {
+  background-color: $ibmNeutral-2;
+  border: 1px solid $ibmNeutral-2;
+  color: $ibmGray-60;
+  padding: 25px;
+  margin: 20px 0 10px;
+  p, label {
+    color: $ibmGray-60;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// Bottom form errors section
+.bottom_form_errors_container {
+  border: 1px solid $ibmRed-50;
+  margin-top: 30px;
+  p {
+    padding-bottom: 0;
+  }
+  .bulleted_list {
+    color: $ibmRed-50;
+    padding: 20px 0 0px;
+    li {
+      padding: 0px 10px 10px 40px;
+      color: $ibmRed-50;
+    }
+  }
+}
+
+.document_conflict_container {
+  background-color: $ibmYellow-10;
+  margin-top: 30px;
+  p {
+    padding-bottom: 0;
+  }
+}
+
+.disabled_fade {
+  opacity: .2;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+  -ms-transition: opacity 0.25s ease;
+  -o-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+
+.faded_out_content {
+  opacity: .5;
+}
+
+
+.time-saved-status {
+  opacity: 0;
+  margin-top: 12px;
+  @include standardTransitions(0.4s, 0.1s);
+}
+
+.fadein {
+  opacity: 1 !important;
+}
+
+.fadeout {
+  opacity: 0;
+}
+
+// Replaced Bootstrap chevron icon with pwb icon
+.glyphicon-chevron-right, .glyphicon-chevron-left {
+  background-image: url($iconsSprite);
+  background-repeat: no-repeat;
+  background-position: -12px -4838px;
+  width: 10px;
+  height: 12px;
+}
+.glyphicon-chevron-left {
+  background-position: -12px -4765px;
+}
+.glyphicon-chevron-right::before, .glyphicon-chevron-left::before {
+  content: "" !important;
+}
+
+// Popovers - Built off the Boostrap UI popovers
+.popover {
+  background-color: $ibmGray-5;
+  color: $ibmGray-60;
+  border: 1px solid $ibmGray-5;
+  @include noBoxShadow();
+  z-index: 890;
+}
+.popover.right {
+  margin-left: 30px;
+}
+.textarea_container {
+  .popover.right {
+    margin-left: 40px;
+  }
+}
+.popover.right > .arrow::after {
+  border-right-color: $ibmGray-5;
+}
+.popover.right > .arrow {
+  left: -8px;
+  border-right-color: $ibmGray-5;
+}
+.popover-content {
+  color: $ibmGray-60;
+  padding: 15px 25px !important;
+  p {
+    color: $ibmGray-60;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// Table Styles
+table, .table {
+
+  thead {
+    th, .table_header {
+      background-color: $ibmNeutral-2;
+      color: $ibmGray-60;
+      vertical-align: middle !important;
+    }
+  }
+
+  tbody {
+    th, .table_header {
+      background-color: $ibmNeutral-2;
+      color: $ibmGray-60;
+      vertical-align: middle !important;
+    }
+    tr, td {
+      color: $ibmGray-60;
+      vertical-align: middle !important;
+    }
+  }
+}
+
+//Sticky navigation currently only for content page
+
+.go_to_section_title {
+  width: 110px;
+  position: relative;
+  top: 12px;
+}
+
+.sticky_nav_section {
+
+  .page-section {
+    padding-bottom: 80px;
+  }
+
+  .page-content {
+    padding-bottom: 30px;
+    border-bottom: 1px solid $defaultBorderColor;
+  }
+}
+
+.sticky_nav_bg_container {
+  display: none;
+  overflow: hidden;
+}
+
+.sticky_nav {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  display: block;
+  background-color: transparent;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+
+  .sticky_nav_container {
+    width: 100%;
+    border-bottom: 1px solid $defaultBorderColor;
+  }
+
+  .page-section {
+    border-bottom: none;
+    background-color: transparent;
+    margin-bottom: 0;
+    padding-bottom: 0px;
+
+  }
+  .page-content {
+    padding: 30px 0;
+    height: 105px;
+    border-bottom: none;
+  }
+
+  .dropdown-menu {
+    top: 48px !important;
+  }
+
+  .sticky_nav_bg_container {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+  }
+
+  .sticky_nav_bg {
+    box-shadow: 0px -6px 18px 0px $ibmGray-20;
+    background-color: $ibmWhite;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 105px;
+    overflow: hidden;
+    border-bottom: 1px solid $ibmGray-5;
+  }
+
+  .dropdown-menu {
+    max-height: 400px;
+  }
+}
+
+.review_overlay_modal_margin_bottom {
+  margin-bottom: 360px;
+}
+
+.review_overlay_modal_margin_bottom_small {
+  margin-bottom: 120px;
+}
+
+.overlay_form_container {
+  position: fixed;
+  bottom: 0px;
+  background-color: $ibmWhite;
+  left: 0px;
+  z-index: 1000;
+  margin: 0px;
+  box-shadow: 0px -10px 20px -4px $ibmGray-10;
+
+  .page-content {
+    margin: 30px 0 0px;
+  }
+
+  textarea.form-control {
+    min-height: 120px;
+  }
+}

@@ -1,0 +1,17 @@
+# Dev/Test Bluemix Manifest file
+#
+# This is the bluemix deployment manifest file for personal deployments
+# Use this after logging in to bluemix org 'saashub', space 'workbench-dev'
+# Then from command line : $ cf push
+# CFCI_TEST ensures that gulfile does not use a local config file
+# CFCI_NODE_ENV specifies the `test` server config
+---
+applications:
+- name: devtestworkbench
+  memory: 1G
+  instances: 2
+  random-route: true
+  env:
+    CFCI_SESS_SECRET: devtestworkbench
+    CFCI_WEB_ROOT: /marketplace/globalization/
+    CFCI_SEC_PATH: home/

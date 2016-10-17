@@ -1,0 +1,29 @@
+<!--
+Licensed Materials - Property of IBM
+
+@ Copyright IBM Corp. 2015 All Rights Reserved
+
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<div class="padded_container tile-top-section">
+
+  <h3 class="product_name">{{$ctrl.offeringName | limitTo: $ctrl.limit}}{{ $ctrl.offeringName.length > $ctrl.limit ? '&#8230;' : ''}}</h3>
+
+  <a ng-if="($ctrl.status==='published' ||
+            $ctrl.status==='Published' ||
+            $ctrl.status==='Published Update') &&
+            $ctrl.liveUrl !== undefined"
+     role="link"
+     name="View Live Version"
+     target="_blank"
+     href="{{$ctrl.liveUrl}}"
+     class="tile-view-live-link">View your published listing</a>
+
+  <button ng-if = "$ctrl.status === 'will_publish' || $ctrl.status === 'pending_publish'"
+          feature-flag="forcePublish"
+          style="position: absolute; padding-left: 14px; padding-right: 14px; bottom: 50px; left: 20px;"
+          type="button"
+          class="btn btn-primary btn-sm ibm-bold"
+          ng-click="$ctrl.publish($ctrl.offeringId)">Force Publish</button>
+</div>

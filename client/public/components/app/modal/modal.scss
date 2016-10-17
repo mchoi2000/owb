@@ -1,0 +1,136 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+// Built on the Bootstrap UI Modal styles
+#myModal, #participantModal {
+  display: block;
+  width: 780px;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+  top: 0;
+  background-color: $ibmWhite;
+  height: $modalHeight !important;
+  min-height: $modalHeight;
+  @include standardBoxShadow;
+  border: 1px solid $defaultBorderColor;
+  text-align: left;
+  overflow: auto;
+}
+
+.modal {
+  overflow: hidden;
+  position: fixed;
+  top: 10%;
+  bottom: 18%;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+  -webkit-animation: fadein .4s;
+  -moz-animation: fadein .4s;
+  -ms-animation: fadein .4s;
+  -o-animation: fadein .4s;
+  animation: fadein .4s;
+  height: $modalHeight + 10px;
+  min-height: $modalHeight + 10px;
+  margin: 0;
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  display: block;
+  border: none;
+  @include noBoxShadow();
+  height: $modalHeight + 10px;
+  min-height: $modalHeight + 10px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.modal-content {
+  position: relative;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  outline: 0;
+  border: none;
+  @include noBoxShadow();
+  height: $modalHeight + 10px;
+  min-height: 550px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.modal-backdrop {
+    background-color: $ibmWhite;
+}
+
+.modal-backdrop.in {
+  opacity: .96;
+}
+
+.modal-header {
+    padding: 60px 60px 0px 60px;
+    border: none;
+    h1 {
+      font-family: $ibmHelvBold;
+    }
+}
+
+.modal-body {
+    position: relative;
+    padding: 25px 60px 38px;
+}
+
+.pwb-modal-footer {
+    padding: 20px 50px;
+    background-color: $ibmNeutral-2;
+    border: none;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 84px;
+}
+
+.approved_confimation_modal {
+  text-align: center;
+  .modal-header {
+    padding-top: 110px;
+  }
+  h1 {
+    background-position: center 2px;
+    padding-top: 80px;
+    text-align: center;
+    padding-bottom: 10px
+  }
+  .caution_icon {
+    background-position: center -248px;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.return_modal {
+  .modal-body {
+    padding: 25px 60px 18px;
+    min-height: 367px;
+  }
+  label {
+    font-weight: normal;
+    font-family: $ibmHelvRegular;
+    margin-bottom: 30px;
+  }
+  textarea {
+    min-height: 210px;
+  }
+}
+
+.approve_modal {
+  .pwb-modal-footer {
+    position: absolute;
+  }
+}

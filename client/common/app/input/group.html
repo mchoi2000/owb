@@ -1,0 +1,15 @@
+<div class="col-xs-12" ng-class="{'dashed_border_top': $ctrl.label && $parent.$first, 'dashed_border_bottom': $ctrl.label && !$parent.$last, 'last_dashed_border_bottom': $ctrl.label && $parent.$last, 'single_input_correction': $parent.$last && $ctrl.model.length < $ctrl.maxItems && !$ctrl.label}">
+  <div ng-show="$ctrl.label" class="col-xs-12 group_label">
+    <div class="unit_header ibmGray-40 col-xs-9">{{$ctrl.label}}</div>
+    <div class="col-xs-3 pull-right" ng-show="$ctrl.model.length > $ctrl.minItems">
+      <button type="button" class="pull-right btn delete_item_btn icon-trash" ng-click="$ctrl.model.splice($parent.$index, 1); $ctrl.onDelete();">Delete</button>
+    </div>
+    <div class="col-xs-12 padding_top" ng-show="$parent.$index >= $ctrl.minItems && $ctrl.isRequired">This is an optional group, but you must complete all required fields if you choose to include it.</div>
+  </div>
+  <ng-form name="{{$ctrl.subformName}}">
+    <ng-transclude></ng-transclude>
+  </ng-form>
+</div>
+<div class="col-xs-12" ng-class="{add_item_btn: $parent.$last && $ctrl.model.length < $ctrl.maxItems, no_button: $parent.$last && $ctrl.model.length === $ctrl.maxItems  && ctrl.label}">
+  <button ng-show="$parent.$last && $ctrl.model.length < $ctrl.maxItems" type="button" class="btn icon-add-circle" ng-click="$ctrl.addItem()">{{$ctrl.addMoreText || 'Add more'}} (maximum {{$ctrl.maxItems}})</button>
+</div>

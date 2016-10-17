@@ -1,0 +1,22 @@
+{
+    "rules": {
+      "quotemark": [true, "single"],
+      "indent": [true, "spaces"],
+      "max-line-length": [true, 100],
+      "eofline": true,
+      "curly": true,
+      "whitespace": [
+          true,
+          "check-branch",
+          "check-decl",
+          "check-operator",
+          "check-module",
+          "check-separator",
+          "check-type",
+          "check-typecase"
+      ],
+      "semicolon": [true, "always"],
+      "no-use-before-declare": true,
+      "no-consecutive-blank-lines": true
+    }
+}

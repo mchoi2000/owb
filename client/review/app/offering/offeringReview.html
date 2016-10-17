@@ -1,0 +1,288 @@
+<pwb-review-section ng-if="blacklisted" name="blacklisted" is-collapsed="sectionsCollapse.blacklisted" label="Blacklisted Countries">
+  <div class="review-section-header-labels clearfix">
+    <div class="col-xs-3 header-label">Country</div>
+    <div class="col-xs-3 header-label">Reason</div>
+  </div>
+
+  <div ng-if="blacklisted.length > 0" ng-repeat="blacklistItem in blacklisted" class="col-xs-12">
+    <div class="col-xs-3 review-column ibmGray-40 ibm-bold review-row">{{blacklistItem.country}}</div>
+    <div class="col-xs-9 review-row review-column ibmGray-40">{{blacklistItem.reason}}</div>
+  </div>
+
+  <div ng-if="blacklisted.length === 0" class="col-xs-12">
+    <div class="col-xs-3 review-column ibmGray-40 ibm-bold review-row"><em class="ibmGray-40">No Content Provided</em></div>
+    <div class="col-xs-9 review-row review-column ibmGray-40">N/A</div>
+  </div>
+
+</pwb-review-section>
+
+<!--Search and navigation-->
+<pwb-review-section name="search" label="Search and navigation" is-collapsed="sectionsCollapse.search">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="Search"></pwb-review-subsection>
+  <pwb-review-text label="Meta Keywords" value="content['meta-keywords'] ? content['meta-keywords'].join(' ') : ''"></pwb-review-text>
+  <pwb-review-subsection label="Offering Attributes"></pwb-review-subsection>
+  <pwb-review-list label="Ideal For Industry" list="content['ideal-for-industry']"></pwb-review-list>
+  <pwb-review-list label="Ideal For Role" list="content['ideal-for-role']"></pwb-review-list>
+  <pwb-review-list label="ibm.com Taxonomy Capability Attributes" list="content.taxonomy"></pwb-review-list>
+  <pwb-review-list label="Category attribute" list="content.category"></pwb-review-list>
+  <pwb-review-list label="Runs on &quot;platform&quot; attribute" list="content.platform"></pwb-review-list>
+  <pwb-review-list label="Deployment infrastructure" list="content['deployment-model']"></pwb-review-list>
+  <pwb-review-text label="Service Type" value="content['service-type']"></pwb-review-text>
+  <pwb-review-text label="Version.Release" value="content['version-release']"></pwb-review-text>
+  <pwb-review-text label="Business Size" value="content['business-size']"></pwb-review-text>
+</pwb-review-section>
+
+<!--Overview-->
+<pwb-review-section name="overview" label="Overview" is-collapsed="sectionsCollapse.overview">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="Offering Overview"></pwb-review-subsection>
+  <pwb-review-text label="Natural Language Name" value="content['natural-language-name']"></pwb-review-text>
+  <pwb-review-text label="Localized Natural Language Name" value="content['localized-natural-language-name']"></pwb-review-text>
+  <pwb-review-text label="Offering headline" value="content.description"></pwb-review-text>
+  <pwb-review-text label="Meta Description" value="content['meta-description']"></pwb-review-text>
+  <pwb-review-link label="Offering Image" value="content['screenshot-url']"></pwb-review-link>
+  <pwb-review-subsection label="Benefits"></pwb-review-subsection>
+  <div ng-repeat="benefit in content.values">
+    <pwb-review-group label="BENEFIT {{$index + 1}}">
+      <pwb-review-text group-label label="Benefit Headline" value="benefit['core-value']"></pwb-review-text>
+      <pwb-review-text label="Benefit Description" value="benefit['quick-hits'][0]"></pwb-review-text>
+      <pwb-review-text label="Benefit type icon" value="benefit.type"></pwb-review-text>
+    </pwb-review-group>
+  </div>
+  <pwb-review-subsection label="Key Features"></pwb-review-subsection>
+    <div ng-repeat="keyFeature in content['key-features']">
+    <pwb-review-group label="KEY FEATURE {{$index +1}}">
+      <pwb-review-text group-label label="Feature Name" value="keyFeature.title"></pwb-review-text>
+      <pwb-review-text label="Feature Description" value="keyFeature.description"></pwb-review-text>
+      <pwb-review-text label="Media Asset" value="keyFeature['feature-type']"></pwb-review-text>
+
+      <div ng-if="keyFeature['feature-type'] === 'Video'">
+        <pwb-review-link label="Media Asset Video URL" value="keyFeature.videoURL"></pwb-review-link>
+      </div>
+      <div ng-if="keyFeature['feature-type'] === 'Image'">
+        <pwb-review-image label="Media Asset Image" value="keyFeature.graphic"></pwb-review-image>
+      </div>
+
+      <pwb-review-link label="Media Asset Thumbnail Image" value="keyFeature.thumbnail"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <pwb-review-subsection label="Testimonials"></pwb-review-subsection>
+  <div ng-repeat="testimonial in content.testimonials">
+    <pwb-review-group label="TESTIMONIAL {{$index + 1}}">
+        <pwb-review-text group-label label="Customer's Quote" value="testimonial.quote"></pwb-review-text>
+        <pwb-review-text label="Attribution: Individual's Name" value="testimonial.name"></pwb-review-text>
+        <pwb-review-text label="Attribution: Individual's Role" value="testimonial.title"></pwb-review-text>
+        <pwb-review-text label="Attribution: Company Name or Generic Industry Name" value="testimonial.company"></pwb-review-text>
+        <pwb-review-link label="Attribution: Company Logo" value="testimonial.logo"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <div ng-if="content.testimonials.length === 0">
+    <pwb-review-group label="TESTIMONIAL 1">
+        <pwb-review-text group-label label="Customer's Quote"></pwb-review-text>
+        <pwb-review-text label="Attribution: Individual's Name"></pwb-review-text>
+        <pwb-review-text label="Attribution: Individual's Role"></pwb-review-text>
+        <pwb-review-text label="Attribution: Company Name or Generic Industry Name"></pwb-review-text>
+        <pwb-review-link label="Attribution: Company Logo"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <pwb-review-subsection label="Community Resources"></pwb-review-subsection>
+  <div ng-repeat="resource in content['community-resources']">
+    <pwb-review-group label="COMMUNITY RESOURCE {{$index +1}}">
+        <pwb-review-text group-label label="Community Resource Type" value="resource.type"></pwb-review-text>
+        <pwb-review-link label="Community Resource Link" value="resource.url"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+</pwb-review-section>
+
+<!-- Details -->
+<pwb-review-section name="details" label="Details" is-collapsed="sectionsCollapse.details">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="What it can do for your business"></pwb-review-subsection>
+  <pwb-review-text label="Intro Sentences" value="content.details.description"></pwb-review-text>
+  <pwb-review-subsection label="Hero Image or Video"></pwb-review-subsection>
+  <pwb-review-text label="Media Type" value="content['media-type']"></pwb-review-text>
+
+  <div ng-if="content['media-type'] === 'Video'">
+    <pwb-review-link label="Hero Video" value="content.details.videoURL"></pwb-review-link>
+  </div>
+  <div ng-if="content['media-type'] === 'Image'">
+    <pwb-review-link label="Hero Image" value="content.details.imageURL"></pwb-review-link>
+  </div>
+</pwb-review-section>
+
+<!-- How Customers Use It -->
+<pwb-review-section name="howCustomersUseIt" label="How customers use it" is-collapsed="sectionsCollapse.howCustomersUseIt">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="Case Studies"></pwb-review-subsection>
+  <div ng-repeat="caseStudy in content['case-studies']">
+    <pwb-review-group label="CASE STUDY {{$index + 1}}">
+      <pwb-review-text group-label label="Case Study Name" value="caseStudy.title"></pwb-review-text>
+      <pwb-review-text label="Case Study Description" value="caseStudy.description"></pwb-review-text>
+      <pwb-review-text label="Case Study Type" value="caseStudy.type"></pwb-review-text>
+      <pwb-review-link label="Case Study URL" value="caseStudy.url"></pwb-review-link>
+      <pwb-review-text label="Customer's Quote" value="caseStudy.testimonial.quote"></pwb-review-text>
+      <pwb-review-text label="Attribution: Individual's Name" value="caseStudy.testimonial['customer-name']"></pwb-review-text>
+      <pwb-review-text label="Attribution: Individual's Role" value="caseStudy.testimonial['customer-title']"></pwb-review-text>
+      <pwb-review-text label="Attribution: Company name or generic industry name" value="caseStudy.testimonial['company-name']"></pwb-review-text>
+      <pwb-review-link label="Attribution: Company Logo" value="caseStudy.testimonial['company-logo']"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <div ng-if="content['case-studies'].length === 0">
+    <pwb-review-group label="CASE STUDY 1">
+      <pwb-review-text group-label label="Case Study Name"></pwb-review-text>
+      <pwb-review-text label="Case Study Description"></pwb-review-text>
+      <pwb-review-text label="Case Study Type"></pwb-review-text>
+      <pwb-review-link label="Case Study URL"></pwb-review-link>
+      <pwb-review-text label="Customer's Quote"></pwb-review-text>
+      <pwb-review-text label="Attribution: Individual's Name"></pwb-review-text>
+      <pwb-review-text label="Attribution: Individual's Role"></pwb-review-text>
+      <pwb-review-text label="Attribution: Company name or generic industry name"></pwb-review-text>
+      <pwb-review-link label="Attribution: Company Logo"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <pwb-review-subsection label="Use Cases"></pwb-review-subsection>
+  <div ng-repeat="useCase in content['use-cases']">
+    <pwb-review-group label="USE CASE {{$index + 1}}">
+      <pwb-review-text group-label label="Use Case Headline" value="useCase.title"></pwb-review-text>
+      <pwb-review-text label="Problem Description" value="useCase['problem-description']"></pwb-review-text>
+      <pwb-review-text label="Solution Description" value="useCase['solution-description']"></pwb-review-text>
+      <pwb-review-text label="Media Asset" value="useCase.type"></pwb-review-text>
+
+      <div ng-if="useCase.type === 'Video'">
+        <pwb-review-link label="Use Case Video URL" value="useCase['video-url']"></pwb-review-link>
+      </div>
+      <div ng-if="usecase.type === 'Image'">
+        <pwb-review-image label="Use Case Image" value="useCase.graphic"></pwb-review-image>
+      </div>
+    </pwb-review-group>
+  </div>
+  <div ng-if="content['use-cases'].length === 0">
+    <pwb-review-group label="USE CASE 1">
+      <pwb-review-text group-label label="Use Case Headline"></pwb-review-text>
+      <pwb-review-text label="Problem Description"></pwb-review-text>
+      <pwb-review-text label="Solution Description"></pwb-review-text>
+      <pwb-review-text label="Media Asset"></pwb-review-text>
+    </pwb-review-group>
+  </div>
+  <pwb-review-subsection label="Capabilities"></pwb-review-subsection>
+  <div ng-repeat="capability in content.capabilities">
+    <pwb-review-group label="CAPABILITY {{$index +1}}">
+      <pwb-review-text group-label label="Capability Name" value="capability.name"></pwb-review-text>
+      <pwb-review-text label="Capability Description" value="capability.description"></pwb-review-text>
+      <pwb-review-text label="Media Asset (Capability video or screenshot)" value="capability['media-type']"></pwb-review-text>
+
+      <div ng-if="capability['media-type'] === 'Video'">
+        <pwb-review-link label="Capability Video URL" value="capability.videoURL"></pwb-review-link>
+      </div>
+      <div ng-if="capability['media-type'] === 'Image'">
+        <pwb-review-link label="Key Capability Image" value="capability.imageURL"></pwb-review-link>
+      </div>
+
+      <pwb-review-link label="Interactive Demo URL" value="capability.demoURL"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <pwb-review-subsection label="Technical Specifications"></pwb-review-subsection>
+  <pwb-review-list label="Technical Specification (Paragraph)" list="content['technical-specifications'].text"></pwb-review-list>
+  <pwb-review-list label="Technical Sepcification (Bullet)" list="content['technical-specifications'].bullets"></pwb-review-list>
+  <pwb-review-link label="Tech Specs Link" value="content['technical-specifications'].url"></pwb-review-link>
+  <pwb-review-subsection label="System Requirements"></pwb-review-subsection>
+  <pwb-review-group label="SOFTWARE REQUIREMENTS">
+    <pwb-review-list group-label label="Software Requirements (Paragraph)" list="content['system-requirements'].software.text"></pwb-review-list>
+    <pwb-review-list label="Software Requirements (Bullet)" list="content['system-requirements'].software.bullets"></pwb-review-list>
+    <pwb-review-link label="Software Requirements Link" value="content['system-requirements'].software.url"></pwb-review-link>
+  </pwb-review-group>
+
+  <pwb-review-group label="HARDWARE REQUIREMENTS">
+    <pwb-review-list group-label label="Hardware Requirements (Paragraph)" list="content['system-requirements'].hardware.text"></pwb-review-list>
+    <pwb-review-list label="Hardware Requirements (Bullet)" list="content['system-requirements'].hardware.bullets"></pwb-review-list>
+    <pwb-review-link label="Hardware Requirements Link" value="content['system-requirements'].hardware.url"></pwb-review-link>
+  </pwb-review-group>
+</pwb-review-section>
+
+<!-- Purchase -->
+<pwb-review-section name="purchasingInformation" label="Purchase" is-collapsed="sectionsCollapse.purchasingInformation">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-link label="Offering Edition Comparison Link" value="content['offering-edition-comparison-link']"></pwb-review-link>
+  <pwb-review-link label="Terms of Use Link" value="content['terms-of-use']"></pwb-review-link>
+  <pwb-review-link label="Warranty Information Link" value="content.warranty"></pwb-review-link>
+  <pwb-review-link label="Runs on Bluemix" value="content['bluemix-service-url']"></pwb-review-link>
+
+  <pwb-review-subsection label="Recommended Offerings"></pwb-review-subsection>
+  <div class = "col-xs-12" ng-repeat="product in relatedProducts track by $index">
+    <pwb-review-link label="Recommended Offering #{{$index + 1}}" value="product.name" href="product.link"></pwb-review-link>
+  </div>
+</pwb-review-section>
+
+<!-- Resources -->
+<pwb-review-section name="resources" label="Resources" is-collapsed="sectionsCollapse.resources">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="RESOURCES"></pwb-review-subsection>
+  <div ng-repeat="resource in content['additional-resources']">
+    <pwb-review-group label="Resource {{$index + 1}}">
+      <pwb-review-text group-label label="Resource Name" value="resource.title"></pwb-review-text>
+      <pwb-review-text label="Resource Description" value="resource.description"></pwb-review-text>
+      <pwb-review-text label="Resource Type" value="resource.type"></pwb-review-text>
+      <pwb-review-link label="Resource Link" value="resource.url"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+</pwb-review-section>
+
+<!-- FAQs -->
+<pwb-review-section name="faqs" label="Frequently asked questions (FAQs)" is-collapsed="sectionsCollapse.faqs">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="FAQs"></pwb-review-subsection>
+  <div ng-repeat="faq in content.FAQ">
+    <pwb-review-group label="FAQ {{$index + 1}}">
+      <pwb-review-text group-label label="FAQ Type" value="faq['faq-type']"></pwb-review-text>
+      <pwb-review-text label="Question" value="faq.question"></pwb-review-text>
+      <pwb-review-text label="Answer" value="faq.answer"></pwb-review-text>
+      <pwb-review-link label="Answer Link" value="faq['answer-link']"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+  <div ng-if="content.FAQ.length === 0">
+    <pwb-review-group label="FAQ 1">
+      <pwb-review-text group-label label="FAQ Type"></pwb-review-text>
+      <pwb-review-text label="Question"></pwb-review-text>
+      <pwb-review-text label="Answer"></pwb-review-text>
+      <pwb-review-link label="Answer Link"></pwb-review-link>
+    </pwb-review-group>
+  </div>
+</pwb-review-section>
+
+<!-- Contact -->
+<pwb-review-section name="contactInfo" label="Contact IBM Info" is-collapsed="sectionsCollapse.contactInfo">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="Contact Footer"></pwb-review-subsection>
+  <pwb-review-link label="Facebook URL" value="content['facebook-url']"></pwb-review-link>
+  <pwb-review-link label="LinkedIn URL" value="content['linkedin-url']"></pwb-review-link>
+  <pwb-review-link label="Twitter URL" value="content['twitter-url']"></pwb-review-link>
+
+  <pwb-review-subsection label="Technical Support"></pwb-review-subsection>
+  <pwb-review-link label="Chat URL" value="content['technical-support'][0]['support-chat']"></pwb-review-link>
+  <pwb-review-link label="Searchable Knowledge Base or Q&A Forum URL" value="content['technical-support'][0]['support-knowledgebase']"></pwb-review-link>
+  <pwb-review-text label="Support Phone Number" value="content['technical-support'][0]['phone-number']"></pwb-review-text>
+  <pwb-review-link label="Support Page URL" value="content['technical-support'][0]['support-url']"></pwb-review-link>
+  <pwb-review-text label="Support Email Address" value="content['technical-support'][0]['support-email']"></pwb-review-text>
+</pwb-review-section>
+
+<pwb-review-section ng-if="qualificationData !== undefined" name="qualification" label="Qualification data" message="Cannot be edited by the provider in the content task" is-collapsed="sectionsCollapse.qualification">
+  <pwb-review-section-header></pwb-review-section-header>
+  <pwb-review-subsection label="Key Offering Dates"></pwb-review-subsection>
+  <pwb-review-text label="Submission date" value="qualificationData.submitDate"></pwb-review-text>
+  <pwb-review-text label="Approval date" value="qualificationData.returnDate"></pwb-review-text>
+  <pwb-review-text label="GA Date" value="qualificationData.GADate"></pwb-review-text>
+  <pwb-review-text label="Marketplace Go Live Date" value="qualificationData.goLiveDate"></pwb-review-text>
+
+  <pwb-review-subsection label="Approved Qualification Information"></pwb-review-subsection>
+  <pwb-review-text label="Brief Description" value="qualificationData.description"></pwb-review-text>
+  <pwb-review-text label="Offering Type" value="qualificationData.type"></pwb-review-text>
+  <pwb-review-text label="Business Unit" value="qualificationData.division"></pwb-review-text>
+  <pwb-review-text label="Focus area" value="qualificationData.focusArea"></pwb-review-text>
+  <pwb-review-text label="Interested in Bluemix?" value="qualificationData.bluemixOnboardingRequired"></pwb-review-text>
+  <pwb-review-text label="Does the offering have a product ID?" value="qualificationData.sbsProductId"></pwb-review-text>
+  <pwb-review-text label="What billing system does the offering use?" value="qualificationData.billingSystem"></pwb-review-text>
+  <pwb-review-text label="Have you completed SBS onboarding for the offering?" value="qualificationData.sbsOnboarding"></pwb-review-text>
+  <pwb-review-text ng-if="qualificationData.type === 'Cognitive Application'" label="Offering team contact person (ﬁrst and last name)" value="qualificationData.contactPerson.firstName + ' ' qualificationData.contactPerson.lastName"></pwb-review-text>
+  <pwb-review-text ng-if="qualificationData.type === 'Cognitive Application'" label="Offering team contact person (email address)" value="qualificationData.contactPerson.email"></pwb-review-text>
+</pwb-review-section>

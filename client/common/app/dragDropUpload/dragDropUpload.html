@@ -1,0 +1,47 @@
+<div class="dropzone col-xs-12 drag_drop_files_container larger_margin_bottom clearfix" id="drag-drop-container">
+
+  <span ng-if="allfiles.length <= 0" class="drag_drop_message ibm-light ibm-download-link">Drag and drop files here</span>
+
+  <div ng-show="allfiles.length > 0" class="uploaded_file_container clearfix" ng-repeat="uploadFile in allfiles"
+    ng-class="{'upload_success' : uploadFile.status ==='complete',
+               'upload_error' : uploadFile.status ==='inValid',
+               'last_list_item' : $last || allfiles.length == 1}">
+
+    <div class="col-xs-12 upload_file_name">
+      <strong ng-class="{'ibmGray-40' : uploadFile.status === 'starting'}">{{uploadFile.name}}</strong>
+      <img ng-hide="true" ng-src="{{uploadFile.file}}" width="100" height="50" />
+    </div>
+
+    <div class="col-xs-12 upload_file_progress_bar_container center_text clearfix" ng-class="{'complete_upload_file' : uploadFile.status !=='complete', 'invalid_upload_file' : uploadFile.status ==='inValid'}">
+      <div class="upload_file_progress_bar">
+        <uib-progressbar max="uploadFile.total" value="uploadFile.progress" type="{{uploadFile.status}}"></uib-progressbar>
+      </div>
+      <button ng-disabled="uploadFile.status == 'inComplete'" class="upload_file_delete_file_btn icon-x-circle pull-right" ng-click="removeUploadFile($index);">Remove Uploaded File</button>
+    </div>
+
+    <div class="col-xs-12 upload_file_status_container clearfix">
+      <span ng-cloak ng-show="uploadFile.status === 'starting'" class="upload_message">Preparing to upload</span>
+      <span ng-cloak ng-show="uploadFile.status === 'inComplete'" class="upload_message">Uploading...</span>
+      <span ng-cloak ng-show="uploadFile.status === 'complete'" class="upload_message complete_upload_message">Uploaded at {{uploadFile.uploadDate | date:"h:mm a 'on' MMMM d, y"}} </span>
+      <span ng-cloak ng-show="uploadFile.status === 'processing'" class="upload_message">Processing...</span>
+      <span ng-cloak ng-show="uploadFile.status === 'inValid'" class="upload_message">Invalid file. Please try again.</span>
+      <span ng-cloak ng-show="uploadFile.status === 'warning'" class="upload_message has-error">{{uploadFile.error.message}}</span>
+
+      <div class="upload-message-container" ng-show="uploadFile.status === 'warning' && (uploadFile.name.indexOf('.zip') > -1 || uploadFile.name.indexOf('.json') > -1)" ng-init="collapse = true">
+        <button ng-cloak class="upload-message-btn" ng-class="{'icon-down-arrow-alt' : collapse, 'icon-up-arrow-alt' : !collapse}" ng-click="collapse = !collapse">Learn more</button>
+        <div uib-collapse="collapse">
+          <ul class="bulleted_list upload-error-list">
+            <li ng-repeat="errordetail in uploadFile.error.errorDetails track by $index">{{errordetail}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="input_add_translation_files col-xs-12 clearfix">
+  <span class="text_label">Or select from file</span>
+  <input class="col-xs-12 center_btn" type="file" multiple ng-model="upload_input_file" ngf-select="uploadInputFiles()"
+  id="input_add_files" name="input_add_files" ng-required="false"/>
+</div>

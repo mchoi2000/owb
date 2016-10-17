@@ -1,0 +1,24 @@
+<fieldset ng-disabled="$ctrl.isDisabled" class="col-xs-12 input_radio" ng-class="{'radio_error' : $ctrl.formCtrl[$ctrl.inputName].$invalid && ($ctrl.formCtrl.$submitted || $ctrl.formCtrl.$$parentForm.$submitted)}">
+  <label ng-if="$ctrl.label"><span ng-show="$ctrl.isRequired" class="has-error">*</span> {{$ctrl.label}}</label>
+  <div ng-if="$ctrl.description" class="small_description_bottom">{{$ctrl.description}}</div>
+
+  <div ng-repeat="choice in $ctrl.choices" class="col-xs-12 control-label">
+    <div class="col-xs-5">
+      <input type="radio" id="{{$ctrl.inputId}}_{{$index}}" name="{{$ctrl.inputName}}"
+             class="ibm_radio_button ibm_radio_button_alt" ng-class="{'radio_checked': $ctrl.model == choice.value}"
+             ng-required="$ctrl.isRequired" ng-change="$parent.$ctrl.onChange({choice: choice.value});"
+             ng-model="$parent.$ctrl.model" ng-value="choice.value">
+      <div aria-hidden="true" class="iradio_square-blue radio_checked_bg"></div>
+      <label for="{{$ctrl.inputId}}_{{$index}}" class="radio_label">{{choice.display}}</label>
+    </div>
+  </div>
+
+  <button class="btn pwb_btn btn-sm"
+          ng-if="$ctrl.clearable === true"
+          ng-hide = "$ctrl.model === null || $ctrl.model === undefined"
+          ng-click="$ctrl.model = null; $ctrl.onClear()">
+    Clear
+  </button>
+
+  <ng-transclude></ng-transclude>
+</fieldset>

@@ -1,0 +1,268 @@
+/*!
+ * Name: ibm.com v18 production file
+ * Release: 31.0.0
+ * Built: 2015-09-09 10:48:59 PM EDT
+ * Owner: Corporate Webmaster (NUS_N_NIWWW)
+ * Copyright (c) 2015 IBM Corporation
+ * Description: Official file for production use
+ *//*!
+ * Name: ibm.com v18 forms CSS file
+ * Owner: Corporate Webmaster (NUS_N_NIWWW)
+ * Copyright (c) 2014 IBM Corporation
+ */
+
+ input, select, textarea {
+    color: #323232;
+    font-size: 16px;
+    font-size: 1rem;
+}
+.ibm-type input, .ibm-type select, .ibm-type textarea {
+    font-family: "HelvRegularIBM", "Helvetica Neue", Arial, sans-serif;
+}
+.ibm-column-form input[type="text"], .ibm-column-form input[type="password"], .ibm-column-form input[type="search"], .ibm-column-form textarea, .ibm-row-form input[type="text"], .ibm-row-form input[type="password"], .ibm-row-form input[type="search"], .ibm-row-form textarea {
+    border: 1px solid #959f9f;
+    font-style: normal;
+    max-width: 100%}
+.ibm-column-form input[type="text"]:focus, .ibm-column-form input[type="password"]:focus, .ibm-column-form input[type="search"]:focus, .ibm-column-form textarea:focus, .ibm-row-form input[type="text"]:focus, .ibm-row-form input[type="password"]:focus, .ibm-row-form input[type="search"]:focus, .ibm-row-form textarea:focus {
+    background: #fff;
+    border: 1px solid #000;
+}
+.ibm-column-form input[disabled], .ibm-column-form textarea[disabled], .ibm-row-form input[disabled], .ibm-row-form textarea[disabled] {
+    cursor: not-allowed;
+}
+.ibm-column-form input[type="text"], .ibm-column-form input[type="password"], .ibm-column-form input[type="search"], .ibm-row-form input[type="text"], .ibm-row-form input[type="password"], .ibm-row-form input[type="search"] {
+    height: 2.25em;
+    line-height: 2.25em;
+    text-indent: 5px;
+}
+.ibm-column-form input::-moz-placeholder, .ibm-row-form input::-moz-placeholder {
+    color: #6d7777;
+}
+.ibm-column-form input:-ms-input-placeholder, .ibm-row-form input:-ms-input-placeholder {
+    color: #6d7777;
+}
+.ibm-column-form input::-webkit-input-placeholder, .ibm-row-form input::-webkit-input-placeholder {
+    color: #6d7777;
+}
+.ibm-column-form textarea, .ibm-row-form textarea {
+    padding: 5px;
+}
+.ibm-column-form label, .ibm-column-form label span.ibm-additional-info, .ibm-row-form label, .ibm-row-form label span.ibm-additional-info {
+    display: block;
+}
+.ibm-column-form .ibm-input-group label, .ibm-row-form .ibm-input-group label {
+    clear: none;
+    display: inline;
+    float: none;
+    margin-right: 10px;
+    position: relative;
+    top: 1px;
+    width: auto;
+}
+.ibm-column-form .ibm-field-error, .ibm-row-form .ibm-field-error {
+    background: rgba(255, 0, 0, 0.2);
+}
+.ibm-column-form .ibm-item-note, .ibm-row-form .ibm-item-note {
+    display: block;
+    margin-top: 5px;
+}
+.ibm-column-form .ibm-item-note.ibm-alert-link, .ibm-row-form .ibm-item-note.ibm-alert-link {
+    color: #e71d32;
+    padding-left: 2em;
+    position: relative;
+}
+.ibm-column-form p span input+a[class*="-link"], .ibm-row-form p span input+a[class*="-link"] {
+    color: transparent;
+    display: inline-block;
+    left: 10px;
+    line-height: 2.25em;
+    position: relative;
+    text-decoration: none;
+    width: 0;
+}
+.ibm-column-form p span input+a[class*="-link"]:before, .ibm-row-form p span input+a[class*="-link"]:before {
+    color: #3b6caa;
+}
+.ibm-column-form p span input+a[class*="-link"]:hover:before, .ibm-row-form p span input+a[class*="-link"]:hover:before {
+    color: #264a60;
+}
+.ibm-column-form p span input+a[class*="-link"].ibm-alert-link:before, .ibm-row-form p span input+a[class*="-link"].ibm-alert-link:before {
+    color: #e71d32;
+}
+.ibm-column-form p span input+a[class*="-link"].ibm-alert-link:hover:before, .ibm-row-form p span input+a[class*="-link"].ibm-alert-link:hover:before {
+    color: #8c101c;
+}
+.ibm-column-form label {
+    box-sizing: border-box;
+    clear: left;
+    float: left;
+    padding: 0 10px 0 0;
+    width: 190px;
+}
+.ibm-column-form label a {
+    position: relative;
+    top: 0;
+}
+.ibm-column-form label span {
+    display: inline;
+    margin: 0;
+}
+.ibm-column-form p {
+    clear: left;
+}
+.ibm-column-form p:after {
+    clear: left;
+    content: "";
+    display: block;
+}
+.ibm-column-form p span {
+    display: block;
+    margin-left: 190px;
+}
+.ibm-column-form p label span {
+    display: inline;
+    margin: 0;
+}
+.ibm-row-form label {
+    padding-bottom: 5px;
+}
+.ibm-row-form label span {
+    display: inline;
+    margin: 0;
+}
+#ibm-content p.ibm-short-btn {
+    float: left;
+    padding-top: 0;
+    width: 100%}
+span.ibm-fileinput input[type="file"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+.ibm-column-form span.ibm-fileinput {
+    margin: 0;
+    position: relative;
+}
+.ibm-column-form span.ibm-fileinput+.ibm-fileinput {
+    margin-top: 15px;
+}
+.ibm-column-form span.ibm-fileinput a {
+    color: #3b6caa;
+    margin: 0;
+    padding-left: 2.2em;
+    width: auto;
+}
+.ibm-column-form span.ibm-fileinput span {
+    display: inline-block;
+    left: 10px;
+    margin: 0;
+    position: relative;
+}
+.ibm-row-form span.ibm-fileinput {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+.ibm-row-form span.ibm-fileinput a {
+    color: #3b6caa;
+    margin: 0;
+    padding-left: 2.2em;
+    width: auto;
+}
+.ibm-row-form span.ibm-fileinput span {
+    margin: 10px;
+}
+.ibm-notice-choice-container {
+    border-top: 1px dotted #aeaeae;
+    clear: left;
+    float: none;
+    margin-bottom: 10px;
+    position: relative;
+    top: 15px;
+}
+.ibm-notice-choice-container .ibm-notice-choice-heading {
+    padding-bottom: 0;
+}
+.ibm-notice-choice-container .ibm-input-group {
+    display: block;
+    padding-top: 15px;
+}
+.ibm-notice-choice-container .ibm-input-group+.ibm-input-group, .ibm-notice-choice-container .ibm-input-group+input[type='hidden']+.ibm-input-group {
+    padding-top: 0;
+}
+.ibm-notice-choice-container .ibm-input-group label {
+    display: inline-block;
+}
+.ibm-notice-choice-container p {
+    padding-top: 15px;
+}
+
+@media only screen and (min-width:0) and (max-width:579px) {
+    form.ibm-column-form label, form.ibm-row-form label {
+        float: none;
+        padding-bottom: 5px;
+        width: auto;
+    }
+    form.ibm-column-form p, form.ibm-row-form p {
+        padding-bottom: 30px;
+    }
+    form.ibm-column-form p span, form.ibm-row-form p span {
+        margin-left: 0;
+    }
+    form.ibm-column-form input[type="text"], form.ibm-column-form input[type="password"], form.ibm-column-form input[type="search"], form.ibm-column-form select, form.ibm-column-form textarea, form.ibm-row-form input[type="text"], form.ibm-row-form input[type="password"], form.ibm-row-form input[type="search"], form.ibm-row-form select, form.ibm-row-form textarea {
+        max-width: 100%
+    }
+}
+
+.icheckbox_square-blue, .iradio_square-blue {
+    background: url($webRoot + 'images/icons/checkboxradio_pwb.png') no-repeat;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    *display: inline;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    width: 22px;
+}
+.icheckbox_square-blue {
+    background-position: 0 0;
+}
+.icheckbox_square-blue.hover, .icheckbox_square-blue.focus {
+    background-position: -24px 0;
+}
+.icheckbox_square-blue.checked {
+    background-position: -48px 0;
+}
+.icheckbox_square-blue.disabled {
+    background-position: -72px 0;
+    cursor: not-allowed;
+}
+.icheckbox_square-blue.checked.disabled {
+    background-position: -96px 0;
+}
+.iradio_square-blue {
+    background-position: -120px 0;
+}
+.iradio_square-blue.hover, .iradio_square-blue.focus {
+    background-position: -144px 0;
+}
+.iradio_square-blue.checked {
+    background-position: -168px 0;
+}
+.iradio_square-blue.disabled {
+    background-position: -192px 0;
+    cursor: not-allowed;
+}
+.iradio_square-blue.checked.disabled {
+    background-position: -216px 0;
+}
+@media(-o-min-device-pixel-ratio:5 / 4), (-webkit-min-device-pixel-ratio:1.25), (min-resolution:120dpi), (min-resolution:1.25dppx) {
+    .icheckbox_square-blue, .iradio_square-blue {
+    background-image: url($webRoot + 'images/icons/checkboxradio_pwb-2x.png');
+    -webkit-background-size: 287px 24px;
+    background-size: 287px 24px;
+}
+}

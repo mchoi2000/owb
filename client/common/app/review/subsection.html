@@ -1,0 +1,7 @@
+<div class="col-xs-12 review-row review-subsection">
+  <div class="col-xs-6 review-column"><strong>{{label}}</strong></div>
+  <div class="col-xs-6 review-column">
+    <div class="pull-right review-subsection-status" ng-class="{'has-error' : alertStatus, 'fadein' : !loading && status}">{{status}} {{modifiedBy}}{{at | date:" 'on' MMM d, y 'at' h:mm a"}}</div>
+    <div class="ibm-spinner loading_spinner pull-right" style="position: absolute; right: 19px; top: 21px;" ng-show="loading && status"></div>
+  </div>
+</div>

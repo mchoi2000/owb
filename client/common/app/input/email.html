@@ -1,0 +1,12 @@
+<div class="col-xs-12 input_element">
+  <div class="content_custom_popover">
+    <label class="ibm-fleft control-label" for="{{$ctrl.inputId}}"><span ng-show="$ctrl.isRequired" class="has-error">*</span> {{$ctrl.label}}</label>
+    <input type="email" id="{{$ctrl.inputId}}" name="{{$ctrl.inputName}}" class="form-control content_custom_popover"
+           ng-class="{'has-error': $ctrl.formCtrl.{{$ctrl.inputName}}.$invalid && ($ctrl.formCtrl.$submitted || $ctrl.formCtrl.$$parentForm.$submitted)}"
+           ng-model="$ctrl.model" placeholder="{{$ctrl.placeholder}}" ng-required="$ctrl.isRequired" ng-trim="false"
+           ng-change="$ctrl.onChange({newValue: $ctrl.model})" ng-focus="$ctrl.focus = true" ng-blur="$ctrl.focus = false"
+           popover-trigger="focus" popover-placement="right" uib-popover="{{$ctrl.description}}">
+  </div>
+  <!-- Error Messages -->
+  <ng-transclude></ng-transclude>
+</div>

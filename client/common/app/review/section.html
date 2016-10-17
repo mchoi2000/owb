@@ -1,0 +1,9 @@
+<div class="col-xs-12 review-section clearfix" ng-class="{'section-collapsed': isCollapsed, 'section-expanded': !isCollapsed}">
+  <div class="review-section-header clearfix">
+    <h2 id="{{name}}" class="h2 col-xs-11">{{label}} <span ng-if="message" class='large_text section-message'>({{message}})</span></h2>
+    <button class="col-xs-1 pull-right review-section-collapse" ng-class="{'icon-add': isCollapsed, 'icon-line': !isCollapsed}" ng-click="isCollapsed = !isCollapsed"></button>
+  </div>
+  <div class="review-section-body clearfix" uib-collapse="isCollapsed">
+    <ng-transclude></ng-transclude>
+  </div>
+</div>

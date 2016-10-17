@@ -1,0 +1,16 @@
+<input id="{{$ctrl.inputId}}" type="hidden" ng-model="$ctrl.model" value="{{$ctrl.model}}" name="{{$ctrl.inputName}}" ng-required="$ctrl.isRequired"/>
+<div class="select_input_container col-xs-12 btn-group input_element content_custom_popover" uib-dropdown keyboard-nav>
+  <div class="col-xs-12">
+    <label ng-class="{'ibmGray-20': $ctrl.isDisabled}"><span ng-show="$ctrl.isRequired" class="has-error">*</span> {{$ctrl.label}}</label>
+  </div>
+  <button id="{{$ctrl.inputId}}_btn" type="button" class="btn dropdown_btn icon-down-arrow" ng-class="{'has-error': $ctrl.formCtrl[$ctrl.inputName].$invalid && ($ctrl.formCtrl.$submitted || $ctrl.formCtrl.$$parentForm.$submitted)}"
+          ng-model="$ctrl.model" ng-disabled="$ctrl.isDisabled" uib-dropdown-toggle
+          popover-trigger="focus" popover-placement="right" uib-popover="{{$ctrl.description}}"
+          aria-label="Your currently selected {{$ctrl.label}} is {{$ctrl.display[$ctrl.model] || 'Select One'}}. Select from the options below to change it.">
+    {{$ctrl.display[$ctrl.model] || 'Select One'}}
+  </button>
+  <ul uib-dropdown-menu class="dropdown-menu max_height_dropdown dropdown_menu_display_options" role="menu" tabindex=0 aria-labelledby="{{$ctrl.inputId}}_btn">
+    <li ng-repeat="option in $ctrl.list" role="menuitem"><a role="option" id="{{$ctrl.inputId}}_option_{{$index}}" href="#" ng-click="$parent.$ctrl.model = option.value; $parent.$ctrl.onChange({option: option.value})">{{option.display}}</a></li>
+  </ul>
+  <ng-transclude></ng-transclude>
+</div>

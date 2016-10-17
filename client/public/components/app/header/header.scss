@@ -1,0 +1,259 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+// v18 overwrite header styles
+#ibm-top {
+  overflow: visible !important;
+}
+
+#ibm-universal-nav {
+  height: 51px;
+}
+
+.ibm-mobilemenu {
+  h2 {
+    font-size: 1rem;
+    line-height: 1.625rem;
+  }
+}
+
+.ibm-mobilemenu-close a.ibm-close-link {
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 0;
+}
+
+.ibm-overlay-backdrop-visible {
+  #pwb-unav-links-container {
+    z-index: 100;
+  }
+  #ibm-search-module {
+    display: block !important;
+  }
+}
+.ibm-masthead-item-search {
+  margin-right: 90px;
+}
+
+// PWB Header styles
+#pwb-unav-links-container li.submenu ul {
+  display: none;
+}
+.pwb-masthead-signin-link:hover ~ .dropdown, .submenu ul:hover {
+    opacity: 1 !important;
+    height: auto !important;
+    display: block !important;
+}
+.ibm-masthead-categories-mobilemenu, .ibm-masthead-unav-mobilemenu {
+  padding: 0px 0px 15px;
+  margin: 0;
+  li {
+    line-height: 1.625rem;
+  }
+}
+.ibm-masthead-categories {
+  display: none !important;
+}
+.ibm-masthead-iconsonly {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#pwb-signin-minimenu-container {
+  top: 36px;
+}
+.pwb-masthead-categories > li, .pwb-masthead-unav > li, .pwb-masthead-iconsonly > li {
+  float: left;
+}
+
+.pwb-masthead-iconsonly {
+  position: relative;
+  float: right;
+}
+#pwb-signin-minimenu-container {
+  min-width: 200px;
+  padding: 0px;
+  position: absolute;
+  right: -1px;
+  z-index: 20;
+  li {
+    padding: 0;
+  }
+}
+.pwb-masthead-iconsonly .pwb-masthead-item-signin.hasinitials button,
+.pwb-masthead-iconsonly .pwb-masthead-item-signin.hasinitials a {
+  font-size: 1rem;
+  margin-left: 0px;
+  position: relative;
+  text-indent: 0px;
+  width: auto;
+}
+.pwb-masthead-signin-link {
+  background: #FFF none repeat scroll 0% 0%;
+  border: 0px none;
+  font-size: 14px;
+  text-indent: 100px;
+  width: 24px;
+  color: #000;
+}
+.pwb-masthead-signin-link:before {
+	content:"\f152";
+  text-indent: 0px;
+}
+.signedin .pwb-masthead-signin-link:before {
+	content:"";
+  text-indent: 100px;
+}
+.pwb-masthead-iconsonly .pwb-masthead-item-signin.signedin button,
+.pwb-masthead-iconsonly .pwb-masthead-item-signin.signedin a {
+    background: #325C80 none repeat scroll 0% 0%;
+    color: #FFF;
+    margin-left: 0px;
+    padding-left: 26px;
+    padding-right: 26px;
+    border: 0px none;
+}
+.pwb-masthead-iconsonly > li > button, .pwb-masthead-iconsonly > li > a {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
+  padding: 0px;
+  text-indent: -999px;
+  text-decoration: none;
+}
+.pwb-masthead-iconsonly > li > a, .pwb-masthead-iconsonly > li > button {
+  background: #FFF none repeat scroll 0% 0%;
+  border: 0px none;
+  font-size: 14px;
+  text-indent: 100px;
+  width: 24px;
+}
+.pwb-masthead-iconsonly > li > a:hover, .pwb-masthead-iconsonly > li > button:hover {
+  border-bottom: 2px solid #3B6CAA;
+  text-decoration: none;
+  background-color: $ibmWhite;
+}
+.pwb-button {
+  background: #FFFFFF;
+  border: none;
+  font-family: Arial, sans-serif;
+  margin: 17px 0;
+}
+#pwb-universal-nav {
+  box-sizing: border-box;
+  height: $headerHeight;
+}
+#pwb-masthead {
+  height: $headerHeight;
+  width: 100%;
+  .page-content {
+    margin: 0 20px;
+  }
+}
+.header_view {
+  height: $headerHeight;
+  border-bottom: 1px solid $defaultBorderColor;
+  margin-bottom: 60px;
+}
+.pwb-top-navs {
+  float: left;
+  width: 100%;
+  padding-right: 14px;
+  ul {
+    li {
+      margin-left: 20px;
+      height: $headerHeight;
+      float: left;
+      display: block;
+      line-height: 100%;
+      a {
+        display: block;
+        height: $headerHeight;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: $h4Size;
+        padding: 30px 5px 0px;
+        color: $ibmGray-80;
+        line-height: 100%;
+      }
+      a:hover {
+        color: $linkHoverColor;
+      }
+      .active-nav {
+        border-bottom: 3px solid $linkColor;
+        color: $linkColor;
+      }
+    }
+  }
+}
+
+// Homepage Link
+#pwb-home-link {
+  margin-right: 20px;
+  margin-left: 0px;
+  a, span {
+    padding: 26px 5px 0px 0px;
+    display: block;
+    height: 44px;
+    border-bottom: none;
+    font-size: 18px;
+    box-sizing:  content-box;
+    color: $ibmGray-80;
+  }
+}
+
+// User Login Section
+#pwb-unav-links-container {
+  float: right;
+  top: -51px;
+  right: 42px;
+  z-index: 900;
+  position: absolute;
+    li.submenu {
+        position: relative;
+        height: 50px;
+        background-position: right 19px;
+        span {
+          display: block;
+          height: 0px;
+          width: 100%;
+          font-size: $baseSize;
+          box-sizing: border-box;
+          padding-top: 0px;
+          padding-right: 0px;
+          margin: 0;
+        }
+        ul {
+          top: 50px;
+          margin: 0;
+          opacity: 0;
+          transition: opacity 0.5s ease 0s;
+          li {
+            font-size: $baseSize;
+            button, a {
+              display: block;
+              width: 100%;
+              border: 1px solid $defaultBorderColor;
+              background-color: #FFF;
+              color: #323232;
+              display: block;
+              padding: 15px;
+              text-decoration: none;
+              font-size: 1rem;
+              line-height: 1.625rem;
+              text-align: left;
+            }
+            button:hover, a:hover {
+              background-color: #3b6caa;
+              color: $ibmWhite;
+              border: 1px solid #3b6caa;
+            }
+          }
+        }
+    }
+}

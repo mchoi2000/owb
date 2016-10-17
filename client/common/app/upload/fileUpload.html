@@ -1,0 +1,27 @@
+<label><span ng-show="isRequired" class="has-error">*</span> {{label}}</label>
+<div class="small_description_bottom">{{description}}</div>
+
+<div class="clearfix video_directive upload_margin">
+    <div class="col-xs-4">
+        <p style="margin-top: 12px;">Upload File:</p>
+    </div>
+    <div class="col-xs-8">
+        <div class="file_upload_container btn file_upload_btn ibm-bold pwb_btn_inverse" ng-hide="model.filename">
+            <span>Browse</span>
+            <input class="upload_btn" type="file" ng-model="model" ngf-select="checkImage($file)" ngf-pattern="{{types}}"
+                   accept="{{types}}" ngf-max-size="{{sizeLimit}}" id="{{inputId}}" name="{{inputName}}" ng-required="isRequired && (!existingData || existingData === '')"/>
+        </div>
+
+        <div ng-show="model.filename">
+            <span class="ibm-inlinelink ibm-remove-link remove_uploaded_file_btn" ng-click="removeFile()" role="button"> </span>
+            <a ng-hide="model.url" href="#" role="button">
+                {{model.filename}}
+            </a>
+            <a ng-show="model.url" href="{{model.url}}" role="button" target="_blank">
+                {{model.filename}}
+            </a>
+        </div>
+        <p>Upload size limit ({{sizeLimit}})</p>
+    </div>
+    <ng-transclude></ng-transclude>
+</div>

@@ -1,0 +1,180 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+
+.review-section {
+  border: 1px solid $defaultBorderColor;
+}
+
+.review-section-header {
+  padding: 14px 20px;
+}
+
+.review-section-body {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.review-section-collapse {
+  font-size: 22px;
+  text-align: right;
+
+  background-color: transparent;
+  border: none;
+  position: relative;
+
+  &::before {
+    line-height: 22px;
+    position: relative;
+    top: 5px;
+  }
+
+  &:hover, &:active, &:disabled {
+    background-color: transparent;
+    border: none;
+  }
+  &:hover {
+    &::before {
+      color: $linkHoverColor;
+    }
+  }
+
+}
+
+.section-collapsed {
+  margin-bottom: 30px;
+
+  h2 {
+    color: $ibmGray-20;
+  }
+
+  .large_text {
+    color: $ibmGray-20;
+  }
+
+  .review-section-collapse {
+    &::before {
+      color: $ibmGray-20;
+      font-size: 24px;
+      right: -1px;
+    }
+
+    &:hover {
+      &::before {
+        color: $linkHoverColor;
+      }
+    }
+
+  }
+
+}
+
+.section-message {
+  margin-left: 25px;
+}
+
+pwb-review-section:last-child {
+  .review-section {
+    margin-bottom: 60px;
+  }
+}
+
+.cmm-review-iot-container {
+  @include standardTransitions(0.25s, 0.0s);
+
+  &.faded_out_content {
+    opacity: .5;
+  }
+}
+
+.section-expanded {
+  margin-bottom: 60px;
+
+  h2 {
+    color: $ibmPurple-60;
+  }
+
+  .large_text {
+    color: $ibmGray-40;
+  }
+
+  .review-section-header {
+    border-bottom: 1px solid $defaultBorderColor;
+  }
+}
+
+.review-section-header-labels {
+  color: $ibmGray-40;
+}
+
+.review-row {
+  border-top: 1px solid $defaultBorderColor;
+}
+
+.review-column {
+  padding-top: 18px;
+  padding-right: 18px;
+  padding-bottom: 18px;
+  padding-left: 20px;
+}
+
+.review-value-content {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  word-wrap: break-word;  
+}
+
+.header-label {
+  padding-left: 20px;
+  padding-bottom: 18px;
+}
+
+.review-list-item {
+  padding-bottom: 15px;
+}
+
+.review-list {
+  padding-top: 20px;
+  padding-left: 20px;
+  padding-bottom: 5px;
+}
+
+.review-subsection {
+  background-color: $ibmNeutral-2;
+  color: $ibmGray-60;
+}
+
+.review-subsection-status {
+  padding-right: 20px;
+  opacity: 0;
+  @include standardTransitions(0.25s, 0.0s);
+}
+
+.review-link {
+  word-wrap: break-word;
+}
+
+.review-img-name {
+  padding-left: 8.5px;
+}
+
+.review-img-overlay {
+  background: $ibmPurple-60;
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  width: 80px;
+  top:0;
+  left:0;
+}
+
+.review-img-overlay:hover {
+  opacity: 0.8;
+}

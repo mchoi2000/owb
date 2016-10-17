@@ -1,0 +1,54 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+
+.section {
+  border-bottom: 1px solid $ibmGray-10;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.section_title:before {
+  color: $ibmGray-10;
+  font-size: 31px;
+  position: absolute;
+  top: 28px;
+  left: 2px;
+}
+
+.input_element {
+  margin-bottom: 18px;
+}
+
+.input_field {
+  margin-bottom: 12px;
+}
+
+.group_label {
+  margin-bottom: 30px;
+}
+
+.subsection_fields {
+  margin-bottom: 30px;
+}
+
+.no_button {
+  margin-bottom: 22px;
+}
+
+.input_radio {
+  margin-bottom: 6px;
+}
+
+.last_dashed_border_bottom {
+  border-bottom: 1px dashed $defaultBorderColor;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.single_input_correction {
+  margin-bottom: -22px;
+}

@@ -1,0 +1,54 @@
+<!--
+Licensed Materials - Property of IBM
+
+@ Copyright IBM Corp. 2015 All Rights Reserved
+
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+
+<div class="padded_container tile-top-section"
+     ng-class="{'icon-close-lock' : $ctrl.status==='qualification_returned' ||
+                                    $ctrl.status==='Returned',
+                'icon-check-lock' : $ctrl.status==='qualification_approved' ||
+                                    $ctrl.status==='Approved'}">
+
+  <span ng-if="$ctrl.status==='qualification_submitted' ||
+               $ctrl.status==='Submitted' ||
+               $ctrl.status==='InReview'"
+        role="alert"
+        class="ibm-bold tile-incomplete-tasks">Awaiting Review</span>
+
+  <h3 class="product_name">{{$ctrl.offeringName | limitTo: $ctrl.limit}}{{ $ctrl.offeringName.length > $ctrl.limit ? '&#8230;' : ''}}</h3>
+
+</div>
+
+<div class="padded_container tile-bottom-section">
+  <ul class="edit_offering_navs zero_out_block_list clearfix">
+
+    <li class="content-task">
+
+      <div class="task-container"
+           ng-class="{'icon-content-doc' : $ctrl.taskName !== 'Offering Commerce',
+                      'icon-dollar-doc' : $ctrl.taskName === 'Offering Commerce'}">
+        <!--- Review Task --->
+        <a class="task"
+           role="link"
+           aria-label="{{$ctrl.taskName}} status is {{$ctrl.statusMessage}} - Review it"
+           href="{{$ctrl.link}}"
+           target="_self">
+          <h4 class="h4 ibm-bold task-name">{{$ctrl.taskName}}</h4>
+          <p class="task-status">{{$ctrl.statusMessage}}</p>
+
+          <span ng-if="$ctrl.status === 'qualification_submitted' ||
+                       $ctrl.status === 'Submitted' ||
+                       $ctrl.status === 'InReview'" class="update-task-link">Review</span>
+          <span ng-if="$ctrl.status === 'qualification_approved' ||
+                       $ctrl.status === 'Approved' ||
+                       $ctrl.status === 'Returned'" class="update-task-link">View</span>
+        </a>
+
+      </div>
+    </li>
+
+  </ul>
+</div>

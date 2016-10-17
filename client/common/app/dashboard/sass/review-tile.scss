@@ -1,0 +1,346 @@
+// Review Specific Styles
+.review-product-tile-item {
+  .task {
+    .update-task-link {
+      right: 10px;
+      top: 16px;
+    }
+  }
+
+  // Review Statuses
+  .review-tile-status-returned,
+  .review-tile-status-approved,
+  .tile-status-needs-review {
+    .tile-top-section {
+      padding: 20px;
+
+      &::before {
+        position: absolute;
+        top: 20px;
+        left: 17px;
+        font-size: 23px;
+        color: $ibmGray-30;
+      }
+
+    }
+
+    .h3, h3 {
+      top: 54px !important;
+      position: absolute;
+    }
+  }
+
+  .review-tile-status-returned,
+  .review-tile-status-approved {
+    .tile-top-section {
+      background-color: $ibmWhite;
+    }
+
+    .task-container {
+      &::before {
+        color: $ibmGray-40;
+      }
+    }
+  }
+
+}
+
+.tile-bottom-section {
+  padding: 10px 10px 10px 10px;
+}
+
+.tile-top-section {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+
+  .h3, h3 {
+    color: $ibmGray-60;
+  }
+
+  &:hover {
+    .h3, h3 {
+      color: $ibmGray-80;
+    }
+  }
+
+}
+
+.tile-incomplete-tasks {
+  background-color: transparent;
+  color: $ibmPurple-60;
+  padding: 4px 12px;
+  font-size: $smallerSize;
+  border: 1px solid $ibmPurple-60;
+}
+
+// Review Task Styles
+.task {
+  background-repeat: no-repeat;
+  background-image: url($dashboardStatusIcons);
+  background-position: -9999px -9999px;
+  padding: 15px 10px 14px 44px;
+  display: block;
+  width: auto;
+  color: $ibmGray-50;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid $ibmWhite;
+  height: 66px;
+
+  .task-status, .task-name {
+    float: left;
+    clear: both;
+    margin: 0;
+    padding: 0;
+  }
+
+  .task-name {
+    color: $ibmGray-60;
+    padding-bottom: 2px;
+    font-size: $baseSize;
+    line-height: 1.3em;
+  }
+
+  .task-status {
+    color: $ibmGray-50;
+    font-size: 13px;
+  }
+
+  .update-task-link {
+    color: $linkColor;
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 12px;
+  }
+
+}
+
+// Link Task Statuses
+a.task {
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid $defaultBorderColor;
+
+    .task-status, .task-name {
+      cursor: pointer;
+    }
+
+    .task-name {
+      color: $ibmGray-80;
+    }
+
+    .task-status {
+      color: $ibmGray-60;
+    }
+
+    .update-task-link {
+      color: $linkHoverColor;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+
+// Task Styles
+.content-task,
+.commerce-task,
+.integration-task {
+  width: 100%;
+  line-height: 1.3em;
+
+  .task-container {
+    margin: 0;
+    padding: 0;
+    height: 66px;
+    position: relative;
+
+    &::before {
+      width: 100%;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 18px;
+      left: 4px;
+      font-size: 32px;
+      color: $ibmPurple-60;
+    }
+  }
+
+  &:hover, &:active {
+    .task-container::before {
+      color: $ibmPurple-70;
+    }
+  }
+
+  // Approved
+  &.approved {
+    .task-container {
+
+      .task-name {
+        color: $ibmGray-40;
+      }
+
+      &::before {
+        color: $ibmGray-20;
+      }
+
+      &:hover, &:active {
+        &::before {
+          color: $ibmGray-20;
+        }
+      }
+
+      .task {
+        background-position: $greenCheck;
+      }
+    }
+  }
+
+  // Rejected
+  &.rejected {
+    .task-container {
+      .task {
+        background-position: $redAlert;
+      }
+    }
+  }
+
+  // Submitted
+  &.submitted {
+    .task-container {
+
+      .task-name {
+        color: $ibmGray-40;
+      }
+
+      &::before {
+        color: $ibmGray-20;
+      }
+
+      &:hover, &:active {
+        &::before {
+          color: $ibmGray-20;
+        }
+      }
+
+      .task {
+        background-position: $grayCheck;
+      }
+    }
+  }
+
+  // Omitted
+  &.omitted {
+    .task-container {
+
+      .task-name {
+        color: $ibmGray-40;
+      }
+
+      &::before {
+        color: $ibmGray-20;
+      }
+
+      &:hover, &:active {
+        .task-name {
+          color: $ibmGray-60;
+        }
+
+        &::before {
+          color: $ibmGray-40;
+        }
+      }
+
+      .task {
+        background-position: $grayOmitted;
+      }
+    }
+  }
+
+  // Published
+  &.published {
+    .task-container {
+
+      .task-name {
+        color: $ibmGray-40;
+      }
+
+      &::before {
+        color: $ibmGray-20;
+      }
+
+      &:hover, &:active {
+
+        .task-name {
+          color: $ibmGray-60;
+        }
+
+        &::before {
+          color: $ibmGray-40;
+        }
+      }
+
+      .task {
+        background-position: $greenCheck;
+      }
+    }
+  }
+
+  // Will Publish
+  &.will-publish {
+    .task-container {
+
+      .task-name {
+        color: $ibmGray-40;
+      }
+
+      &::before {
+        color: $ibmGray-20;
+      }
+
+      &:hover, &:active {
+        &::before {
+          color: $ibmGray-40;
+        }
+      }
+
+      .task {
+        background-position: $greenCheck;
+      }
+    }
+  }
+
+  // Complete
+  &.complete {
+    .task-container {
+
+      .task-name {
+        color: $ibmGray-40;
+      }
+
+      &::before {
+        color: $ibmGray-20;
+      }
+
+      &:hover, &:active {
+        .task-name {
+          color: $ibmGray-60;
+        }
+
+        &::before {
+          color: $ibmGray-40;
+        }
+      }
+
+      .task {
+        background-position: $greenCheck;
+      }
+    }
+  }
+
+}

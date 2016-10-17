@@ -1,0 +1,27 @@
+<li class="sort_offerings ibmGray-60">
+  <div class="btn-group" uib-dropdown keyboard-nav>
+    <button focus-if="$ctrl.updatedSort"
+            ng-focus="$ctrl.updatedSort=false"
+            role="button"
+            id="provider_sort_offerings_dropdown"
+            aria-label="Your current sort option is {{$ctrl.sortProductsName}}. Select from the options below to change it."
+            ng-disabled="$ctrl.isDisabled()"
+            type="button"
+            class="btn dropdown_btn icon-down-arrow regular-font cols-xs-12" uib-dropdown-toggle>
+          {{$ctrl.sortProductsName}}
+    </button>
+
+    <ul uib-dropdown-menu class="dropdown-menu dropdown_menu_display_options"
+        tabindex=0
+        role="menu"
+        aria-label="Sort your offerings">
+      <li ng-repeat="myOption in $ctrl.sortOptionsList" role="menuitem">
+        <a role="option"
+           aria-label="Sort offerings by {{myOption.name}}"
+           href="#"
+           ng-click="$ctrl.update(myOption)">{{myOption.name}}</a>
+      </li>
+    </ul>
+  </div>
+
+</li>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="22px"
+	 height="22px" viewBox="0 0 22 22" xml:space="preserve">
+<g id="icon-check">
+	<path id="icon-color" fill="#aeaeae" d="M11,2c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S16,2,11,2z M9.7,14.5l-3.2-3.2l1.2-1.2l2,2l4.6-4.6l1.2,1.2L9.7,14.5z"/>
+	<path fill="#fff" d="M11,3c4.4,0,8,3.6,8,8c0,4.4-3.6,8-8,8s-8-3.6-8-8C3,6.6,6.6,3,11,3 M11,1C5.5,1,1,5.5,1,11s4.5,10,10,10
+		s10-4.5,10-10S16.5,1,11,1L11,1z"/>
+</g>
+</svg>

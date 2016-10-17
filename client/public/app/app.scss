@@ -1,0 +1,2689 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+/**
+ * App-wide Styles
+ */
+
+$webRoot: getWebRoot();
+
+@import 'vars.scss';
+@import 'pwb-icons.scss';
+@import 'v18/forms.scss';
+@import 'bootstrap/_bootstrap.scss';
+@import 'normalize.scss';
+@import '../../review/app/cmm/cmm.scss';
+@import '../../common/app/review/review.scss';
+@import '../../common/app/input/input.scss';
+@import '../../common/app/upload/fileUpload.scss';
+//@import '../../provider/app/content/cognitive/modal.scss';
+
+//Override Terrible v18 styles
+ul>li:before {
+    display: none;
+    position: inherit;
+    margin-left: 0;
+    font-size: 0;
+}
+
+//Links that don't change for now
+.inert-link, .inert-link:visited, .inert-link:hover, .inert-link:active {
+  color: inherit;
+  text-decoration: none;
+  vertical-align:top;
+}
+
+// injector
+// Add Other Files
+@import 'common.scss';
+@import 'header/header.scss';
+@import 'footer/footer.scss';
+@import 'modal/modal.scss';
+@import 'search/search.scss';
+@import 'error/toast.scss';
+@import 'dragDropUpload/dragDropUpload.scss';
+@import 'dashboard/cmm.scss';
+//@import 'upload/translation.scss';
+//@import 'academy/academy.scss';
+
+// Provider Dashboard
+//@import 'dashboard/dashboard.scss';
+
+// Dashboard Statuses
+@import 'dashboard/sass/review-tile.scss';
+@import 'dashboard/sass/dashboard-tile.scss';
+
+
+// General Styles
+
+// Overwrite v18 Styles and Sticky Footer
+
+html, body {
+  background-color: $ibmWhite;
+  height:100%;
+}
+
+* {
+  margin: 0;
+}
+
+.application_container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -76px;
+  background-color: $ibmWhite;
+}
+
+.application_container.primary_v18_footer {
+  margin-bottom: -500px;
+}
+
+.application_view {
+  /*min-height: 840px;*/
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  overflow: visible !important;
+  background-color: $ibmWhite;
+}
+
+// Overwrite v18 responsive styles
+@media only screen and (max-width: $desktopBaseWidth) {
+  #ibm-top, .page-section-container, .footer_container, .application_view, .application_container {
+    width: $desktopBaseWidth;
+    min-width: $desktopBaseWidth;
+    max-width: $desktopBaseWidth;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: visible !important;
+  }
+}
+
+// END Overwrite v18 Responsive Styles and Sticky Footer
+
+// Dashboard  Styles
+.dashboard_left_navs_container {
+  h2, h4 {
+    padding: 14px 0px;
+    clear: both;
+  }
+
+  .nav_list {
+    li {
+      margin-bottom: 10px;
+    }
+  }
+
+}
+
+.sub_nav_list {
+
+  padding-left: 15px;
+
+  li, dt, dd {
+    list-style-type: disc;
+    list-style-position: outside;
+    list-style-image: inherit;
+  }
+}
+
+.dashboard_offerings_heading.focused {
+  font-size: $h2Size !important;
+}
+
+.dashboard_top_navs_container {
+  height: 30px;
+  padding: 4px 0px 0px;
+  margin-bottom: 12px;
+
+  .create_new_offering {
+    float: left;
+    padding: 6px 0;
+    a {
+      color: $linkColor;
+    }
+
+    a:hover {
+      color: $linkHoverColor;
+    }
+  }
+
+  .disabled_dropdown {
+    opacity: .5;
+
+    select {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}
+
+.sort_offerings {
+  float: right;
+  position: relative;
+  font-family: $ibmHelvBold;
+  color: $ibmGray-80;
+  width: 188px;
+
+  .btn-group {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    @include standardBoxShadow();
+    top: 38px !important;
+  }
+}
+
+#sort_offerings_dropdown,
+#provider_sort_offerings_dropdown {
+  background-color: $ibmWhite;
+  padding: 6px 30px 6px 10px;
+  cursor: pointer;
+  float: right;
+  color: rgba(0,0,0,0);
+  width: 100%;
+  text-align: right;
+  position: relative;
+  text-shadow: 0 0 0 $ibmGray-60;
+  @include noBoxShadow();
+
+  &::before {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+    font-size: 11px;
+  }
+
+  &:hover {
+    color: $ibmGray-80;
+  }
+}
+
+#provider_sort_offerings_dropdown {
+  text-align: center;
+  height: 42px;
+
+  &::before {
+    top: 15px;
+    right: 15px;
+  }
+
+}
+
+#dashboard_products_sort_select {
+  font-size: $baseSize;
+  font-family: $ibmHelvRegular;
+  color: $ibmGray-60;
+  margin-left: 5px;
+}
+
+.dashboard-tile-container {
+  min-height: 640px;
+}
+
+.empty_products_container {
+  height: 600px;
+  text-align: center;
+  border: 2px dashed $ibmGray-10;
+  position: absolute;
+  background-color: $ibmWhite;
+
+  .no_offerings_msg {
+    margin: 170px auto 0;
+    padding-top: 30px;
+    margin-bottom: 20px;
+    color: $ibmGray-50;
+    width: 450px;
+
+    .icon_sprite {
+      text-indent: -9999px;
+      text-align: left;
+      display: block;
+      width: 40px;
+      height: 46px;
+      margin: 0 auto;
+      clear: both;
+      background-position: center -720px;
+    }
+  }
+  .no_commerce_offerings_msg {
+    .icon_sprite {
+      background-position: center -850px;
+    }
+  }
+  .add_first_offering {
+    color: $ibmWhite;
+  }
+}
+
+.empty_search_results {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+}
+
+.return_comment_word_wrap {
+  word-wrap: break-all;
+  display:inline-block;
+  word-break: initial;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+}
+
+// Review Dashboard
+.results_filter_sort_container {
+  margin-bottom: 4px;
+}
+.dashboard_filter_sort_container {
+  float: right;
+  li {
+    display: inline-block;
+  }
+  button {
+    width: 122px;
+  }
+  .all_offerings_sort_btn {
+    width: 98px;
+  }
+}
+.last_modified_commerce_task {
+  float: right;
+  font-size: 14px !important;
+}
+.total_results_container {
+  color: $ibmGray-60;
+  padding: 6px 0;
+}
+#filter_description_text {
+  padding: 6px 0px;
+  display: block;
+  font-size: $baseSize;
+}
+#dashboard_sort_description {
+  padding: 6px;
+}
+.dashboard_filter_btn {
+  font-family: $ibmHelvBold;
+  padding: 6px;
+}
+.showing_unselect {
+  color: $ibmGray-40;
+  font-family: $ibmHelvRegular;
+}
+.sort_offerings_container {
+  .sort_offerings {
+    margin-left: 50px;
+  }
+}
+.dashboard_products_container {
+  h4, strong {
+    font-size: $baseSize;
+  }
+  .review_status_completed_review {
+    .top_section {
+      background-position: 10px -2485px;
+    }
+    .bottom_section {
+      padding: 20px 8px;
+
+      .dashboard_icon_container::before {
+        color: $ibmGray-20;
+      }
+      .dashboard_icon_container::before:hover {
+        color: $ibmGray-30;
+      }
+
+    }
+  }
+  .status_rejected {
+    .top_section {
+      background-position: 10px -2684px;
+    }
+    .bottom_section {
+      .content_task {
+        a, div {
+        }
+      }
+    }
+  }
+}
+.reviewer_products_container {
+  .status_rejected, .review_status_completed_review {
+    .bottom_section {
+      .content_task {
+        a, div {
+          background-position: -9999px -9999px;
+        }
+      }
+      .commerce_task {
+        a, div {
+          background-position: -9999px -9999px;
+        }
+      }
+    }
+  }
+}
+
+// Qualification Form
+
+.qualification_section_title_container {
+  background-color: $ibmBlue-60;
+
+  .page-title-container {
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+
+  h1 {
+    font-size: $heroHeaderSize;
+  }
+
+  p {
+    font-size: $h4Size;
+  }
+
+  a {
+    color: $inverseLinkColor;
+  }
+
+}
+
+.qualification_form_container {
+
+  .qualification_section {
+
+    color: $qualificationFormTextColor;
+
+    .btn[disabled] {
+      color: $qualificationFormTextColor;
+    }
+
+    input, label, select, button, legend, .btn, p, textarea.form-control {
+      font-size: $h4Size;
+    }
+
+    //Change Border Colors
+    .form-control,
+    .select_input_container .dropdown_btn,
+    .type_input_container .dropdown_btn,
+    .division_input_container .dropdown_btn,
+    .brand_input_container .dropdown_btn,
+    .dropdown-menu,
+    .dropdown-menu li a,
+    .btn-default,
+    .returned_comments_list li.returned_comment .container,
+    .disabled {
+      border-color: $qualificationFormdefaultBorderColor;
+    }
+
+    .form-control,
+    .select_input_container .dropdown_btn,
+    .type_input_container .dropdown_btn,
+    .division_input_container .dropdown_btn,
+    .brand_input_container .dropdown_btn,
+    .calendar_icon_btn {
+      &:hover {
+        border-color: $ibmBlue-50;
+      }
+      &:focus {
+        border-color: $ibmGray-80;
+      }
+    }
+
+    fieldset[disabled] {
+      .form-control,
+      .select_input_container .dropdown_btn,
+      .type_input_container .dropdown_btn,
+      .division_input_container .dropdown_btn,
+      .brand_input_container .dropdown_btn,
+      .calendar_icon_btn {
+        background-color: $qualificationFormDisabledBgColor;
+        &:hover {
+          border-color: $qualificationFormdefaultBorderColor;
+        }
+      }
+
+      .textarea_container {
+        textarea.form-control {
+          background-color: $qualificationFormDisabledBgColor;
+        }
+        .hide_default_text_resize {
+          background-color: $qualificationFormDisabledBgColor;
+        }
+      }
+
+    }
+
+
+    .disabled, .disabled:hover {
+      background-color: $qualificationFormDisabledBgColor;
+    }
+
+    label, legend {
+      color: $ibmGray-80;
+    }
+
+    input, select {
+      color: $ibmGray-60;
+    }
+
+    .btn-primary {
+      color: $ibmWhite;
+    }
+
+    .submit_offering_btn {
+      font-family: $ibmHelvRegular;
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+
+    .form-group {
+      margin-bottom: 50px;
+    }
+
+    li.checkbox_container, .checkbox_container {
+      margin-bottom: 6px;
+    }
+
+    .page-section {
+      width: 780px;
+      max-width: 780px;
+      min-width: 780px;
+    }
+
+    .select_input_container .dropdown_btn::before {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      left: auto;
+    }
+
+    select.blacklist_multi_select[disabled] {
+      background-color: red;
+    }
+
+    select.general_multi_select[disabled] {
+      background-color: red;
+    }
+  }
+
+  .header_view {
+    margin-bottom: 0px;
+  }
+  .review_page-title-container {
+    margin-bottom: 30px;
+  }
+  .returned_comments_list {
+    .returned_comment {
+      padding: 0;
+    }
+  }
+}
+
+#qualificationWrapper, #registerWrapper, #confirmationWrapper {
+  margin-top: 40px;
+  .page-content {
+    margin-bottom: 110px;
+  }
+}
+
+#confirmationWrapper {
+  .page-content {
+    margin-bottom: 165px;
+  }
+}
+
+#qualificationWrapper, #confirmationWrapper {
+  margin-top: 80px;
+}
+
+#qualificationWrapper.larger_margin_bottom {
+  margin-top: 20px;
+}
+
+.returned_offering_title_section {
+  background-color: $ibmRed-60;
+
+  h1 {
+    font-size: 32px;
+  }
+  .returned_offering_status {
+    margin-bottom: 25px;
+    li {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.returned_offering_instructions {
+  p {
+    font-size: $largeSize;
+  }
+}
+
+#select_service_dropdown, #select_division_dropdown, #select_brand_dropdown, .long_dropdown {
+  @include standardTransitions(.25s, .25s);
+}
+
+#dateGA_input_container *, #dateLive_input_container * {
+  vertical-align: top;
+}
+
+#OMFN_input_container,
+#MMFN_input_container,
+#OMLN_input_container,
+#dateGA_input_container,
+#dateLive_input_container {
+  .container {
+    margin-right: 15px;
+  }
+}
+
+#dateLive_input_container {
+  .container {
+    margin-right: 0;
+    margin-left: 15px;
+  }
+}
+
+#dateGA_input_container, #dateLive_input_container {
+  .uib-close, .uib-datepicker-current{
+    display: none;
+  }
+  .disabled-month{
+    background-color: #ffffff;
+    border: none !important;
+  }
+  .btn-group {
+    left: 150px;
+    button {
+      font-family: $ibmHelvLight;
+    }
+  }
+  .btn[disabled] {
+    color: #DCDCDC;
+  }
+  .dropdown-menu {
+    padding: 10px;
+    @include standardBoxShadow();
+    margin-top: 10px;
+    top: 40px !important;
+    left: auto !important;
+    right: 0;
+
+    li {
+      height: auto;
+      padding: 0;
+
+      div {
+        table {
+          thead {
+            tr:first-child {
+              button.btn {
+                border: none;
+                &:hover {
+                  background-color: transparent;
+                }
+              }
+            }
+
+            tr:nth-child(2) {
+              th {
+                height: 20px;
+                color: $ibmGray-80
+              }
+            }
+
+            tr {
+              th:nth-child(2) {
+                button {
+                  color: $ibmBlue-50;
+                  margin-bottom: 10px;
+                  padding: 2px 0px;
+                  border: 1px solid $ibmWhite !important;
+                  font-family: $ibmHelvLight;
+                  font-size: $baseSize;
+                  font-weight: normal;
+                }
+                strong {
+                  font-family: $ibmHelvLight;
+                  font-size: $baseSize;
+                  font-weight: normal;
+                }
+                button:hover {
+                  background-color: transparent;
+                  border: 1px solid $ibmBlue-50 !important;
+                }
+              }
+            }
+
+          }
+          tr {
+            padding-bottom: 4px;
+            th {
+              background-color: $ibmWhite;
+              margin-bottom: 8px;
+            }
+          }
+
+          tbody {
+            tr {
+              td {
+                background-color: $ibmWhite;
+
+                button, .btn-default {
+                  //border: none;
+                  //border-right: 1px solid $defaultBorderColor;
+                  //border-bottom: 1px solid $defaultBorderColor;
+                  border: 1px solid #ffffff;
+                  background-color: #f4f4f4;
+                  font-size: $baseSize;
+
+                  .text-info {
+                    //color: $ibmBlue-50;
+                    color: #000000;
+                    font-weight: bold;
+                  }
+                }
+
+                .btn-default.active {
+                  @include noBoxShadow();
+                  background-color: $ibmBlue-50;
+                  span {
+                    color: $ibmWhite;
+                  }
+                }
+
+                .btn-default:hover {
+                  background-color: #C0E6FF;
+                }
+
+                .btn-default[disabled].active {
+                  //background-color: $ibmRed-50 !important;
+                  span {
+                    opacity: .7;
+                    color: $ibmWhite;
+                  }
+                }
+              }
+              td:last-child {
+                button, .btn-default {
+                  border-right: none;
+
+                }
+
+              }
+            }
+
+            tr:last-child {
+              td {
+                button, .btn-default {
+                  border-bottom: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    li:nth-child(2) {
+      padding: 10px 0px 2px !important;
+      .btn {
+        background-color: transparent;
+        color: $linkColor;
+        padding: 0px 2px;
+        border: none;
+      }
+      span {
+        .btn:nth-child(2) {
+          position: relative;
+          left: 75px;
+        }
+      }
+      .center_btn {
+        left: 62px;
+        position: relative;
+      }
+    }
+  }
+
+  .calendar_icon_btn[disabled], .calendar_icon_btn.disabled, .calendar_icon_btn.disabled:hover {
+    background-color: $qualificationFormDisabledBgColor !important;
+    opacity: 1 !important;
+  }
+
+}
+
+#dateGA_input:focus ~ span .calendar_icon_btn, #dateLive_input:focus ~ span .calendar_icon_btn {
+  border: 1px solid $ibmGray-80;
+}
+
+.calendar_icon_btn, .calendar_icon_btn:active, .calendar_icon_btn:focus {
+  height: 42px;
+  width: 46px;
+  padding: 0;
+  font-size: 0px !important;
+  color: $ibmGray-30;
+  background-color: $ibmWhite !important;
+  @include noBoxShadow();
+  @include standardTransitions(.25s, .25s);
+  overflow: hidden;
+}
+
+.calendar_icon_btn::before {
+  font-size: 40px !important;
+  position: absolute !important;
+  top: -9px;
+  left: 6px !important;
+  height: 50px;
+}
+
+.calendar_icon_btn:focus {
+  border: 1px solid $ibmGray-80;
+}
+
+.select_input_container, .type_input_container, .division_input_container, .brand_input_container {
+  .form-group {
+      width: 100%;
+      float: left;
+      box-sizing: border-box;
+  }
+
+  .dropdown-menu, .dropdown-menu-alt {
+    width: 100%;
+    min-width: 100%;
+    padding: 0;
+    overflow: auto;
+    top: 78px !important;
+  }
+
+  .dropdown-menu-alt-position {
+    top: 48px !important;
+  }
+
+  .control-label, .dropdown_btn {
+    display: block;
+    width: 100%;
+  }
+
+  .dropdown_btn {
+    background-color: $ibmWhite;
+    text-align: left;
+    padding: 11px 14px 9px;
+    border: 1px solid $defaultBorderColor;
+    @include noBoxShadow();
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 11px;
+      left: auto;
+    }
+
+    &[disabled] {
+      opacity: 1 !important;
+      background-color: $disabledBgColor !important;
+    }
+  }
+
+  .dropdown_btn:focus {
+    border: 1px solid $input-border-focus;
+  }
+
+}
+
+.type_input_container, .division_input_container, .brand_input_container {
+  .form-group {
+      padding-right: 6%;
+  }
+  .dropdown-menu {
+    width: auto;
+    min-width: 94%;
+  }
+}
+
+.division_input_container {
+  .form-group {
+    padding-left: 3%;
+    padding-right: 0%;
+  }
+  .dropdown-menu {
+    margin-left: 3%;
+  }
+}
+
+.other_type_container, .other_division_container, .other_brand_container {
+  background-color: $disabledBgColor;
+  padding: 20px;
+
+  label {
+    padding-top: 15px;
+    margin-bottom: 0;
+  }
+}
+
+.brand_input_container {
+  .form-group {
+    padding-right: 0px;
+    padding-left: 0%;
+  }
+  .dropdown-menu {
+    margin-left: 6%;
+  }
+}
+
+.digital_purchase_radios_container {
+  margin-right: 60px;
+}
+
+.form_submit_btns_container {
+  margin-top: 30px;
+}
+
+.qualification_save_btn {
+  margin-right: 15px;
+}
+
+// Qualification Confirmation Page Styles
+.confirmation_page-title-container, .review_page-title-container {
+  background-color: $ibmNeutral-2;
+  padding: 60px 0;
+  margin-bottom: 70px;
+
+  .page-title-container {
+    padding-left: 42px;
+    background-position: 0px -3952px;
+    margin: 0;
+    padding-top: 4px;
+
+    h1 {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.what_is_next_container {
+  .col-xs-9 {
+    padding-right: 40px;
+  }
+  p {
+    color: $ibmGray-50;
+    margin-bottom: 14px;
+  }
+
+  .pwb_right_section_container {
+    padding-right: 20px;
+
+    li {
+      color: $ibmGray-60;
+    }
+  }
+}
+
+.qualification_confirmation_header {
+  position: relative;
+  padding-left: 68px;
+  margin-top: 20px;
+
+  &::before {
+    position: absolute;
+    left: -2px;
+    top: -6px;
+    font-size: 52px;
+    color: $ibm-Green20;
+  }
+}
+
+// Review Page Styles
+.review_page-title-container {
+  padding: 60px 0px 70px;
+
+  .page-title-container {
+    padding-left: 0;
+    background-image: none;
+  }
+  .section_title {
+    margin-bottom: 10px;
+  }
+}
+
+.offering_submitter_info {
+  margin-top: 20px;
+
+  .section_title {
+    margin-bottom: 30px;
+  }
+}
+
+.send_invitation_button {
+  font-family: $ibmHelvRegular;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-top: -13px;
+}
+
+// Commerce Review Styles
+
+.preview_detailed_ed_compare_btn {
+  color: $ibmGray-60;
+  padding: 8px 8px 8px 0px;
+  position: relative;
+  line-height: 100%;
+  top: -10px;
+}
+
+.preview_detailed_ed_compare_btn::before {
+  color: $ibmPurple-60;
+  font-size: 36px;
+  line-height: 100%;
+  top: 8px;
+  position: relative;
+  padding-right: 16px;
+}
+
+.commerce_review_details_table {
+  table-layout: fixed;
+
+  .table_side_column {
+    width: 200px;
+  }
+}
+
+// Landing Page Styles
+
+.pwb_sign_in_link_spacing {
+  margin-top: 18px;
+  margin-bottom: 5px;
+}
+
+.pwb_landing_page_container {
+  p {
+    font-size: $largeSize;
+  }
+}
+
+.pwb_landing_hero_banner {
+  background-color: $ibmPurple-60;
+  text-align: center;
+  padding-top: 80px;
+  h1 {
+    color: $ibmWhite;
+    font-size: 39px;
+    font-family: $ibmHelvLight;
+    font-weight: normal;
+  }
+  h4 {
+    font-size: 20px;
+    color: #eed2ff;
+    font-family: $ibmHelvLight;
+    font-weight: normal;
+  }
+  .qualify_offering_btn_container {
+    margin: 30px auto 55px;
+    .btn {
+      font-size: $largeSize;
+    }
+  }
+}
+
+.pwb_landing_info_banner {
+  background-color: $ibmPurple-70;
+  color: $ibmWhite;
+  text-align: center;
+  padding: 22px 5px;
+  h3 {
+    color: $ibmWhite;
+  }
+}
+
+.pwb_landing_steps_list, .pwb_landing_future_additions {
+  padding: 100px 0 100px;
+}
+
+.pwb_landing_future_additions {
+  .pwb_right_section_container {
+    min-height: 270px;
+  }
+}
+
+.pwb_landing_steps_list {
+  background-color: $ibmNeutral-2;
+}
+
+.section_title {
+  font-size: $largerSize;
+  margin-bottom: 78px;
+}
+
+.section_title_with_description {
+  margin-bottom: 22px;
+}
+
+.steps_to_qualify_list {
+  .padded_container {
+      width: 96%;
+
+      font-size: $largeSize;
+      line-height: 1.3em;
+      padding: 30px;
+      color: $ibmGray-50;
+      min-height: 330px;
+  }
+  .single_entry {
+    margin: 0 4% 0 0;
+  }
+  .clear_guidance {
+    margin: 0 2.66666666666667% 0 1.33333333333333%;
+    border-left: 1px solid $defaultBorderColor;
+    border-right: 1px solid $defaultBorderColor;
+  }
+  .onboarding_tracking {
+    margin: 0 1.33333333333333% 0 2.66666666666667% ;
+  }
+  .step_4 {
+    margin: 0 0 0 4%;
+  }
+  h3 {
+    font-size: $largerSize;
+    margin-bottom: 20px;
+    line-height: 100%
+  }
+  .circle_bg {
+    background-color: $ibmPurple-60;
+    color: $ibmWhite;
+    width: 40px;
+    height: 40px;
+    line-height: 80%;
+    margin-bottom: 24px;
+  }
+}
+
+.future_additions_list {
+  ul {
+    width: 100%;
+    li {
+      padding: 0 10px 28px 50px;
+      background-position: 0px -2910px;
+      font-size: $largeSize;
+
+      h3 {
+        font-family: $ibmHelvBold;
+        font-size: $largeSize;
+        margin-bottom: 10px;
+      }
+    }
+    .self_service_provisioning { background-position: 0px -3084px; }
+    .team_collaboration { background-position: 0px -3256px; }
+    .analytics_performance_insight { background-position: 0px -3448px; }
+    .partners { background-position: 0px -4934px; }
+  }
+}
+.feedback_email_link {
+  background-position: 0px -3670px;
+  padding: 8px 4px 8px 40px;
+  top: 10px;
+  font-size: $largeSize;
+  position: relative;
+}
+
+.benefit_icon_container {
+  &::before {
+    color: $ibmPurple-60;
+    font-size: 48px;
+    top: 0;
+  }
+}
+
+// Commerce Review
+.review_bottom_section {
+  padding: 0px;
+}
+.commerce_plan_details_container {
+  .page-content {
+    margin-bottom: 60px;
+  }
+  .section_title {
+    margin-bottom: 20px;
+  }
+}
+.commerce_plan_detail, div.commerce_plan_detail {
+  padding: 0px 20px 20px;
+  margin: 10px 0px;
+}
+
+.download_csv_error_text {
+  padding-bottom:10px;
+  margin-top: 10px;
+}
+
+.download_csv_info_text {
+  position: absolute;
+  top: 22px;
+  left: 20px;
+}
+
+.download_csv_btn, .download_csv_btn:hover {
+  width: 180px;
+  float: left;
+  border: 1px solid $defaultBorderColor;
+  height: 45px;
+  display: block;
+  position: relative;
+  padding-right: 52px;
+  padding-top: 13px;
+  text-align: right;
+  color: $ibmBlue-60;
+}
+
+.download_csv_btn_error {
+  width: 180px;
+  float: left;
+  border: 1px solid red;
+  height: 45px;
+  display: block;
+  position: relative;
+  padding-right: 52px;
+  padding-top: 13px;
+  text-align: right;
+  color: $ibmBlue-60;
+}
+
+.download_csv_btn:hover {
+  @include standardBoxShadow();
+}
+
+.download_csv_btn::before {
+  position: absolute;
+  right: 20px;
+  top: 1px;
+  float: right;
+  color: $ibmBlue-60;
+  left: auto;
+  bottom: auto;
+}
+
+// Commerce Form
+.commerce_page_title_top_section {
+  background-color: $ibmNeutral-2;
+  .page-title-container {
+    padding-top: 8px;
+    h1 {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// - Page 1
+.step_status {
+  font-size: $h3Size;
+  margin-bottom: 30px;
+}
+.meets_requirements_container {
+  padding-bottom: 60px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid $defaultBorderColor;
+}
+
+.meets_requirements_description {
+  margin-bottom: 20px;
+}
+.pid_form_container {
+  margin-top: 50px;
+}
+
+// - Page 2
+.commerce_page_two_title_section, .integration_section {
+  margin-bottom: 30px;
+  border-bottom: 1px solid $defaultBorderColor;
+  padding-bottom: 40px;
+  h2 {
+    margin-bottom: 6px;
+  }
+  .col-xs-9 {
+    padding: 0px 20px 20px 0;
+  }
+  .col-xs-3 {
+    padding: 0px 20px 50px 20px;
+    border-left: 1px solid $defaultBorderColor;
+  }
+}
+
+.commerce_add_plan_detail_btn, .add_item_btn {
+  margin-bottom: 20px;
+  .btn, .btn:active, .btn.active {
+    background-position: -4px -4148px;
+    border: none;
+    background-color: $ibmWhite;
+    text-align: left;
+    @include noBoxShadow();
+    padding-left: 34px;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      top: 7px;
+      left: 2px;
+      font-size: 23px;
+      color: $ibmPurple-60;
+    }
+    &[disabled] {
+      background-color: transparent;
+      border: none;
+      &:hover {
+        background-color: transparent;
+        border: none;
+      }
+      &::before {
+        opacity: .6;
+      }
+    }
+  }
+}
+
+
+.featured_edition_inner_container {
+  margin-left: 8%;
+  margin-right: 0;
+  width: 92%;
+}
+
+.featured_edition_radio_button {
+  border-right: 1px solid $defaultBorderColor;
+  padding-top: 0px;
+  height: auto;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  padding-right: 20px;
+  cursor: default;
+
+  .ibm_radio_button {
+    width: 96px;
+  }
+  .radio_label {
+    height: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.no_featured_edition_radio_button {
+  padding-top: 0px;
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+  width: 140px;
+  cursor: default;
+
+  .ibm_radio_button {
+    width: 140px;
+    height: 38px;
+  }
+
+  .radio_checked_bg {
+    top: 0px;
+  }
+
+}
+
+.featured_plan_name  {
+  float: left;
+  padding-left: 30px;
+  color: $ibmGray-60 !important;
+  padding-top: 4px;
+  width: 100%;
+}
+
+.featured_edition_container {
+  margin-top: 60px;
+}
+
+.commerce_add_plan_btn, .commerce_add_plan_btn:hover, .commerce_add_plan_btn:visited {
+  text-align: left;
+  background-color: $ibmWhite;
+  border: none;
+  text-decoration: none;
+  border-top: 1px solid $defaultBorderColor;
+  border-bottom: 1px solid $defaultBorderColor;
+  background-position: left -4342px;
+  padding: 16px 20px 12px 40px;
+  line-height: 100%;
+  color: $ibmGray-60;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    left: 4px;
+    top: 10px;
+    font-size: 29px;
+    color: $ibmPurple-60;
+  }
+  &[disabled] {
+    background-color: transparent;
+    opacity: .6;
+    border-left: none;
+    border-right: none;
+
+    &:hover, &:focus {
+      background-color: transparent;
+      opacity: .6;
+      border-left: none;
+      border-right: none;
+    }
+  }
+}
+
+.commerce_plan_details_subtitle {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.commerce_plan_container {
+  margin-bottom: 30px;
+}
+.commerce_additional_plan_container {
+  padding-top: 30px;
+  border-top: 1px solid $defaultBorderColor;
+}
+.commerce_delete_plan_btn, .delete_item_btn {
+  text-align: left;
+  background-position: right -4538px;
+  background-color: $ibmWhite;
+  border: none;
+  padding: 10px 38px 10px 10px;
+  @include noBoxShadow();
+
+  &[disabled] {
+    background-color: transparent;
+    opacity: .6;
+    border: none;
+
+    &:hover, &:focus {
+      background-color: transparent;
+      opacity: .6;
+      border: none;
+    }
+  }
+
+}
+
+.commerce_previous_plan_details_list {
+  padding: 10px 0;
+}
+
+.content_custom_popover {
+  .popover {
+    width: 276px;
+  }
+}
+
+// Commerce Page 2 Popovers
+.commerce_custom_popover, .commerce_textarea_custom_popover {
+  .popover {
+    width: 480px !important;
+    top: 24px !important;
+    background-color: $ibmGray-5;
+    border: medium none !important;
+    max-width: 480px !important;
+    min-width: 480px !important;
+    right: 0px !important;
+    left: 700px !important;
+    margin-left: 0;
+    color: $ibmGray-60;
+    background-color: transparent;
+
+    .arrow {
+      display: none;
+    }
+    p {
+      color: $ibmGray-60;
+      padding-bottom: 10px;
+    }
+  }
+  .popover.right {
+    margin-left: 0px;
+  }
+  .popover-content {
+    padding: 0px !important;
+  }
+  .commerce_custom_popover_no_radio {
+    .popover {
+      left: 626px !important;
+    }
+  }
+}
+
+.commerce_textarea_custom_popover {
+  .popover {
+    top: -4px !important;
+  }
+}
+
+.commerce_plan_details_popover {
+  .popover {
+    top: -192px !important;
+  }
+}
+
+.commerce_price_select_popover {
+  .popover {
+    top: -230px !important;
+  }
+}
+
+.commerce_price_radios_popover {
+  .popover {
+    top: -300px !important;
+  }
+}
+
+.commerce_price_label_popover {
+  .popover {
+    top: -348px !important;
+  }
+}
+
+//Integration popovers
+.popover_integration_radio {
+  .popover {
+    margin-left: 635px;
+    width: 480px;
+    max-width: 480px;
+    z-index: 800;
+  }
+}
+
+.popover_integration_input_box {
+  .popover {
+    margin-left: 105px;
+    width: 480px;
+    max-width: 480px;
+    z-index: 800;
+  }
+}
+
+.integration_saving_configuration {
+  margin-top: 16px;
+  margin-left: 123px;
+}
+
+.return_comments_container {
+  margin-bottom: 40px;
+  .section_title {
+    margin-bottom: 20px;
+  }
+}
+
+.returned_comments_list {
+  margin-top: 30px;
+  padding-bottom: 10px;
+  .returned_comment, li.returned_comment {
+    padding: 20px 20px 10px;
+    pre {
+      background-color: $ibmWhite;
+      font-family: $ibmHelvRegular;
+      border: none;
+      margin: 0;
+      padding: 0;
+      font-size: $h4Size;
+      width: 820px;
+    }
+    h5 {
+      padding-bottom: 20px;
+      font-size: $largeSize;
+      color: $linkHoverColor;
+    }
+    .container {
+      border: 1px dashed $defaultBorderColor;
+      padding: 30px;
+      br {
+        display: block;
+        margin-bottom: 12px;
+      }
+    }
+    .triaged_container {
+      border-style: solid;
+      margin-bottom: -1px;
+    }
+  }
+}
+
+#commerceWrapper, #commerceReviewWrapper, #contentWrapper {
+  .returned_comments_list {
+    margin-top: 0;
+  }
+  .returned_comment {
+    padding: 20px 0px 10px;
+  }
+}
+
+#reviewWrapper {
+  .returned_comments_list {
+    margin-top: 0;
+  }
+  .returned_comment {
+    padding: 20px 0px 20px;
+  }
+}
+
+.save_form_notice_commerce {
+  position: absolute;
+  top: 55px;
+  left: 190px;
+}
+
+.save_form_notice_content {
+  margin-right: 25px;
+}
+
+.save_form_notice_integration {
+  margin-top: 10px;
+  margin-right: 20px;
+}
+
+// Register page-title-container
+#registerWrapper {
+  .page-section {
+    width: 390px;
+  }
+  h1 {
+    margin-bottom: 54px;
+  }
+  .form_submit_btns_container {
+    margin-top: 10px;
+  }
+}
+
+.register_form_errors_container {
+  margin-bottom: 30px;
+  margin-top: 10px;
+  h3 {
+    padding-bottom: 10px;
+  }
+  .bulleted_list {
+    li {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.terms_of_use_modal {
+  top: 0;
+  bottom: 0;
+  background-image: url($closeIcon);
+  background-repeat: no-repeat;
+  background-position: right top;
+  height: auto;
+
+  #myModal {
+    height: 540px;
+    p {
+      color: $ibmGray-60;
+    }
+  }
+  .modal-dialog {
+    top: 90px;
+    margin: 0 auto;
+    width: 790px;
+  }
+  .modal-content, .modal-dialog {
+    height: 550px;
+  }
+  .modal-body {
+    padding: 25px 40px 38px;
+  }
+}
+
+#termsOfUseWrapper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.modal_scolling_container, #termsOfUseWrapper .page-content {
+  h3 {
+    font-size: $baseSize;
+    font-family: $ibmHelvBold;
+  }
+  ol {
+    padding-left: 10px;
+    li {
+      list-style-position: outside;
+      padding-left: 4px;
+    }
+    li::before {
+      line-height: 100% !important;
+      font-family: $ibmHelvBold !important;
+      li::before {
+        font-family: $ibmHelvRegular !important;
+      }
+    }
+  }
+}
+
+.modal_scolling_container {
+  height: 362px;
+  padding: 20px 25px 0px 20px;
+  overflow-y: scroll;
+}
+
+.modal_scrolling_mask_top, .modal_scrolling_mask_bottom {
+  position: absolute;
+  z-index: 100;
+  background-image: url($webRoot + 'images/scrolling_mask.png');
+  background-repeat: no-repeat;
+  width: 652px;
+  height: 30px;
+  top: 25px;
+  left: 58px;
+}
+
+.modal_scrolling_mask_bottom {
+  bottom: 36px;
+  top: auto;
+  background-position: center -334px;
+}
+
+.sorry_page_container {
+  .page-content {
+    margin-top: 100px;
+    width: 760px;
+
+    h3 {
+      line-height: 1.3em;
+    }
+  }
+}
+
+// Manage Team modal
+
+.overlay_disable_bg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 240px;
+  background-color: $ibmWhite;
+  z-index: 0;
+  opacity: 0;
+  @include standardTransitions(.4s, 0s);
+}
+
+.overlay_disable_bg.show_overlay {
+  opacity: .7;
+  z-index: 120;
+}
+
+// Manage Team modal
+
+.manageTeamButton {
+  font-size: $baseSize;
+  width: 280px;
+  border: none;
+  height: 40px;
+  text-align: left;
+  color: $ibmGray-60;
+  border-top: 1px solid $defaultBorderColor;
+  padding: 13px 10px 9px 58px;
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  background-color: transparent;
+
+  &::before {
+    position: absolute;
+    left: 18px;
+    top: 9px;
+    font-size: 23px;
+    color: $ibmPurple-60;
+  }
+
+  &:hover {
+    background-color: $ibmPurple-60;
+    color: $ibmWhite;
+
+    &::before {
+      color: $ibmWhite;
+    }
+  }
+}
+
+.manage_team_modal {
+  h2 {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+
+    strong {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.participant_modal {
+  height: $participantModalHeight + 10px;
+
+  #myModal {
+    height: $participantModalHeight;
+  }
+
+  .modal-content, .modal-dialog {
+    height: $participantModalHeight + 10px;
+  }
+
+  .modal-body {
+    height: 330px;
+    padding: 15px 0 0;
+    margin: 0 60px;
+    overflow:  hidden;
+
+    .collaborator_list {
+      -moz-transition: all 0.3s ease-out;
+      -webkit-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+      width: 100%;
+    }
+
+    .collaborator_detail {
+      border-bottom: 1px solid $defaultBorderColor;
+
+      td {
+        padding: 10px 0px;
+        vertical-align: middle;
+        height: 45px;
+      }
+
+      .participant_name {
+        padding-left: 2px;
+      }
+    }
+
+  }
+}
+
+.collaborator_list_container {
+  display: block;
+  height: 215px;
+  z-index: 10;
+  position: relative;
+  overflow-y: auto;
+  border-top: 1px solid $defaultBorderColor;
+}
+
+.collaborator_list_container.collaborator_editing_expanded {
+  height: 304px;
+}
+
+.invite_users_container {
+  background-repeat: repeat-x;
+  background-position: 2px 0px;
+  padding-top: 12px;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  -moz-transition: all .3s ease-out 0s;
+  -webkit-transition: all .3s ease-out 0s;
+  -o-transition: all .3s ease-out 0s;
+  transition: all .3s ease-out 0s;
+  z-index: 140;
+  background-color: $ibmWhite;
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
+  h5, label {
+    margin-bottom: 12px;
+  }
+
+  legend {
+    margin-bottom: 0;
+    margin-top: 6px;
+  }
+}
+
+.invite_users_focused {
+  bottom: 20px;
+}
+
+.invite_users_fade_out {
+  opacity: 0;
+  bottom: -50px;
+}
+
+.invite_users_container_top_shadow {
+  box-shadow: 0px -10px 20px -4px $ibmGray-10;
+}
+
+.fade_out_functionality {
+  opacity: .07;
+}
+
+.manage_participant_options_list {
+  li {
+    line-height: 1.3em;
+    font-size: $baseSize;
+    height: 24px;
+  }
+
+  .make_owner_menu_item {
+    width: 72px;
+    text-align: center;
+    position: relative;
+    left: -12px;
+  }
+
+  .make_owner_btn, .make_owner_btn[disabled]:hover {
+    border: none;
+    color: $linkColor;
+    background-color: transparent;
+    padding: 6px 0 0 0;
+  }
+
+  .last_sent_updated_time {
+    top: 3px;
+    position: relative;
+  }
+
+  .role_status_menu_item {
+    width: 107px;
+    padding-top: 3px;
+    padding-left: 0px;
+  }
+
+  .role_status_confirm_change {
+    padding-top: 0;
+  }
+
+  .participant_remove_btn, .participant_remove_btn[disabled]:hover {
+    display: block;
+    font-size: 1px;
+    color: $ibmPurple-60;
+    text-align: left;
+    background-position: center -3560px;
+    width: 24px;
+    border: none;
+    padding: 0;
+    background-color: $ibmWhite;
+    height: 24px;
+    text-align: right;
+  }
+
+  .remove_user_menu_item {
+    width: 30px;
+    text-align: right;
+  }
+
+  .undo_remove_user_menu_item {
+    padding-top: 3px;
+  }
+}
+
+.invited_user_status_email {
+  background-position: -4px -3817px;
+  padding-left: 32px !important;
+}
+
+.invitees_input_text_container {
+  position: relative;
+  border: 1px solid $defaultBorderColor;
+  background-color: $ibmWhite;
+  float: left;
+  width: 100%;
+  padding: 4px;
+}
+
+.has_invalid_emails {
+  border: 1px solid $ibmRed-50;
+}
+
+.invitee_item_container {
+  float: left;
+  line-height: 100%;
+  height: 26px;
+  padding: 0px 0px;
+  overflow: hidden;
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.invitees_input_field {
+  border: none;
+  height: 30px;
+  line-height: 100%;
+  background-color: transparent;
+  padding: 0px 0px 0 2px;
+  font-size: $baseSize;
+  z-index: 10;
+  width: 10px;
+  float: left;
+
+  input {
+    margin-bottom: 0;
+    border: none;
+    height: 30px;
+    padding: 0;
+    line-height: 100%;
+    width: 100%;
+    background-color: transparent;
+  }
+}
+
+.invitee_block_name, .invitee_block_name:hover {
+  background-color: $ibmGray-10;
+  font-size: $baseSize;
+  padding: 2px 20px 0px 8px;
+  position: relative;
+  color: $ibmGray-60;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  float: left;
+  height: 26px;
+  cursor: default;
+  box-shadow: none !important;
+}
+
+.invalid_email, .invalid_email:hover {
+  background-color: $collabInviteeErrorColor;
+
+  .remove_invitee_btn, .remove_invitee_btn:hover {
+  }
+}
+
+.remove_invitee_btn, .remove_invitee_btn:hover {
+  position: absolute;
+  float: right;
+  width: 15px;
+  height: 15px;
+  font-size: 12px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: block;
+  right: 2px;
+  top: 5px;
+  color: $ibmGray-60;
+  background-position: -10px -5837px;
+  font-size: 0px;
+  background-color: transparent;
+}
+
+.invitees_input_text_display {
+  font-size: $baseSize;
+  height: 30px;
+  line-height: 100%;
+  position: absolute;
+  float: left;
+  opacity: 0;
+  top: -50px;
+  z-index: 5;
+}
+
+// Integration Page
+
+.implement_offering_api_section_container,
+.provide_technical_details_section_container,
+.test_configuration_section_container {
+  .section_title {
+    margin-bottom: 50px;
+  }
+}
+
+.integration_get_started {
+  padding: 50px 60px;
+  border:solid 1px $defaultBorderColor;
+
+  .h1 {
+    margin-bottom: 40px;
+  }
+
+  ul {
+    li:first-child {
+      padding-left: 0;
+      padding-right: 30px;
+    }
+    li {
+      padding-left: 30px;
+    }
+  }
+}
+
+.dont_show_this_again_container {
+  top: 10px;
+  position: relative;
+
+  label {
+    top: 2px;
+    position: relative;
+    padding-left: 8px;
+  }
+}
+
+.invite_users_btn {
+  top: 20px;
+  padding: 12px 10px 10px 40px;
+  height: 40px;
+  position: relative;
+
+  &::before {
+    font-size: 24px;
+    top: 7px;
+    left: 3px;
+    position: absolute;
+  }
+}
+
+.getting_started_section_container {
+  margin-bottom: 30px;
+}
+
+.integration_form_list {
+  li, li:before {
+    list-style-position: inside !important;
+    margin-left: 0 !important;
+    width: auto;
+    font-size: 20px !important;
+    line-height: 100% !important;
+  }
+
+}
+
+.subscription_events_container {
+  margin: 40px 0 20px;
+}
+
+.run_all_tests {
+  .btn {
+    background-color: $ibmGray-60;
+    color: $ibmWhite;
+    border-color: $ibmGray-60;
+    width: 150px;
+  }
+}
+
+.run_test_container {
+  .btn {
+    background-color: $ibmGray-60;
+    color: $ibmWhite;
+  }
+}
+
+.subscription_events_container, .run_test_container {
+  .btn[disabled], .btn[disabled]:hover {
+    background-color: $disabledBgColor;
+    color: $ibmGray-40;
+    opacity: 1 !important;
+    border: 1px solid transparent;
+
+  }
+}
+
+.run_test_container {
+  border: 1px solid $defaultBorderColor;
+  padding: 24px 30px;
+  margin-bottom: 15px;
+
+  .ibm-spinner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 8px;
+    left: 2px;
+  }
+}
+
+.test_error_block {
+  background-color:#303030;
+  padding:15px 15px;
+  margin-top:-12px;
+}
+
+.run_test_container.test_in_progress {
+  background-color: $ibmGray-5;
+  .run_test_status_name {
+    background-position: -9999px -9999px;
+  }
+}
+
+.run_test_container.test_passed {
+  border: 1px solid $ibm-Green20;
+  background-color: #e9f9d2;
+  color: $ibm-Green60;
+
+  .run_test_status_name {
+    background-position: -9999px -9999px;
+  }
+  .run_test_status_name::before {
+    color: $ibm-Green60;
+  }
+}
+
+.run_test_container.test_failed {
+  border: 1px solid $ibmRed-30;
+  background-color: #ffedf1;
+  color: $ibmRed-50;
+
+  .run_test_status_name {
+    background-position: -2px -5662px;
+  }
+  .run_test_status_name::before {
+    color: $ibmRed-50;
+  }
+}
+
+.run_test_pass_fail_msg,
+.run_test_status_name,
+.run_test_btn_container {
+  height: 45px;
+}
+.run_test_btn_container {
+  top: 2px;
+}
+
+.run_test_pass_fail_msg,
+.run_test_status_name {
+  position: relative;
+  top: 14px;
+}
+
+.run_test_status_name {
+  top: 0px;
+  padding-left: 70px;
+  background-position: -1px -5407px;
+
+  strong {
+    position: relative;
+    top: 14px;
+  }
+}
+
+.run_test_status_name::before {
+  font-size: 36px;
+  line-height: 100%;
+  top: 4px;
+}
+
+// Content Form
+
+.fieldset_section, .content_form_intro_section {
+  border-bottom: 1px solid $defaultBorderColor;
+  padding-bottom: 50px;
+  margin-bottom: 30px;
+  clear: both;
+  position: relative;
+}
+
+.content_form_intro_section {
+  p {
+    padding-bottom: 20px;
+  }
+}
+
+.remove_uploaded_file_btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 36px !important;
+  margin-bottom: 12px !important;
+  &::before {
+    top: -4px;
+  }
+
+}
+
+.delete_item_btn {
+  padding: 2px 28px 2px 10px;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    top: 1px;
+    right: 2px;
+    font-size: 20px;
+    color: $ibmPurple-60;
+  }
+}
+
+.delete_item_btn_small {
+  top: -1spx;
+}
+
+.subsection_container {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.subsection_header, .subsection_header_no_description {
+  text-align: left;
+  color: $ibmGray-80;
+  text-transform: capitalize;
+  font-family: $ibmHelvBold;
+  font-size: 1.25em;
+  margin-bottom: 12px;
+}
+
+.subsection_header_aligned_left{
+  margin-top: 20px;
+  padding-top: 15px;
+  color: $ibmGray-40;
+  text-transform: uppercase;
+  font-weight: normal;
+  font-family: $ibmHelvRegular;
+}
+
+.subsection_description, .unit_margin {
+  font-size: 1.25em;
+  margin-bottom: 42px;
+  color: $ibmGray-40;
+  padding-bottom: 0px;
+}
+
+.unit_header {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.small_description_bottom {
+  margin-bottom: 18px;
+}
+
+.scroll_list_bottom, .subsection_header_no_description {
+  margin-bottom: 30px;
+}
+
+.container-space-bottom {
+  margin-bottom: 25px;
+}
+// Qualification Review
+
+.offering_naming_approval_radios_container {
+  padding-left: 20px;
+  label {
+    padding-right: 20px;
+  }
+}
+
+.return_offering_header, .approve_offering_header  {
+  position: relative;
+  padding-left: 40px;
+  padding-bottom: 20px;
+
+  &::before{
+    padding-right: 20px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    color: $ibmRed-50;
+    font-size: 28px;
+  }
+}
+
+.approve_offering_header {
+  &::before{
+    color: $ibm-Green50;
+  }
+}
+
+.approve_padding {
+  padding-right: 40px;
+}
+
+.onboard_invitation_container {
+  border-left: 2px solid $ibmGray-10;
+  padding-left: 40px;
+}
+
+.onboard_heading {
+  padding-bottom: 22px;
+  line-height: 150%;
+}
+
+// Blacklist
+
+.blacklist_multi_select_container {
+  width: 265px;
+  float: left;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.long-country-name-tooltip {
+  position: fixed;
+  border: 1px solid $ibmGray-10;
+  color: $ibmGray-60;
+  font-size: $smallSize;
+  height: 26px;
+  line-height: 100%;
+  background-color: $ibmGray-5;
+  padding: 6px;
+  z-index: 1000;
+  display: inline-block;
+  @include standardBoxShadow();
+}
+
+.general_multi_select_container {
+  width: 357px;
+  float: left;
+  position: relative;
+  padding: 0;
+}
+
+.moving_loading_animation {
+  width: 100%;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $ibmWhite;
+  opacity: .8;
+  height: 1100px;
+  z-index: 890;
+  text-align: center;
+  padding-top: 370px;
+
+  .loading_spinner {
+    font-size: 24px;
+    height: 40px;
+    width: 40px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: -75px;
+  }
+}
+
+select.blacklist_multi_select {
+  min-height: 310px;
+  padding: 6px 0 !important;
+  width: 280px;
+  border: none;
+
+  option {
+    padding: 5px 8px;
+    cursor: pointer;
+  }
+
+  &[disabled] {
+    background-color: $qualificationFormDisabledBgColor;
+  }
+}
+
+.blacklist-select-title {
+  width: 180px;
+  float: left;
+}
+.blacklist-select-count {
+  width: 78px;
+  float: right;
+}
+
+.blacklist-select-container {
+  border: 1px solid $defaultBorderColor;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+select.general_multi_select {
+  min-height: 210px;
+  padding: 6px 0 !important;
+
+  option {
+    padding: 5px 8px;
+  }
+
+  &[disabled] {
+    background-color: $qualificationFormDisabledBgColor;
+  }
+}
+
+.move_all_to_publish_btn, .move_all_to_blacklist_btn {
+  padding: 8px 12px 8px 0px;
+  border: none;
+  background-color: transparent !important;
+  box-shadow: none;
+  color: $ibmGray-60;
+  text-align: left;
+
+  &[disabled], &[disabled]:hover, &[disabled]:focus {
+    opacity: 1 !important;
+    background-color: transparent !important;
+    border: none;
+    &::before {
+      color: $ibmGray-20;
+    }
+  }
+
+  &::selection, &:active, &:focus {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: $ibmGray-60;
+  }
+
+  &::before {
+    color: $ibmPurple-60;
+    font-size: 24px;
+    position: absolute;
+    right: 18px;
+    text-align: right;
+    top: 5px;
+  }
+
+}
+
+.move_all_to_publish_btn {
+  text-align: right;
+
+  &::before {
+    right: auto;
+    left: 70px;
+    text-align: left;
+  }
+}
+
+.blacklist_reasons_input_container {
+  width: 288px;
+
+  .dropdown-menu {
+    width: auto;
+    top: 46px !important;
+  }
+
+  .dropdown_btn {
+    color: $ibmGray-40;
+    padding: 10px 10px 8px;
+    &::before {
+      color: $ibmGray-60;
+    }
+  }
+
+}
+
+.blacklist_reasons_input_container.add_individual_reasons {
+  width: 380px;
+}
+
+.blacklist_reasons_or_container {
+  width: 52px;
+  padding-top: 10px;
+  float: left;
+}
+
+.select_reason_all_container {
+  height: auto;
+  position: relative;
+  width: 250px;
+
+  .dropdown-menu {
+    width: auto;
+    top: 48px !important;
+  }
+
+  .btn-primary {
+    padding: 11px 14px 9px 14px;
+    border: none;
+  }
+}
+
+.select_reason_all_container.add_individual_reasons {
+  width: 190px;
+}
+
+.select_reason_for_all_btn, .apply_reason_to_all_btn {
+  bottom: 0px;
+  right: 0px;
+  background-color: $linkColor;
+  color: $ibmWhite;
+  border: none;
+
+  &:hover, &:focus, &:active {
+    color: $ibmWhite;
+    background-color: $linkHoverColor !important;
+  }
+
+  &[disabled], &[disabled]:hover, &[disabled]:focus {
+    opacity: 1 !important;
+    background-color: $ibmGray-10 !important;
+    color: $ibmGray-50;
+    border: none;
+  }
+}
+
+.blacklist_move_btns_container {
+  margin-top: 140px;
+  width: 60px;
+  float: left;
+}
+
+.blacklist_move_btn, .blacklist_move_btn:focus, .blacklist_move_btn:hover {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  display: block;
+  position: relative;
+  font-size: 0px !important;
+  color: $ibmWhite;
+  background-color: transparent;
+  border: 1px solid $ibmWhite;
+  padding: 0;
+  margin: 0px auto 20px;
+
+  &::before {
+    font-size: 28px;
+    width: 36px;
+    height: 36px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 100%;
+    padding-top: 4px;
+    color: $ibmGray-60;
+  }
+
+  &:hover, &:focus, &:active {
+    &::before {
+      color: $ibmPurple-60;
+    }
+  }
+
+  &:focus, &:active {
+    border: 1px dotted $ibmGray-40;
+  }
+
+  &[disabled], .disabled {
+    background-color: transparent;
+    border: 1px solid $ibmWhite;
+    cursor: not-allowed;
+
+    &::before {
+      color: $ibmGray-20;
+    }
+
+    &:hover {
+      &::before {
+        color: $ibmGray-20;
+      }
+    }
+  }
+}
+
+.blacklist_reasons_by_country {
+  min-height: 100px;
+  height: auto;
+
+  .moving_loading_animation {
+    width: 50%;
+    min-height: 70px;
+    padding-top: 70px;
+    margin-top: 0px;
+    height: auto;
+  }
+}
+
+.blacklist_individual_reasons_container {
+  position: relative;
+
+  &.fade_out_for_animation {
+    opacity: .2;
+  }
+
+  .dropdown-menu {
+    width: auto !important;
+  }
+
+}
+
+//Sorry page_title
+.sorry_bulleted_list {
+  li {
+    padding-bottom: 20px;
+  }
+}
+
+//Content Preview
+.view_preview_icon {
+  border-top: 1px dashed $defaultBorderColor;
+  margin-top: 60px;
+  margin-bottom: -55px;
+  padding-top: 10px;
+  .ibm-view-link {
+    color: $ibmPurple-60 !important;
+  }
+  .view_preview_info {
+    margin-top: 10px;
+    .view_preview_link {
+      margin-left: 35px;
+      margin-right: 30px;
+    }
+    .email_preview_container {
+      top: -2px;
+      position: relative;
+      padding-left: 8px;
+    }
+  }
+}
+
+// Academy Review Page
+.starting-at-price-dollar-sign {
+  top: 10px;
+  left: 4px;
+  font-size: 15px;
+  position: relative;
+}

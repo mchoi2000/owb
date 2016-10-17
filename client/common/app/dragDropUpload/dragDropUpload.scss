@@ -1,0 +1,169 @@
+// Translation Upload
+
+.dropzone {
+  border: 2px dashed $defaultBorderColor;
+  padding: 60px 100px;
+  min-height: 252px;
+}
+
+.drap_drop_active_hover {
+  background-color: $ibmNeutral-2;
+}
+
+.drag_drop_message {
+  color: $ibmGray-40;
+  text-align: center;
+  font-size: $h3Size;
+  width: 100%;
+  display: block;
+  position: relative;
+  padding-top: 68px;
+  top: 10px;
+
+  &::before {
+    width: 100%;
+    margin: 0 auto;
+    top: 0;
+    font-size: 50px;
+    color: $ibmGray-20;
+  }
+}
+
+// Upload/Progress bars
+
+.upload_file_name {
+  color: $ibmGray-60;
+  margin-bottom: 10px;
+}
+
+.upload-message-container {
+  margin-top: 6px;
+}
+
+.upload-message-btn {
+  font-size: $smallSize;
+  position: relative;
+  background-color: transparent;
+  color: $ibmGray-40;
+  padding: 4px 24px 4px 0;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 6px;
+  line-height: 100%;
+  height: 20px;
+  display: block;
+
+  &::before {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 11px;
+    line-height: 100%;
+  }
+}
+
+.upload-error-list {
+  background-color: $ibmGray-5;
+  padding: 8px 16px;
+
+  li {
+    font-size: $baseSize;
+    color: $ibmGray-60;
+  }
+}
+
+.complete_upload_message {
+  color: $ibm-Green40;
+}
+.failure_upload_message {
+  color: $ibmRed-50;
+}
+
+.drag-drop-upload {
+}
+
+.upload_file_progress_bar_container {
+  height: 12px;
+}
+
+.upload_file_progress_bar {
+  width: 534px;
+  float: left;
+}
+
+.invalid_upload_file {
+  .progress-bar {
+    background-color: $ibmRed-50;
+  }
+}
+
+.upload_file_delete_file_btn {
+  display: block;
+  width: 22px;
+  height: 22px;
+  font-size: 0px;
+  color: $ibmWhite;
+  position: relative;
+  top: -8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 24px;
+    color: $ibmGray-60;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border: none;
+    background-color: transparent;
+    &::before {
+      color: $ibmGray-20;
+    }
+  }
+
+}
+
+.input_add_translation_files {
+  background-color: $ibmGray-60;
+  color: $ibmWhite;
+  width: 100%;
+  height: 30px;
+  position: relative;
+
+  input {
+    opacity: 0;
+    font-size: 0;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+  }
+  .text_label {
+    top: 0;
+    position: absolute;
+    color: $ibmWhite;
+    width: 100%;
+    height: 30px;
+    padding-top: 5px;
+    display: block;
+    text-align: center;
+  }
+}
+
+.uploaded_file_container {
+  border-bottom: 1px solid $defaultBorderColor;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+
+.upload_errors_container {
+  margin-bottom: 40px;
+  padding: 24px 30px;
+  border: 1px solid $ibmRed-50;
+}

@@ -1,0 +1,6 @@
+<div class="col-xs-12">
+  <div class="col-xs-3 review-column ibmGray-40" ng-class="{'review-row': !inGroup || groupLabel}">{{groupLabel}}</div>
+  <div class="col-xs-3 review-row review-column ibm-bold ibmGray-40">{{label}}</div>
+  <div class="col-xs-6 review-row review-column review-value-content" ng-if="value !== '' && value !== undefined">{{value}}</div>
+  <div class="col-xs-6 review-row review-column review-value-content" ng-if="value === '' || value === undefined"><em class="ibmGray-40">No content provided</em></div>
+</div>

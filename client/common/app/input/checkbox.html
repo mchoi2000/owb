@@ -1,0 +1,26 @@
+<label><span ng-show="$ctrl.minSelect > 0" class="has-error">*</span> {{$ctrl.label}}</label>
+<div ng-if="$ctrl.description" class="small_description_bottom">{{$ctrl.description}}</div>
+
+<div class="col-xs-12" ng-class="{'checkbox_error': $ctrl.formCtrl[$ctrl.inputName].$invalid && ($ctrl.formCtrl.$submitted || $ctrl.formCtrl.$$parentForm.$submitted)}">
+  <ul class="zero_out_block_list col-xs-6">
+   <li ng-repeat="option in $ctrl.list" class="checkbox_container col-xs-12 padding_left" ng-class="{'disabled': !option.checked && $ctrl.model.length === $ctrl.maxSelect}" ng-if="$index <= 3">
+     <label for="{{$ctrl.inputId}}_{{$index}}">{{option.display}}</label>
+     <div aria-disabled="false" class="icheckbox_square-blue" ng-class="{'checked' : option.checked, 'checkbox_focused': checkBoxFocus}" role="checkbox">
+       <input type="checkbox" id="{{$ctrl.inputId}}_{{$index}}" ng-model="option.checked" ng-true-value="true" ng-false-value="false"
+              ng-focus="checkBoxFocus = true;" ng-blur="checkBoxFocus = false;" ng-change="$ctrl.updateModel();" ng-disabled="!option.checked && $ctrl.model.length === $ctrl.maxSelect">
+     </div>
+   </li>
+ </ul>
+
+ <ul class="zero_out_block_list col-xs-6">
+   <li ng-repeat="option in $ctrl.list" class="checkbox_container col-xs-12 padding_left" ng-class="{'disabled': !option.checked && $ctrl.model.length === $ctrl.maxSelect}" ng-if="$index > 3">
+     <label for="{{$ctrl.inputId}}_{{$index}}">{{option.display}}</label>
+     <div aria-disabled="false" class="icheckbox_square-blue" ng-class="{'checked' : option.checked, 'checkbox_focused': checkBoxFocus}" role="checkbox">
+       <input type="checkbox" id="{{$ctrl.inputId}}_{{$index}}" ng-model="option.checked" ng-true-value="true" ng-false-value="false"
+              ng-focus="checkBoxFocus = true;" ng-blur="checkBoxFocus = false;" ng-change="$ctrl.updateModel()" ng-disabled="!option.checked && $ctrl.model.length === $ctrl.maxSelect">
+     </div>
+   </li>
+ </ul>
+</div>
+<input type="hidden" ng-model="$ctrl.model" name="{{$ctrl.inputName}}"/>
+<ng-transclude></ng-transclude>

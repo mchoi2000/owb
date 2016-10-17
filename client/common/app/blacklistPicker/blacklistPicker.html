@@ -1,0 +1,136 @@
+<!--- Blacklist Countries --->
+<div id="full-country-long-name-tooltip" ng-show="fullCountryNameTooltip != ''" class="long-country-name-tooltip">{{fullCountryNameTooltip}}</div>
+<fieldset ng-class="{'larger_margin_bottom' : blacklist.length > 0}">
+  <p class="sr-only">Use the menus below to select any countries that the offering will not be published in. Any countries that will need to be blacklisted, need to be moved to the select menu to the right. Once you have the add the countries you need to blacklist, you will need to give the reason the offering will not be published below.</p>
+  <ng-form class="col-xs-12 clearfix" name="blackListForm">
+    <div class="form-group blacklist_multi_select_container clearfix">
+      <div class="blacklist-select-title">
+        <label class="control-label" for="multiplePublishingCoutries">Publish offering in:</label>
+      </div>
+      <div class="blacklist-select-count">
+        <span class="small_text ibmGray-60 pull-right" ng-show="whitelist.length === 1" aria-live="polite">1 Country</span>
+        <span class="small_text ibmGray-60 pull-right" ng-show="whitelist.length > 1" aria-live="polite">{{whitelist.length}} Countries</span>
+      </div>
+
+      <div class="col-xs-12 blacklist-select-container clearfix">
+        <select ng-mousemove="fullCountryNameMouseMove($event);" multiple class="blacklist_multi_select" name="multiplePublishingCoutries" id="multiplePublishingCoutries" ng-model="selectedWhitelist">
+            <option ng-mouseover="fullCountryNameMouseOver($event);" ng-mouseout="fullCountryNameMouseOut($event);" ng-repeat="country in whitelist | orderBy:'display'" value="{{country.value}}">{{country.display | limitTo: maxCountryDisplayLength}}{{ country.display.length > maxCountryDisplayLength ? '&#8230;' : ''}}</option>
+        </select>
+        <div ng-show="showMovingAnimation" class="moving_loading_animation">
+          Updating fields
+          <div class="ibm-spinner loading_spinner"></div>
+        </div>
+      </div>
+      <button type="button" class="btn move_all_to_blacklist_btn icon-forward-arrow-circle col-xs-12" ng-mousedown="showMovingAnimation = true;" ng-click="addToBlacklist(true);" ng-disabled="whitelist.length===0" ng-class="{'disabled' : showMovingAnimation}">Move ALL to do NOT publish list</button>
+    </div>
+
+    <div class="form-group blacklist_move_btns_container clearfix">
+      <button class="icon-forward-arrow blacklist_move_btn" type="button" ng-mousedown="showMovingAnimation = true;" ng-disabled="whitelist.length == 0" ng-class="{'disabled' : showMovingAnimation}" ng-click="addToBlacklist(false);">Move Selected Countries to the Do Not Publish section</button>
+      <button class="icon-back-arrow blacklist_move_btn" type="button" ng-mousedown="showMovingAnimation = true;" ng-disabled="blacklist.length == 0" ng-class="{'disabled' : showMovingAnimation}" ng-click="removeFromBlacklist(false);">Move Selected Countries to Publishing section</button>
+    </div>
+
+    <div class="form-group blacklist_multi_select_container clearfix">
+      <div class="blacklist-select-title">
+        <label class="control-label" for="multipleBlacklistCoutries">Do NOT publish offering in:</label>
+      </div>
+      <div class="blacklist-select-count">
+        <span class="small_text ibmGray-60 pull-right" ng-show="blacklist.length === 1" aria-live="polite">1 Country</span>
+        <span class="small_text ibmGray-60 pull-right" ng-show="blacklist.length > 1" aria-live="polite">{{blacklist.length}} Countries</span>
+      </div>
+
+      <div class="col-xs-12 blacklist-select-container clearfix">
+        <select ng-mousemove="fullCountryNameMouseMove($event);" multiple class="blacklist_multi_select" name="multipleBlacklistCoutries" id="multipleBlacklistCoutries"
+                ng-model="selectedBlacklist">
+                <option ng-mouseover="fullCountryNameMouseOver($event);" ng-mouseout="fullCountryNameMouseOut($event);" ng-repeat="option in blacklist | orderBy:'display'" value="{{option.value}}">{{option.display | limitTo: maxCountryDisplayLength}}{{ option.display.length > maxCountryDisplayLength ? '&#8230;' : ''}}</option>
+        </select>
+
+        <div ng-show="showMovingAnimation" class="moving_loading_animation">
+          Updating fields
+          <div class="ibm-spinner loading_spinner"></div>
+        </div>
+      </div>
+
+      <button type="button" class="btn move_all_to_publish_btn icon-back-arrow-circle col-xs-12" ng-mousedown="showMovingAnimation = true;" ng-disabled="blacklist.length===0" ng-click="removeFromBlacklist(true);">Move ALL to publish list</button>
+    </div>
+  </ng-form>
+</fieldset>
+<!--- End blacklisted countries arrange --->
+<!--- Begin Add reasons for blacklisted countries --->
+<fieldset ng-show="blacklist.length > 0">
+  <ng-form name="blackListReasonsForm">
+    <legend id="blacklist_countries" class="sr-only">Why should the offering not be published in the selected countries?</legend>
+
+    <div class="form-group largest_margin_bottom clearfix" ng-class="{'subsection_container' : showIndividualReasons && blacklist.length > 1}">
+      <input type="hidden" ng-if="blacklist.length > 0" ng-model="singleReasonForAllBlacklist" value="{{singleReasonForAllBlacklist}}" name="blackListSingleReason" ng-required="!atleastOneReasonSelected && !showIndividualReasons"/>
+      <div class="col-xs-12">
+        <label ng-if="blacklist.length == 1" class="control-label" for="blacklist_single_reason">Why should the offering NOT be published in the selected country?</label>
+        <label ng-if="blacklist.length > 1" class="control-label" for="blacklist_single_reason">Why should the offering NOT be published in the selected countries?</label>
+      </div>
+      <div class="col-xs-12 clearfix">
+
+        <div class="select_input_container blacklist_reasons_input_container pull-left clearfix" ng-class="{'add_individual_reasons' : addReasonsManually}">
+
+          <div class="col-xs-12 btn-group" uib-dropdown keyboard-nav>
+            <button id="blacklist_single_reason" name="blacklist_single_reason" aria-label="Your currently selected blacklist reason is all countries is {{blackListReasons[singleReasonForAllBlacklist]}}. Select from the options below to change it."
+            focus-if="singleReasonFocus" ng-blur="singleReasonFocus = false" type="button" class="btn icon-down-arrow dropdown_btn cols-xs-12" ng-model="singleReasonForAllBlacklist" uib-dropdown-toggle ng-class="{'has-error': blackListReasonsForm.blackListSingleReason.$error.required && (form.$submitted || form.brand.$touched || form.brand.$dirty)}">
+              <span class="truncated_select_show" ng-if="blacklist.length > 1">{{reasonsDisplay[singleReasonForAllBlacklist] || 'Select a reason for ALL countries'}}</span>
+              <span class="truncated_select_show" ng-if="blacklist.length === 1">{{reasonsDisplay[singleReasonForAllBlacklist] || 'Select a reason'}}</span>
+            </button>
+            <ul uib-dropdown-menu class="dropdown-menu dropdown_menu_display_options" tabindex=0 role="menu">
+              <!-- Use this when individual reasons are turned off -->
+              <li class='firstli' ng-repeat="reason in blackListReasons" ng-if="!showIndividualReasons" role="menuitem"><a href="#" role="option" ng-click="updateBlackListReason('singleReasonForAllCountries', reason.value, false); singleReasonFocus = true;">{{reason.display}}</a></li>
+
+              <!-- Use this when individual reasons are turned on -->
+              <li class='secondli' ng-repeat="reason in blackListReasons" ng-if="showIndividualReasons" role="menuitem"><a href="#" role="option" ng-click="updateReasons(reason.value);">{{reason.display}}</a></li>
+
+            </ul>
+            <span class="has-error small_text" ng-show="blackListReasonsForm.blackListSingleReason.$error.required && (form.$submitted || form.brand.$touched || form.brand.$dirty)">
+              Select one
+            </span>
+          </div>
+        </div>
+
+        <div class="blacklist_reasons_or_container" ng-show="!addReasonsManually && blacklist.length > 1">
+          <span class="text_align_center col-xs-12 ibmGray-40">Or</span>
+        </div>
+
+        <div class="select_reason_all_container pull-right clearfix" ng-class="{'add_individual_reasons' : addReasonsManually}">
+          <button type="button" class="col-xs-12 btn btn-primary pull-right" ng-show="!addReasonsManually && blacklist.length > 1" ng-mousedown="showMovingAnimation = true; showIndividualReasons = true;" ng-click="addReasonsManually = true; clearAllBlacklistReasons();">Select a reason for each country</button>
+          <button type="button" class="col-xs-12 btn btn-primary apply_reason_to_all_btn pull-right" ng-disabled="singleReasonForAllBlacklist == ''" ng-show="addReasonsManually && blacklist.length > 1" ng-mousedown="showMovingAnimation = true; showIndividualReasons = true;" ng-click="updateBlackListReason('singleReasonForAllCountries', singleReasonForAllBlacklist, true);">Apply to ALL countries</button>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="showIndividualReasons && blacklist.length > 1" class="form-group col-xs-12 blacklist_reasons_by_country clearfix">
+
+      <legend id="product_attributes" class="sr-only">SELECT THE REASON FOR EACH COUNTRY</legend>
+
+      <!--- Repeat through blacklist countries and add reason select fields for each --->
+      <div ng-if="addReasonsManually && blacklist.length > 1" class="blacklist_individual_reasons_container clearfix" ng-class="{'fade_out_for_animation' : showMovingAnimation}">
+        <div ng-repeat-start="blacklistCountry in blacklist track by $index" class="col-xs-6 clearfix" ng-class="{'padding_right' : ($index + 1) % 2 === 1, 'padding_left' : ($index + 1) % 2 === 0}">
+          <input type="hidden" ng-model="marketConfig[blacklistCountry.value].offeringMgr.reason" value="{{marketConfig[blacklistCountry.value].offeringMgr.reason}}" name="blackListCountry{{$index}}" required/>
+          <div class="select_input_container col-xs-12">
+            <div class="form-group larger_margin_bottom btn-group" uib-dropdown keyboard-nav>
+              <label class="control-label" for="blacklist_reason_{{$index}}">{{blacklistCountry.display}}</label>
+              <button aria-label="Your currently selected blacklist reason is {{marketConfig[blacklistCountry.value].offeringMgr.reason}}. Select from the options below to change it." id="blacklist_reason_{{$index}}" name="blacklist_reason_dropdown{{$index}}"
+                focus-if="reasonFocus" ng-blur="reasonFocus = false" type="button" class="btn icon-down-arrow dropdown_btn cols-xs-12" ng-model="marketConfig[blacklistCountry.value].offeringMgr.reason" uib-dropdown-toggle ng-class="{'has-error': blackListReasonsForm.blackListCountry{{$index}}.$error.required && (form.$submitted)}">
+                <span class="truncated_select_show">{{reasonsDisplay[marketConfig[blacklistCountry.value].offeringMgr.reason] || 'Select one'}}</span>
+              </button>
+              <ul uib-dropdown-menu class="dropdown-menu dropdown_menu_display_options" tabindex=0 role="menu" aria-labelledby="select_brand_dropdown">
+                <li ng-repeat="reason in blackListReasons" role="menuitem"><a href="#" role="option" ng-click="updateBlackListReason(blacklistCountry, reason.value, true); $parent.reasonFocus = true; addReasonsManually = true;">{{reason.display}}</a></li>
+              </ul>
+              <span class="has-error small_text" ng-show="blackListReasonsForm.blackListCountry{{$index}}.$error.required && (form.$submitted)">
+                Select one
+              </span>
+            </div>
+          </div>
+        </div>
+        <div ng-if="($index + 1) % 2 === 0" class="col-xs-12 clearfix" ng-repeat-end="blacklistCountry in blacklist"></div>
+      </div>
+      <div ng-show="showMovingAnimation" class="moving_loading_animation">
+        Updating fields for each country
+        <div class="ibm-spinner loading_spinner"></div>
+      </div>
+    </div>
+  </ng-form>
+</fieldset>

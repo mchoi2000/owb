@@ -1,0 +1,239 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+/* Typography */
+// IBM Fonts
+$ibmHelvLight: "HelvLightIBM","Helvetica Neue",Helvetica,Arial,sans-serif;
+$ibmHelvRegular: "HelvRegularIBM","Helvetica Neue",Helvetica,Arial,sans-serif;
+$ibmHelvBold: "HelvBoldIBM","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+// Base for Paragraphs
+$baseSize: 14px;
+
+// Sub Headers
+
+$heroHeaderSize: 39px;
+$h1Size: $baseSize * 1.953;
+$h2Size: $baseSize * 1.563;
+$h3Size: $baseSize * 1.25;
+$h4Size: $baseSize * 1.15;
+$h5Size: $baseSize;
+$h6Size: $baseSize;
+
+// Small for Captions, etc.
+$smallSize: 0.85em;
+$smallerSize: 0.8em;
+
+// Larger Text
+$mediumSize: $baseSize * 1.2858;
+$largeSize: $h3Size;
+$largerSize: $h2Size;
+//////////////////////////////////////////////////////////////////
+
+/* Colors */
+
+// White
+$ibmWhite: #ffffff;
+
+// IBM Grays
+$ibmGray-80: #323232;
+$ibmGray-70: #464646;
+$ibmGray-60: #5a5a5a;
+$ibmGray-50: #777677;
+$ibmGray-40: #959595;
+$ibmGray-30: #aeaeae;
+$ibmGray-20: #c7c7c7;
+$ibmGray-10: #e0e0e0;
+$ibmGray-5: #f4f4f4;
+
+$ibmNeutral-2: #f9f9f9;
+
+// IBM Blues
+$ibmBlue-60: #325c80;
+$ibmBlue-50: #4178be;
+$ibmBlue-40: #5596e6;
+$ibmBlue-30: #5aaafa;
+$ibmBlue-20: #7cc7ff;
+
+$lightestBlue: #cdebff;
+
+// IBM Greens
+$ibm-Green60: #2d660a;
+$ibm-Green50: #4b8400;
+$ibm-Green40: #5aa700;
+$ibm-Green30: #8cd211;
+$ibm-Green20: #b4e051;
+$ibm-Green10: #c8f08f;
+
+// IBM Magentas
+$ibmMagenta-60: #a6266e;
+$ibmMagenta-50: #db2780;
+$ibmMagenta-30: #ff71d4;
+$ibmMagenta-20: #ff9eee;
+
+// IBM Oranges
+$ibmOrange-60: #a53725;
+$ibmOrange-50: #d74108;
+$ibmOrange-40: #ff5003;
+$ibmOrange-30: #ff7832;
+
+// IBM Purples
+$ibmPurple-70: #562f72;
+$ibmPurple-60: #734098;
+$ibmPurple-50: #9855d4;
+$ibmPurple-30: #ba8ff7;
+$ibmPurple-20: #d7aaff;
+
+$lightestPurple: #f1dbff;
+
+// IBM Reds
+$ibmRed-70: #8c101c;
+$ibmRed-60: #ad1625;
+$ibmRed-50: #e71d32;
+$ibmRed-40: #ff5050;
+$ibmRed-30: #ff7d87;
+
+// IBM Teals
+$ibmTeal-60: #006d5d;
+$ibmTeal-50: #008571;
+$ibmTeal-40: #00b4a0;
+$ibmTeal-30: #41d6c3;
+
+// IBM Yellows
+$ibmYellow-50: #8c7300;
+$ibmYellow-30: #efc100;
+$ibmYellow-10: #fde876;
+
+// Border Colors
+$defaultBorderColor: $ibmGray-10;
+
+// Text Colors
+$textColor: $ibmGray-50;
+$darkTextColor: $ibmGray-80;
+$lightTextColor: $ibmGray-40;
+
+$qualificationFormTextColor: $ibmGray-80;
+$qualificationFormdefaultBorderColor: $ibmGray-40;
+
+$collabInviteeErrorColor: #ffd2dd;
+
+// Link Colors
+$linkColor: $ibmBlue-50;
+$linkHoverColor: $ibmBlue-60;
+// Link color for white text on dark bg
+$inverseLinkColor: #c0e6ff;
+
+// Background Colors
+$greyBoxBgColor: $ibmGray-5;
+$disabledBgColor: $ibmNeutral-2;
+$qualificationFormDisabledBgColor: $ibmGray-10;
+
+// Default Box Shadow
+
+$defaultBoxShadow: 1px 1px 4px 0px $ibmGray-10;
+
+//////////////////////////////////////////////////////////////////
+
+/* Images and Sprites */
+
+// Icons Sprite
+$iconsSprite: $webRoot + "images/application_icons_sprite.png";
+$largeIconsSprite: $webRoot + "images/application_large_icons_sprite.png";
+$closeIcon: $webRoot + "images/close_icon.png";
+
+$reviewTabActiveBG : $webRoot + "images/tab_active.svg";
+$reviewTabInactiveBG : $webRoot + "images/tab_inactive.svg";
+
+// Dashboard Icon Sprite
+$dashboardStatusIcons : $webRoot + "images/icons/dashboard_status_icons.svg";
+
+$dottedLineBG: $webRoot + "images/icons/dotted-line.svg";
+
+// Icon Background Positions for each Dashboard Icon
+$greenCheck: 13px 28px;
+$redAlert: 13px -85px;
+$grayOmitted: 13px -207px;
+$grayCheck: 13px -336px;
+
+/* Layout */
+
+// Desktop Settings - Add Responsive settings in the future when needed.
+
+// The padding of the site container added to both sides. For the desktop, the width of the container is actually 1180px.
+$desktopSiteContainerPadding: 10px;
+
+// The width of the site container
+
+$desktopBaseWidth: 1200px;
+$desktopSiteWidth: $desktopBaseWidth - ($desktopSiteContainerPadding * 2);
+
+
+// The width of a 1/4 (one fourth) column container.
+$desktopColumnWidth-OneFourth: 280px;
+
+// The space between each of the columns.
+$desktopColumGutter: 20px;
+
+// Default padding for padding container
+$containerPadding: 20px;
+
+$headerHeight: 70px;
+
+// Modal
+
+$modalHeight: 540px;
+$participantModalHeight: 572px;
+
+/* Mixins */
+
+// CSS Transitions
+@mixin standardTransitions($duration, $delay) {
+  transition: border-color $duration ease $delay,
+              color $duration ease $delay,
+              background-color $duration ease $delay,
+              text-decoration $duration ease $delay,
+              opacity $duration ease $delay,
+              box-shadow $duration ease $delay;
+  -webkit-transition: border-color $duration ease $delay,
+              color $duration ease $delay,
+              background-color $duration ease $delay,
+              text-decoration $duration ease $delay,
+              opacity $duration ease $delay,
+              box-shadow $duration ease $delay;
+  -moz-transition: border-color $duration ease $delay,
+              color $duration ease $delay,
+              background-color $duration ease $delay,
+              text-decoration $duration ease $delay,
+              opacity $duration ease $delay,
+              box-shadow $duration ease $delay;
+  -o-transition: border-color $duration ease $delay,
+              color $duration ease $delay,
+              background-color $duration ease $delay,
+              text-decoration $duration ease $delay,
+              opacity $duration ease $delay,
+              box-shadow $duration ease $delay;
+}
+
+@mixin turnOffTransitions() {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: all 0 ease;
+  transition: none;
+}
+
+@mixin standardBoxShadow() {
+  -webkit-box-shadow: 1px 1px 4px 0px $ibmGray-10 !important;
+  -moz-box-shadow: 1px 1px 4px 0px $ibmGray-10 !important;
+  -o-box-shadow: 1px 1px 4px 0px $ibmGray-10 !important;
+  box-shadow: 1px 1px 4px 0px $ibmGray-10 !important;
+}
+
+@mixin noBoxShadow() {
+  -webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+  -o-box-shadow: none !important;
+	box-shadow: none !important;
+}

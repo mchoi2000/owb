@@ -1,0 +1,16 @@
+<div class="col-xs-12 input_element">
+  <div class="content_custom_popover">
+    <div ng-if="$ctrl.label" ng-class="{'col-xs-12': !$ctrl.deletable, 'col-xs-10': $ctrl.deletable}">
+      <label class="ibm-fleft control-label" for="{{$ctrl.inputId}}"><span ng-show="$ctrl.isRequired" class="has-error">*</span> {{$ctrl.label}}</label>
+      <span ng-show="$ctrl.maxLength && $ctrl.focus" aria-live="polite" class="ibm-fright">{{$ctrl.maxLength - $ctrl.formCtrl[$ctrl.inputName].$$rawModelValue.length}} Characters Remaining</span>
+    </div>
+    <div class="col-xs-2 pull-right" ng-show="$ctrl.deletable">
+      <button type="button" ng-click="$ctrl.onDelete()" class="pull-right btn delete_item_btn delete_item_btn_small icon-trash small_text">Delete</button>
+    </div>
+    <input type="text" id="{{$ctrl.inputId}}" name="{{$ctrl.inputName}}" class="form-control content_custom_popover" ng-class="{'has-error': $ctrl.formCtrl.{{$ctrl.inputName}}.$invalid && ($ctrl.formCtrl.$submitted || $ctrl.formCtrl.$$parentForm.$submitted)}"
+           ng-model="$ctrl.model" placeholder="{{$ctrl.placeholder}}" ng-required="$ctrl.isRequired" ng-minlength="$ctrl.minLength" ng-maxlength="$ctrl.maxLength" ng-pattern="$ctrl.regexPattern" ng-trim="false"
+           ng-change="$ctrl.onChange({newValue: $ctrl.model})" ng-focus="$ctrl.focus = true" ng-blur="$ctrl.focus = false" popover-trigger="focus" popover-placement="right" uib-popover="{{$ctrl.description}}">
+  </div>
+  <!-- Error Messages -->
+  <ng-transclude></ng-transclude>
+</div>

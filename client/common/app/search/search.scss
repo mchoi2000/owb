@@ -1,0 +1,75 @@
+
+.select_input_container {
+  .search-dropdown-menu {
+    width: 100%;
+    min-width: 100%;
+    padding-top: 12px;
+    overflow: auto;
+    top: 82px !important;
+  }
+}
+
+.search-dropdown-menu {
+  @extend .dropdown-menu;
+
+  li {
+    height: 30px;
+    a {
+      color: $ibmGray-60;
+      padding: 4px 20px;
+      height: 30px;
+      border-bottom: 0px;
+    }
+  }
+}
+
+.search-input {
+  background-color: $ibmWhite;
+  position: absolute;
+  right: 10px;
+  text-align: right;
+  font-size: 15px;
+  width: 25px;
+  height: 25px;
+  line-height: 20px;
+}
+
+.search-input.ibm-masthead-search-link {
+  top: 41px;
+}
+
+.search-input.ibm-spinner {
+  top: 39px;
+}
+
+.search-selected {
+  background-color: $ibmNeutral-2;
+  border-color: $ibmGray-10;
+  border-style: solid;
+  border-width: 1px;
+  cursor: default;
+  height: 42px;
+  padding: 10px 14px;
+
+  button {
+    background-color: inherit;
+    font-size: 0px;
+    height: 25px;
+    width: 25px;
+
+    border-width: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+  }
+
+  button:before {
+    font-size: 20px;
+    color: $ibmGray-60;
+  }
+}
+
+.search-link {
+  padding-top: 12px;
+}

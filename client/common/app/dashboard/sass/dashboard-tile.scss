@@ -1,0 +1,395 @@
+.dashboard-product-tile-item,
+.review-product-tile-item {
+  &:hover {
+    @include standardBoxShadow();
+  }
+
+  .task-inner-container {
+    &::before {
+      top: 14px;
+      left: 0;
+    }
+  }
+
+  .task-content {
+    padding: 20px 0px 20px 0px;
+    margin-left: 36px;
+  }
+
+  .dotted-line-connection {
+    background-position: 12px -20px;
+  }
+
+  .tile-top-section {
+    border-bottom: 1px solid $defaultBorderColor;
+    height: 150px;
+    background-color: $ibmNeutral-2;
+  }
+
+  .tile-bottom-section {
+    width: 100%;
+    border-left: none;
+  }
+
+  .task-name-container, .task-status-container {
+    width: 100%;
+    float: none;
+  }
+
+  .task-name-container {
+    padding-bottom: 10px;
+  }
+
+  .update-task-link {
+    position: absolute;
+    top: 19px;
+    right: 0;
+  }
+
+  .manageTeamButton {
+    left: 0;
+    bottom: 0;
+  }
+
+  &.published-tile {
+    .tile-top-section {
+      background-color: $ibmWhite;
+    }
+  }
+
+}
+
+.dashboard-product-list-item {
+  position: relative;
+  background-color: $ibmNeutral-2;
+  margin-bottom: 20px !important;
+  margin-right: 0px !important;
+  min-height: 210px;
+
+
+  .tile-top-section {
+    height: 170px;
+    position: inherit;
+
+    .tile-view-live-link {
+      right: auto;
+      left: 20px;
+      bottom: 50px;
+    }
+  }
+
+  .container {
+    border: 1px solid $defaultBorderColor;
+  }
+
+  &.published-tile {
+    background-color: $ibmWhite;
+  }
+
+  .manageTeamButton {
+    background-color: transparent;
+  }
+
+  .extended-height {
+    .task-inner-container {
+      &::before {
+        top: 24px;
+      }
+    }
+  }
+
+  // Vertically Centered Styles for List
+  .task-name,
+  .task-status,
+  .update-task-link {
+    &.vertically-center {
+      height: 36px;
+      line-height: 36px;
+
+      .task-status-title,
+      .update-task-link,
+      .task-status-date {
+        height: 36px;
+        line-height: 36px;
+      }
+
+      .task-status-date {
+        top: 1px;
+      }
+    }
+
+  }
+
+  .dotted-line-cover-top {
+    &.extended-height {
+      height: 56px;
+    }
+  }
+
+  .updates-requested-msg {
+    top: 2px;
+  }
+}
+
+.tile-status-published {
+  h3, .h3 {
+    color: $ibmGray-40 !important;
+  }
+}
+
+.tile-top-section {
+  float:left;
+  width: 280px;
+  padding: 30px 20px;
+}
+
+.tile-bottom-section {
+  width: 582px;
+  float: left;
+  min-height: 210px;
+}
+
+.task-headings-container {
+  padding-left: 52px;
+  padding-top: 16px;
+  margin-bottom: 0;
+}
+
+.task-container {
+  position: relative;
+}
+
+.task-inner-container {
+  position: relative;
+
+  &::before {
+    color: $ibmGray-20;
+    font-size: 26px;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+  }
+
+  &.red {
+    &::before {
+      color: $ibmRed-50;
+    }
+  }
+
+  &.green {
+    &::before {
+      color: $ibm-Green50;
+    }
+  }
+
+  &.purple {
+    &::before {
+      color: $ibmPurple-60;
+    }
+  }
+}
+
+.dotted-line-connection {
+  background-image: url($dottedLineBG);
+  background-repeat: repeat-y;
+  background-position: 22px -20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dotted-line-cover-top,
+.dotted-line-cover-bottom {
+  position: absolute;
+  width: 40px;
+  height: 46px;
+  background-color: $ibmWhite;
+  top: 0;
+}
+
+.dotted-line-cover-bottom {
+  top: 8px;
+  height: 200px;
+}
+
+.integration-icon-bottom {
+  .dotted-line-cover-bottom {
+    top: 12px;
+  }
+}
+
+.task-content {
+  padding: 20px 10px 20px 0px;
+  margin-left: 52px;
+  margin-bottom: 0;
+
+  &.extended-height {
+    height: 76px;
+  }
+}
+
+.task-name-container, .task-status-container {
+  float: left;
+  line-height: 100%;
+}
+
+.task-name-container,
+.task-name-heading {
+  width: 150px;
+}
+
+.task-name-heading, .task-status-heading {
+  float: left;
+}
+
+.task-name {
+  font-size: $baseSize;
+  color: $ibmGray-60;
+}
+
+.task-status-container {
+  width: 260px
+}
+
+.task-status,
+.published-status,
+.published-status-date,
+.task-status-title,
+.task-status-date,
+.updates-requested-msg,
+.update-task-link {
+  padding: 0;
+  margin: 0;
+  line-height: 100%;
+  position: relative;
+}
+
+.task-status {
+  line-height: 110%;
+}
+
+.updates-requested-msg,
+.published-status {
+  margin-top: 8px;
+}
+
+.updates-requested-msg,
+.published-status-date,
+.task-status-date {
+  top: 1px;
+}
+
+.dashboard-products-container {
+  margin-bottom: 30px;
+  position: relative;
+  background-color: #fff;
+  min-height: 640px;
+  width: 100%;
+  opacity: 1;
+
+  &:hover {
+    cursor: default;
+  }
+
+  .fade_out {
+    opacity: 0;
+  }
+
+  .dashboard-product-tile-item,
+  .review-product-tile-item {
+
+    width: $desktopColumnWidth-OneFourth;
+    margin-right: $desktopColumGutter;
+    margin-bottom: $desktopColumGutter;
+    float:left;
+    padding:0;
+    position: relative;
+    height: 550px;
+    overflow: hidden;
+    border: 1px solid $defaultBorderColor;
+    line-height: 1.3em;
+    cursor: default;
+    margin-bottom: 20px !important;
+
+
+    .h3, h3 {
+      color: $ibmGray-60;
+      clear: both;
+      font-size: $h3Size;
+      line-height: 1.2em;
+      top: 0px;
+      word-break: keep-all;
+      width: 86%;
+    }
+
+    p {
+      color: $ibmGray-60;
+    }
+  }
+
+  .review-product-tile-item {
+    height: 450px;
+  }
+
+}
+
+.tile-bottom-section {
+  height: auto;
+  width: 599px;
+  box-sizing: border-box;
+  padding: 10px 10px 10px 10px;
+  border-left: 1px solid $defaultBorderColor;
+  background-color: $ibmWhite;
+}
+
+.tile-view-live-link {
+  float: right;
+  bottom: 14px;
+  position: absolute;
+  right: 20px;
+  font-size: $baseSize;
+}
+
+// Review tile Styles
+.dashboard-product-tile-item,
+.review-product-tile-item {
+  // Tile Statuses - All
+  .tile-status-submitted,
+  .tile-status-will-publish,
+  .tile-status-published,
+  .tile-status-review-complete,
+  .review-tile-status-returned {
+
+    .tile-top-section {
+      background-repeat: no-repeat;
+      padding-top: 52px;
+    }
+    .h3, h3 {
+      color: $ibmGray-40 !important;
+
+    }
+
+    &:hover {
+      .h3, h3 {
+        color: $ibmGray-50;
+      }
+    }
+
+    .link_submitted {
+      text-decoration: none;
+    }
+  }
+
+  // Published Status
+  .tile-status-published,
+  .tile-status-will-publish {
+
+    .tile-top-section {
+      background-color: $ibmWhite;
+      padding-top: 22px;
+    }
+
+    .published_date {
+      color: $ibmGray-50;
+    }
+  }
+}

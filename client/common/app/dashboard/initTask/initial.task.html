@@ -1,0 +1,67 @@
+<!--
+Licensed Materials - Property of IBM
+
+@ Copyright IBM Corp. 2015 All Rights Reserved
+
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<li class="task-container" ng-class="{'border_top' : $ctrl.taskName === 'Commerce Task',
+                                      'integration-icon-bottom' : $ctrl.taskIcon === 'icon-markup'
+                                      }">
+
+  <div aria-hidden="true" ng-if="$ctrl.taskName === 'Commerce Task'" ng-class="{'extended-height' : $ctrl.lastPublishedDate !== ''}" class="dotted-line-cover-top"></div>
+  <div aria-hidden="true" ng-if="$ctrl.taskName === 'Integration Task'" class="dotted-line-cover-bottom"></div>
+
+  <div ng-class="{'extended-height' : $ctrl.lastPublishedDate !== '' || $ctrl.status === 'Returned'}">
+
+    <div class="task-inner-container {{$ctrl.taskIcon}} {{$ctrl.iconColor}}">
+      <div class="task-content clearfix"
+           ng-class="{'border_top' : $ctrl.taskName === 'Integration Task'}">
+
+        <div class="task-name-container">
+          <h4 class="ibm-bold task-name" ng-class="{'vertically-center' : $ctrl.status !== 'Returned' && $ctrl.lastPublishedDate !== ''}">{{$ctrl.taskName}}</h4>
+          <p ng-if="$ctrl.status === 'Returned'" class="updates-requested-msg small_text ibm-bold ibmRed-50">Updates Requested</p>
+        </div>
+
+        <div class="task-status-container">
+          <p class="task-status" ng-class="{'ibm-Green50' : $ctrl.status === 'Complete' || $ctrl.status === 'Published',
+                                            'vertically-center' : $ctrl.status === 'Returned' && $ctrl.lastPublishedDate === ''}">
+
+            <span ng-if="$ctrl.status.substring(0,17) !== 'Will be published' &&
+                         $ctrl.status.substring(0,7) !== 'Waiting' &&
+                         $ctrl.status.substring(0,16) !== 'Sent for publish'" class="task-status-title">{{$ctrl.status}}</span>
+
+            <em ng-if="$ctrl.status.substring(0,17) === 'Will be published' ||
+                       $ctrl.status.substring(0,16) === 'Sent for publish' ||
+                       $ctrl.status.substring(0,7) === 'Waiting'" class="task-status-title">{{$ctrl.status}}</em>
+
+            <span ng-if="$ctrl.statusDate !== ''" class="task-status-date ibm-bold small_text pull-right">{{$ctrl.statusDate}}</span>
+          </p>
+
+          <p ng-if="$ctrl.lastPublishedDate !== ''" class="published-status ibm-Green50">
+            <span ng-if="$ctrl.isAcademy" class="publish-status-title">Published</span>
+            <span ng-if="!$ctrl.isAcademy" class="publish-status-title">Last published</span>
+            <span class="publish-status-date ibm-bold ibm-Green50 small_text pull-right">{{$ctrl.lastPublishedDate}}</span>
+          </p>
+        </div>
+        <a ng-if="$ctrl.status==='Not required' ||
+                  $ctrl.status=='Complete' ||
+                  $ctrl.status=='Returned' ||
+                  $ctrl.status=='Published' ||
+                  $ctrl.status.substring(0,7) === 'Waiting'"
+           href="{{$ctrl.link}}"
+           ng-class="{'vertically-center' : $ctrl.status === 'Returned' ||
+                                            $ctrl.lastPublishedDate !== ''}"
+           target="_self" class="update-task-link pull-right">Update</a>
+
+       <a ng-class="{'vertically-center' : $ctrl.status === 'Returned' ||
+                                           $ctrl.lastPublishedDate !== ''
+                    }" ng-if="$ctrl.status==='Not Started' ||
+                              $ctrl.status==='Last modified' ||
+                              $ctrl.status==='Unavailable status'"
+              href="{{$ctrl.link}}"
+              target="_self" class="update-task-link pull-right">Edit</a>
+      </div>
+    </div>
+  </div>
+</li>

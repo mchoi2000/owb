@@ -1,0 +1,31 @@
+<div class="col-xs-12 clearfix input_element content_custom_popover">
+  <div class="btn-group select_input_container col-xs-12 clearfix" uib-dropdown keyboard-nav is-open="searchCtrl.listResults">
+    <div class="col-xs-10">
+      <label for="{{inputId}}_searchTerm"><span ng-show="isRequired" class="has-error">* </span>{{label}}</label>
+    </div>
+
+    <div class="col-xs-2 pull-right" ng-show="deleteable">
+      <button type="button" ng-click="onDelete()" class="pull-right btn delete_item_btn delete_item_btn_small icon-trash small_text">Delete</button>
+    </div>
+
+    <input type="hidden" id="{{inputId}}" name="{{inputName}}" value="{{model}}" ng-hide="true" ng-required="isRequired" ng-model="model"/>
+    <div ng-hide="searchCtrl.productFound">
+      <input id="{{inputId}}_seachTerm" name="{{inputName}}_searchTerm" type="text" placeholder="{{searchCtrl.placeholder}}"
+             ng-model="searchCtrl.searchTerm" ng-change="searchCtrl.queryProducts()" force-focus="searchCtrl.forceFocus" ng-focus="searchCtrl.resetNotFound()" ng-blur="searchCtrl.checkInput($event)"
+             class="form-control" ng-class="{'has-error': formCtrl[{{inputName}}].$invalid.required  && (formCtrl.$submitted || formCtrl.$$parentForm.$submitted)}"
+             popover-trigger="focus" popover-placement="right" uib-popover="{{description}}" autocomplete="off"/>
+      <div class="search-input" ng-class="{'ibm-masthead-search-link': !searchCtrl.searching, 'ibm-spinner': searchCtrl.searching}"></div>
+    </div>
+    <div ng-show="searchCtrl.productFound" class="col-xs-12">
+      <div class="search-selected col-xs-12">
+         {{searchCtrl.productTitle}}
+        <button type="button" class="icon-x-circle" ng-click="searchCtrl.unselect()">cancel</button>
+      </div>
+      <a class="search-link col-xs-12" href="{{searchCtrl.productUrl}}" target="_blank">View this offering’s page in the Marketplace.</a>
+    </div>
+    <ul id="{{inputId}}_list" uib-dropdown-menu class="dropdown_menu_display_options" ng-class="{'search-dropdown-menu': searchCtrl.resultsFound, 'dropdown-menu': !searchCtrl.resultsFound}" role="menu" tabindex=0 aria-labelledby="{{inputName}}_dropdown">
+      <li ng-repeat="(num, product) in searchCtrl.searchResults" role="menuitem"><a id="{{num}}" name={{inputName}}_option href="#" ng-click="searchCtrl.selectProduct(product)" ng-keydown="searchCtrl.keyboardSelect($event, product)" ng-bind-html="product.displayTitle"></a></li>
+    </ul>
+    <ng-transclude></ng-transclude>
+  </div>
+</div>

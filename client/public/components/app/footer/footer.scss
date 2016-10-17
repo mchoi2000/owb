@@ -1,0 +1,124 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+// v18 overwrite footer styles
+
+#ibm-footer {
+  li, select, input {
+    font-size: 1rem;
+  }
+}
+
+#ibm-footer .ibm-footer-corporate-links {
+  padding: 15px 0;
+
+  li {
+    line-height: 1.625rem;
+  }
+}
+
+#ibm-footer #ibm-footer-locale-selector {
+  padding-top: 10px;
+}
+
+#ibm-footer.ibm-alternate .ibm-col-1-1 {
+  padding: 8px 0 8px;
+}
+
+.footer_container, .push_footer_to_bottom {
+  height: 76px;
+  clear: both;
+}
+
+.push_footer_to_bottom.primary_v18_footer {
+  height: 500px;
+}
+
+.footer_container {
+  position: relative;
+  width: 100%;
+  clear: both;
+  height: 70px;
+}
+
+.ibm-columns {
+  width: 1200px !important;
+  margin: 0 auto !important;
+  padding-bottom: 45px;
+}
+
+.ibm-col-1-1 {
+  width: 1180px !important;
+  margin: 0 auto !important;
+  padding: 8px 0 12px;
+}
+
+#ibm-footer-module {
+
+  .ibm-col-4-1 {
+    width: 25% !important;
+    margin: 0;
+  }
+
+  .ibm-columns {
+    padding-bottom: 50px;
+  }
+
+  h3, li, a {
+    font-size: 16px;
+    line-height: 1.625rem;
+  }
+
+  .select2-selection__rendered {
+    font-size: 16px !important;
+  }
+
+  h3 {
+    padding-bottom: 15px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+
+    li + li {
+      padding-top: 7px;
+    }
+  }
+}
+
+#ibm-footer .ibm-footer-corporate-links ul {
+  padding-left: 0px;
+}
+
+#ibm-footer-container {
+  padding: 0px 0px;
+  background-color: $ibmGray-80;
+  color: $ibmWhite;
+
+}
+
+.ibm-footer-navs {
+  width: 100%;
+  margin-top: 48px;
+  position: relative;
+
+  li {
+    float: left;
+    margin-right: 20px;
+    top: 5px;
+    color: $ibmGray-30;
+    height: 50px;
+    line-height: 100%;
+    vertical-align: top;
+    position: relative;
+
+    a {
+      color: #fff;
+    }
+
+  }
+}

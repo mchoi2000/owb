@@ -1,0 +1,9 @@
+<div class="page-content clearfix" role="region" aria-label="Offering status">
+  <div class="col-xs-7 page-title-container clearfix">
+      <h1 class="ibm-bold">{{$ctrl.offeringName}}</h1>
+      <p class="ibmGray-60">
+        <span ng-hide="$ctrl.task.status === 'Returned' || $ctrl.task.status === 'InReview'"><span class="ibm-Green50">Approved on {{$ctrl.task.returnDate | date: 'shortDate'}} by {{$ctrl.task.reviewer.fname}} {{$ctrl.task.reviewer.lname}}</span> &nbsp; - &nbsp; </span>
+        <span ng-show="$ctrl.task.status === 'Returned'"><span class="ibmRed-50">Returned on {{$ctrl.task.returnDate | date: 'MM/dd/yy'}} by {{$ctrl.task.reviewer.fname}} {{$ctrl.task.reviewer.lname}}</span>&nbsp; - &nbsp; </span>
+      Submitted for review on {{$ctrl.task.submitDate | date: 'MM/dd/yy'}}</p>
+  </div>
+</div>

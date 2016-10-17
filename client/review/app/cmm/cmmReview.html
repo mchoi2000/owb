@@ -1,0 +1,207 @@
+<!--
+Licensed Materials - Property of IBM
+@ Copyright IBM Corp. 2015 All Rights Reserved
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<div id="ibm-top" class="pwb_page_container">
+  <div class="header_view" header></div>
+  <div id="reviewWrapper">
+    <div ng-show="!ctrlCMM.loadingPage || ctrlCMM.saveClicked">
+    <section class="page-section-container cmm_review_page-title-container commerce_review_page_title_top_section">
+      <div class="page-section">
+        <div class="page-content clearfix" role="region" aria-label="Offering status">
+          <div class="col-xs-7 page-title-container clearfix">
+            <h1 class="ibm-bold">{{ctrlCMM.product.offeringName}}</h1>
+          </div>
+        </div>
+
+        <div class="page-content offering_submitter_info clearfix" role="region" aria-labelledby="offering_submitter_description">
+          <h2 id="offering_submitter_description" class="h2 section_title icon-line review-offering-user-information ibmGray-50">Offering contacts</h2>
+          <div class="col-xs-4 clearfix" ng-repeat="contact in ctrlCMM.contactList">
+            <dl class="zero_out_block_list info_list_container col-xs-10">
+              <dt class="ibm-bold">Name</dt>
+              <dd>{{contact.fname + ' ' + contact.lname}}</dd>
+              <dt class="ibm-bold">Role</dt>
+              <dd>{{contact.projectRole}}</dd>
+              <div ng-if="contact.email">
+                <dt class="ibm-bold">Email Address</dt>
+                <dd ng-class="{'no_border_bottom' : !contact.phone}"><a href="mailto:{{contact.email}}">{{contact.email}}</a></dd>
+              </div>
+              <div ng-if="contact.phone">
+                <dt class="ibm-bold no_border_bottom">Phone Number</dt>
+                <dd>{{contact.phone}}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <uib-tabset class="review-tabs" active="ctrlCMM.activeTab">
+
+      <uib-tab index="0" heading="Review PDP Content">
+        <section ng-class="{'sticky_nav': ctrlCMM.sectionNav.stickNav}" class="sticky_nav_section cmm-review-sticky-nav-section col-xs-12">
+          <div class="sticky_nav_bg_container">
+            <div aria-hidden="true" class="sticky_nav_bg"></div>
+          </div>
+          <div class="page-section">
+            <div class="page-content clearfix">
+              <!--Dropdown go to section, save and preview buttons-->
+              <div class="col-xs-6 clearfix">
+                <label for="section_nav" class="pull-left go_to_section_title">Go to Section</label>
+                <div class="select_input_container col-xs-7 btn-group" uib-dropdown keyboard-nav>
+                  <button id="go_to_section_dropdown" type="button" name="go_to_section_dropdown" class="btn dropdown_btn icon-down-arrow cols-xs-12" ng-model="ctrlCMM.sectionNav.currentSection" uib-dropdown-toggle>
+                    {{ctrlCMM.sectionNav.currentSection || 'Select One'}}
+                  </button>
+                  <ul uib-dropdown-menu class="dropdown-menu dropdown-sticky-navigation" role="menu" tabindex=0 aria-labelledby="go_to_section_dropdown">
+                    <li ng-repeat="section in ctrlCMM.sectionNav.sectionList" role="menuitem"><a href="#" ng-click="ctrlCMM.sectionNav.goToSection(section); ctrlCMM.expandSection(section.name);">{{section.value}}</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-xs-5 pull-right clearfix">
+                <label for="section_nav" class="pull-left go_to_section_title">Language</label>
+                <div class="select_input_container btn-group col-xs-5" uib-dropdown keyboard-nav>
+                  <button id="go_to_section_dropdown" type="button" name="language_dropdown" class="btn dropdown_btn icon-down-arrow cols-xs-12" ng-model="ctrlCMM.currentLanguage" uib-dropdown-toggle>
+                    {{ctrlCMM.currentLanguage.display}}
+                  </button>
+                  <ul uib-dropdown-menu class="dropdown-menu dropdown-sticky-navigation" role="menu" tabindex=0 aria-labelledby="go_to_section_dropdown">
+                    <li ng-repeat="language in ctrlCMM.locales | orderBy:'+display'" role="menuitem"><a href="#" ng-click="ctrlCMM.selectLanguage(language)">{{language.display}}</a></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <label class="pull-right lang-preview-link">
+                    <div class="ibm-view-link"></div>
+                    <a class="pull-right" target="_blank" href="http://nautilus.stage1.mybluemix.net/marketplace/cloud/{{ctrlCMM.product.wcm.draftURL}}/{{ctrlCMM.currentLanguage.value.slice(3,5) === 'la' ? 'mx' : ctrlCMM.currentLanguage.value.slice(3,5)}}/{{ctrlCMM.currentLanguage.value}}">View Preview</a>
+                    <div class="lang-info">
+                      ({{ctrlCMM.currentLanguage.display}})
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section ng-show="ctrlCMM.sectionNav.stickNav" class="sticky_nav_section col-xs-12">
+          <div class="page-section"><div class="page-content clearfix"><div style="height:43px"></div></div></div>
+        </section>
+
+        <section class="page-section-container col-xs-12">
+          <div class="page-section">
+            <div class="page-content clearfix">
+              <pwb-offering-review content="ctrlCMM.content" sections-collapse="ctrlCMM.sectionTabsCollapse" related-products="ctrlCMM.relatedProducts"></pwb-offering-review>
+            </div>
+          </div>
+        </section>
+      </uib-tab>
+
+      <!--Blacklist tab-->
+      <uib-tab index="1" heading="Approve or Blacklist Offering">
+        <section ng-class="{'sticky_nav': ctrlCMM.iotNav.stickNav}" class="sticky_nav_section cmm-review-sticky-nav-section col-xs-12">
+          <div class="sticky_nav_bg_container">
+            <div aria-hidden="true" class="sticky_nav_bg"></div>
+          </div>
+          <div class="page-section">
+            <div class="page-content clearfix">
+              <!--Dropdown go to section, save and preview buttons-->
+              <div class="col-xs-9 clearfix">
+                <label for="section_nav" class="pull-left go_to_section_title">Go to IOT</label>
+                <div class="select_input_container col-xs-5 btn-group" uib-dropdown keyboard-nav>
+                  <button id="go_to_section_dropdown" type="button" name="go_to_section_dropdown" class="btn dropdown_btn icon-down-arrow cols-xs-12" ng-model="ctrlCMM.iotNav.currentSection" uib-dropdown-toggle>
+                    {{ctrlCMM.iotNav.currentSection || 'Select One'}}
+                  </button>
+                  <ul uib-dropdown-menu class="dropdown-menu dropdown-sticky-navigation" role="menu" tabindex=0 aria-labelledby="go_to_section_dropdown">
+                    <li ng-repeat="iot in ctrlCMM.iotNav.sectionList" role="menuitem"><a href="#" ng-click="ctrlCMM.iotNav.goToSection(iot);ctrlCMM.expandIOTSection(iot.value);">{{iot.value}}</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="right_nav_container col-xs-3 pull-right" ng-show="ctrlCMM.iotNav.stickNav">
+                <input ng-disabled="ctrlCMM.saveInProgress" type="button" class="btn pwb_btn ibm-bold pull-right margin_left" value="Save" ng-click="ctrlCMM.loadingPage = true; ctrlCMM.saveInProgress = true; ctrlCMM.saveClicked = true; ctrlCMM.saveBlacklistOffering(false);"/>
+                <div class="ibm-spinner loading_spinner pull-right" style="margin-top:12px;" ng-show="ctrlCMM.saveInProgress"></div>
+                <div class="pull-right time-saved-status" ng-class="{'fadein': !ctrlCMM.finishedSaving && !ctrlCMM.saveInProgress}"><span ng-if="ctrlCMM.saveClicked && ctrlCMM.timeSaved !== ''">Saved at {{ctrlCMM.timeSaved | date:'shortTime'}}</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section ng-show="ctrlCMM.sectionNav.stickNav" class="sticky_nav_section col-xs-12">
+          <div class="page-section"><div class="page-content clearfix"><div style="height:43px"></div></div></div>
+        </section>
+
+        <section class="page-section-container col-xs-12">
+          <div class="page-section">
+            <div class="page-content clearfix">
+              <ng-form name="cmmBlacklistForm">
+                  <div class="col-xs-12 clearfix cmm-review-iot-container" ng-repeat="iot in ctrlCMM.IOTs track by iot.label" ng-class="{'faded_out_content' : ctrlCMM.loadingPage}">
+                  <h1 id="{{ctrlCMM.generateId(iot.label)}}" class="iot-header ibmPurple-60 ibm-bold">{{iot.label}}</h1>
+
+                  <pwb-review-section ng-repeat="area in iot.group track by area.label" label="{{area.label}}" is-collapsed="area.collapsed" >
+                    <div ng-repeat="country in area.group" ng-class="{'faded_out_content' : country.status === '' || country.status === undefined}">
+                      <pwb-review-subsection label="{{country.name}}" loading="ctrlCMM.loadingPage" status="country.status" at="country.at" modified-by="country.modifiedBy" alert-status="country.statusAlert"></pwb-review-subsection>
+                      <div ng-show="country.offeringMgrReason" class="col-xs-12 om-bl-msg">Blacklisted by Offering Team - {{country.offeringMgrReason}}</div>
+                      <div class="col-xs-12 blacklist-item">
+                        <div class="col-xs-4 lang-done">
+                          <div class="col-xs-12">
+                            <strong>Translated Languages</strong>
+                          </div>
+                          <div class="col-xs-12">
+                            <div ng-repeat="lang in country.translatedLanguages">
+                              <div class="col-xs-8 lang-wrapper">
+                                <a class="ibm-bold view_preview_link" ng-href="http://nautilus.stage1.mybluemix.net/marketplace/cloud/{{ctrlCMM.product.wcm.draftURL}}/{{country.code.toLowerCase()}}/{{lang.value}}" target="_blank">
+                                  <div class="ibm-view-link"></div>
+                                  <div class="language_button">
+                                    {{lang.display}}
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                            <div ng-if="country.translatedLanguages.length === 0" class="lang-waiting">
+                              <ul>
+                                <li class="no-langs"><em>None</em></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-3 lang-waiting">
+                          <strong>Languages Awaiting Translation</strong>
+                          <ul>
+                            <li ng-repeat="lang in country.untranslatedLanguages">{{lang}}</li>
+                            <li ng-if="country.untranslatedLanguages.length === 0" class="no-langs"><em>None</em></li>
+                          </ul>
+                        </div>
+                        <div class="col-xs-5 bl-select">
+                          <div class="radio-pad col-xs-12">
+                            <pwb-radio-input is-disabled="country.translatedLanguages.length === 0" input-id="{{country.name}}_bl_radio" input-name="{{country.name}}_bl_radio"
+                                             choices="ctrlCMM.blRadioChoices" model="country.approved" on-change="ctrlCMM.modifyBlacklist(choice, country.code);"
+                                             clearable="::country.approved == null" on-clear="ctrlCMM.removeFromLists(country);"></pwb-radio-input>
+                          </div>
+                          <div class="select-pad col-xs-12">
+                            <pwb-dropdown-input label="Do not publish due to" input-id="{{country.name}}_bl_dropdown" input-name="{{country.name}}_bl_dropdown"
+                                                list="ctrlCMM.blReasons" model="country.selectedReason" is-disabled="country.approved !== false" on-change="ctrlCMM.addReasonToBlacklist(country.code, option)"></pwb-dropdown-input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </pwb-review-section>
+
+                </div>
+              </ng-form>
+
+              <div class="form-group form-group-margin-bottom col-xs-12 clearfix">
+                <div ng-hide="ctrlCMM.saveInProgress" class="pull-right clearfix">
+                  <legend id="submit_form" class="h2 ibmGray-50"></legend>
+                  <input type="button" id="saveBtn" class="btn btn-primary submit_offering_btn ibm-bold" value="Save and close" ng-click="ctrlCMM.saveBlacklistOffering(true);"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </uib-tab>
+
+    </uib-tabset>
+  </div>
+  </div>
+</div>

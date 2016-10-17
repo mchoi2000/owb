@@ -1,0 +1,311 @@
+<!--
+Licensed Materials - Property of IBM
+
+@ Copyright IBM Corp. 2015 All Rights Reserved
+
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<div class="modal approve_modal manage_team_modal clearfix" id="myModal" role="dialog" ng-init="finishChanges = true">
+  <div class="modal-header">
+    <h2 class="ibm-bold h3 ibmPurple-60">Participant Settings <strong class="h1 ibmGray-80">{{ctrlCM.product.offeringName}}</strong></h2>
+  </div>
+  <div ng-show="ctrlCM.loadingPage" class="page-section-container page_load_spinner_margin moving_loading_animation">
+    Loading...
+    <div class="ibm-spinner loading_spinner"></div>
+  </div>
+
+  <div class="modal-body" ng-hide="ctrlCM.loadingPage">
+
+    <div aria-label="Offering Participants Table" role="region" class="collaborator_list_container" ng-class="{'collaborator_editing_expanded': ctrlCM.confirmChange.changeOwner || ctrlCM.editorsToRemove.length >= 1 || ctrlCM.confirmChange.removeEditor}">
+      <table class="collaborator_list" ng-init="disableMakeOwnerLink = false">
+          <tr class="sr-only">
+            <th colspan="3">Manage Offering Participants</th>
+          </tr>
+          <tr class="sr-only">
+            <th class="col-xs-4 participant_name">Full Name</th>
+            <th class="col-xs-4">Email</th>
+            <th class="col-xs-4">Manage Participant Options</th>
+          </tr>
+          <!--- If the current user is an editor --->
+          <tr class="collaborator_detail" ng-if="ctrlCM.notOwner">
+            <td ng-if="!ctrlCM.confirmChange.removeEditor" class="col-xs-4 participant_name">
+              <strong class="ibmGray-60">{{ctrlCM.currentUser.fname}} {{ctrlCM.currentUser.lname}} (You)</strong>
+            </td>
+            <td ng-if="!ctrlCM.confirmChange.removeEditor" class="col-xs-4">
+              {{ctrlCM.currentUser.email | limitTo: ctrlCM.maxEmailLength}}<span ng-show="ctrlCM.currentUser.email.length>ctrlCM.maxEmailLength">...</span>
+            </td>
+            <td ng-if="!ctrlCM.confirmChange.removeEditor" class="col-xs-4">
+              <ul class="zero_out_block_list manage_participant_options_list" aria-label="Editor options">
+                <li class="pull-left make_owner_menu_item" aria-label="As an editor, you cannot make someone else the owner"></li>
+                <li class="pull-left role_status_menu_item">Editor</li>
+                <button ng-hide="ctrlCM.inviteUsersFocus || ctrlCM.inviteesList[0].email != ''" ng-disabled="disableMakeOwnerLink" class="icon_sprite pull-right participant_remove_btn" aria-label="Remove yourself from this offering" ng-click="ctrlCM.removeEditor(ctrlCM.currentUser._id)">Remove</button>
+              </ul>
+            </td>
+            <!--- Removed Editor --->
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(ctrlCM.currentUser._id) != -1" class="col-xs-4 participant_name">
+              <strong class="ibmGray-20">{{ctrlCM.currentUser.fname}} {{ctrlCM.currentUser.lname}} (You)</strong>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(ctrlCM.currentUser._id) != -1" class="col-xs-4">
+              <span class="ibmGray-20">{{ctrlCM.currentUser.email}}</span>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(ctrlCM.currentUser._id) != -1" class="col-xs-4">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left ibmGray-20 make_owner_menu_item"></li>
+                  <li class="pull-left ibmGray-20 role_status_menu_item">Removed</li>
+                  <li class="pull-right remove_user_menu_item undo_remove_user_menu_item"><a role="button" tabindex="0" class="small_text" aria-label="Undo removing yourself from the offering" ng-disabled="disableMakeOwnerLink || ctrlCM.inviteUsersFocus || !finishChanges" ng-click="ctrlCM.undoRemoveEditor(ctrlCM.currentUser.email)">Undo</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+
+          <!--- Display the owner if the current user is an editor --->
+          <tr class="collaborator_detail" ng-if="ctrlCM.notOwner">
+            <td class="col-xs-4 participant_name">
+              <strong class="ibmGray-60">{{ctrlCM.productOwner.fname}} {{ctrlCM.productOwner.lname}}</strong>
+            </td>
+            <td class="col-xs-4">
+              {{ctrlCM.productOwner.email | limitTo: ctrlCM.maxEmailLength}}<span ng-show="ctrlCM.productOwner.email.length>ctrlCM.maxEmailLength">...</span>
+            </td>
+            <td class="col-xs-4">
+              <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                <li class="pull-left make_owner_menu_item" aria-label="User is already the owner" role="menuitem"></li>
+                <li class="pull-left role_status_menu_item">Owner</li>
+                <li class="pull-left role_status_menu_item" ng-show="ctrlCM.confirmChange.changeOwner">Editor</li>
+                <li class="pull-right remove_user_menu_item" aria-label="The owner cannot be removed unless his role is changed to an editor"></li>
+              </ul>
+            </td>
+          </tr>
+
+          <!--- If the current user is the owner --->
+          <tr class="collaborator_detail" ng-if="ctrlCM.currentUser.email === ctrlCM.productOwner.email">
+            <td class="col-xs-4 participant_name">
+              <strong class="ibmGray-60">{{ctrlCM.productOwner.fname}} {{ctrlCM.productOwner.lname}} (You)</strong>
+            </td>
+            <td class="col-xs-4">
+              <span>{{ctrlCM.productOwner.email | limitTo: ctrlCM.maxEmailLength}}<span ng-show="ctrlCM.productOwner.email.length>ctrlCM.maxEmailLength">...</span></span>
+            </td>
+            <td class="col-xs-4">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left make_owner_menu_item" aria-label="User is already the owner"></li>
+                  <li class="pull-left role_status_menu_item" ng-hide="ctrlCM.confirmChange.changeOwner">Owner</li>
+                  <li class="pull-left role_status_menu_item" ng-show="ctrlCM.confirmChange.changeOwner">Editor</li>
+                  <li class="pull-right remove_user_menu_item" aria-label="The owner cannot be removed unless his role is changed to an editor"></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+
+          <tr aria-label="A register editor" class="collaborator_detail" ng-repeat="editor in ctrlCM.editors" ng-show="editor.email !== ctrlCM.currentUser.email" ng-init="changeOwner = false">
+            <td ng-show="changeOwner === false && ctrlCM.editorsToRemove.indexOf(editor._id) === -1" class="col-xs-4 participant_name"><strong class="ibmGray-60">{{editor.fname}} {{editor.lname}}</strong></td>
+            <td ng-show="changeOwner === false && ctrlCM.editorsToRemove.indexOf(editor._id) === -1" class="col-xs-4"><span>{{editor.email | limitTo: ctrlCM.maxEmailLength}}<span ng-show="editor.email.length>ctrlCM.maxEmailLength">...</span></span></td>
+            <td ng-show="changeOwner === false && ctrlCM.editorsToRemove.indexOf(editor._id) === -1" class="col-xs-4" aria-label="Manage this user's role">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left make_owner_menu_item">
+                    <button ng-show="ctrlCM.currentUser.email === ctrlCM.productOwner.email && !ctrlCM.inviteUsersFocus && ctrlCM.inviteesList[0].email === ''" ng-class="{'disabled_fade': ctrlCM.editorsToRemove.length >= 1}" ng-disabled="disableMakeOwnerLink || ctrlCM.editorsToRemove.length >= 1" class="make_owner_btn small_text" ng-click="$parent.disableMakeOwnerLink=true; changeOwner = true; ctrlCM.newOwner = editor._id;">
+                      Make Owner
+                    </button>
+                    <span ng-show="ctrlCM.currentUser._id !== ctrlCM.product.owner" class="sr-only">You do not have permission to change the owner</span>
+                  </li>
+                  <li class="pull-left role_status_menu_item" ng-show="editor._id === ctrlCM.product.owner">
+                      Owner
+                  </li>
+                  <li class="pull-left role_status_menu_item" ng-if="editor._id !== ctrlCM.product.owner">
+                      Editor
+                  </li>
+                  <li class="pull-right remove_user_menu_item">
+                    <button ng-show="ctrlCM.currentUser.email === ctrlCM.productOwner.email && !ctrlCM.inviteUsersFocus && ctrlCM.inviteesList[0].email === ''" ng-disabled="disableMakeOwnerLink" class="icon_sprite pull-right participant_remove_btn" aria-label="Remove {{editor.fname}} {{editor.lname}} from this offering" ng-click="ctrlCM.removeEditor(editor._id)" ng-focus="ctrlCM.lastUserRemoveUndo = false" focus-if="ctrlCM.lastUserRemoveUndo == editor._id">Remove</button>
+                    <span ng-show="ctrlCM.currentUser._id !== ctrlCM.product.owner" class="sr-only">You do not have permission to remove another editor</span>
+                  </li>
+                </ul>
+              </div>
+            </td>
+
+            <td class="participant_name col-xs-12" colspan="3" ng-show="changeOwner === true;">
+              <div class="col-xs-8 has-error">
+                Are you sure you want to transfer ownership to <strong>{{editor.fname}} {{editor.lname}}</strong>?
+              </div>
+              <div class="col-xs-4 manage_participant_options_list">
+                <div class="make_owner_menu_item pull-left">
+                  <a class="text_align_right small_text" tabindex="0" role="button" aria-label="Cancel making this user the new owner" ng-click="changeOwner = false;$parent.disableMakeOwnerLink=false;">Cancel</a>
+                </div>
+                <div class="container pull-left role_status_menu_item role_status_confirm_change">
+                  <button aria-label="Yes, I'm sure I want to transfer ownership - Save changes below to confirm the new ownership after pressing this button." tabindex="0" id="transfer" type="button" focus-if="ctrlCM.newOwner == editor._id" ng-focus="ctrlCM.newOwner = false;" ng-click="changeOwner = false;ctrlCM.changeOwner(editor._id);" class="btn btn-primary btn-sm pwb_small_primary_btn text_align_left">Yes, I'm Sure</button>
+                </div>
+              </div>
+            </td>
+
+            <!--- Removed Editor --->
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(editor._id) != -1" class="col-xs-4 participant_name">
+              <strong class="ibmGray-20">{{editor.fname}} {{editor.lname}}</strong>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(editor._id) != -1" class="col-xs-4">
+              <span class="ibmGray-20">{{editor.email}}</span>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(editor._id) != -1" class="col-xs-4">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left ibmGray-20 make_owner_menu_item"></li>
+                  <li class="pull-left ibmGray-20 role_status_menu_item">Removed</li>
+                  <li class="pull-right remove_user_menu_item undo_remove_user_menu_item"><a role="button" tabindex="0" class="small_text" aria-label="Editor removed from offering - Undo" ng-disabled="disableMakeOwnerLink || ctrlCM.inviteUsersFocus || !finishChanges" ng-click="ctrlCM.undoRemoveEditor(editor._id);" ng-focus="ctrlCM.lastUserRemoved = false" focus-if="ctrlCM.lastUserRemoved == editor._id">Undo</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+
+          <!--- Pending Qualification to send Emails Section --->
+          <tr aria-label="The user with email {{invitedUser.email}} will recieve an invitation email once the qualification has been approved" class="collaborator_detail" ng-repeat="invitedUser in ctrlCM.invitedUsersList" ng-if="ctrlCM.invitedUsersList.length > 0 && invitedUser.email !== null && (ctrlCM.product.status === 'qualification_submitted' || ctrlCM.product.status === 'qualification_returned' || ctrlCM.product.status === 'qualification_incomplete')">
+            <td ng-show="!ctrlCM.confirmChange.changeOwner && ctrlCM.editorsToRemove.indexOf(invitedUser.email) === -1" class="col-xs-4 participant_name" aria-label="{{invitedUser.email}}"><strong class="invited_user_status_email icon_sprite ibmGray-40">{{invitedUser.email | limitTo: ctrlCM.maxEmailLength}}<span ng-show="invitedUser.email.length>ctrlCM.maxEmailLength">...</span></strong></td>
+            <td ng-show="!ctrlCM.confirmChange.changeOwner && ctrlCM.editorsToRemove.indexOf(invitedUser.email) === -1" class="col-xs-4"><span class="ibmGray-40">Pending Qualification Approval</span></td>
+            <td ng-show="!ctrlCM.confirmChange.changeOwner && ctrlCM.editorsToRemove.indexOf(invitedUser.email) === -1" class="col-xs-4" aria-label="Manage this user's role">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left make_owner_menu_item">
+                    <span class="sr-only">You cannot make this user an owner until the offering has been approved</span>
+                  </li>
+                  <li aria-label="The user has no role until the offering qualification has been approved" class="pull-left role_status_menu_item">
+                  </li>
+                  <li class="pull-right remove_user_menu_item">
+                    <button role="button" ng-show="ctrlCM.currentUser.email === ctrlCM.productOwner.email" ng-hide="ctrlCM.inviteUsersFocus || ctrlCM.inviteesList[0].email != '' || ctrlCM.notOwner" ng-disabled="disableMakeOwnerLink" class="icon_sprite pull-right participant_remove_btn" aria-label="Remove {{invitedUser.email}} from this offering" ng-click="ctrlCM.removeEditor(invitedUser.email)">Remove</button>
+                    <span ng-show="ctrlCM.currentUser._id !== ctrlCM.product.owner" class="sr-only">You do not have permission to remove this invited user</span>
+                  </li>
+                </ul>
+              </div>
+            </td>
+
+            <!--- Removed Editor from a Pending Offering for qualification --->
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(invitedUser.email) != -1" class="col-xs-4 participant_name">
+              <strong class="invited_user_status_email icon_sprite ibmGray-20">{{invitedUser.email}}</strong>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(invitedUser.email) != -1" class="col-xs-4">
+              <span class="ibmGray-20">Pending Qualification Approval</span>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(invitedUser.email) != -1" class="col-xs-4">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left ibmGray-20 make_owner_menu_item"></li>
+                  <li class="pull-left ibmGray-20 role_status_menu_item" aria-label="Removed">Removed</li>
+                  <li class="pull-right remove_user_menu_item undo_remove_user_menu_item"><a role="button" tabindex="0" class="small_text" aria-label="Undo this user from being removed from the offering" ng-disabled="disableMakeOwnerLink || ctrlCM.inviteUsersFocus || !finishChanges" ng-click="ctrlCM.undoRemoveEditor(invitedUser.email)">Undo</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+
+          <!--- Invitations Sent Section --->
+
+          <!--- Invitations Sent but not registered Section --->
+          <tr aria-label="{{invitedUser.email}} was sent an email, but they have not registered yet" class="collaborator_detail" ng-repeat="invitedUser in ctrlCM.invitedUsersList" ng-if="ctrlCM.invitedUsersList.length > 0 && invitedUser.email !== null && (ctrlCM.product.status !== 'qualification_submitted' && ctrlCM.product.status !== 'qualification_returned' && ctrlCM.product.status !== 'qualification_incomplete')">
+            <td ng-show="!ctrlCM.confirmChange.changeOwner && ctrlCM.editorsToRemove.indexOf(invitedUser.email) === -1" class="col-xs-4 participant_name"><strong class="invited_user_status_email icon_sprite ibmGray-40">Invitation Sent!</strong></td>
+            <td ng-show="!ctrlCM.confirmChange.changeOwner && ctrlCM.editorsToRemove.indexOf(invitedUser.email) === -1" class="col-xs-4" aria-label="{{invitedUser.email}}"><span>{{invitedUser.email | limitTo: ctrlCM.maxEmailLength}}<span ng-show="invitedUser.email.length>ctrlCM.maxEmailLength">...</span></span></td>
+            <td ng-show="!ctrlCM.confirmChange.changeOwner && ctrlCM.editorsToRemove.indexOf(invitedUser.email) === -1" class="col-xs-4" aria-label="Manage this user's role">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list">
+                  <li class="pull-left make_owner_menu_item">
+                    <button ng-show="(ctrlCM.currentUser._id === invitedUser.invitedBy) || (ctrlCM.currentUser._id === ctrlCM.product.owner)" ng-click="ctrlCM.resendInvite(invitedUser.email)" ng-class="{'disabled_fade': ctrlCM.editorsToRemove.length >= 1}" ng-hide="disableMakeOwnerLink || ctrlCM.inviteUsersFocus || ctrlCM.inviteesList[0].email != '' || ctrlCM.notOwner" ng-disabled="ctrlCM.editorsToRemove.length >= 1 || ctrlCM.inviteUsersFocus || !finishChanges" class="make_owner_btn small_text" ng-if="invitedUser.resentAt === ''">Resend</button>
+                    <span aria-live="assertive" class="last_sent_updated_time" ng-if="invitedUser.resentAt !== ''"><span class="sr-only">Invitation email sent at </span>{{invitedUser.resentAt | date:'h:mm a'}}</span>
+                  </li>
+                  <li aria-label="User has already been sent an invitation" class="pull-left role_status_menu_item"><span>Sent {{invitedUser.lastSent | date:'M/dd/yyyy'}}</span></li>
+                  <li class="pull-right remove_user_menu_item">
+                    <button ng-show="ctrlCM.currentUser.email === ctrlCM.productOwner.email" ng-disabled="disableMakeOwnerLink || ctrlCM.inviteUsersFocus || !finishChanges" class="icon_sprite pull-right participant_remove_btn" aria-label="Remove {{invitedUser.email}} from this offering" ng-click="ctrlCM.removeEditor(invitedUser.email)" ng-hide="disableMakeOwnerLink || ctrlCM.inviteUsersFocus || ctrlCM.inviteesList[0].email != '' || ctrlCM.notOwner">Remove</button>
+                    <span ng-show="ctrlCM.currentUser._id !== ctrlCM.product.owner" class="sr-only">You do not have permission to remove this invited user</span>
+                  </li>
+                </ul>
+              </div>
+            </td>
+
+            <!--- Removed Users that was sent an invivation but not registered Section --->
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(invitedUser.email) != -1" class="col-xs-4 participant_name">
+              <strong class="invited_user_status_email icon_sprite ibmGray-20">Invitation Sent!</strong>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(invitedUser.email) != -1" class="col-xs-4">
+              <span>{{invitedUser.email}}</span>
+            </td>
+            <td ng-show="ctrlCM.editorsToRemove.indexOf(invitedUser.email) != -1 && ctrlCM.product.status !== 'qualification_submitted'" class="col-xs-4">
+              <div>
+                <ul class="zero_out_block_list manage_participant_options_list" aria-label="The owner's options">
+                  <li class="pull-left ibmGray-20 make_owner_menu_item"></li>
+                  <li class="pull-left ibmGray-20 role_status_menu_item">Removed</li>
+                  <li class="pull-right remove_user_menu_item undo_remove_user_menu_item"><a role="button" tabindex="0" class="small_text" aria-label="Undo this user from being removed from the offering" ng-disabled="disableMakeOwnerLink" ng-click="ctrlCM.undoRemoveEditor(invitedUser.email)">Undo</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+
+      </table>
+    </div>
+
+
+    <div class="overlay_disable_bg" ng-class="{'show_overlay': ctrlCM.inviteUsersFocus || !finishChanges || ctrlCM.inviteesList[0].email != ''}"></div>
+
+    <div aria-label="Invite new participants" role="region" class="invite_users_container" aria-describedby="invite_users_functionality_description" ng-class="{'invite_users_container_top_shadow': (ctrlCM.editors.length + ctrlCM.product.offeringData.invitedUsers.length > 3) && !ctrlCM.inviteUsersFocus && ctrlCM.inviteesList[0].email == '' && finishChanges, 'invite_users_focused': ctrlCM.inviteUsersFocus || ctrlCM.inviteesList[0].email != '', 'invite_users_fade_out' : disableMakeOwnerLink || ctrlCM.confirmChange.changeOwner || ctrlCM.confirmChange.removeEditor || ctrlCM.editorsToRemove.length >= 1}">
+        <span class="sr-only" id="modal_changes_status" aria-live="assertive">{{ctrlCM.lastUserEmailInvited}}</span>
+
+        <ng-form name="inviteEditors" class="clearfix">
+          <div class="form-group col-xs-12">
+            <fieldset ng-disabled="ctrlCF.cmc.status === 'InReview' || ctrlCF.cmc.status === 'Approved'">
+              <h5 id="invite_users_description" class="col-xs-4 h3 regular-font ibmGray-50">Invite Editors</h5>
+              <label class="sr-only" for="invitees_input">Invite Editors</label>
+              <legend aria-hidden="true" class="pull-right text_align_right col-xs-8 regular-font ibmGray-50">Separate emails with commas to invite multiple people</legend>
+
+              <span class="sr-only" id="invite_users_functionality_description">Type in emails in the text fields to invite. Pressing a comma will add the email text to the list of invited emails. Invalid emails will be added, but automatically removed from the list when you press the Send button.</span>
+              <ul class="zero_out_block_list invitees_input_text_container standard_margin_bottom" ng-hide="disableMakeOwnerLink || ctrlCM.confirmChange.changeOwner || ctrlCM.confirmChange.removeEditor || ctrlCM.editorsToRemove.length >= 1" ng-class="{'has_invalid_emails' : !ctrlCM.allValidEmails && ctrlCM.inviteesList[0].email != ''}">
+                <li>
+                  <div ng-repeat-start="invitee in ctrlCM.inviteesList">
+                    <div ng-if="invitee.email != '' && invitee.valid == true" id="existing_invite_{{$index}}" aria-label="Valid email - {{invitee.email}}" class="btn btn-small invitee_block_name">{{invitee.email}}<button class="remove_invitee_btn icon_sprite" aria-label="Delete {{invitee.email}} from the invitee list" ng-click="ctrlCM.removeInvitee(invitee.email, false)">Remove Email</button></div>
+                    <div ng-if="invitee.email != '' && invitee.valid == false" id="existing_invite_{{$index}}" aria-label="Invalid email - {{invitee.email}}" class="btn btn-small invitee_block_name invalid_email">{{invitee.email}}<button class="remove_invitee_btn icon_sprite" aria-label="Delete {{invitee.email}} for the invitee list" ng-click="ctrlCM.removeInvitee(invitee.email, false)">Remove Email</button></div>
+                  </div>
+                  <div class="invitee_item_container" ng-repeat-end="invitee in ctrlCM.inviteesList" id="invitee_item_container_{{$index}}">
+
+                    <div class="invitees_input_field" id="invitees_input_field_{{$index}}">
+                      <input aria-label="Enter email to invite" ng-focus="ctrlCM.inviteUsersFocus = true; invitee.focused = false;" ng-blur="ctrlCM.createNewInvitee($index, invitee.newEmail); ctrlCM.inviteUsersFocus = false;" focus-if="invitee.focused" ng-keydown="ctrlCM.updateInviteesInputWidth($index, invitee.newEmail, $event);" ng-keyup="ctrlCM.updateInviteesInputWidth($index, invitee.newEmail, $event);" ng-model="invitee.newEmail" ng-disabled="disableMakeOwnerLink || ctrlCM.confirmChange.changeOwner || ctrlCM.confirmChange.removeEditor || ctrlCM.editorsToRemove.length >= 1" class="form-control" name="invitees_{{$index}}" type="text"/>
+                    </div>
+                    <div class="invitees_input_text_display" id="invitees_input_text_display_{{$index}}" ng-model="invitee.newEmail">{{invitee.newEmail}}</div>
+
+                  </div>
+                </li>
+
+              </ul>
+              <span class="has-error col-xs-12 small_text" ng-if="!ctrlCM.allValidEmails && ctrlCM.inviteesList[0].email != ''">Invalid Email Address</span>
+
+            </fieldset>
+          </div>
+        </ng-form>
+    </div>
+  </div>
+
+  <div class="pwb-modal-footer">
+    <div class="container" aria-label="Confirm changes section" aria-describedby="confirm_changes_section_description">
+      <span class="sr-only" id="confirm_changes_section_description">You must click save changes below before your changes occur or click send to invite new participants</span>
+      <div class="col-xs-7" ng-show="ctrlCM.confirmChange.changeOwner || ctrlCM.confirmChange.removeEditor || ctrlCM.editorsToRemove.length  >= 1">
+        <div ng-if="ctrlCM.confirmChange.changeOwner" class="has-error">
+          By saving these changes, you will no longer have owner privileges for this offering.
+        </div>
+        <div ng-if="ctrlCM.confirmChange.removeEditor && ctrlCM.notOwner" class="has-error">
+          By saving these changes, you will no longer have access to this offering.
+        </div>
+        <div ng-if="ctrlCM.editorsToRemove.length >= 1 && ctrlCM.currentUser.email === ctrlCM.productOwner.email" class="has-error">
+          By saving these changes, the editors you removed will no longer have access to this offering.
+        </div>
+      </div>
+
+      <div class="pull-right col-xs-5" ng-show="ctrlCM.confirmChange.changeOwner || ctrlCM.confirmChange.removeEditor || ctrlCM.editorsToRemove.length >= 1"  >
+        <button type="button" ng-click="ctrlCM.saveChange();" aria-label="Save Changes - This will confirm changes and close participant settings" class="btn btn-primary ibm-bold pull-right">Save Changes</button>&nbsp;
+        <button type="button" ng-click="ctrlCM.cancelChange();disableMakeOwnerLink=false;" aria-label="Cancel - This will remove all your changes" class="btn pwb_btn ibm-bold qualification_save_btn pull-right">Cancel</button>
+      </div>
+
+      <div class="pull-right col-xs-5" ng-show="!ctrlCM.inviteUsersFocus && ctrlCM.inviteesList[0].email == '' && !ctrlCM.confirmChange.changeOwner && !ctrlCM.confirmChange.removeEditor && ctrlCM.editorsToRemove.length == 0">
+        <button id="done" type="button" ng-click="ctrlCM.closeModal();" aria-label="Done - This will close participant settings without making any changes." class="btn btn-primary ibm-bold pull-right">Done</button>
+      </div>
+
+      <div class="pull-right col-xs-5" ng-hide="(ctrlCM.inviteesList[0].email == '' && !ctrlCM.inviteUsersFocus) || ctrlCM.confirmChange.changeOwner || ctrlCM.confirmChange.removeEditor || ctrlCM.editorsToRemove.length >= 1">
+        <button type="submit" ng-click="finishChanges=true; ctrlCM.sendInvitations(ctrlCM.inviteesList);ctrlCM.loadingPage=true;" aria-label="Send - This will email send invites to the emails you added" class="btn btn-primary ibm-bold pull-right">Send</button>&nbsp;
+        <button type="button" ng-click="finishChanges=true; ctrlCM.removeInvitee('all', true);" aria-label="Cancel - This will remove all your changes" class="btn pwb_btn ibm-bold qualification_save_btn pull-right">Cancel</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

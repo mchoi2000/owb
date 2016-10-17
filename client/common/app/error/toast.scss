@@ -1,0 +1,62 @@
+/* +++++++++++PWB Toast Component CSS+++++++++++ */
+#toast-container > :hover {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .85;
+}
+#toast-container > div.pwb-toast  {
+  opacity: .85;
+  height: 42px;
+  width: 1180px;
+  margin: 0 auto;
+  padding: 0px 0px 15px 0px;
+  border-radius: 0px;
+  background: none !important;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+
+  .pwb-toaster-container{
+    width: 90%;
+    float: left;
+    background-color: #AD1625;
+    padding-top: 12px;
+    height: 42px;
+  }
+  .pwb-toast-button {
+    width: 20%;
+    background-color: #ffffff;
+  }
+  .pwb-close-button {
+    border-left: 4px solid #ffffff;
+    height: 42px;
+    width: 10%;
+    float: right;
+    background-color: #AD1625;
+    padding: 12px 0px 0px 15px;
+  }
+  .pwb-close-button:hover {
+    background-color: #8C101C;
+  }
+  .toast-email {
+    color: #C0E6FF;
+  }
+  .toast-email:hover {
+    text-decoration: underline;
+  }
+}
+
+#toast-container {
+  left: 0;
+  right: 0;
+  padding-top: 18px;
+
+  .toast-title, .toast-message {
+    font-family: $ibmHelvRegular;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: normal;
+    padding-left: 20px;
+  }
+}

@@ -1,0 +1,4 @@
+---
+applications:
+- name: operatorworkbench-stage
+  memory: 1G

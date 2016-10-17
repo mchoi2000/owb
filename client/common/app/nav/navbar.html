@@ -1,0 +1,25 @@
+<section ng-show="$ctrl.navService.stickNav" class="sticky_nav_section">
+  <div class="page-section"><div class="page-content clearfix"><div style="height:43px"></div></div></div>
+</section>
+
+<section ng-class="{'sticky_nav': $ctrl.navService.stickNav}" class="sticky_nav_section">
+  <div class="sticky_nav_bg_container">
+    <div aria-hidden="true" class="sticky_nav_bg"></div>
+  </div>
+  <div class="page-section">
+    <div class="page-content clearfix">
+      <div class="col-xs-9 clearfix">
+        <label for="section_nav" class="pull-left go_to_section_title">Go to section</label>
+        <div class="select_input_container col-xs-5 btn-group" uib-dropdown keyboard-nav>
+          <button id="go_to_section_dropdown" type="button" name="go_to_section_dropdown" class="btn dropdown_btn icon-down-arrow cols-xs-12" ng-model="$ctrl.navService.currentSection" uib-dropdown-toggle>
+            {{$ctrl.navService.currentSection || 'Select One'}}
+          </button>
+          <ul uib-dropdown-menu class="dropdown-menu dropdown-sticky-navigation" role="menu" tabindex=0 aria-labelledby="go_to_section_dropdown">
+            <li ng-repeat="section in $ctrl.navService.sectionList" role="menuitem"><a href="#" ng-click="$ctrl.navService.goToSection(section)">{{section.value}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <ng-transclude></ng-transclude>
+    </div>
+  </div>
+</section>
