@@ -2,13 +2,11 @@
 
 describe('Blacklist Picker Directive', function() {
   var compile, scope, element, $timeout;
-
   beforeEach(function() {
-    module('common.countries', 'provider.content',
+    module('common.blacklistPicker',
     'common/app/blacklistPicker/blacklistPicker.html');
-    inject(function($injector, BlackListCountriesService, ContentData,
+    inject(function($injector, BlackListCountriesService,
       $compile, $rootScope, _$timeout_) {
-
       BlackListCountriesService.getCountries = function() {
         return {
           then: function (callback) {
@@ -47,12 +45,6 @@ describe('Blacklist Picker Directive', function() {
       scope.$digest();
 
     });
-  });
-
-  it('should create a blacklist picker directive', function() {
-    var directiveScope = element.children().isolateScope();
-    expect(directiveScope.id).toEqual('test');
-    expect(directiveScope.name).toEqual('test');
   });
 
   it('should watch marketConfig and update if all reasons are same', function() {

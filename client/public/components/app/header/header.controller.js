@@ -30,7 +30,7 @@
       self.pageTitle = $route.current.pageTitle;
     }
 
-    //activate();
+    activate();
 
     function activate() {
       return UserService.get()

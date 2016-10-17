@@ -13,16 +13,7 @@
       'common.loading',
       'common.spinner',
       'common.calendar',
-      'review.academy',
-      'review.qualification',
-      'review.qualificationDash',
       'review.cmm',
-      'review.commerce',
-      'review.commerceDash',
-      'review.commerceSpecialist',
-      'review.commerceSpecialistDash',
-      'review.content',
-      'review.contentDash',
       'review.cmmDash'
     ]
   ).config(configuration);

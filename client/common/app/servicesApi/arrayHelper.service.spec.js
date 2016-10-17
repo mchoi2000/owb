@@ -59,6 +59,13 @@ describe('ArrayHelper', function () {
     expect(data.three[0]).toBe('one');
   });
 
+  it('should initialize array with minimum length', function () {
+    var array = [];
+    serviceArrayHelper.initArray(array, '', 3);
+
+    expect(array.length).toBe(3);
+  });
+
   it('should check if its an empty object', function() {
     var obj1 = {
       one : [],

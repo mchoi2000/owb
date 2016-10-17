@@ -23,12 +23,20 @@ describe('ProductsFactory', function () {
     serviceProductsFactory.getQualificationsByQuery('testParam1=testValue1&testParam2=testValue2');
   });
 
+  it('should get count by query', function() {
+    serviceProductsFactory.getCount('testParam1=testValue1&testParam2=testValue2');
+  });
+
   it('should query products (null)', function() {
     serviceProductsFactory.getQualificationsByQuery({id: ''});
   });
 
   it('should getByCmcStatus', function() {
     serviceProductsFactory.getByCmcStatus('testStatus');
+  });
+
+  it('should getByCmcStatus by specialistRequired, marketplaceReviewerApproved', function() {
+    serviceProductsFactory.getByCmcStatus('testStatus', false, true);
   });
 
   it('should getQualification', function() {
