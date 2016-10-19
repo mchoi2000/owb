@@ -1,0 +1,62 @@
+language: node_js
+group: bluezone
+node_js:
+- 6.3.1
+sudo: required
+before_script:
+- npm install -g gulp --progress false --depth 0
+- npm install -g istanbul --progress false --depth 0
+before_install:
+- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+- sudo apt-get update -q
+- sudo apt-get install g++-4.8 -y
+- npm install -g npm@3.10.4 --progress false --depth 0
+install:
+- npm install
+script:
+- gulp test
+- gulp build
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: "./bin/deploy.sh"
+  on:
+    branch: master
+    node: 6.3.1
+env:
+  global:
+  # Common Unsecure Variables ( Same in prod / stage )
+  - CF_ID=pkadiya@us.ibm.com
+  - CF_ORG=MarketplaceOnboarding
+  - CF_ENV_PREFIX=CFCI_
+  - CFCI_TEST=TRUE
+  - MEMORY_SIZE=1G
+  - CFCI_SEC_PATH=home/
+  - APP_PATH=./dist
+  - APP_MANIFEST_PATH=./dist
+  - PROJ_PATH=./
+  - CXX=g++-4.8
+  - CFCI_SOFTLAYER_AUTH_URL=https://dal05.objectstorage.softlayer.net/auth/v1.0/
+  # Common Secure Variables ( Same in prod / stage )
+  # CF_PWD
+  - secure: pwj19kzNTr6hZUyblF/AbkH8AsAivdF9YT3Z0gGpPS8CiWR1EIROwU/PQyn7fWlctc/+EOxI10pIF0l+ytBU5cGb8LtJqkMgyHgCTOUtxKkyzD0s3gGLIVlCX11EqbaaiXeZpGmQFS9N07GcsHqSFeD40Dq6RGcK6h7AZUTowT9NPnUi6Tghw0MmIFK0s+/FFBR72Kg/ugj1KD6npx2cLiaGjwd91m52HCz9Zsa8U9StsOj9s4F3NbLkqmdZTKa+FIol6lmCiHF2nKClWM0WZO3GSPQWvrcm1p+EYLkiy1/cz4d2xv90tPzUPcUz3OBS+XpV07t2JS0vWybS9ZeCLHFCBYzUlBJDjNRWL99BoxXfQ78uXhyuwOckhOPhVmL9ryOY4ZJcbfvXh+O4v0hYpnmNhby98bF5dUhZpevg9ZnaAe93w6HGwTXC4ojsee1a+OaiNvjwOEUy3Y59nQjVP0yKX7KgRLsmK0oSYOVA6D2diXRb0eqk3pGPl7xuvQm8OK/T5exbVRCFjb1ULBE++UQLtCHqiLJ4zrMBZ9AG6QPG2Yq7a8GCKP7RdOU/KUtM7+4nSI0vwdOUEChxAQupP2hvMIntBXOhogbfSu/QtO/yiqGg3MPClj9Lkk2BKMtlh2664EUs36pZbtRgdnzylGXDpVg35E9XwoTTWdQ2Y9U=
+  # Production Unsecure Vars
+  ##
+  - APP_NAME=operatorworkbench
+  - CF_SPACE=prod
+  - APP_MANIFEST_PATH=manifest-prod.yml
+  - NUMBER_INSTANCES=6
+  - CFCI_WEB_ROOT=/marketplace/operator/
+  - CF_NODE_ENV=production
+  - CFCI_SOFTLAYER_CDN_URL=http://29DB6.http.dal05.cdn.softlayer.net
+  # Production Secure Vars
+  ##
+  # Staging Unsecure Vars
+  ##
+  - STAGE_APP_NAME=operatorworkbench
+  - STAGE_CF_SPACE=dev
+  - STAGE_APP_MANIFEST_PATH=manifest-staging.yml
+  - STAGE_NUMBER_INSTANCES=4
+  - STAGE_CFCI_WEB_ROOT=/marketplace/operator/
+  - STAGE_CF_NODE_ENV=staging
+  - STAGE_CFCI_SOFTLAYER_CDN_URL=http://223ae.http.dal05.cdn.softlayer.net
