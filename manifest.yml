@@ -8,7 +8,7 @@
 ---
 applications:
 - name: devtestworkbench
-  memory: 1G
+  memory: 500M
   instances: 1
   random-route: true
   env:
