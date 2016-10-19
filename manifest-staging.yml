@@ -1,4 +1,4 @@
 ---
 applications:
 - name: opwb-stage
-  memory: 1G
+  memory: 500M
