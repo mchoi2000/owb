@@ -217,20 +217,6 @@ promote2prod() {
     done
 }
 
-migrate() {
-  REVS=($(git log --merges -2 --pretty=format:%H))
-  HEAD=${REVS[0]}
-  PREV=${REVS[1]}
-
-  # Diff previous merge commits; Migrate if ./migrate/configs has changed
-  git diff --quiet ${HEAD} ${PREV} ./migrate/configs.js
-
-  if [ $? -eq 1 ]; then
-      echo "Executing Migration Process"
-      NODE_ENV=${CF_NODE_ENV} node ./migrate/index.js
-  fi
-}
-
 # workflow
 install-cf-cli
 push2cf
