@@ -1,4 +1,4 @@
 ---
 applications:
-- name: operatorworkbench
+- name: opwb
   memory: 1G
