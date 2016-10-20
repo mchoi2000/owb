@@ -10,7 +10,7 @@ set -e
 export CF_TARGET=https://api.w3ibm.bluemix.net && \
 	export CFCI_NEW_RELIC_APP_NAME="operator-workbench-us-prod" && \
 	./bin/deploy_to_bluemix.sh && \
-	export CF_DOMAIN=mybluemix.net && \
+	export CF_DOMAIN=w3ibm.mybluemix.net && \
 	export CF_TARGET=https://api.w3ibm.bluemix.net && \
 	export CFCI_NEW_RELIC_APP_NAME="operator-workbench-us-stage" && \
 	export APP_NAME=$STAGE_APP_NAME && \
