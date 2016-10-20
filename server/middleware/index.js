@@ -49,6 +49,16 @@ module.exports = function exportsMiddleware(app, passport) {
     }
   });
 
+  if (env === 'production' || env === 'staging' || env === 'test') {
+    app.use('/', express.static(path.join(config.root, 'client/public'), {
+      index: false,
+      setHeaders: cacheBust
+    }));
+    app.use('/common',
+      express.static(path.join(config.root, 'client/common'), staticOpts));
+    app.set('appPath', path.join(config.root, 'client'));
+  }
+
   if (env === 'development') {
     if (process.env.LOCAL) {
       app.use(require('connect-livereload')({ignore:
