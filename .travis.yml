@@ -27,10 +27,10 @@ env:
   global:
   # Common Unsecure Variables ( Same in prod / stage )
   - CF_ID=pkadiya@us.ibm.com
-  - CF_ORG=MarketplaceOnboarding
+  - CF_ORG=apiplatform
   - CF_ENV_PREFIX=CFCI_
   - CFCI_TEST=TRUE
-  - MEMORY_SIZE=1G
+  - MEMORY_SIZE=512M
   - CFCI_SEC_PATH=home/
   - APP_PATH=./dist
   - APP_MANIFEST_PATH=./dist
