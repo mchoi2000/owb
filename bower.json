@@ -1,5 +1,5 @@
 {
-  "name": "provider-workbench",
+  "name": "operatorworkbench",
   "version": "0.0.0",
   "authors": [
     "Pradeep Kadiyala <pkadiya@us.ibm.com>"
@@ -7,7 +7,7 @@
   "description": "Marketplace Operator Workbench",
   "main": "index.html",
   "license": "MIT",
-  "homepage": "ibm.com/marketplace",
+  "homepage": "w3ibm.mybluemix.net/marketplace/operator",
   "dependencies": {
     "angular": "~1.5.5",
     "angular-animate": "~1.5.5",

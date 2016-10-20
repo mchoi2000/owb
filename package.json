@@ -1,7 +1,7 @@
 {
-  "name": "cmm",
+  "name": "operatorworkbench",
   "version": "1.0.0",
-  "description": "Country Marketplace Manager",
+  "description": "Operator Workbench",
   "main": "server/app.js",
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
