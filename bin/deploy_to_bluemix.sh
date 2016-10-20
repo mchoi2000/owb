@@ -76,7 +76,7 @@ fi
 [ -d $APP_PATH ] && APP_DIR="$APP_PATH" || APP_DIR=$(dirname "$APP_PATH")
 
 CF_TARGET="${CF_TARGET:-https://api.w3ibm.bluemix.net}"
-CF_DOMAIN="${CF_DOMAIN:-mybluemix.net}"
+CF_DOMAIN="${CF_DOMAIN:-w3ibm.mybluemix.net}"
 export APP_URL="https://${APP_DEPLOY_NAME}.${CF_DOMAIN}"
 
 if [ -d $CF_NODE_ENV ]; then
