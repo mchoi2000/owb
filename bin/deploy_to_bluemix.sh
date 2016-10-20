@@ -161,7 +161,7 @@ EOT
 
     # login
     cf-login
-    cf push ${APP_DEPLOY_NAME} -i ${NUMBER_INSTANCES:-2} -m ${MEMORY_SIZE:-512M} -p ${APP_PATH} -f ${APP_MANIFEST}
+    cf push ${APP_DEPLOY_NAME} -i ${NUMBER_INSTANCES:-1} -m ${MEMORY_SIZE:-512M} -p ${APP_PATH} -f ${APP_MANIFEST}
     RETURN_CODE=$?
 
     popd > /dev/null

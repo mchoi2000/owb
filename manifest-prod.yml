@@ -1,4 +1,4 @@
 ---
 applications:
 - name: opwb
-  memory: 500M
+  memory: 512M
