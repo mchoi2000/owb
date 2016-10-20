@@ -45,7 +45,7 @@ env:
   - APP_NAME=operatorworkbench
   - CF_SPACE=prod
   - APP_MANIFEST_PATH=manifest-prod.yml
-  - NUMBER_INSTANCES=6
+  - NUMBER_INSTANCES=1
   - CFCI_WEB_ROOT=/marketplace/operator/
   - CF_NODE_ENV=production
   - CFCI_SOFTLAYER_CDN_URL=http://29DB6.http.dal05.cdn.softlayer.net
@@ -56,7 +56,7 @@ env:
   - STAGE_APP_NAME=operatorworkbench
   - STAGE_CF_SPACE=dev
   - STAGE_APP_MANIFEST_PATH=manifest-staging.yml
-  - STAGE_NUMBER_INSTANCES=4
+  - STAGE_NUMBER_INSTANCES=1
   - STAGE_CFCI_WEB_ROOT=/marketplace/operator/
   - STAGE_CF_NODE_ENV=staging
   - STAGE_CFCI_SOFTLAYER_CDN_URL=http://223ae.http.dal05.cdn.softlayer.net
