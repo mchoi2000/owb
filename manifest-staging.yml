@@ -1,4 +1,4 @@
 ---
 applications:
-- name: opwb-stage
+- name: operatorworkbench-stage
   memory: 500M
