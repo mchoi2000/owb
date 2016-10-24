@@ -1,4 +1,4 @@
 ---
 applications:
 - name: operatorworkbench
-  memory: 1G
+  memory: 512M

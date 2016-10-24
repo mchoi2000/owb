@@ -8,8 +8,8 @@
 ---
 applications:
 - name: devtestworkbench
-  memory: 1G
-  instances: 2
+  memory: 512M
+  instances: 1
   random-route: true
   env:
     CFCI_SESS_SECRET: devtestworkbench
