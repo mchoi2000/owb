@@ -11,8 +11,6 @@ before_install:
 - sudo apt-get update -q
 - sudo apt-get install g++-4.8 -y
 - npm install -g npm@3.10.4 --progress false --depth 0
-- openssl aes-256-cbc -K $encrypted_cb79c5695895_key -iv $encrypted_cb79c5695895_iv -in server/certs/w3ApiCrtKey.tar.enc -out server/certs/w3ApiCrtKey.tar -d
-- tar xvf server/certs/w3ApiCrtKey.tar
 install:
 - npm install
 script:
