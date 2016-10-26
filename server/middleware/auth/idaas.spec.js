@@ -137,6 +137,7 @@ var mockOpenIDConnect = {
   IDaaSOIDCStrategy: function(options, verify) {
     options.authorizationURL.should.equal(config.idaas.authURL);
     options.tokenURL.should.equal(config.idaas.tokenURL);
+    console.log('config.idaas.clientID is:::', config.idaas.clientID);
     options.clientID.should.equal(config.idaas.clientID);
     options.clientSecret.should.equal(config.idaas.clientSecret);
     options.callbackURL.should.equal(config.idaas.callbackURL);
@@ -151,7 +152,6 @@ var mockOpenIDConnect = {
         lastName: testUser.lname
       }
     }, 'testAuth', 'testRefresh', {}, function(err, user) {
-      console.log('user is::::', user);
       user.id.should.equal(uniqueSecurityName);
       user.email.should.equal(testUser.email);
       user.fname.should.equal(testUser.fname);
