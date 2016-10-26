@@ -12,13 +12,13 @@ var config = require('./config/environment');
 var errors = require('./components/errors');
 var path = require('path');
 //var roles = require('./config/auth/roles');
-//var auth = require('./config/auth/idaas');
+var auth = require('./middleware/auth/idaas');
 
 module.exports = function exportRoutes(app, passport) {
   var env = app.get('env');
 
   // Insert routes below
-  //auth.routes(app, passport);
+  auth.routes(app, passport);
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|client/public/bower_components|assets|images)/*')

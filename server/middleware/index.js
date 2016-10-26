@@ -17,9 +17,9 @@ const morgan = require('morgan');
 const path = require('path');
 const config = require('../config/environment');
 const logger = require('../components/logger').get('access');
-//const roles = require('./auth/roles');
-//const userAuth = require('./auth/idaas');
-//const RedisStore = require('connect-redis')(expressSession);
+const roles = require('./auth/roles');
+const userAuth = require('./auth/idaas');
+const RedisStore = require('connect-redis')(expressSession);
 
 module.exports = function exportsMiddleware(app, passport) {
 
@@ -40,6 +40,31 @@ module.exports = function exportsMiddleware(app, passport) {
   app.use(bodyParser.json({limit: '15mb'}));
   app.use(bodyParser.urlencoded({extended: true}));
 
+  var enforceTLS = function enforceTLS(req, res, next) {
+    if (typeof req.headers['$wsis'] !== 'undefined' && req.headers['$wsis'] === 'false') {
+      return res.redirect('https://' + config.webHost + req.originalUrl);
+    }
+    next();
+  };
+  app.use(enforceTLS);
+
+  const store = new RedisStore(config.redis);
+  app.use(expressSession({
+    name: 'JSESSIONID', // Use bluemix session affinity
+    store: store,
+    secret: config.secrets.session,
+    resave: false,
+    saveUninitialized: false,
+    proxy: true,
+    rolling: true,
+    cookie: {
+      path: config.webRoot.slice(0, -1),
+      maxAge: 86400000, //1 Day
+      httpOnly: true,
+      secure: true
+    }
+  }));
+
   // Clear cache for non-authenticated users when they hit back button
   // from the IBM signout page after signing out.
   app.use(function(req, res, next) {
@@ -47,6 +72,39 @@ module.exports = function exportsMiddleware(app, passport) {
       res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
       next();
     }
+  });
+
+  //logging request details
+  app.use(morgan('combined', {
+    stream: {
+      write: function writeFunction(message, encoding) {
+        logger.debug(message);
+      }
+    }
+  }));
+
+  //Passport config
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  userAuth.middleware(app, passport);
+
+  //CSRF Protections
+  app.use(function appUseCallback(req, res, next) {
+    if (!req.user || !req.user.strategy || req.user.strategy !== 'jwt') {
+      csrf()(req, res, next);
+    } else {
+      next();
+    }
+  });
+  app.use(function appUseCallback(req, res, next) {
+    if (req.csrfToken) {
+      res.cookie('XSRF-TOKEN', req.csrfToken(), {
+        path: config.webRoot.slice(0, -1),
+        secure: true
+      });
+    }
+    next();
   });
 
   if (env === 'production' || env === 'staging' || env === 'test') {
@@ -80,6 +138,10 @@ module.exports = function exportsMiddleware(app, passport) {
       app.use('/', express.static(path.join(config.root, '.tmp/public'), staticOpts));
       app.use('/common',
         express.static(path.join(config.root, '.tmp/common'), staticOpts));
+      app.use('/review', roles.is('registered operator'),
+        express.static(path.join(config.root, '.tmp/review'), staticOpts));
+      app.use('/review', roles.is('registered operator'),
+        express.static(path.join(config.root, 'client/review'), staticOpts));
 
     }
 
