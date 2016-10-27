@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--
+Licensed Materials - Property of IBM
+
+@ Copyright IBM Corp. 2015 All Rights Reserved
+
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<html lang="en-US" ng-app="register">
+  <head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="dcterms.date" scheme="iso8601" content="2016-04-01">
+    <meta name="dcterms.rights" content="© Copyright IBM Corp. 2015">
+    <meta name="dc.date" scheme="iso8601" content="2016-04-01">
+    <meta name="dc.rights" content="© Copyright IBM Corp. 2016">
+    <meta name="dc.language" scheme="RFC1766" content="en">
+    <meta name="description" content="Service Provider Workbench">
+    <meta name="ibm.country" content="US">
+    <meta name="ibm.effective" scheme="W3CDTF" content="2016-01-04">
+    <meta name="geo.country" content="US">
+    <meta name="owner" content="pwbteam@us.ibm.com">
+    <meta name="source" content="http://www.ibm.com/marketplace/workbench">
+    <meta name="keywords" content="marketplace, service, provider, workbench">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="{{webRoot}}">
+
+    <link rel="icon" href="//www.ibm.com/favicon.ico">
+    <link rel="canonical" href="http://www.ibm.com/marketplace/workbench">
+
+    <script>
+      digitalData = {
+        page: {
+          category: {
+            primaryCategory: "REPLACE"
+          },
+          pageInfo: {
+            effectiveDate: "2015-10-15",
+            expiryDate: "2395-01-01",
+            language: "en-US",
+            publishDate: "2015-10-15",
+            publisher: "IBM Corporation",
+            version: "v18",
+            ibm: {
+              contentDelivery: "REPLACE",
+              contentProducer: "REPLACE",
+              country: "US",
+              industry: "REPLACE",
+              owner: "REPLACE",
+              owningPortal: "REPLACE",
+              siteID: "REPLACE",
+              subject: "REPLACE",
+              type: "REPLACE"
+            }
+          }
+        }
+      };
+    </script>
+
+    <link href="//1.www.s81c.com/common/v18/css/www.css" rel="stylesheet">
+
+    <script src="//1.www.s81c.com/common/v18/js/www.js"></script>
+
+    <script type="text/javascript">
+      // Standard v18 settings
+      IBMCore.common.util.config.set({
+        "masthead":{
+            "type":"alternate",
+            "logoanimation": {
+              "enabled": true
+            }
+        },
+        "greeting": {
+            "enabled": false
+        },
+        "sticky": {
+          "enabled": false
+        },
+        "sbs": { "enabled": false },
+        "footer": {
+          "type": "alternate"
+        }
+      });
+
+      var addedSignInOut = false;
+
+      IBMCore.common.module.masthead.subscribe("ready", "customjs", function() {
+        var profileMenuLinks = [];
+
+        profileMenuLinks.push({"title": "MyIBM", "url":"https://myibm.ibm.com/dashboard/?lnk=mmi"});
+        profileMenuLinks.push({"title": "Profile", "url":"https://www.ibm.com/myibm/profile/?lnk=mmi"});
+        profileMenuLinks.push({"title": "Products and services", "url":"https://www.ibm.com/myibm/products-services/?lnk=mmi"});
+        profileMenuLinks.push({"title": "Notifications", "url":"https://myibm.ibm.com/notifications/?lnk=mmi"});
+        profileMenuLinks.push({"title": "Support", "url":"http://www.ibm.com/support/en-us/?lnk=mmi"});
+
+        IBMCore.common.module.masthead.subscribe("profileMenuReady", "customjs", function() {
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+
+              for(var i = 0; i < profileMenuLinks.length; i++) {
+               if (profileMenuLinks[i].title == "Sign Out" || profileMenuLinks[i].title == "Sign In") {
+                 addedSignInOut = true;
+               }
+              }
+
+              if(xmlhttp.status == 200 && !addedSignInOut) {
+                var userLogginData = JSON.parse(xmlhttp.responseText);
+
+                if (userLogginData._id) {
+                  profileMenuLinks.push({"title": "Sign Out", "url":"auth/logout"});
+                }
+                else {
+                  profileMenuLinks.push({"title": "Sign In", "url":"auth/sso"});
+                }
+
+              }
+              else if(!addedSignInOut) {
+                profileMenuLinks.push({"title": "Sign In", "url":"auth/sso"});
+              }
+
+              IBMCore.common.module.masthead.editProfileMenu({
+                 action: "replace",
+                 links: profileMenuLinks
+              });
+
+            }
+          }
+
+          xmlhttp.open("GET", "api/user/", true);
+          xmlhttp.send();
+        });
+
+      });
+    </script>
+
+    <!-- build:css(client/public) register/app/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp/public) register/app/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="app/app.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <title>Join the Provider Workbench! - Service Provider Workbench</title>
+  </head>
+  <body class="ibm-type" id="ibm-com">
+    <div class="application_container clearfix">
+      <div id="ibm-top" class="ibm-landing-page">
+        <div id="ibm-masthead" role="banner" aria-label="IBM">
+        	<div id="ibm-universal-nav">
+        		<nav role="navigation" aria-label="IBM">
+        			<div id="ibm-home"><a href="http://www.ibm.com/us/en/">IBM®</a></div>
+        			<ul id="ibm-menu-links" role="toolbar" aria-label="Site map">
+        			</ul>
+        		</nav>
+
+            <div id="ibm-search-module" role="search" aria-labelledby="ibm-masthead" style="display: none;">
+              <form id="ibm-search-form" action="https://www.ibm.com/Search/" method="get">
+                <p>
+                  <input maxlength="100" value="" placeholder="Search" name="q" id="q" aria-label="Search" type="text">
+                  <input value="18" name="v" type="hidden">
+                  <input value="utf" name="en" type="hidden">
+                  <input value="en" name="lang" type="hidden">
+                  <input value="us" name="cc" type="hidden">
+                  <input id="ibm-search" class="ibm-btn-search" value="Submit" type="submit">
+                </p>
+              </form>
+            </div>
+        	</div>
+        </div>
+      </div>
+
+        <div class="application_view" ng-view autoscroll="true">
+
+        </div>
+      <!--<div class="application_view"> -->
+
+      <div class="push_footer_to_bottom"></div>
+
+    </div>
+
+    <!-- FOOTER_BEGIN -->
+  	<div id="ibm-footer-module"></div>
+
+  	<footer role="contentinfo" aria-label="IBM">
+  		<div id="ibm-footer">
+  			<ul>
+  				<li><a href="http://www.ibm.com/contact/us/en/">Contact</a></li>
+  				<li><a href="http://www.ibm.com/privacy/us/en/">Privacy</a></li>
+  				<li><a href="http://www.ibm.com/legal/us/en/">Terms of use</a></li>
+  				<li><a href="http://www.ibm.com/accessibility/us/en/">Accessibility</a></li>
+  			</ul>
+  		</div>
+  	</footer>
+  	<!-- FOOTER_END -->
+
+
+    <!-- build:js(client/public) register/app/vendor.js -->
+    <!-- inject:bower:js -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,.tmp/public,client,client/public}) register/app/app.js -->
+    <!-- inject:app:js -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+
+
+<script src="//1.www.s81c.com/common/stats/ida_stats.js" />
+
+  </body>
+</html>

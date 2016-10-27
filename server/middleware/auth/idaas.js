@@ -4,7 +4,7 @@
 //
 //US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 //Schedule Contract with IBM Corp.
-/** IDaaS Passport Strategy Solution
+/** IDaaS Passport Strategy Solution **/
 'use strict';
 
 var config = require('../../config/environment');
@@ -61,21 +61,18 @@ function middleware(app, passport) {
     function OIDCStrategyCallback(iss, sub, profile, accessToken, refreshToken, params, done) {
       logger.debug('Verifying Authenticated User %s', sub);
       return done(null, {
-        id: profile._json.uniqueSecurityName,
-        email: profile._json.email,
-        fname: profile._json.given_name,
-        lname: profile._json.family_name
+        id: profile._json.uid,
+        email: profile._json.emailAddress,
+        fname: profile._json.firstName,
+        lname: profile._json.lastName
       });
     }
   );
   passport.use(strategyObj);
 
-  app.use('/admin/', ensureAuthenticated);
-  app.use('/provider/', ensureAuthenticated, ensurePwbAccess, ensureRegistered);
-  app.use('/qualification/', ensureAuthenticated);
-  app.use('/register/', ensureAuthenticated, ensurePwbAccess);
-  app.use('/review/', ensureAuthenticated);
-  app.use('/translation/', ensureAuthenticated);
+  //app.use('/provider/', ensureAuthenticated, ensurePwbAccess, ensureRegistered);
+  //app.use('/register/', ensureAuthenticated);
+  app.use('/review/cmm', ensureAuthenticated);
 
   function ensureAuthenticated(req, res, next) {
     if (!req.isAuthenticated()) {
@@ -87,7 +84,7 @@ function middleware(app, passport) {
     next();
   }
 
-  function ensurePwbAccess(req, res, next) {
+  /*function ensurePwbAccess(req, res, next) {
     if (req.user.PWBPlatform !== true &&
       req.user.roles.indexOf('admin') === -1 &&
       req.user.roles.indexOf('academy') === -1) {
@@ -95,7 +92,7 @@ function middleware(app, passport) {
       return res.redirect(config.webRoot + 'sorryPage');
     }
     next();
-  }
+  } */
 
   function ensureRegistered(req, res, next) {
     if (!req.user.registered && req.originalUrl.indexOf('register') === -1) {
@@ -121,7 +118,6 @@ function routes(app, passport) {
         logger.error('Authentication Error: ', err);
         return next(err);
       }
-
       if (!user) {
         logger.warn('User Authentication Failed');
         return res.redirect(config.webRoot + 'auth/fail');
@@ -134,7 +130,7 @@ function routes(app, passport) {
         }
         userService.getUser(user.id)
           .then(function getUserCallback(userDoc) {
-            var url = _roleHome(userDoc.roles[0], userDoc.PWBPlatform);
+            var url = _roleHome(userDoc.roles[0]);
             if (req.session && req.session.returnTo) {
               url = req.session.returnTo;
               delete req.session.returnTo;
@@ -144,6 +140,10 @@ function routes(app, passport) {
               logger.debug('Redirecting authenticated user to %s', url);
               res.redirect(url);
             });
+          })
+          .catch(function userServiceError() {
+            logger.error('Unable to authenticate the user');
+            res.status(400).send('Unable to authenticate the user');
           });
       });
     })(req, res, next);
@@ -189,40 +189,17 @@ function routes(app, passport) {
   });
 
   //TODO: Add Commerce Reviewer Dashboard Homepage
-  function _roleHome(role, pwbEnabled) {
+  function _roleHome(role) {
     var home = config.webRoot;
     switch (role) {
-      case 'provider':
-        if (pwbEnabled) {
-          home = home + '/provider/dashboard';
-        } else {
-          home = home + '/qualification';
-        }
-        break;
-      case 'admin':
-        home = home + '/admin';
-        break;
-      case 'qualificationReviewer':
-        home = home + '/review/qualification';
-        break;
-      case 'commerceReviewer':
-        home = home + '/review/commerce';
-        break;
-      case 'contentReviewer':
-        home = home + '/review/content';
-        break;
       case 'cmmReviewer':
         home = home + '/review/cmm';
         break;
-      case 'academy':
-        home = home + '/provider/dashboard';
-        break;
       default:
-        home = home + '/qualification';
+        home = home + '/register';
     }
 
     logger.debug('Homepage %s for user role %s', home, role);
     return home;
   }
 }
- **/

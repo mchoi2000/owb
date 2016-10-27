@@ -24,8 +24,18 @@ var environment = {
   root: path.normalize(__dirname + '/../../..'),
   webRoot: requiredProcessEnv('CFCI_WEB_ROOT'),
   // Application attributes in Bluemix
-  cfApp: JSON.parse(requiredProcessEnv('VCAP_APPLICATION'))
+  cfApp: JSON.parse(requiredProcessEnv('VCAP_APPLICATION')),
+  nodeEnv: requiredProcessEnv('NODE_ENV'),
 
+  redis: {
+    host: 'aws-us-east-1-portal.23.dblayer.com',
+    port: 16118,
+    pass: process.env.CFCI_REDIS_PASSWORD
+  },
+  secrets: {
+    session: process.env.CFCI_SESS_SECRET
+  },
+  authStrategy: process.env.AUTH_STRAT || 'idaas'
 };
 
 // Merge specific NODE_ENV configuration settings into environment

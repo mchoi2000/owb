@@ -11,6 +11,19 @@
 
 module.exports = {
   webHost: 'www.ibm.com',
+
+  //Cloudant URL
+  dbUrl: 'https://opwb.cloudant.com',
+  dbdir: './db/',
+  usersDB: 'prod-user',
+
+  remoteDBOptions: {
+    auth: {
+      username: process.env.CFCI_CLOUDANT_USERNAME,
+      password: process.env.CFCI_CLOUDANT_PASSWORD
+    }
+  },
+
   //Logging Config
   logging: {
     silent: true,
@@ -23,5 +36,14 @@ module.exports = {
       db: ['Console', 'File'],
       user: ['Console', 'File']
     }
+  },
+
+  idaas: {
+    authURL: 'https://w3id.sso.ibm.com/isam/oidc/endpoint/amapp-runtime-oidcidp/authorize',
+    tokenURL: 'https://w3id.sso.ibm.com/isam/oidc/endpoint/amapp-runtime-oidcidp/token',
+    clientID: process.env.CFCI_IDAAS_CLIENT,
+    clientSecret: process.env.CFCI_IDAAS_SECRET,
+    callbackURL: process.env.CFCI_IDAAS_CALLBACK,
+    issuer: 'https://w3id.sso.ibm.com/isam'
   }
 };

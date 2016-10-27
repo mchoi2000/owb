@@ -59,5 +59,9 @@ gulp.task('serve:dist', ['build'], function(cb) {
 // Set test environment
 gulp.task('env:dev', function(cb) {
   process.env.NODE_ENV = 'development';
+  process.env.CFCI_IDAAS_CLIENT = 'Dummy ClientId';
+  process.env.CFCI_IDAAS_SECRET = 'Dummy Secret';
+  process.env.CFCI_IDAAS_CALLBACK =
+    'https://localhost:3000/marketplace/operator/auth/sso/oidc/return';
   cb();
 });

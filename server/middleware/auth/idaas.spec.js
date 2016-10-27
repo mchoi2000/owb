@@ -5,7 +5,7 @@
 //US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 //Schedule Contract with IBM Corp.
 //SSO Unit Testing
-/*
+
 'use strict';
 var proxyquire = require('proxyquire').noCallThru();
 var should = require('should');
@@ -23,126 +23,6 @@ var testUser = {
   lname: 'last',
   registered: false,
   verified: false,
-  products: [],
-  features: []
-};
-
-var testAdmin = {
-  id: 'https://connect.ibmserviceengage.com/blueid/admin@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/admin@test.com',
-  email: 'admin@test.com',
-  roles: ['admin'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  products: [],
-  features: []
-};
-
-var testRegisteredAdmin = {
-  id: 'https://connect.ibmserviceengage.com/blueid/registeredAdmin@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/registeredAdmin@test.com',
-  email: 'registeredAdmin@test.com',
-  roles: ['admin'],
-  fname: 'first',
-  lname: 'last',
-  registered: true,
-  verified: false,
-  products: [],
-  features: []
-};
-
-var testQualReviewer = {
-  id: 'https://connect.ibmserviceengage.com/blueid/qual@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/qual@test.com',
-  email: 'qual@test.com',
-  roles: ['qualificationReviewer'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  products: [],
-  features: []
-};
-
-var testCommReviewer = {
-  id: 'https://connect.ibmserviceengage.com/blueid/comm@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/comm@test.com',
-  email: 'comm@test.com',
-  roles: ['commerceReviewer'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  products: [],
-  features: []
-};
-
-var testContentReviewer = {
-  id: 'https://connect.ibmserviceengage.com/blueid/content@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/content@test.com',
-  email: 'content@test.com',
-  roles: ['contentReviewer'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  products: [],
-  features: []
-};
-
-var testCMMReviewer = {
-  id: 'https://connect.ibmserviceengage.com/blueid/cmm@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/cmm@test.com',
-  email: 'content@test.com',
-  roles: ['cmmReviewer'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  countries: [],
-  products: [],
-  features: []
-};
-
-var testAcademyReviewer = {
-  id: 'https://connect.ibmserviceengage.com/blueid/academy@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/academy@test.com',
-  email: 'content@test.com',
-  roles: ['academy'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  countries: [],
-  products: [],
-  features: []
-};
-
-var testProvider = {
-  id: 'https://connect.ibmserviceengage.com/blueid/provider@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/provider@test.com',
-  email: 'provider@test.com',
-  roles: ['provider'],
-  fname: 'first',
-  lname: 'last',
-  registered: false,
-  verified: false,
-  products: [],
-  features: []
-};
-
-var testRegisteredProvider = {
-  id: 'https://connect.ibmserviceengage.com/blueid/registeredProvider@test.com',
-  _id: 'https://connect.ibmserviceengage.com/blueid/registeredProvider@test.com',
-  email: 'registeredProvider@test.com',
-  roles: ['provider'],
-  fname: 'first',
-  lname: 'last',
-  registered: true,
-  verified: false,
-  PWBPlatform: true,
   products: [],
   features: []
 };
@@ -214,15 +94,6 @@ var mockPassport = {
       callback('testError');
       callback();
       callback(null, testUser);
-      callback(null, testAdmin);
-      callback(null, testRegisteredAdmin);
-      callback(null, testQualReviewer);
-      callback(null, testProvider);
-      callback(null, testRegisteredProvider);
-      callback(null, testCommReviewer);
-      callback(null, testContentReviewer);
-      callback(null, testCMMReviewer);
-      callback(null, testAcademyReviewer);
     }
 
     var ret = function() {};
@@ -234,24 +105,6 @@ var mockUsers = {
   getUser: function(id) {
     if (id === testUser._id) {
       return Promise.resolve(testUser);
-    } else if (id === testAdmin._id) {
-      return Promise.resolve(testAdmin);
-    } else if (id === testRegisteredAdmin._id) {
-      return Promise.resolve(testRegisteredAdmin);
-    } else if (id === testProvider._id) {
-      return Promise.resolve(testProvider);
-    } else if (id === testRegisteredProvider._id) {
-      return Promise.resolve(testRegisteredProvider);
-    } else if (id === testQualReviewer._id) {
-      return Promise.resolve(testQualReviewer);
-    } else if (id === testCommReviewer._id) {
-      return Promise.resolve(testCommReviewer);
-    } else if (id === testContentReviewer._id) {
-      return Promise.resolve(testContentReviewer);
-    } else if (id === testCMMReviewer._id) {
-      return Promise.resolve(testCMMReviewer);
-    } else if (id === testAcademyReviewer._id) {
-      return Promise.resolve(testAcademyReviewer);
     } else {
       return Promise.reject('not found');
     }
@@ -284,6 +137,7 @@ var mockOpenIDConnect = {
   IDaaSOIDCStrategy: function(options, verify) {
     options.authorizationURL.should.equal(config.idaas.authURL);
     options.tokenURL.should.equal(config.idaas.tokenURL);
+    console.log('config.idaas.clientID is:::', config.idaas.clientID);
     options.clientID.should.equal(config.idaas.clientID);
     options.clientSecret.should.equal(config.idaas.clientSecret);
     options.callbackURL.should.equal(config.idaas.callbackURL);
@@ -292,13 +146,12 @@ var mockOpenIDConnect = {
 
     verify('testIssuer', testUser._id, {
       _json: {
-        uniqueSecurityName: uniqueSecurityName,
-        email: testUser.email,
-        given_name: testUser.fname,
-        family_name: testUser.lname
+        uid: uniqueSecurityName,
+        emailAddress: testUser.email,
+        firstName: testUser.fname,
+        lastName: testUser.lname
       }
     }, 'testAuth', 'testRefresh', {}, function(err, user) {
-
       user.id.should.equal(uniqueSecurityName);
       user.email.should.equal(testUser.email);
       user.fname.should.equal(testUser.fname);
@@ -500,4 +353,4 @@ describe('oidc', function() {
     sso.routes(mockApp, mockPassport);
   });
 });
-*/
+

@@ -1,0 +1,69 @@
+<div class="header_view" header></div>
+<main id="registerWrapper" aria-label="Register to join the Provider Workbench" role="main">
+    <section class="page-section-container">
+        <div class="page-section">
+            <div class="page-content clearfix">
+                <h1 class="ibm-bold ibmPurple-60 center_text" id="welcome">Join the Provider Workbench!</h1>
+                <form novalidate name="registerForm">
+                    <fieldset>
+                        <div class="form-group col-xs-12 clearfix">
+                            <label for="firstName_input">First Name</label>
+                            <input type="text" value="{{RegistrationCtrl.user.fname}}" name="firstName" id="firstName_input" ng-model="RegistrationCtrl.user.fname" ng-trim="false" class="form-control" required ng-class="{'has-error': registerForm.firstName.$error.required && registerForm.$submitted}"/>
+                            <span class="has-error" ng-show="registerForm.firstName.$error.required && registerForm.$submitted">First Name Required</span>
+                        </div>
+
+                        <div class="form-group col-xs-12 clearfix">
+                            <label for="lastName_input">Last Name</label>
+                            <input type="text" value="{{RegistrationCtrl.user.lastName}}" name="lastName" id="lastName_input" ng-model="RegistrationCtrl.user.lname" ng-trim="false" class="form-control" required ng-class="{'has-error': registerForm.lastName.$error.required && registerForm.$submitted}"/>
+                            <span class="has-error" ng-show="registerForm.lastName.$error.required && registerForm.$submitted">Last Name Required</span>
+                        </div>
+
+                        <div class="select_input_container">
+                            <div class="form-group col-xs-12 clearfix" uib-dropdown>
+                                <label class="control-label" for="select_role_dropdown">{{RegistrationCtrl.roleSelection}}</label>
+
+                                <button required aria-label="Your currently selected Role is {{RegistrationCtrl.roleSelection}}. Select from the options below to change it." id="select_role_dropdown" type="button" name="select_role_dropdown" class="btn dropdown_btn ibm-chevron-down-link cols-xs-12" ng-model="RegistrationCtrl.roleSelection" uib-dropdown-toggle ng-class="{'has-error': registerForm.projectRole.$error.required && registerForm.$submitted}">
+                                    Select one
+                                </button>
+                                <ul uib-dropdown-menu class="dropdown-menu dropdown_menu_display_options" role="menu" tabindex=0 aria-labelledby="select_role_dropdown">
+                                    <li ng-repeat="role in RegistrationCtrl.roles"> <a href="#" ng-click="RegistrationCtrl.updateRoleOption(role.value, true)"> {{role.value}} </a></li>
+                                </ul>
+                                <span class="has-error" ng-show="registerForm.projectRole.$error.required && registerForm.$submitted">Project Role Required</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-xs-12 clearfix" ng-show="RegistrationCtrl.roleSelection == 'Other'">
+                            <label for="otherProjectRole_input">Enter your role</label>
+                            <input type="text" name="otherProjectRole" id="otherProjectRole_input" ng-change="RegistrationCtrl.updateRoleOption(RegistrationCtrl.otherProjectRole, false)" ng-model="RegistrationCtrl.otherProjectRole" ng-trim="false" class="form-control" ng-class="{'has-error': registerForm.projectRole.$error.required && registerForm.$submitted}"/>
+                        </div>
+
+                        <input type="hidden" ng-model="RegistrationCtrl.user.projectRole" value="{{RegistrationCtrl.role}}" name="projectRole" required/>
+                    </fieldset>
+                    <div class="col-xs-12" ng-show="registerForm.$submitted && registerForm.$invalid">
+                        <div class="padded_container bottom_form_errors_container register_form_errors_container">
+                            <h3 class="h1 ibm-bold">We're sorry.</h3>
+
+                            <p>Your registration could not be submitted due to errors in the following field/fields</p>
+                            <ul class="bulleted_list">
+                                <li ng-show="registerForm.firstName.$error.required">First Name Required</li>
+                                <li ng-show="registerForm.lastName.$error.required">Last Name Required</li>
+                                <li ng-show="registerForm.projectRole.$error.required">Project Role Required</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <p class="center_text">I accept the <a ng-click="RegistrationCtrl.openTermsOfUseModal();" target="_blank">IBM Marketplace Provider Agreement</a></p>
+                    </div>
+
+                    <div class="form-group form-group-margin-bottom form_submit_btns_container col-xs-12 clearfix">
+                        <input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Join now!" ng-click="RegistrationCtrl.acceptRegistration(registerForm)">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+</main>
+</div>
