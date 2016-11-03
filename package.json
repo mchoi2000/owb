@@ -1,7 +1,7 @@
 {
   "name": "operatorworkbench",
   "version": "1.0.0",
-  "description": "Operator Workbench",
+  "description": "Operator Workbench ",
   "main": "server/app.js",
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
