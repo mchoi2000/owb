@@ -96,7 +96,7 @@ describe('Register controller', function() {
 
     ctrl.updateRoleOption('Other', true);
     expect(ctrl.role).toBe('');
-    expect(ctrl.roleSelection).toBe('Other');
+    expect(ctrl.selectedRole).toBe('Other');
   });
 
   it('should initialize the registration', function() {

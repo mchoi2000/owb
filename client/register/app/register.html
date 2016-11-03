@@ -42,9 +42,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-xs-12 clearfix" ng-show="RegistrationCtrl.roleSelection == 'Other'">
-                            <label for="otherProjectRole_input">Enter your role</label>
-                            <input type="text" name="otherProjectRole" id="otherProjectRole_input" ng-change="RegistrationCtrl.updateRoleOption(RegistrationCtrl.otherProjectRole, false)" ng-model="RegistrationCtrl.otherProjectRole" ng-trim="false" class="form-control" ng-class="{'has-error': registerForm.projectRole.$error.required && registerForm.$submitted}"/>
+                        <div class="form-group col-xs-12 clearfix" ng-show="RegistrationCtrl.selectedRole == 'Other'">
+                            <label for="otherProjectRole_input"><span class="ibmRed-50">*</span>Enter your role</label>
+                            <input type="text" required name="otherProjectRole" id="otherProjectRole_input" ng-change="RegistrationCtrl.updateRoleOption(RegistrationCtrl.otherProjectRole, false)" ng-model="RegistrationCtrl.otherProjectRole" ng-trim="false" class="form-control" ng-class="{'has-error': registerForm.projectRole.$error.required && registerForm.$submitted}"/>
                         </div>
                         <input type="hidden" ng-model="RegistrationCtrl.user.projectRole" value="{{RegistrationCtrl.role}}" name="projectRole" required/>
                         <input type="hidden" ng-model="RegistrationCtrl.user.projectLocales" value="{{RegistrationCtrl.projectLocales}}" name="projectLocales" required/>

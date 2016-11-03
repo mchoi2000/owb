@@ -48,7 +48,7 @@
     self.updateRoleOption = updateRoleOption;
     function updateRoleOption(value, isSelected) {
       if (value === 'Other' && isSelected) {
-        self.roleSelection = value;
+        self.selectedRole = value;
         self.role = '';
       } else if (isSelected) {
         self.role = value;
