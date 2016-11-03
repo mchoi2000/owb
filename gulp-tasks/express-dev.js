@@ -25,6 +25,7 @@ var webRoot = process.env.CFCI_WEB_ROOT;
 
 const ngApps = [
   'public',
+  'register',
   'review'
 ];
 

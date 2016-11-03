@@ -13,9 +13,9 @@ module.exports = {
   webHost: 'localhost',
 
   //Cloudant URL
-  dbUrl: 'CLOUDANT_URL',
+  dbUrl: 'https://opwb.cloudant.com',
   dbdir: './db/',
-  usersDB: 'owbuserdb',
+  usersDB: 'stage-user',
 
   remoteDBOptions: {
     auth: {

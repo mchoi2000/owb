@@ -24,7 +24,7 @@
     // If so, manually set the page values since route.current is breaking in gulp serve:dist
     if ($route.current === undefined && self.path === '/register/register.html') {
       self.pageSlug = 'register';
-      self.pageTitle = 'Join the Provider Workbench';
+      self.pageTitle = 'Join the Globalization Workbench';
     } else {
       self.pageSlug = $route.current.pageSlug;
       self.pageTitle = $route.current.pageTitle;

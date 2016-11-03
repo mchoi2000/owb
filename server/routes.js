@@ -20,6 +20,9 @@ module.exports = function exportRoutes(app, passport) {
   // Insert routes below
   auth.routes(app, passport);
 
+  app.use('/api/user', require('./api/user'));
+  app.use('/api/locales', require('./api/locales'));
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|client/public/bower_components|assets|images)/*')
     .get(function routeGetCallback(req, res) {
@@ -38,6 +41,12 @@ module.exports = function exportRoutes(app, passport) {
   app.route('/review*')
     .get(function reviewApp(req, res) {
       res.sendFile(path.resolve(app.get('appPath') + '/review/index.html'));
+    });
+
+  // Register App
+  app.route('/register*')
+    .get(function registerApp(req, res) {
+      res.sendFile(path.resolve(app.get('appPath') + '/register/index.html'));
     });
 
   // Translation App

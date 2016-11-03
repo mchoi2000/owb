@@ -3,10 +3,9 @@
 
   var registrationData = {
     roleList: [
-      {name: 'Offering manager', value: 'Offering manager'},
-      {name: 'Marketing manager', value: 'Marketing manager'},
-      {name: 'Portfolio manager', value: 'Portfolio manager'},
-      {name: 'Developer', value: 'Developer'},
+      {name: 'Country marketplace manager', value: 'Marketing manager'},
+      {name: 'Portfolio marketing manager', value: 'Portfolio manager'},
+      {name: 'Merchandising manager', value: 'Merchandising manager'},
       {name: 'Other', value: 'Other'}
     ]
   };

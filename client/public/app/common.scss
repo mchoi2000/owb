@@ -804,7 +804,7 @@ h4, .h4, h5, .h5, h6, .h6 {
   color: $ibmRed-50;
 }
 
-.form-control.has-error, button.has-error, .textarea_container.has-error, .general_multi_select.has-error {
+.form-control.has-error, button.has-error, .textarea_container.has-error, .general_multi_select.has-error, select.has-error {
   color: $ibmGray-60 !important;
   border: 1px solid $ibmRed-50 !important;
   background-color: $ibmWhite;

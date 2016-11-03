@@ -15,35 +15,45 @@ describe('Register controller', function() {
   beforeEach(inject(function(_$httpBackend_, _$controller_) {
     $httpBackend = _$httpBackend_;
     $controller = _$controller_;
+    $httpBackend.when('GET', 'api/locales').respond(['en-us']);
+    $httpBackend.when('POST', 'auth/register/cmm').respond({});
+    $httpBackend.when('GET', 'api/user').respond({_id: 'userId'});
   }));
 
   it('should get user', function() {
     var ctrl = $controller('RegistrationController');
-    $httpBackend.expect('GET', 'api/user').respond({_id: 'userId'});
+    $httpBackend.expect('GET', 'api/user');
     ctrl.getUser();
     $httpBackend.flush();
     expect(ctrl.user._id).toBe('userId');
   });
 
-  it('should open terms of use', function() {
+  it('should get locales', function() {
     var ctrl = $controller('RegistrationController');
-    ctrl.openTermsOfUseModal();
-    expect(typeof ctrl.modalInstance === 'undefined').toBe(false);
+    $httpBackend.expect('GET', 'api/locales');
+    ctrl.getLocales();
+    $httpBackend.flush();
+    expect(ctrl.locales[0]).toBe('en-us');
   });
 
   it('should accept registration', function() {
     var ctrl = $controller('RegistrationController');
+    $httpBackend.expect('POST', 'auth/register/cmm');
     ctrl.role = 'test';
-
+    ctrl.selectedLocales = ['en-us'];
     var projectRoleField = {};
     projectRoleField.$setViewValue = function(viewValue) {
       expect(viewValue).toBe('test');
     };
 
-    $httpBackend.expect('POST', 'auth/register', undefined).respond({});
+    var projectLocalesField = {};
+    projectLocalesField.$setViewValue = function(viewValue) {
+      expect(viewValue[0]).toBe('en-us');
+    };
     ctrl.acceptRegistration({
       $invalid: false,
-      projectRole: projectRoleField
+      projectRole: projectRoleField,
+      projectLocales: projectLocalesField
     });
 
     $httpBackend.flush();
@@ -52,15 +62,22 @@ describe('Register controller', function() {
   it('should accept registration (invalid form)', function() {
     var ctrl = $controller('RegistrationController');
     ctrl.role = 'test';
+    ctrl.selectedLocales = ['en-us'];
 
     var projectRoleField = {};
     projectRoleField.$setViewValue = function(viewValue) {
       expect(viewValue).toBe('test');
     };
 
+    var projectLocalesField = {};
+    projectLocalesField.$setViewValue = function(viewValue) {
+      expect(viewValue[0]).toBe('en-us');
+    };
+
     ctrl.acceptRegistration({
       $invalid: true,
-      projectRole: projectRoleField
+      projectRole: projectRoleField,
+      projectLocales: projectLocalesField
     });
   });
 
@@ -70,10 +87,25 @@ describe('Register controller', function() {
     ctrl.updateRoleOption('test', true);
     expect(ctrl.role).toBe('test');
 
-    ctrl.updateRoleOption('Other', true);
-    expect(ctrl.role).toBe('');
-
     ctrl.updateRoleOption('test', false);
     expect(ctrl.role).toBe('test');
   });
+
+  it('should update the role option with other', function() {
+    var ctrl = $controller('RegistrationController');
+
+    ctrl.updateRoleOption('Other', true);
+    expect(ctrl.role).toBe('');
+    expect(ctrl.selectedRole).toBe('Other');
+  });
+
+  it('should initialize the registration', function() {
+    var ctrl = $controller('RegistrationController');
+
+    ctrl.initialize();
+    expect(ctrl.selectedRole).toBe('Select one');
+    expect(ctrl.roleSelection).toBe('Please Select A Role');
+
+  });
+
 });
