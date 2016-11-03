@@ -30,7 +30,7 @@
     function acceptRegistration(registerForm) {
       registerForm.projectRole.$setViewValue(self.role);
       registerForm.projectLocales.$setViewValue(self.selectedLocales);
-
+      console.log(registerForm);
       if (!registerForm.$invalid) {
         $http({
           method: 'POST',

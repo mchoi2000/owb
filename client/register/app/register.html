@@ -24,8 +24,6 @@
                             <select name="select_projectLocales" multiple ng-model="RegistrationCtrl.selectedLocales" class="register_locales_select" id="locales_select">
                                 <option ng-repeat="locale in RegistrationCtrl.locales" value="{{locale.locale}}"> {{locale.name}} </option>
                             </select>
-
-                            <span class="has-error" ng-show="registerForm.locales.$error.required && registerForm.$submitted">Responsible locales Required</span>
                         </div>
 
                         <div class="select_input_container">
@@ -44,10 +42,10 @@
 
                         <div class="form-group col-xs-12 clearfix" ng-show="RegistrationCtrl.selectedRole == 'Other'">
                             <label for="otherProjectRole_input"><span class="ibmRed-50">*</span>Enter your role</label>
-                            <input type="text" required name="otherProjectRole" id="otherProjectRole_input" ng-change="RegistrationCtrl.updateRoleOption(RegistrationCtrl.otherProjectRole, false)" ng-model="RegistrationCtrl.otherProjectRole" ng-trim="false" class="form-control" ng-class="{'has-error': registerForm.projectRole.$error.required && registerForm.$submitted}"/>
+                            <input type="text" name="otherProjectRole" id="otherProjectRole_input" ng-change="RegistrationCtrl.updateRoleOption(RegistrationCtrl.otherProjectRole, false)" ng-model="RegistrationCtrl.otherProjectRole" ng-trim="false" class="form-control"/>
                         </div>
                         <input type="hidden" ng-model="RegistrationCtrl.user.projectRole" value="{{RegistrationCtrl.role}}" name="projectRole" required/>
-                        <input type="hidden" ng-model="RegistrationCtrl.user.projectLocales" value="{{RegistrationCtrl.projectLocales}}" name="projectLocales" required/>
+                        <input type="hidden" ng-model="RegistrationCtrl.user.projectLocales" value="{{RegistrationCtrl.projectLocales}}" name="projectLocales"/>
                     </fieldset>
                     <div class="col-xs-12" ng-show="registerForm.$submitted && registerForm.$invalid">
                         <div class="padded_container bottom_form_errors_container register_form_errors_container">
