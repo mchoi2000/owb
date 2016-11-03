@@ -2,7 +2,6 @@
 db/
 dist/
 nbproject/
-node_modules/
 reports/
 client/public/bower_components/
 server/certs/

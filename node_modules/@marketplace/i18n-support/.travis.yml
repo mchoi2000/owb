@@ -1,0 +1,12 @@
+language: node_js
+node_js: 4.3
+sudo: false
+env:
+  global:
+    secure: c3i5wk4QhdcgxDaDEYzapW171u4pD9YmInIOX9gVx3I2elY2Pjtvj5Px+xrnUYHNLEEbduVlH4eLh3nPRpwWjoIC+U91ARTO5BtT0Fh1C0D6t/6HJuLcIOEwjpAbBiq7utFghPnLHgcfy7Tg2RssgpJ3qRRWT7wxzaxgm8CNEHE=
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: "./node_modules/.bin/publish_package.sh ${PWD}"
+  on:
+    branch: master
