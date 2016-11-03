@@ -117,6 +117,8 @@ module.exports = function exportsMiddleware(app, passport) {
     app.use('/register/cmm', roles.is('unregistered operator'),
       express.static(path.join(config.root, 'client/register'), staticOpts));
     app.set('appPath', path.join(config.root, 'client'));
+    app.use('/register', roles.is('unregistered operator'),
+      express.static(path.join(config.root, 'client/register'), staticOpts));
   }
 
   if (env === 'development') {
