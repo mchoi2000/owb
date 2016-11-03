@@ -79,7 +79,7 @@ describe('header', function() {
     rootScope.$apply();
 
     expect(controller.pageSlug).toBe('register');
-    expect(controller.pageTitle).toBe('Join the Provider Workbench');
+    expect(controller.pageTitle).toBe('Join the Globalization Workbench');
   });
 
   it('should compile header directive', function() {

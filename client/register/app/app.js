@@ -15,7 +15,7 @@
       controller: 'RegistrationController',
       controllerAs: 'RegistrationCtrl',
       templateUrl: 'register/app/register.html',
-      pageTitle: 'Join the Provider Workbench',
+      pageTitle: 'Join the Operator Workbench',
       pageSlug: 'register'
     });
   }
