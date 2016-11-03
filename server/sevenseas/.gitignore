@@ -1,0 +1,7 @@
+src_tool/public/api
+src_tool/public/lib
+src_tool/node_modules
+node_modules
+log.txt
+config.json
+coverage

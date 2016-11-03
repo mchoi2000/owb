@@ -1,5 +1,5 @@
 {
-    "excludeFiles": ["node_modules/**", "client/public/bower_components/**"],
+    "excludeFiles": ["node_modules/**", "client/public/bower_components/**", "server/i18n-support/**", "server/sevenseas/**"],
 
     "requireCurlyBraces": [
         "if",

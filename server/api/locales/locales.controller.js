@@ -6,8 +6,8 @@
 //Schedule Contract with IBM Corp.
 'use strict';
 var _ = require('lodash');
-var i18nSupport = require('@marketplace/i18n-support');
-var sevenseas = require('@marketplace/sevenseas');
+var i18nSupport = require('../../i18n-support');
+var sevenseas = require('../../sevenseas');
 
 module.exports = {
   getCountriesWithLang: function(req, res) {
