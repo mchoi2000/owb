@@ -27,7 +27,7 @@ try {
 var webRoot = process.env.CFCI_WEB_ROOT;
 
 var requireDir = require('require-dir');
-requireDir('./gulp-tasks');
+requireDir('./gulp-tasks', {recurse: true});
 
 // Code Coverage Reporting Params
 let lobsterOpts = {

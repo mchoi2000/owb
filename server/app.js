@@ -13,7 +13,6 @@ var path = require('path');
 var pem = require('pem');
 
 var express = require('express');
-var path = require('path');
 var passport = require('passport');
 var logger = require('./components/logger').get('app');
 
