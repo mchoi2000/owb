@@ -1,0 +1,8 @@
+# created by Pradeep Kadiyala <pkadiya@us.ibm.com>
+#
+# Client and Server coverage reports are placed in /reports/coverage as part of `gulp test`
+# The build process then runs `istanbul report` to merge them into /reports/converage/conbined
+# This is the config file for that command
+
+reporting:
+  dir: reports/coverage/report-combined
