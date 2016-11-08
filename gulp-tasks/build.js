@@ -32,6 +32,7 @@ const transforms = {
 
 const ngApps = [
   'public',
+  'register',
   'review'
 ];
 

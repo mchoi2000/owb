@@ -114,7 +114,11 @@ module.exports = function exportsMiddleware(app, passport) {
     }));
     app.use('/common',
       express.static(path.join(config.root, 'client/common'), staticOpts));
+    app.use('/register/cmm', roles.is('unregistered operator'),
+      express.static(path.join(config.root, 'client/register'), staticOpts));
     app.set('appPath', path.join(config.root, 'client'));
+    app.use('/register', roles.is('unregistered operator'),
+      express.static(path.join(config.root, 'client/register'), staticOpts));
   }
 
   if (env === 'development') {
@@ -134,6 +138,10 @@ module.exports = function exportsMiddleware(app, passport) {
       }));
       app.use('/common',
         express.static(path.join(config.root, 'client/common'), staticOpts));
+      app.use('/register/cmm', roles.is('unregistered operator'),
+        express.static(path.join(config.root, 'client/register'), staticOpts));
+      app.use('/register', roles.is('unregistered operator'),
+        express.static(path.join(config.root, 'client/register'), staticOpts));
 
       app.use('/', express.static(path.join(config.root, '.tmp/public'), staticOpts));
       app.use('/common',
@@ -142,6 +150,8 @@ module.exports = function exportsMiddleware(app, passport) {
         express.static(path.join(config.root, '.tmp/review'), staticOpts));
       app.use('/review', roles.is('registered operator'),
         express.static(path.join(config.root, 'client/review'), staticOpts));
+      app.use('/register', roles.is('unregistered operator'),
+        express.static(path.join(config.root, '.tmp/register'), staticOpts));
 
     }
 
