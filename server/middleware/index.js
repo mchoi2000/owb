@@ -90,13 +90,13 @@ module.exports = function exportsMiddleware(app, passport) {
   userAuth.middleware(app, passport);
 
   //CSRF Protections
-  app.use(function appUseCallback(req, res, next) {
+  /*app.use(function appUseCallback(req, res, next) {
     if (!req.user || !req.user.strategy || req.user.strategy !== 'jwt') {
       csrf()(req, res, next);
     } else {
       next();
     }
-  });
+  });*/
   app.use(function appUseCallback(req, res, next) {
     if (req.csrfToken) {
       res.cookie('XSRF-TOKEN', req.csrfToken(), {

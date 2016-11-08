@@ -61,7 +61,7 @@ describe('user data access', function() {
       });
   });
 
-  it('should create user (PWB Error)', function(done) {
+  it('should create user (OWB Error)', function(done) {
     let self = this;
     let da = proxyquire('./user.da.db', {pouchdb: self.pouchWrapper.MockPouch});
 
@@ -71,7 +71,7 @@ describe('user data access', function() {
         done();
       })
       .catch(function(reason) {
-        reason.should.be.instanceof(Errors.PWBError);
+        reason.should.be.instanceof(Errors.OWBError);
         done();
       });
   });
@@ -242,7 +242,7 @@ describe('user data access', function() {
         done();
       })
       .catch(function(reason) {
-        reason.name.should.equal('PWBError');
+        reason.name.should.equal('OWBError');
         done();
       });
   });

@@ -10,12 +10,13 @@
 // ==================================
 
 module.exports = {
-  webHost: 'www.ibm.com',
+  webHost: 'opwb.w3ibm.mybluemix.net',
 
   //Cloudant URL
   dbUrl: 'https://opwb.cloudant.com',
   dbdir: './db/',
   usersDB: 'prod-user',
+  userAuditDB: 'prod-user-audit',
 
   remoteDBOptions: {
     auth: {
@@ -45,5 +46,10 @@ module.exports = {
     clientSecret: process.env.CFCI_IDAAS_SECRET,
     callbackURL: process.env.CFCI_IDAAS_CALLBACK,
     issuer: 'https://w3id.sso.ibm.com/isam'
+  },
+  emails: {
+    owbTeamEmail: ['owbteam@us.ibm.com'],
+    owbTeamName: 'Operator Workbench team',
+    noreplyEmail: 'noreply@operatorworkbench.com'
   }
 };

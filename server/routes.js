@@ -19,6 +19,7 @@ module.exports = function exportRoutes(app, passport) {
 
   // Insert routes below
   auth.routes(app, passport);
+  app.use('/globalization', require('./api/invite'));
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|client/public/bower_components|assets|images)/*')

@@ -35,7 +35,9 @@ var environment = {
   secrets: {
     session: process.env.CFCI_SESS_SECRET
   },
-  authStrategy: process.env.AUTH_STRAT || 'idaas'
+  authStrategy: process.env.AUTH_STRAT || 'idaas',
+
+  sendgridApiKey: process.env.CFCI_SENDGRID_API_KEY
 };
 
 // Merge specific NODE_ENV configuration settings into environment
