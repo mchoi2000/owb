@@ -64,7 +64,7 @@ var mockApp = {
   },
 
   post: function(path, fn1, fn2) {
-    path.should.equal('/auth/register');
+    path.should.equal('/auth/register/cmm');
     testRegister(fn2);
   }
 };

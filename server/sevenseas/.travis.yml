@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+- 4.2.1
+env:
+  global:
+  - APP_PATH=${TRAVIS_BUILD_DIR}
+  - APP_NAME="sevenseas"
+  # GEMFURY_TOKEN
+  - secure: EGgQuSIfq/M6Llf0WEcW9Okk6dRVF+KFridBN+hj6ro6QykENNYxGS4FlcZ8Xh/ohDxMuaS481ZLEXTzP63Oy9iN5r6SZBZ3Vdzbowp2RYKqNhfc50R6sfMhVaWZKSw4AppMHBZ67QApdm9UoMoW41Cb1CkQGqKic/buN3er69s=
+
+before_script:
+- npm install --unsafe-perm
+script:
+- npm test
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: "gulp test && ./node_modules/.bin/publish_package.sh ${PWD}"
+  on:
+    # branch: master
+    all_branches: true

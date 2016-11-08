@@ -72,7 +72,7 @@ function middleware(app, passport) {
 
   //app.use('/provider/', ensureAuthenticated, ensurePwbAccess, ensureRegistered);
   //app.use('/register/', ensureAuthenticated);
-  app.use('/review/cmm', ensureAuthenticated);
+  app.use('/review/cmm', ensureAuthenticated, ensureRegistered);
 
   function ensureAuthenticated(req, res, next) {
     if (!req.isAuthenticated()) {
@@ -100,7 +100,7 @@ function middleware(app, passport) {
       req.session.returnTo = req.originalUrl;
 
       return req.session.save(function saveSession() {
-        return res.redirect(config.webRoot + 'register');
+        return res.redirect(config.webRoot + 'register/cmm');
       });
     }
     next();
@@ -149,14 +149,17 @@ function routes(app, passport) {
     })(req, res, next);
   });
 
-  app.post('/auth/register', roles.is('unregistered provider'), function register(req, res) {
+  app.post('/auth/register/cmm', roles.is('unregistered operator'), function register(req, res) {
     if (!req.user.registered) {
       var user = {
         _id: req.user._id,
         fname: req.body.fname,
         lname: req.body.lname,
         phoneNumber: req.body.phoneNumber,
-        projectRole: req.body.projectRole,
+        info: {
+          locales: req.body.projectLocales,
+          projectRole: req.body.projectRole
+        },
         registered: true
       };
 
@@ -196,7 +199,7 @@ function routes(app, passport) {
         home = home + '/review/cmm';
         break;
       default:
-        home = home + '/register';
+        home = home + '/register/cmm';
     }
 
     logger.debug('Homepage %s for user role %s', home, role);
