@@ -15,6 +15,7 @@ install:
 - npm install
 script:
 - gulp test
+- istanbul report
 - gulp build
 deploy:
   skip_cleanup: true
@@ -23,6 +24,9 @@ deploy:
   on:
     branch: master
     node: 6.3.1
+after_deploy:
+- gulp report-coverage
+- "./bin/uploadCoverage.sh"
 env:
   global:
     # Common Unsecure Variables ( Same in prod / stage )
@@ -45,6 +49,8 @@ env:
     - secure: nadyFZH+e1sDnw5eDwwxitqRfQLeRb6Zph/EJxAbrRNc1tktNbuzHV8jLpB3WoU2ROKgHq+pRYXmY1kTXRCWyQuimjEAdjUsDb8P+LaVb/k3P6b++hX3qThs3xqEkRNhwwN3vu8mwyoEd/ajvogy8O/7A+PHSgv0nEY+UsG3wsw954T67v3+y/DcY41Ve/11d9wyUg3WuhFJSab8krlEa+I/OnHkZnRUfSo3BzdbP2Ocb2nO4lmyNuURPvaVXJMRtkgXh7yydosCi79e2lk2jRS/eB2zxE4aHsQUrWbYoJOqhJw03+dK6O4yy9HOBhXWfjNB4O9/75FOqQO5QqKI/Sj4J06MsEC2BghtZYZzSrVArwHjxn474V/KOGtWTZunpdnDhASEdyPQ9ChE7cvL1UaEh/cZ2cYyQBJdu2pTD5/w/SVWTvjBONXQ3v4kGHtxNYHABz60l9kAXu2gGCDVRX4M+E5kizLZk2+3Lbc5wKukKd6FabLco9JsoIFsFIJ6N6kAddTC34ErQF/tfLL+QNdut4TgPMhx3NjizsV045OHNAjJN484tZAMWL26pZeuxQ7zKvfTB/HP5YO4A/22b1BcFub3hfDSL0QwzTbOO3RNFtygN4cLsECBV4AFK1Kc/t8cteEF4mOfpK4RxR91PHx3deS1RsJHWNRI4nySdl8=
     # CFCI_CLOUDANT_PASSWORD
     - secure: QZQWxxY4CYkm8MK3DlAwHtRNuKdfdRzDsTT5aTM2OozvpeyU93Yy1j6/Fzwjk1INTXdRDjeQhOE00qXGMMMoXGB8zH831C7I0Qkd8ZreIWL7JYJuOBdYWKuCO/DGrHLqc6uQ+gTsHAD6WAmZvE6C4KWPGOmGaRUM/YJepqW8uUm1gDgHcFzRL4DMKeLoFvb/yIEAQNP8p7mSFJFPm9Y/USj88+ajAyzSb5uDnGvBvcBQ0TgewOQsX0w6bTzSGCieSZ2THXuSD2uirXYuABLQtz9bRc9ZPn8CRSreSP+O4n4xjLx/YF347nPkXFDi4ii4t0jzlU8dXI+/lVN9IhPv7oeIpRBJZ5B5Xi7vHsCva7+AnTFVWtaAUX5fp9bTKLlVTf+pwpnXKI/z5+/K9dwF+ie/KoEOIQbkGb3mCln4zKE/5RX7qPCRjb8+6wL4gZ89efU992ezC9WE7G6YIYuBu8WNtIr25tu/hSbpLpKc5ymqyWgeznbqLtmA3iXOISruBWK0ID3ysC1P9DSL05ukh/msN/ZBi5xOvAonTl2H51wK93CwpVetptUNzt0Bsrv8zo+dvSCmlMWc6LraeylQihT1Mbm+/7PUD7fmTu1YqCkSxK7jktZBlvIY2t8g+ZtiYPOvh9TsNt5SKenBTi2LHC2MpkDRRY9NWg8tDYIsejI=
+    # LOBSTER_API_KEY
+    - secure: cFMNOZkJQEyWzvJ3w+CbaqvcBDy2akzOw8RZ5AGJOlXtpFqaE+X80JpiMD4tRFW1rl58HVMeL9pJhCih7pBXVvR+jSdYggqRoRNeuhOKvEWIq98tL+B1YWb2hflEOBj4ZUpgyBSsEYWscKus+NuCAOw0HbYAK/fAISgqv/qmoQv50QMnzKY65sH9xz7SZ9UFAAFKNi2JmhZCMi2CnQe0FE0B0unNAM1uF/sUq2FfQW3fg3HOAwUFHmrF1u2WNWCMzeyn/qT+mESAiRf/Wvy6nlYIGZ6ktgQtEGQscMsZtqAO0/f2zJuruNGEaUgFN9Ae041V8WRRm/C4J0B+tVw7andSnHRoGG/v53zMp/+hi066rgVxYtChQ9l7ANpNKYE831CpfrMYQTtVU51u1cKDrRPZNWRGagaLiv5Tpf6UqdQ1mCd5oOX+YJwwRywNtAfGnSa5W1UtISjq4Xu51kDjdISZGbKiyR7BRbFJE8q8HXYN0PP1ObD3GgFQpoTkFnV+6wU9CmyXeb3X+KeNTS1nVvXXwoLU1ddxGs9x9W3rkA6D4diLmA51tZ7un0Hzasg0p/TmokhCO7TzSeZc1F8ui+Ylw8CV/R45GPjZkEVSSIsLw8JBVeV4rmVjCOpoUlP5zEUCpwphzi6RVsVITqYbwIiJUytrtyVDB9pDO8MToOc=
     # Production Unsecure Vars
     ##
     - APP_NAME=opwb

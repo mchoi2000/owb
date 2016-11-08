@@ -12,6 +12,7 @@ const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
 const browserSync = require('browser-sync').create();
 const fs = require('fs');
+const lobster = require('@marketplace/lobster');
 
 // If running gulp locally, load local env variables
 try {
@@ -27,6 +28,15 @@ var webRoot = process.env.CFCI_WEB_ROOT;
 
 var requireDir = require('require-dir');
 requireDir('./gulp-tasks');
+
+
+// Code Coverage Reporting Params
+let lobsterOpts = {
+  apiKey: process.env.LOBSTER_API_KEY,
+  coveragePageURL:
+    'https://pages.github.ibm.com/digital-marketplace/operator-wb-playbacks/coverage/lcov-report/',
+  reportLocation: 'reports/coverage/report-combined/lcov-report/index.html'
+};
 
 // Start server in development mode with browser-sync
 gulp.task('serve', ['express:dev'], function() {
@@ -64,4 +74,10 @@ gulp.task('env:dev', function(cb) {
   process.env.CFCI_IDAAS_CALLBACK =
     'https://localhost:3000/marketplace/operator/auth/sso/oidc/return';
   cb();
+});
+
+//Report Code Coverage
+gulp.task('report-coverage', function() {
+  gulp.src(lobsterOpts.reportLocation)
+    .pipe(lobster.sendIstanbulCoverageInfo(lobsterOpts));
 });
