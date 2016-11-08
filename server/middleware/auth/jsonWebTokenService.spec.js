@@ -1,6 +1,6 @@
-'use strict';
+//'use strict';
 
-/* jshint unused: false */
+/** jshint unused: false
 var proxyquire = require('proxyquire').noCallThru();
 var sinon = require('sinon');
 var should = require('should');
@@ -138,4 +138,4 @@ describe('JSON Web Token Test Specifications - ', function() {
     jsonWebTokenService.middleware(mockApp, mockPassportBadRequest);
   });
 
-});
+}); **/

@@ -20,9 +20,9 @@ module.exports = {
 
 function sendOperatorInviteEmails(invitedUsers) {
   return userService.getUser(invitedUsers.invitedBy.id).then(function checkResult(invitedUser) {
-    if (!emailPattern.test(invitedUsers.invitedBy.emailAddress)) {
-      let err = new ValidationError('Invalid email address of the invitedBy user');
-      logger.warn('Invalid email address of the invitedBy user', invitedUsers.invitedBy.email);
+    if (invitedUser.roles.indexOf('admin') === -1) {
+      let err = new ValidationError('Invited User is not an admin');
+      logger.warn('Invited user is not an admin', invitedUser.roles);
       return Promise.reject(err);
     }
     else {

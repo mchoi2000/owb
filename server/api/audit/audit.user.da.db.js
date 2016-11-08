@@ -36,7 +36,6 @@ audits.createIndex({
 module.exports = {
   createUserAudit: createUserAudit,
   getUserAudit: getUserAudit,
-  updateUserAudit: updateUserAudit,
   queryUserAudits: queryUserAudits,
   getAllUsersAudits: getAllUsersAudits
 };
@@ -76,23 +75,6 @@ function getAllUsersAudits() {
   then(function resolveGetAllUser(response) {
     logger.debug('Got all users audits from DB');
     return response;
-  });
-}
-
-function updateUserAudit(data) {
-  return audits.put(data).
-  then(function resolveUpdate(response) {
-    logger.debug('Updated user audit %s to rev %s', response.id, response.rev);
-    return response;
-  }).
-  catch(function rejectUpdate(reason) {
-    if (reason.status === 409) {
-      logger.warn('Conflict error updating user audit %s to rev %s', reason.id, reason.rev);
-      throw new Errors.ConflictError(reason.id, reason.rev, 'Conflict Error\n' + reason.message);
-    }
-
-    logger.warn('Unable to update user audit %s from rev %s\n%j', reason.id, reason.rev, reason);
-    throw new Errors.OWBError('Error updating user:\n' + reason.message);
   });
 }
 

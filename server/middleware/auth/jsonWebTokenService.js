@@ -1,4 +1,4 @@
-var jwt = require('jsonwebtoken');
+/**var jwt = require('jsonwebtoken');
 var JWTStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var passport = require('passport');
@@ -42,12 +42,8 @@ function middleware (app, passport) {
 
   passport.use(jwtStrategy);
 
-  app.use('/api/wcm', passport.authenticate('jwt', {session: false}));
-  app.use('/api/build', passport.authenticate('jwt', {session: false}));
-  app.use('/api/download/content/:id', passport.authenticate('jwt', {session: false}));
-  app.use('/api/products/translatable/:id', passport.authenticate('jwt', {session: false}));
-  app.use('/api/reminder', passport.authenticate('jwt', {session: false}));
+  app.use('/api/invite', passport.authenticate('jwt', {session: false}));
 }
 
 module.exports.middleware = middleware;
-module.exports.constructJWT = constructJWT;
+module.exports.constructJWT = constructJWT; **/

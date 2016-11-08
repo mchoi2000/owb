@@ -17,7 +17,7 @@ var user = {
   'lname': 'userLastName',
   'registered': false,
   'countries': ['country1'],
-  'roles': ['operator']
+  'roles': ['admin']
 };
 var userAudit = {
 
@@ -34,7 +34,8 @@ var invitedUsers = {
     'id': 'userId',
     'emailAddress': 'userEmail@ibm.com',
     'fname': 'userFirstName',
-    'lname': 'userLastName'
+    'lname': 'userLastName',
+    'roles': ['admin']
   }
 };
 
@@ -52,7 +53,7 @@ beforeEach(function() {
         return Promise.resolve({ok: true});
       },
       getUser: function(id) {
-        return Promise.resolve({user});
+        return Promise.resolve(user);
       }
     },
     '../audit/audit.user.service': {
@@ -106,10 +107,10 @@ describe('Invite Service Test - ', function mainTestInviteService() {
     self.inviteService.sendOperatorInviteEmails(invitedUsers).catch(cb);
   });
 
-  it('should fail the user invite process because of invalid email of the invitee user',
+  it('should fail the user invite process because invitee user donot have an admin role',
   function showFail(done) {
     var self = this;
-    invitedUsers.invitedBy.emailAddress = 'userEmail@google.com';
+    user.roles = '[\'operator\']';
     var cb = function (err) {
       assert(err.name === 'ValidationError');
       done();
@@ -123,6 +124,7 @@ describe('Invite Service Test - ', function mainTestInviteService() {
     invitedUsers.invitedBy.id = 'userId';
     invitedUsers.invitedBy.emailAddress = 'userEmail@ibm.com';
     invitedUsers.users[0].emailAddress = 'someEmail@google.com';
+    user.roles = '[\'admin\']';
     var cb = function (results) {
       assert(results instanceof Array);
       done();
@@ -145,7 +147,7 @@ describe('Invite Service Test - ', function mainTestInviteService() {
             return Promise.reject({err: {status: 404}});
           },
           getUser: function(id) {
-            return Promise.resolve({ok: true});
+            return Promise.resolve(user);
           }
         },
         '../audit/audit.user.service': {

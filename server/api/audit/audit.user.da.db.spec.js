@@ -76,6 +76,24 @@ describe('user data access', function () {
       });
   });
 
+  it('should get user audit', function(done) {
+    let self = this;
+    let da = proxyquire('./audit.user.da.db', {pouchdb: self.pouchWrapper.MockPouch});
+
+    da.createUserAudit({test: 'testValue'})
+      .then(function(response) {
+        return da.getUserAudit(response.id);
+      })
+      .then(function(document) {
+        document.test.should.equal('testValue');
+        done();
+      })
+      .catch(function(reason) {
+        expect().toFail(reason.toString());
+        done();
+      });
+  });
+
   it('should get audit (Missing Error)', function(done) {
     let self = this;
     let da = proxyquire('./audit.user.da.db', {pouchdb: self.pouchWrapper.MockPouch});
@@ -120,60 +138,6 @@ describe('user data access', function () {
       })
       .catch(function (reason) {
         expect().toFail(reason);
-        done();
-      });
-  });
-
-  it('should update user audit', function (done) {
-    let self = this;
-    let da = proxyquire('./audit.user.da.db', {pouchdb: self.pouchWrapper.MockPouch});
-
-    da.createUserAudit({test: 'testValue'})
-      .then(function (response) {
-        return da.updateUserAudit({_id: response.id, _rev: response.rev, test: 'testValue2'});
-      })
-      .then(function (response) {
-        response.ok.should.be.true();
-        return da.getUserAudit(response.id);
-      })
-      .then(function (doc) {
-        doc.test.should.equal('testValue2');
-        done();
-      })
-      .catch(function (reason) {
-        expect().toFail(reason.toString());
-        done();
-      });
-  });
-
-  it('should fail to update user audit(Conflict Error)', function (done) {
-    let self = this;
-    let da = proxyquire('./audit.user.da.db', {pouchdb: self.pouchWrapper.MockPouch});
-
-    da.createUserAudit({test: 'testValue'})
-      .then(function (response) {
-        return da.updateUserAudit({_id: response.id, test: 'testValue2'});
-      })
-      .catch(function (reason) {
-        reason.name.should.equal('ConflictError');
-        done();
-      });
-  });
-
-  it('should fail to update user audit (OWB Error)', function (done) {
-    let self = this;
-    let da = proxyquire('./audit.user.da.db', {pouchdb: self.pouchWrapper.MockPouch});
-
-    da.createUserAudit({test: 'testValue'})
-      .then(function (response) {
-        return da.updateUserAudit({id: response.id, test: 'testValue2'});
-      })
-      .then(function () {
-        expect().toFail('Update of doc should not have succeeded');
-        done();
-      })
-      .catch(function (reason) {
-        reason.name.should.equal('OWBError');
         done();
       });
   });

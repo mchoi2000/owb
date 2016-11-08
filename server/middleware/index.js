@@ -19,6 +19,7 @@ const config = require('../config/environment');
 const logger = require('../components/logger').get('access');
 const roles = require('./auth/roles');
 const userAuth = require('./auth/idaas');
+const serviceAuth = require('./auth/jsonWebTokenService');
 const RedisStore = require('connect-redis')(expressSession);
 
 module.exports = function exportsMiddleware(app, passport) {
@@ -88,6 +89,7 @@ module.exports = function exportsMiddleware(app, passport) {
   app.use(passport.session());
 
   userAuth.middleware(app, passport);
+  //serviceAuth.middleware(app, passport);
 
   //CSRF Protections
   /*app.use(function appUseCallback(req, res, next) {
