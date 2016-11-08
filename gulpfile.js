@@ -29,7 +29,6 @@ var webRoot = process.env.CFCI_WEB_ROOT;
 var requireDir = require('require-dir');
 requireDir('./gulp-tasks');
 
-
 // Code Coverage Reporting Params
 let lobsterOpts = {
   apiKey: process.env.LOBSTER_API_KEY,
