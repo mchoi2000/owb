@@ -41,7 +41,7 @@ var invitedUsers = {
 beforeEach(function() {
   var self = this;
   self.inviteService = proxyquire('./invite.service', {
-    '.../../components/email': {
+    '../../components/email': {
       invite: {
         emailInvitedOperator: function(countries, invitedBy, user) {
         }
@@ -129,5 +129,37 @@ describe('Invite Service Test - ', function mainTestInviteService() {
     };
     self.inviteService.sendOperatorInviteEmails(invitedUsers).then(cb);
   });
+
+  it('should fail the user invite process because of application error ',
+    function showFail(done) {
+      var self = this;
+      self.inviteService = proxyquire('./invite.service', {
+        '.../../components/email': {
+          invite: {
+            emailInvitedOperator: function(countries, invitedBy, user) {
+            }
+          }
+        },
+        '../user/user.service': {
+          addUser: function (operator) {
+            return Promise.reject({err: {status: 404}});
+          },
+          getUser: function(id) {
+            return Promise.resolve({ok: true});
+          }
+        },
+        '../audit/audit.user.service': {
+          addUserAudit: function(audit) {
+            return Promise.resolve(userAudit);
+          }
+        }
+      });
+      invitedUsers.users[0].emailAddress = 'userEmail@ibm.com';
+      var cb = function (results) {
+        assert(results instanceof Array);
+        done();
+      };
+      self.inviteService.sendOperatorInviteEmails(invitedUsers).then(cb);
+    });
 
 });
