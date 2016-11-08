@@ -11,11 +11,12 @@
 
 module.exports = {
   //Logging Config
-  webHost: 'w3.stage.ibm.com',
+  webHost: 'opwb-stage.w3ibm.mybluemix.net',
   //Cloudant URL
   dbUrl: 'https://opwb.cloudant.com',
   dbdir: './db/',
   usersDB: 'stage-user',
+  userAuditDB: 'stage-user-audit',
 
   remoteDBOptions: {
     auth: {
@@ -44,5 +45,10 @@ module.exports = {
     clientSecret: process.env.CFCI_IDAAS_SECRET,
     callbackURL: process.env.CFCI_IDAAS_CALLBACK,
     issuer: 'https://w3id.alpha.sso.ibm.com/isam'
+  },
+  emails: {
+    owbTeamEmail: ['owbteam@us.ibm.com'],
+    owbTeamName: 'Operator Workbench team',
+    noreplyEmail: 'noreply@operatorworkbench.com'
   }
 };

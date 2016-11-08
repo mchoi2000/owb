@@ -14,9 +14,10 @@ module.exports = {
   denodeify: denodeify,
   MockPouchWrapper: MockPouchWrapper,
   Errors: {
-    PWBError: PWBError,
+    OWBError: OWBError,
     MissingError: MissingError,
-    ConflictError: ConflictError
+    ConflictError: ConflictError,
+    ValidationError: ValidationError
   }
 };
 
@@ -92,11 +93,20 @@ function MissingError(documentId, message) {
 }
 util.inherits(MissingError, Error);
 
-function PWBError(message) {
+function OWBError(message) {
   var self = this;
   Error.captureStackTrace(this, this.constructor);
   self.name = self.constructor.name;
   self.message = message;
 }
-util.inherits(PWBError, Error);
+util.inherits(OWBError, Error);
+
+function ValidationError(message, details) {
+  let self = this;
+  Error.captureStackTrace(this, this.constructor);
+  self.name = self.constructor.name;
+  self.message = message;
+  self.details = details;
+}
+util.inherits(ValidationError, Error);
 
