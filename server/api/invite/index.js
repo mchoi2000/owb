@@ -10,5 +10,5 @@ const express = require('express');
 const controller = require('./invite.controller');
 
 const router = express.Router();
-router.post('/invite', controller.inviteUser);
+router.post('/', controller.inviteUser);
 module.exports = router;

@@ -1,9 +1,9 @@
-/**var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 var JWTStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 var passport = require('passport');
-var config = require('../environment');
-var serviceDBService = require('../../api/services/serviceDB.service');
+var config = require('../../config/environment');
+//var           = require('../../api/services/serviceDB.service');
 var logger = require('../../components/logger').get('security');
 
 //Create a payload for a new JWT Token
@@ -18,7 +18,7 @@ function constructJWT(service) {
 
 //This method will handle the authentication logic for jwtToken using an apikey
 function verifyPayload(req, jwtPayload, done) {
-  serviceDBService.getService(jwtPayload.sub)
+  /* serviceDBService.getService(jwtPayload.sub)
     .then(function getServiceCallback(result) {
       req.user = {
         _id: jwtPayload.sub,
@@ -29,7 +29,13 @@ function verifyPayload(req, jwtPayload, done) {
     }).catch(function catchCallback(err) {
       logger.error('JWT Authentication Error %s', err);
       done(err, null);
-    });
+    }); */
+  req.user = {
+    _id: jwtPayload.sub,
+    roles: jwtPayload.roles,
+    strategy: 'jwt'
+  };
+  done(null, req.user);
 }
 
 function middleware (app, passport) {
@@ -42,8 +48,8 @@ function middleware (app, passport) {
 
   passport.use(jwtStrategy);
 
-  app.use('/api/invite', passport.authenticate('jwt', {session: false}));
+  app.use('/globalization/invite', passport.authenticate('jwt', {session: false}));
 }
 
 module.exports.middleware = middleware;
-module.exports.constructJWT = constructJWT; **/
+module.exports.constructJWT = constructJWT;
