@@ -37,7 +37,10 @@ var environment = {
   },
   authStrategy: process.env.AUTH_STRAT || 'idaas',
 
-  sendgridApiKey: process.env.CFCI_SENDGRID_API_KEY
+  sendgridApiKey: process.env.CFCI_SENDGRID_API_KEY,
+
+  tokenSecret: process.env.CFCI_JWT_TOKEN_SECRET,
+  jwtAlgorithms: ['HS256']
 };
 
 // Merge specific NODE_ENV configuration settings into environment

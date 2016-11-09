@@ -19,7 +19,7 @@ module.exports = function exportRoutes(app, passport) {
 
   // Insert routes below
   auth.routes(app, passport);
-  app.use('/globalization', require('./api/invite'));
+  app.use('/globalization/invite', require('./api/invite'));
 
   app.use('/api/user', require('./api/user'));
   app.use('/api/locales', require('./api/locales'));
