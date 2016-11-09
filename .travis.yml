@@ -16,7 +16,7 @@ install:
 script:
 - gulp test
 - istanbul report
-  - gulp build
+- gulp build
 deploy:
   skip_cleanup: true
   provider: script
