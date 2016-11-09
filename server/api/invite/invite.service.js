@@ -59,7 +59,7 @@ function createOperator(user) {
   let operator = {
     _id : user.id,
     email : user.emailAddress,
-    name : user.fname,
+    fname : user.fname,
     lname : user.lname,
     registered : false
   };
