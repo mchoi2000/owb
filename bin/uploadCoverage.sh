@@ -12,7 +12,7 @@ cd ..
 rm -rf ghpagesRepo
 mkdir ghpagesRepo
 cd ghpagesRepo
-git clone --branch=gh-pages git@github.ibm.com:digital-marketplace/operator-wb-playbacks.git
+git clone --branch=gh-pages https://github.ibm.com/digital-marketplace/operator-wb-playbacks.git
 cd operator-wb-playbacks
 
 # Clean up old coverage report
