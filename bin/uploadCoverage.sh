@@ -2,7 +2,7 @@
 
 # Upload Coverage Report
 
-git config --global user.email "pkadiya@travis.innovate.ibm.com"
+git config --global user.email "pkadiya@us.ibm.com"
 git config --global user.name "Travis CI"
 
 wbClientCoverageReport="../../operator-workbench/reports/coverage/report-combined/lcov-report"
