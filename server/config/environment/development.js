@@ -20,8 +20,8 @@ module.exports = {
 
   remoteDBOptions: {
     auth: {
-      username: '',
-      password: ''
+      username: process.env.CFCI_CLOUDANT_USERNAME,
+      password: process.env.CFCI_CLOUDANT_PASSWORD
     }
   },
 
