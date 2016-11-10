@@ -10,6 +10,7 @@
 const gulp = require('gulp');
 const plugins = require('gulp-load-plugins')();
 const runSequence = require('run-sequence');
+const argv = require('yargs').argv;
 
 var mockIdaas;
 var mockV18;

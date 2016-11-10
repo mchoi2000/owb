@@ -27,10 +27,10 @@ function addUser(user) {
     fname: user.fname,
     lname: user.lname,
     registered: false,
-    countries: [],
+    locales: [],
     roles: []
   };
-  return da.createUser(user);
+  return da.createUser(newUser);
 }
 
 function getUser(identifier) {

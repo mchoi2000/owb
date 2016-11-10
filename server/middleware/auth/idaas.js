@@ -155,11 +155,7 @@ function routes(app, passport) {
         _id: req.user._id,
         fname: req.body.fname,
         lname: req.body.lname,
-        phoneNumber: req.body.phoneNumber,
-        info: {
-          locales: req.body.projectLocales,
-          projectRole: req.body.projectRole
-        },
+        info: req.body.info,
         registered: true
       };
 

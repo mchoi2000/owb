@@ -13,7 +13,7 @@
 
     $routeProvider.otherwise({
       controller: 'RegistrationController',
-      controllerAs: 'RegistrationCtrl',
+      controllerAs: 'ctrlReg',
       templateUrl: 'register/app/register.html',
       pageTitle: 'Join the Operator Workbench',
       pageSlug: 'register'

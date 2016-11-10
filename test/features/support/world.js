@@ -18,7 +18,7 @@ const webBase = 'https://' + config.webHost + ':9001' + config.webRoot;
 function World() {
   this.browser = new Browser({
     strictSSL: false,
-    waitDuration: '10s'
+    waitDuration: '30s'
   });
 
   this.browser.pipeline.addHandler((browser, request) => {
@@ -34,13 +34,6 @@ function World() {
   });
 
   this.usersDB = new Pouchdb(config.dbdir + config.usersDB);
-  this.productsDB = new Pouchdb(config.dbdir + config.productsDB);
-  this.qualifDB = new Pouchdb(config.dbdir + config.qualificationsDB);
-  this.contentDB = new Pouchdb(config.dbUrl + '/' + config.contentDB);
-  this.publishDB = new Pouchdb(config.dbUrl + '/' + config.publishedProdDB);
-  this.blacklistDB = new Pouchdb(config.dbUrl + '/' + config.blacklistDB);
-  this.invitedDB = new Pouchdb(config.dbUrl + '/' + config.inviteDB);
-  this.serviceDB = new Pouchdb(config.dbUrl + '/' + config.serviceDB);
 
   this.webHost = config.webHost;
   this.webRoot = config.webRoot;
