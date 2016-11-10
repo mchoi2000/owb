@@ -1,0 +1,8 @@
+{
+  "log": {
+    "file": "./db/log.txt"
+  },
+  "couchdb": {
+    "uuid": "5209b590-0547-4e5c-b0c5-222a0f703baa"
+  }
+}

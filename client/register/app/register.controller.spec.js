@@ -3,109 +3,119 @@
 describe('Register controller', function() {
   var $httpBackend;
   var $controller;
+  var ctrl;
 
-  beforeEach(module('register', function($provide) {
-    $provide.value('$window', {
-      location: {
-        href: ''
-      }
-    });
-  }));
+  var $window = {
+    location: {
+      href: ''
+    }
+  };
+
+  beforeEach(module('register'));
 
   beforeEach(inject(function(_$httpBackend_, _$controller_) {
     $httpBackend = _$httpBackend_;
     $controller = _$controller_;
-    $httpBackend.when('GET', 'api/locales').respond(['en-us']);
-    $httpBackend.when('POST', 'auth/register/cmm').respond({});
-    $httpBackend.when('GET', 'api/user').respond({_id: 'userId'});
+    ctrl = $controller('RegistrationController', {
+      $window: $window
+    });
+
+    $httpBackend.when('GET', 'api/locales').respond(200,
+      [
+        {name: 'Test1', locale: 'code1'},
+        {name: 'Test2', locale: 'code2'},
+        {name: 'Test3', locale: 'code3'}
+      ]
+    );
+    $httpBackend.when('GET', 'api/catalog/getTMTContactModules').respond(200, {
+        'BU1': 'Name1',
+        'BU2': 'Name2',
+        'BU3': 'Name3'
+      }
+    );
+    $httpBackend.when('GET', 'api/user').respond(200, {_id: 'userId'});
   }));
 
-  it('should get user', function() {
-    var ctrl = $controller('RegistrationController');
-    $httpBackend.expect('GET', 'api/user');
-    ctrl.getUser();
-    $httpBackend.flush();
-    expect(ctrl.user._id).toBe('userId');
-  });
-
-  it('should get locales', function() {
-    var ctrl = $controller('RegistrationController');
-    $httpBackend.expect('GET', 'api/locales');
-    ctrl.getLocales();
-    $httpBackend.flush();
-    expect(ctrl.locales[0]).toBe('en-us');
-  });
-
-  it('should accept registration', function() {
-    var ctrl = $controller('RegistrationController');
-    $httpBackend.expect('POST', 'auth/register/cmm');
-    ctrl.role = 'test';
-    ctrl.selectedLocales = ['en-us'];
-    var projectRoleField = {};
-    projectRoleField.$setViewValue = function(viewValue) {
-      expect(viewValue).toBe('test');
-    };
-
-    var projectLocalesField = {};
-    projectLocalesField.$setViewValue = function(viewValue) {
-      expect(viewValue[0]).toBe('en-us');
-    };
-    ctrl.acceptRegistration({
-      $invalid: false,
-      projectRole: projectRoleField,
-      projectLocales: projectLocalesField
-    });
-
-    $httpBackend.flush();
-  });
-
-  it('should accept registration (invalid form)', function() {
-    var ctrl = $controller('RegistrationController');
-    ctrl.role = 'test';
-    ctrl.selectedLocales = ['en-us'];
-
-    var projectRoleField = {};
-    projectRoleField.$setViewValue = function(viewValue) {
-      expect(viewValue).toBe('test');
-    };
-
-    var projectLocalesField = {};
-    projectLocalesField.$setViewValue = function(viewValue) {
-      expect(viewValue[0]).toBe('en-us');
-    };
-
-    ctrl.acceptRegistration({
-      $invalid: true,
-      projectRole: projectRoleField,
-      projectLocales: projectLocalesField
-    });
-  });
-
-  it('should update the role option', function() {
-    var ctrl = $controller('RegistrationController');
-
-    ctrl.updateRoleOption('test', true);
-    expect(ctrl.role).toBe('test');
-
-    ctrl.updateRoleOption('test', false);
-    expect(ctrl.role).toBe('test');
-  });
-
-  it('should update the role option with other', function() {
-    var ctrl = $controller('RegistrationController');
-
-    ctrl.updateRoleOption('Other', true);
-    expect(ctrl.role).toBe('');
-    expect(ctrl.selectedRole).toBe('Other');
-  });
-
-  it('should initialize the registration', function() {
-    var ctrl = $controller('RegistrationController');
-
+  it('should initialize', function() {
     ctrl.initialize();
-    expect(ctrl.selectedRole).toBe('Select one');
-    expect(ctrl.roleSelection).toBe('Please Select A Role');
-
+    $httpBackend.flush();
+    expect(ctrl.user._id).toEqual('userId');
+    expect(ctrl.locales).toEqual({
+      'code1': 'Test1',
+      'code2': 'Test2',
+      'code3': 'Test3'
+    });
+    expect(ctrl.businessUnits).toEqual(['BU1', 'BU2', 'BU3']);
   });
 
+  it('should select locales', function() {
+    ctrl.selectedLocales = ['code2', 'code3'];
+    ctrl.changeLocales();
+    expect(ctrl.localeRoleMaps).toEqual([
+      {'locale':'code2','role':''},{'locale':'code3','role':''}
+    ]);
+    expect(ctrl.showOther).toEqual([false,false]);
+  });
+
+  it('should select locales that are already present', function() {
+    ctrl.localeRoleMaps = [{'locale':'code2','role':''}];
+    ctrl.selectedLocales = ['code2', 'code3'];
+    ctrl.changeLocales();
+    expect(ctrl.localeRoleMaps).toEqual([
+      {'locale':'code2','role':''},{'locale':'code3','role':''}
+    ]);
+    expect(ctrl.showOther).toEqual([false,false]);
+  });
+
+  it('should update role: Role = Other', function() {
+    ctrl.showOther = [false, false];
+    var lObj = {'locale': 'code1', 'role': ''};
+    ctrl.updateRoleOption(lObj, 'Other', 0);
+    expect(lObj).toEqual(lObj);
+    expect(ctrl.showOther[0]).toBeTruthy();
+  });
+
+  it('should update role', function() {
+    ctrl.showOther = [false, false];
+    var lObj = {'locale': 'code1', 'role': ''};
+    ctrl.updateRoleOption(lObj, 'Manager', 0);
+    expect(lObj.role).toEqual('Manager');
+    expect(ctrl.showOther[0]).toBeFalsy();
+  });
+
+  it('should check to see if roles are empty', function() {
+    ctrl.localeRoleMaps = [{'locale':'code2','role':''}];
+    expect(ctrl.checkAllRoles()).toBeTruthy();
+  });
+
+  it('should check role is portfolio', function() {
+    ctrl.localeRoleMaps = [{'locale':'code2','role':'Portfolio manager'}];
+    expect(ctrl.isRolePortfolio()).toBeTruthy();
+  });
+
+  it('should accept registration: role and BU not updated', function() {
+    ctrl.user = {fname: '', lname: '', info: {}};
+    $httpBackend.when('POST', 'auth/register/cmm').respond(200, {});
+
+    ctrl.acceptRegistration({'$invalid': false});
+    $httpBackend.flush();
+
+    expect($window.location.href).toEqual('review/cmm');
+  });
+
+  it('should accept registration: role and BU updated', function() {
+    ctrl.user = {fname: '', lname: '', info: {}};
+    ctrl.localeRoleMaps = [{'locale':'code2','role':''}];
+    ctrl.selecteBUs = ['BU1', 'BU2', 'BU3'];
+    $httpBackend.when('POST', 'auth/register/cmm').respond(200, {});
+
+    ctrl.acceptRegistration({'$invalid': false});
+    $httpBackend.flush();
+
+    expect($window.location.href).toEqual('review/cmm');
+  });
+
+  it('should accept registration: form error', function() {
+    ctrl.acceptRegistration({'$invalid': true});
+  });
 });

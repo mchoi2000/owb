@@ -40,7 +40,12 @@ var environment = {
   sendgridApiKey: process.env.CFCI_SENDGRID_API_KEY,
 
   tokenSecret: process.env.CFCI_JWT_TOKEN_SECRET,
-  jwtAlgorithms: ['HS256']
+  jwtAlgorithms: ['HS256'],
+
+  w3APIs: {
+    taxonomies: 'w3.api.ibm.com/common/run/taas/taxonomies',
+    w3ClientSecret: process.env.CFCI_W3_CLIENT_ID
+  }
 };
 
 // Merge specific NODE_ENV configuration settings into environment
