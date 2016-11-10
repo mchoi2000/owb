@@ -27,11 +27,14 @@ function middleware(app, passport) {
       .then(function getUserSuccessCallback(doc) {
           logger.debug('User %s already serialized', user.id);
           done(null, user.id);
-        })
-      .catch(function userNotFound(reason) {
-        logger.debug('Failed to find the user ', user.id);
-        return done(null, false);
-      });
+        },
+        function getUserFailureCallback(err) {
+          logger.debug('Adding new user %s', user.id);
+          userService.addUser(user)
+            .then(function addUserCallback() {
+              done(null, user.id);
+            });
+        });
   });
 
   passport.deserializeUser(function deserializeUserCallback(id, done) {
