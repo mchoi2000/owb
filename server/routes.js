@@ -23,6 +23,7 @@ module.exports = function exportRoutes(app, passport) {
 
   app.use('/api/user', require('./api/user'));
   app.use('/api/locales', require('./api/locales'));
+  app.use('/api/catalog', require('./api/catalog'));
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|client/public/bower_components|assets|images)/*')
