@@ -18,7 +18,7 @@ mkdirp.sync(config.dbdir);
 var baseUrl = config.dbUrl + '/';
 
 // create remote dbservices
-var users = new PouchDB(baseUrl + config.usersDB);
+var users = new PouchDB(baseUrl + config.usersDB, config.remoteDBOptions);
 
 users.createIndex({
   index: {
