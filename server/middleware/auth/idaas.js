@@ -71,7 +71,7 @@ function middleware(app, passport) {
   passport.use(strategyObj);
 
   //app.use('/provider/', ensureAuthenticated, ensurePwbAccess, ensureRegistered);
-  //app.use('/register/', ensureAuthenticated);
+  app.use('/register/cmm', ensureAuthenticated);
   app.use('/review/cmm', ensureAuthenticated, ensureRegistered);
 
   function ensureAuthenticated(req, res, next) {
