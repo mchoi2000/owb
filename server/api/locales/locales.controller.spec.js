@@ -28,8 +28,6 @@ describe('country controller', function() {
         getWCMLanguageAndViewMap : function() {
           return;
         }
-      },
-      '../../../node_modules/@marketplace/i18n-support' : {
       }
     });
     var req = {
