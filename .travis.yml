@@ -1,7 +1,7 @@
 language: node_js
 group: bluezone
 node_js:
-- 6.3.1
+- 6.9.1
 sudo: required
 before_script:
 - npm install -g gulp --progress false --depth 0
@@ -23,7 +23,7 @@ deploy:
   script: "./bin/deploy.sh"
   on:
     branch: master
-    node: 6.3.1
+    node: 6.9.1
 after_deploy:
 - gulp report-coverage
 - "./bin/uploadCoverage.sh"
