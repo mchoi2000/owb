@@ -15,8 +15,8 @@ module.exports = {
   //Cloudant URL
   dbUrl: process.env.CFCI_CLOUDANT_URL,
   dbdir: './db/',
-  usersDB: 'stage-user',
-  userAuditDB: 'stage-user-audit',
+  usersDB: 'owbuserdb',
+  userAuditDB: 'owb-user-audit-db',
 
   remoteDBOptions: {
     auth: {
