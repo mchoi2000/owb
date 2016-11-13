@@ -24,12 +24,10 @@ describe('country controller', function() {
 
   it('fail when sevenseas locale not loaded', function() {
     var _countryController = proxyquire('./locales.controller', {
-      '../../sevenseas' : {
+      '../../../node_modules/@marketplace/sevenseas' : {
         getWCMLanguageAndViewMap : function() {
           return;
         }
-      },
-      '../../i18n-support' : {
       }
     });
     var req = {
