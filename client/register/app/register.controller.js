@@ -54,6 +54,7 @@
 
     function acceptRegistration(registerForm) {
       if (!registerForm.$invalid) {
+        self.user.info = {};
         if (self.localeRoleMaps.length > 0) {
           self.user.info.locales = self.localeRoleMaps;
         }
