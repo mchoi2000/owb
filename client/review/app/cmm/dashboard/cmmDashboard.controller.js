@@ -48,6 +48,11 @@
 
     _this.countryList = '';
 
+    _this.countryLanguageList = '';
+    _this.localeList = [];
+    _this.sortOption = 'country';
+    _this.sortBlah = true;
+
     _this.countrySelected = {
       name: '',
       code: ''
@@ -60,20 +65,20 @@
     };
     var indexedCountries = [];
 
-    _this.countriesToFilter = countriesToFilter;
-    function countriesToFilter() {
-      indexedCountries = [];
-      return _this.countryList;
-    }
+    /* _this.countriesToFilter = countriesToFilter;
+     function countriesToFilter() {
+       indexedCountries = [];
+       return _this.countryList;
+     }
 
-    _this.filterCountries = filterCountries;
-    function filterCountries(country) {
-      var countryNew = (indexedCountries.indexOf(country.IOT) === -1);
-      if (countryNew) {
-        indexedCountries.push(country.IOT);
-      }
-      return countryNew;
-    }
+     _this.filterCountries = filterCountries;
+     function filterCountries(country) {
+       var countryNew = (indexedCountries.indexOf(country.IOT) === -1);
+       if (countryNew) {
+         indexedCountries.push(country.IOT);
+       }
+       return countryNew;
+     }
 
     _this.updatedSort = false;
 
@@ -157,7 +162,7 @@
     // Language Filter
     _this.languageFilter = languageFilter;
     function languageFilter (product) {
-      /*jshint maxcomplexity:50 */
+      /*jshint maxcomplexity:50
 
       // Cycles through product.wcm.locales
       // Returns true if at least one selected language matches
@@ -214,7 +219,7 @@
     // Status Filter
     _this.statusFilter = statusFilter;
     function statusFilter (product) {
-      /*jshint maxcomplexity:20 */
+      /*jshint maxcomplexity:20
       if (_this.statusSelected === '') {
         return true;
       }
@@ -255,7 +260,7 @@
         }
       }
       return false;
-    }
+    } */
 
     _this.initialize = initialize;
     function initialize() {
@@ -264,16 +269,16 @@
       _this.queryParams.search = '';
       queryProducts();
 
-      BlackListCountriesService.getCountries()
-        .then(function getCountryList(result) {
-          _this.countryList = result.data;
+      BlackListCountriesService.getLocales()
+        .then(function getLocalesList(result) {
+          _this.localeList = result;
 
         });
     }
 
     function queryProducts() {
       _this.loadingPage = true;
-      ProductsFactory.getTranslateDocs()
+      /*ProductsFactory.getTranslateDocs()
         .then(function getByStatusCallback(result) {
           if (result.data.docs.length === 0) {
             _this.displayEmpty = true;
@@ -288,7 +293,7 @@
 
           _this.loadingPage = false;
 
-        });
+        }); */
     }
 
     _this.initialize();

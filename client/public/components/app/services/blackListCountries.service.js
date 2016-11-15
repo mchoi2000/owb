@@ -12,24 +12,20 @@
 
   function BlackListCountriesService($http) {
     var blackListCountriesService = {
-      getCountryNames: getCountryNames,
-      getCountries: getCountries,
-      getAllCountries: getAllCountries
+      getLocales: getLocales
     };
 
-    // Gets a clone of the Blacklist country data.
-    function getCountryNames() {
-      return $http.get('api/data/blacklistCountries/getAllCountryNames');
+    function getLocales() {
+      return $http.get('api/locales')
+        .then(function getLocale(locales) {
+          return locales.data.map(function(obj) {
+            return {
+              country: obj.name.split('-')[0].trim(),
+              language: obj.name.split('-')[1].trim()
+            };
+          });
+        });
     }
-
-    function getCountries() {
-      return $http.get('api/data/blacklistCountries/getCountries');
-    }
-
-    function getAllCountries() {
-      return $http.get('api/data/blacklistCountries/getAllCountries');
-    }
-
     return blackListCountriesService;
   }
 })();

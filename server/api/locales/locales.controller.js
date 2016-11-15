@@ -8,7 +8,7 @@
 var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
-var sevenseas = require('../../../node_modules/@marketplace/sevenseas');
+var sevenseas = require('../../sevenseas');
 var i18nSupport = JSON.parse(
   fs.readFileSync(path.normalize(__dirname + '/../../config/i18n-support.json')));
 

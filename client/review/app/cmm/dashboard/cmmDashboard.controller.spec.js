@@ -9,6 +9,7 @@ describe('CMM Dashboard Controller Spec', function() {
   var ctrlDash;
   var $httpBackend, cmmData;
   var $q;
+  var $rootScope;
   var sampleProds = [
     {offeringName: 'Product A', cmc: {status: 'Approved'}, owner: 'AOwner'},
     {offeringName: 'Product D', cmc: {status: 'Approved'}, owner: 'DOwner'},
@@ -20,10 +21,11 @@ describe('CMM Dashboard Controller Spec', function() {
 
   beforeEach(module('review.cmmDash'));
 
-  beforeEach(inject(function(_$httpBackend_, _cmmData_, _$q_, $controller) {
+  beforeEach(inject(function(_$httpBackend_, _cmmData_, _$q_, _$rootScope_, _$controller_) {
     $httpBackend = _$httpBackend_;
     cmmData = _cmmData_;
     $q = _$q_;
+    $rootScope = _$rootScope_;
 
     mockBlacklistService.getCountries = function() {
       return $q.resolve({data: [
@@ -41,13 +43,32 @@ describe('CMM Dashboard Controller Spec', function() {
       ]});
     };
 
-    ctrlDash = $controller('CMMDashboard', {
+    mockBlacklistService.getLocales = function() {
+      console.log('sending the localeList:::');
+      return $q.resolve([
+        {country: 'country1', language: 'language1'},
+        {country: 'country2', language: 'language2'},
+        {country: 'country3', language: 'language3'}
+      ]);
+    };
+
+    ctrlDash = _$controller_('CMMDashboard', {
       BlackListCountriesService: mockBlacklistService
     });
 
   }));
 
-  it('should query the products from the database', function() {
+  it('should check the initialize', function() {
+    ctrlDash.initialize();
+    expect(ctrlDash.displayEmpty).toEqual(false);
+    console.log('ctrlDash.localeList is:::', ctrlDash.localeList);
+
+    expect(ctrlDash.localeList).toBeDefined();
+
+    $rootScope.$apply();
+  });
+
+  /*it('should query the products from the database', function() {
     $httpBackend.whenGET('api/translation/getTranslateDocs').respond(200, {
       docs: sampleProds
     });
@@ -327,6 +348,6 @@ describe('CMM Dashboard Controller Spec', function() {
     ctrlDash.statusSelected = 'Blacklisted by Offering Provider';
     ctrlDash.reasonSelected = 'ROM5';
     expect(ctrlDash.statusFilter(testProduct)).toBeFalsy();
-  });
+  }); */
 
 });
