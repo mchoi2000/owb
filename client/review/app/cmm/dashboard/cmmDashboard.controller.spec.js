@@ -41,6 +41,22 @@ describe('CMM Dashboard Controller Spec', function() {
       ]});
     };
 
+    mockBlacklistService.getLocales = function() {
+      return $q.resolve({data: [
+        {area: '1', IOT: '1', name: 'Test1', languages: ['en', 'fr'], code: 'T1'},
+        {area: '1', IOT: '1', name: 'Test2', languages: ['en', 'fr'], code: 'T2'},
+        {area: '1', IOT: '1', name: 'Test3', languages: ['en', 'fr'], code: 'T3'},
+        {area: '1', IOT: '1', name: 'Test4', languages: ['en'], code: 'T4'},
+        {area: '1', IOT: '1', name: 'Test5', languages: ['en'], code: 'T5'},
+        {area: '1', IOT: '1', name: 'Test6', languages: [], code: 'T6'},
+        {area: '1', IOT: '1', name: 'United States', languages: ['en'], code: 'US'},
+        {area: '1', IOT: '1', name: 'France', languages: ['fr'], code: 'FR'},
+        {area: '1', IOT: '1', name: 'Canada', languages: ['en', 'fr'], code: 'CA'},
+        {area: '1', IOT: '1', name: 'Germany', languages: ['de'], code: 'DE'},
+        {area: '1', IOT: '1', name: 'Spain', languages: ['es'], code: 'ES'}
+      ]});
+    };
+
     ctrlDash = $controller('CMMDashboard', {
       BlackListCountriesService: mockBlacklistService
     });

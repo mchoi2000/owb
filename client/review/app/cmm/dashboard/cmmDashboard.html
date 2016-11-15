@@ -7,6 +7,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
 -->
 <div>
   <div class="header_view" header></div>
+
   <main id="reviewDashboardWrapper" aria-label="Dashboard of qualified offerings that need to be reviewed." role="main">
     <section class="page-section-container">
       <div class="page-section">
@@ -14,70 +15,38 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
         <div class="page-content page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
           <div class="col-xs-6">
             <!--- Page Title  --->
-            <h1 class="page_title ibm-bold ibmPurple-60" id="welcome">Offerings for review</h1>
-          </div>
-          <div class="col-xs-6 pull-right search-bar-container" role="search" aria-labelledby="search_box_description">
-            <ng-form novalidate name="pwbSearchForm">
-              <label id="search_box_description" class="sr-only" for="dashboard_search_box">Search for an offering by name, owner name or owner email.</label>
-              <input ng-keyup="$event.keyCode == 13 && ctrlCMM.updateSearch(ctrlCMM.newSearch);" class="form-control icon_sprite search_box" placeholder="Search for an offering by name or owner" type="text" id="dashboard_search_box" aria-controls="dashboard_products_list" ng-model="ctrlCMM.newSearch"/>
-              <button type="button" ng-click="ctrlCMM.updateSearch(ctrlCMM.newSearch);" class="search-box-btn icon-search">Search</button>
-            </ng-form>
+            <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
           </div>
         </div>
 
-        <div class="page-content filter-results-sort-container clearfix" role="region" aria-label="Offering total amount of products found and sort options.">
+        <table class="table table-bordered commerce_review_details_table center_text">
+          <thead>
+          <tr>
+            <th class="center_text" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Country Name</th>
+            <th class="center_text" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Language</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortBlah">
+            <td>{{x.country}}</td>
+            <td>{{x.language}}</td>
+            <td></td>
+            <td><a href="">Join Locale team</a></td>
+            <td><input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/></td>
+          </tr>
+          </tbody>
+        </table>
 
-          <div class="col-xs-6 total_results_container" ng-show="ctrlCMM.searchComplete">
-            <span class="ibmGray-40 h3" aria-live="polite">{{(ctrlCMM.productList | filter:ctrlCMM.searchProduct | filter:ctrlCMM.countryFilter | filter: ctrlCMM.languageFilter | filter: ctrlCMM.statusFilter).length}}
-              <span ng-show="(ctrlCMM.productList | filter:ctrlCMM.searchProduct | filter:ctrlCMM.countryFilter | filter: ctrlCMM.languageFilter | filter: ctrlCMM.statusFilter).length != 1">offerings</span>
-              <span ng-show="(ctrlCMM.productList | filter:ctrlCMM.searchProduct | filter:ctrlCMM.countryFilter | filter: ctrlCMM.languageFilter | filter: ctrlCMM.statusFilter).length == 1">offering</span>
-            </span>
-          </div>
-
-          <div class="col-xs-6 pull-right sort_offerings_container">
-
-            <div class="sort-container clearfix">
-              <h4 class="ibm-bold ibmGray-60">Sort</h4>
-              <div class="btn-group pull-right" uib-dropdown keyboard-nav>
-                <button focus-if="ctrlCMM.updatedSort" ng-focus="ctrlCMM.updatedSort=false" role="button" id="sort_offerings_dropdown" aria-label="Your current sort option is {{ctrlCMM.sortProducts.name}}. Select from the options below to change it." ng-disabled="ctrlCMM.productList.length===0" type="button" class="btn dropdown_btn icon-down-arrow cols-xs-12" uib-dropdown-toggle>
-                  {{ctrlCMM.sortProducts.name}}
-                </button>
-
-                <ul uib-dropdown-menu class="dropdown-menu dropdown_menu_display_options" tabindex=0 role="menu" aria-label="Sort your offerings">
-                  <li ng-repeat="myOption in ctrlCMM.sortOptionsList" role="menuitem"><a role="option" aria-label="Sort offerings by {{myOption.name}}" href="#" ng-click="ctrlCMM.updateSortProducts(myOption.name, myOption.value, false)">{{myOption.name}}</a></li>
-                </ul>
-              </div>
-            </div>
-            <!---
-            <ul aria-label="Sort settings." class="zero_out_block_list dashboard_filter_sort_container">
-              <li class="sort_offerings ibmGray-60">
-                <div class="btn-group" uib-dropdown keyboard-nav>
-                  <button focus-if="ctrlCMM.updatedSort" ng-focus="ctrlCMM.updatedSort=false" role="button" id="sort_offerings_dropdown" aria-label="Your current sort option is {{ctrlCMM.sortProducts.name}}. Select from the options below to change it." ng-disabled="ctrlCMM.productList.length===0" type="button" class="btn dropdown_btn icon-down-arrow cols-xs-12" uib-dropdown-toggle>
-                    <span class="ibm-bold">Sort:</span> {{ctrlCMM.sortProducts.name}}
-                  </button>
-
-                  <ul uib-dropdown-menu class="dropdown-menu dropdown_menu_display_options" tabindex=0 role="menu" aria-label="Sort your offerings">
-                    <li ng-repeat="myOption in ctrlCMM.sortOptionsList" role="menuitem"><a role="option" aria-label="Sort offerings by {{myOption.name}}" href="#" ng-click="ctrlCMM.updateSortProducts(myOption.name, myOption.value, false)">{{myOption.name}}</a></li>
-                  </ul>
-                </div>
-
-              </li>
-            </ul>
-            --->
-          </div>
-
-        </div>
-
-        <div class="page-content all-cmm-filters-container largest_margin_bottom clearfix" role="region" aria-label="Filter options for products"
+        <!--<div class="page-content all-cmm-filters-container largest_margin_bottom clearfix" role="region" aria-label="Filter options for products"
         ng-class="{'no_margin_bottom' : ctrlCMM.countrySelected.code !== '' && ctrlCMM.selectedLangs.length !== 0 && ctrlCMM.statusSelected !== '' && ctrlCMM.searchQuery !== ''}">
 
-            <div class="filter-title-container">
+            <!--<div class="filter-title-container">
               <h4 class="ibm-bold ibmGray-60">Filter by</h4>
             </div>
 
             <div class="cmm-filters-container">
 
-              <!-- Country Filter -->
+              <!-- Country Filter
               <div class="filter-container">
                 <div class="select_input_container cmm-dropdown-container col-xs-12" uib-dropdown keyboard-nav on-toggle="countryFilterOpen = open">
                   <button id="country_dropdown"
@@ -85,7 +54,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                           name="country_dropdown"
                           class="btn dropdown_btn icon-down-arrow cols-xs-12"
                           uib-dropdown-toggle>
-                        Country
+                        Country name
                   </button>
                   <button class="clear-selection-btn icon-x small_text" ng-click="ctrlCMM.countrySelected = {name: '', code: ''};" ng-show="countryFilterOpen == true;">Clear Selection</button>
 
@@ -95,50 +64,20 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                       {{serviceOption.IOT}}
                     </li>
                     <div class="iot-countries" ng-repeat-end="serviceOption in ctrlCMM.countriesToFilter() | filter:ctrlCMM.filterCountries">
-                      <li ng-repeat="country in ctrlCMM.countryList | filter:{IOT: serviceOption.IOT}">
+                      <li ng-repeat="x in ctrlCMM.countryList track by $index">{{x}}</li>
                         <a href="#" ng-click="ctrlCMM.countrySelected = {name : country.name, code : country.code};"><span ng-class="{'selected' : ctrlCMM.countrySelected.code === country.code}" class="hover-bg-color">{{country.name}}</span></a>
                       </li>
                     </div>
                   </ul>
-
-                </div>
-              </div>
-
-              <!-- Status Filter -->
-              <div class="filter-container">
-                <div class="select_input_container cmm-dropdown-container col-xs-12 btn-group" uib-dropdown on-toggle="reasonFilterOpen = open" keyboard-nav>
-                  <button id="status_dropdown"
-                          type="button"
-                          name="status_dropdown"
-                          class="btn dropdown_btn icon-down-arrow cols-xs-12"
-                          uib-dropdown-toggle>
-                        Status
-                  </button>
-                  <button class="clear-selection-btn icon-x small_text" ng-click="ctrlCMM.statusSelected = ''; ctrlCMM.reasonSelected = {display: '', value: ''};" ng-show="reasonFilterOpen == true;">Clear Selection</button>
-                  <ul uib-dropdown-menu
-                      class="cmm-status-dropdown-menu dropdown-menu dropdown_menu_display_options"
-                      role="menu" tabindex=0>
-                    <li ng-repeat="status in ctrlCMM.statusList"
-                        role="menuitem">
-
-                        <a ng-if="status.name !== 'Blacklisted by Country Manager' && status.name !== 'Blacklisted by Offering Provider'" href="#" ng-click="ctrlCMM.statusSelected = status.name; ctrlCMM.reasonSelected = {display: '', value: ''};"><span ng-class="{'selected' : ctrlCMM.statusSelected === status.name}" class="hover-bg-color">{{status.name}}</span></a>
-
-                        <a ng-click="ctrlCMM.statusSelected = status.name; ctrlCMM.reasonSelected = {display: '', value: ''};" href="#" class="cmm-status-subnav-title" ng-if="status.name === 'Blacklisted by Country Manager' || status.name === 'Blacklisted by Offering Provider'"><span ng-class="{'selected' : ctrlCMM.statusSelected === status.name}" class="hover-bg-color icon-right-arrow">{{status.name}}</span></a>
-                        <ul class="cmm-status-subnav-menu" ng-if="status.name === 'Blacklisted by Country Manager' || status.name === 'Blacklisted by Offering Provider'">
-
-                          <li ng-show="status.name === 'Blacklisted by Country Manager'" ng-repeat="cmmReason in ctrlCMM.cmmReasonList"><a href="#"
-                              ng-click="ctrlCMM.statusSelected = 'Blacklisted by Country Manager'; ctrlCMM.reasonSelected = { display : cmmReason.display, value : cmmReason.value};"><span ng-class="{'selected' : ctrlCMM.reasonSelected.value === cmmReason.value}" class="hover-bg-color">{{cmmReason.display}}</span></a></li>
-
-                          <li ng-show="status.name === 'Blacklisted by Offering Provider'" ng-repeat="providerReason in ctrlCMM.providerReasonList"><a href="#"
-                              ng-click="ctrlCMM.statusSelected = 'Blacklisted by Offering Provider'; ctrlCMM.reasonSelected = { display : providerReason.shortDisplay, value : providerReason.value };"><span ng-class="{'selected' : ctrlCMM.reasonSelected.value === providerReason.value}" class="hover-bg-color">{{providerReason.shortDisplay}}</span></a></li>
-                        </ul>
-
-                    </li>
+                  <ul>
+                     <li ng-repeat="x in ctrlCMM.countryList track by $index">{{x}}</li>
                   </ul>
+
                 </div>
               </div>
 
-              <!-- Language Filter -->
+
+
               <div class="filter-container">
                 <div class="select_input_container cmm-dropdown-container col-xs-12 btn-group" uib-dropdown keyboard-nav on-toggle="langFilterOpen = open;">
                   <button id="language_dropdown"
@@ -164,6 +103,9 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                       <button ng-click="ctrlCMM.setSelectedLangs();"
                               class="btn lang-confirm-selections col-xs-10 center">Apply</button>
                     </li>
+                  </ul>
+                  <ul>
+                    <li ng-repeat="x in ctrlCMM.countryLanguageList track by $index">{{x}}</li>
                   </ul>
                 </div>
               </div>
@@ -193,21 +135,21 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
           </ul>
         </div>
 
-        <!-- Dashboard tiles -->
+         Dashboard tiles
         <div class="page-content dashboard-tile-container clearfix" role="region" aria-label="The list of offerings based on your display options">
 
-          <!--- Empty Tile Message --->
+          <!--- Empty Tile Message
           <div ng-show="!ctrlCMM.loadingPage && (ctrlCMM.productList | filter:ctrlCMM.searchProduct | filter:ctrlCMM.countryFilter | filter: ctrlCMM.languageFilter | filter: ctrlCMM.statusFilter).length == 0" class="col-xs-12 empty_products_container" ng-cloak>
             <p class="no_offerings_msg h3">We couldn't find any results based on your filter options</p>
           </div>
 
 
           <ul ng-show="!ctrlCMM.loadingPage && (ctrlCMM.productList | filter:ctrlCMM.searchProduct | filter:ctrlCMM.countryFilter | filter: ctrlCMM.languageFilter | filter: ctrlCMM.statusFilter).length >= 1" id="dashboard_products_list" class="zero_out_block_list dashboard_products_container reviewer_products_container cmm-products-container clearfix">
-            <!--- Begin Repeat through all offerings --->
+            <!--- Begin Repeat through all offerings
             <li aria-label="Review the offering - {{x.offeringName}}" class="cmm-product-item" ng-repeat="x in ctrlCMM.productList | filter:ctrlCMM.searchProduct | filter:ctrlCMM.countryFilter | filter: ctrlCMM.languageFilter | filter: ctrlCMM.statusFilter | orderBy:ctrlCMM.sortProducts.value" ng-show='x.status' ng-class="{'end_row': !(($index + 1) % 4)}">
               <a class="product-name h3" href="review/cmm/{{x._id}}">{{x.offeringName | limitTo: ctrlCMM.nameTruncateLimit}}{{ x.offeringName.length > ctrlCMM.nameTruncateLimit ? '&#8230;' : ''}}</a>
             </li>
-            <!--- End Repeat through all offerings --->
+            <!--- End Repeat through all offerings
           </ul>
 
           <div ng-show="ctrlCMM.loadingPage" class="page-section page_load_spinner_margin moving_loading_animation" id="triggerPageLoad" style="position:relative;">
@@ -215,7 +157,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
             <div class="ibm-spinner loading_spinner"></div>
           </div>
 
-        </div>
+        </div> -->
 
       </div>
   </section>

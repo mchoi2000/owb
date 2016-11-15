@@ -28,7 +28,7 @@
       getContent: getContent,
       getByContentId: getByContentId,
       getByUser: getByUser,
-      getTranslateDocs: getTranslateDocs,
+      //getTranslateDocs: getTranslateDocs,
       submitQualification: submitQualification,
       deleteProduct: deleteProduct,
       restoreProduct: restoreProduct,
@@ -188,9 +188,9 @@
       return $http.get(baseIntegrationURL +  '/getBPC/' + productId);
     }
 
-    function getTranslateDocs() {
+    /*function getTranslateDocs() {
       return $http.get('api/translation/getTranslateDocs');
-    }
+    }*/
 
     function launchBPCTests(productId) {
       return $http.get(baseIntegrationURL +  '/launchBPCTests/' + productId);

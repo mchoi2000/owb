@@ -22,7 +22,7 @@
       templateUrl: 'review/app/cmm/dashboard/cmmDashboard.html',
       controller: 'CMMDashboard',
       controllerAs: 'ctrlCMM',
-      pageTitle: 'Provider Workbench CMM Review Dashboard',
+      pageTitle: 'Operator Workbench CMM Review Dashboard',
       pageSlug: 'cmm-dashboard'
     })
     ;
