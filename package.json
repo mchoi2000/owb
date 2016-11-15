@@ -10,7 +10,6 @@
   "author": "Pradeep Kadiyala",
   "license": "ISC",
   "dependencies": {
-    "@marketplace/sevenseas": "latest",
     "adm-zip": "0.4.7",
     "archiver": "1.0.0",
     "base64url": "2.0.0",
