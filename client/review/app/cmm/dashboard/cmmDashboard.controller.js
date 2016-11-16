@@ -51,7 +51,7 @@
     _this.countryLanguageList = '';
     _this.localeList = [];
     _this.sortOption = 'country';
-    _this.sortBlah = false;
+    _this.sortField = false;
 
     _this.countrySelected = {
       name: '',
