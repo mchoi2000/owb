@@ -15,7 +15,8 @@ var ctrlMock = {
   show: 'show',
   addInvitedUser: 'addInvitedUser',
   removeUsers: 'removeUsers',
-  updateFeatures: 'updateFeatures'
+  updateFeatures: 'updateFeatures',
+  joinLocale: 'joinLocale'
 };
 
 var expressMock = {
@@ -48,6 +49,9 @@ var expressMock = {
         } else if (path === '/removeUsers') {
           auth.should.equal('access user info');
           func.should.equal(ctrlMock.removeUsers);
+        } else if (path === '/joinLocale') {
+          auth.should.equal('access user info');
+          func.should.equal(ctrlMock.joinLocale);
         } else {
           should.fail();
         }

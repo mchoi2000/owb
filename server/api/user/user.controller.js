@@ -13,7 +13,8 @@ module.exports = {
   index: index,
   show: show,
   showAll: showAll,
-  removeUsers: removeUsers
+  removeUsers: removeUsers,
+  joinLocale: joinLocale
 };
 
 function index(req, res) {
@@ -63,6 +64,15 @@ function removeUsers(req, res) {
     .then(function removeUsersSuccess(response) {
       return res.status(200).json(response);
     }).catch(function removeUsersFailure(error) {
+      return res.status(500).json(error);
+    });
+}
+
+function joinLocale(req, res) {
+  service.joinLocale(req.user, req.body)
+    .then(function joinLocaleSuccess(response) {
+      return res.status(200).json(response);
+    }).catch(function joinLocaleFailure(error) {
       return res.status(500).json(error);
     });
 }

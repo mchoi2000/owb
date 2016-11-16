@@ -491,3 +491,71 @@ div .cmm-dropdown-container {
 
   }
 }
+
+
+.dashboard-offerings-container {
+  border-right: 1px solid $defaultBorderColor;
+  min-height: 900px;
+  float: left;
+  width: 902px;
+  margin-bottom: 40px;
+}
+
+.dashboard-right-side-navs {
+  min-height: 900px;
+  float: left;
+  width: 278px;
+  position: relative;
+}
+
+.dashboard-right-side-header {
+  padding: 0px 24px 18px;
+}
+
+.joined-locale {
+  font-size: 14px;
+  &.green {
+    &::before {
+      color: $ibm-Green50;
+    }
+  }
+}
+
+.right-side-content-section {
+  padding: 0px 24px 18px;
+  .right-info {
+    border: 1px solid $defaultBorderColor;
+    padding: 30px 30px 30px;
+  }
+
+  ul {
+    li {
+      padding-left: 0px;
+    }
+  }
+}
+
+.dashboard-right-side-content {
+  position: relative;
+  width: 278px;
+  top: -5px;
+  transition: all 0.25s ease 0.0s;
+}
+
+.dashboard-right-side-sticky {
+  .dashboard-right-side-content {
+    position: fixed;
+    top: 50px;
+  }
+}
+
+.dashboard-title-section {
+  .page-title-container {
+    margin-top: 6px;
+    margin-bottom: 45px;
+  }
+
+  .search-bar-container {
+    padding-right: 20px;
+  }
+}

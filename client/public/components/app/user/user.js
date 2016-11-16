@@ -20,7 +20,8 @@
       updateFeatures: updateFeatures,
       inviteUser: inviteUser,
       removeUsers: removeUsers,
-      resendInvite: resendInvite
+      resendInvite: resendInvite,
+      joinLocale: joinLocale
     };
 
     return service;
@@ -60,6 +61,10 @@
 
     function resendInvite(resendData) {
       return $http.post('api/user/resendInvite' , resendData);
+    }
+
+    function joinLocale(locales) {
+      return $http.post('api/user/joinLocale' , locales);
     }
   }
 })();

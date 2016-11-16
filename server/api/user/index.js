@@ -15,4 +15,5 @@ router.get('/', controller.index);
 router.get('/all', roles.is('admin'), controller.showAll);
 router.get('/:id', roles.can('access user info'), controller.show);
 router.post('/removeUsers', roles.can('access user info'), controller.removeUsers);
+router.post('/joinLocale', roles.can('access user info'), controller.joinLocale);
 module.exports = router;

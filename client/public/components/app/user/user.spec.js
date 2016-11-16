@@ -91,4 +91,15 @@ describe('User Service', function() {
       });
     $httpBackend.flush();
   });
+
+  it('should join locale', function (done) {
+    $httpBackend.when('POST', 'api/user/joinLocale', [{'en-us': 'editor'}])
+    .respond([{'en-us': 'editor'}]);
+    service.joinLocale([{'en-us': 'editor'}])
+      .then(function(result) {
+        expect(result.status).toBe(200);
+        done();
+      });
+    $httpBackend.flush();
+  });
 });

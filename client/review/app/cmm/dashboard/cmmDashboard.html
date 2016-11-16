@@ -9,36 +9,58 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
   <div class="header_view" header></div>
 
   <main id="reviewDashboardWrapper" aria-label="Dashboard of qualified offerings that need to be reviewed." role="main">
-    <section class="page-section-container">
+    <section ng-show="!ctrlDS.loadingPage" class="page-section-container">
       <div class="page-section">
+        <div class="page-content clearfix">
 
-        <div class="page-content page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
-          <div class="col-xs-6">
-            <!--- Page Title  --->
-            <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
+          <div class="dashboard-offerings-container">
+            <div class="col-xs-12 dashboard-title-section clearfix">
+              <div class="col-xs-6 page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
+                <!--- Page Title  --->
+                <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
+              </div>
+
+              <div class="col-xs-12">
+                <table class="table commerce_review_details_table center_text">
+                  <thead>
+                  <tr>
+                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Country Name</th>
+                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Language</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortBlah">
+                    <td>{{x.country}}</td>
+                    <td>{{x.language}}</td>
+                    <td ng-if="ctrlCMM.userLocales[x.locale]" class="joined-locale icon-check-circle-new green">Joined</td>
+                    <td ng-if="!ctrlCMM.userLocales[x.locale]"><a href="" ng-click="ctrlCMM.joinLocale(x.locale, 'editor');">Join Locale team</a></td>
+                    <td><input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+          <div class="dashboard-right-side-navs">
+            <div class="col-xs-12 dashboard-right-side-content">
+              <h3 class="dashboard-right-side-header ibm-bold ibmGray-60">My Locales</h3>
+              <div class="right-side-content-section">
+                <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet. </span>
+                <ul class="cmm-country-list" ng-if="ctrlCMM.currentUser.locales.length > 0">
+                  <li ng-repeat="(code, country) in ctrlCMM.userLocales">
+                    <a href="">{{country}}</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="right-side-content-section">
+                <div class="right-info">
+                  These are the IBM Marketplace Globalization Workbench locale teams you belong to. You can use the Globalization Workbench to view, monitor, or manage your team's offerings. These locales are also listed in your navigation bar in the upper right.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <table class="table commerce_review_details_table center_text">
-          <thead>
-          <tr>
-            <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortField = !ctrlCMM.sortField;">Country Name
-              <img class="upArrow" src="images/icons/sort-arrows.svg"/>
-            </th>
-            <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortField = !ctrlCMM.sortField;">Language
-              <img class="upArrow" src="images/icons/sort-arrows.svg"/>
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortField">
-            <td>{{x.country}}</td>
-            <td>{{x.language}}</td>
-            <td><a href="">Join Locale team</a></td>
-            <td><input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/></td>
-          </tr>
-          </tbody>
-        </table>
       </div>
   </section>
 </main>
