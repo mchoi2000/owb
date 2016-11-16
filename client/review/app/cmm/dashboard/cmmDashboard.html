@@ -19,18 +19,17 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
           </div>
         </div>
 
-        <table class="table table-bordered commerce_review_details_table center_text">
+        <table class="table commerce_review_details_table center_text">
           <thead>
           <tr>
-            <th class="center_text" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Country Name</th>
-            <th class="center_text" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Language</th>
+            <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Country Name</th>
+            <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Language</th>
           </tr>
           </thead>
           <tbody>
           <tr ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortBlah">
             <td>{{x.country}}</td>
             <td>{{x.language}}</td>
-            <td></td>
             <td><a href="">Join Locale team</a></td>
             <td><input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/></td>
           </tr>
