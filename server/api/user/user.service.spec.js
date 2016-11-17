@@ -391,7 +391,6 @@ describe('user service', function() {
     service.joinLocale({_id:'user'}, [{'locale': 'en-us', 'roles': ['editor']}])
     .then(function(response) {
         expect(response).toBeDefined();
-        console.log('**********' + JSON.stringify(response));
         done();
       });
   });

@@ -29,7 +29,7 @@
     _this.loadingPage = true;
     _this.localeList = [];
     _this.sortOption = 'country';
-    _this.sortBlah = false;
+    _this.sortField = false;
     _this.currentUser = {};
 
     //Build a {locale: number-of-languages} map to determine the displayname

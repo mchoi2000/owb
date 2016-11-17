@@ -24,12 +24,12 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                 <table class="table commerce_review_details_table center_text">
                   <thead>
                   <tr>
-                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Country Name</th>
-                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortBlah = !ctrlCMM.sortBlah;">Language</th>
+                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortField = !ctrlCMM.sortField;">Country Name</th>
+                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortField = !ctrlCMM.sortField;">Language</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortBlah">
+                  <tr ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortField">
                     <td>{{x.country}}</td>
                     <td>{{x.language}}</td>
                     <td ng-if="ctrlCMM.userLocales[x.locale]" class="joined-locale icon-check-circle-new green">Joined</td>
