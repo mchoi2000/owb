@@ -325,122 +325,6 @@ describe('user service', function() {
     });
   });
 
-  /*it('should remove users', function(done) {
-    let self = this;
-
-    let service = proxyquire('./user.service', {
-      './user.da.db': self.mockDA,
-      './invitedUser.da.db': self.mockInvitedDa,
-      '../products/product.da.db': self.mockProductService,
-      '../../components/email': {},
-      '../features/feature.controller': {}
-    });
-
-    service.removeUsers(['userToBeRemovedFromProduct','inviteeToBeRemovedFromProduct'],
-                        'removeProductTest')
-      .then(function() {
-        done();
-      });
-  });*/
-
-  /*it('should remove invitee with mulitpe products from a product', function(done) {
-    let self = this;
-
-    let service = proxyquire('./user.service', {
-      './user.da.db': self.mockDA,
-      './invitedUser.da.db': self.mockInvitedDa,
-      '../products/product.da.db': self.mockProductService,
-      '../../components/email': {},
-      '../features/feature.controller': {}
-    });
-
-    service.removeUsers(
-      ['inviteeWithMulipleProducts'],
-      'removeProductTest')
-      .then(function(data) {
-        data[0].ok.should.equal(true);
-        expect(data[0].id).toBeDefined();
-        expect(data[0].rev).toBeDefined();
-        done();
-      });
-  }); */
-
-  /*it('should fail to remove users who cannot be found in the db', function(done) {
-    let self = this;
-
-    let service = proxyquire('./user.service', {
-      './user.da.db': self.mockDA,
-      './invitedUser.da.db': self.mockInvitedDa,
-      '../products/product.da.db': self.mockProductService,
-      '../../components/email': {},
-      '../features/feature.controller': {}
-    });
-
-    service.removeUsers(
-      ['removeUserError','removeInviteeError'],
-      'removeProductTest')
-      .then(function() {
-        done();
-      });
-  });*/
-
-  /*it('should fail to remove users from a product that cannot be found in the db', function(done) {
-    let self = this;
-
-    let service = proxyquire('./user.service', {
-      './user.da.db': self.mockDA,
-      './invitedUser.da.db': self.mockInvitedDa,
-      '../products/product.da.db': self.mockProductService,
-      '../../components/email': {},
-      '../features/feature.controller': {}
-    });
-
-    service.removeUsers(
-      ['removeUserError','removeInviteeError'],
-      'fakeProduct')
-      .catch(function() {
-        done();
-      });
-  }); */
-
-  /*it('should update features', function(done) {
-    let self = this;
-
-    let service = proxyquire('./user.service', {
-      './user.da.db': self.mockDA,
-      './invitedUser.da.db': self.mockInvitedDa,
-      '../products/product.da.db': {},
-      '../../components/email': {},
-      '../features/feature.controller': {}
-    });
-
-    service.updateFeatures('user', ['feature'])
-      .then(function(response) {
-        response.ok.should.equal(true);
-        expect(response.id).toBeDefined();
-        expect(response.rev).toBeDefined();
-        done();
-      });
-  });*/
-
-  /*it('should fail to update features', function(done) {
-    let self = this;
-
-    let service = proxyquire('./user.service', {
-      './user.da.db': self.mockDA,
-      './invitedUser.da.db': self.mockInvitedDa,
-      '../products/product.da.db': {},
-      '../../components/email': {},
-      '../features/feature.controller': {}
-    });
-
-    service.updateFeatures('fakeUser', ['feature'])
-      .then(function(response) {
-        response.should.equal('not user');
-        done();
-      });
-  }); */
-
   it('should update user', function(done) {
     let self = this;
 
@@ -490,6 +374,23 @@ describe('user service', function() {
     service.getAllCMMs({selector: '', fields: []}).then(function(response) {
         expect(response).toBeDefined();
         expect(response).toEqual([{email: 'test@test.com', countries: ['test1']}]);
+        done();
+      });
+  });
+
+  it('should join locale', function(done) {
+    let self = this;
+
+    let service = proxyquire('./user.service', {
+      './user.da.db': self.mockDA,
+      '../products/product.da.db': {},
+      '../../components/email': {},
+      '../features/feature.controller': {}
+    });
+
+    service.joinLocale({_id:'user'}, [{'locale': 'en-us', 'roles': ['editor']}])
+    .then(function(response) {
+        expect(response).toBeDefined();
         done();
       });
   });

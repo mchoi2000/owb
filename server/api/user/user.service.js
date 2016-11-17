@@ -16,7 +16,8 @@ module.exports = {
   showAll: showAll,
   updateUser: updateUser,
   getCMMByCountry: getCMMByCountry,
-  getAllCMMs: getAllCMMs
+  getAllCMMs: getAllCMMs,
+  joinLocale: joinLocale
 };
 
 // User methods
@@ -56,81 +57,11 @@ function updateUser(newData) {
     }
   );
 }
-/*
-// Remove users from collab modal
-function removeUsers(userIds, productId) {
-  var removedEditors = [];
-  var removedInvitees = [];
-  return productDa.get(productId)
-    .then(function removeUsersFromProduct(doc) {
-      // Remove the users from the product
-      var newEditorsList = [];
-      var newInvitedUsers = [];
-      // Remove editors from product
-      doc.offeringData.editors.forEach(function(editor) {
-        if (!_.includes(userIds, editor)) {
-          newEditorsList.push(editor);
-        } else {
-          removedEditors.push(editor);
-        }
-      });
-      // Remove invitees from product
-      doc.offeringData.invitedUsers.forEach(function(invitee) {
-        if (!_.includes(userIds, invitee.email)) {
-          newInvitedUsers.push(invitee);
-        } else {
-          removedInvitees.push(invitee);
-        }
-      });
-      doc.offeringData.editors = newEditorsList;
-      doc.offeringData.invitedUsers = newInvitedUsers;
-      return updateUsers(doc);
-    })
-    .then(function removeProductFromUsers(response) {
-      // Remove the product from the users
-      removedEditors = removedEditors.map(function(provider) {
-        return da.getUser(provider)
-          .then(function userFoundInUserdb(doc) {
-            // User found in user db
-            var indexOfValue = doc.products.indexOf(productId);
-            doc.products = _.difference(doc.products, [productId]);
-            // Remove product from user
-            return da.updateUser(doc);
-          })
-          .catch(function userNotFoundInUserdb(err) {
-            logger.warn('Editor %s to remove from product %s not found in user db',
-                        productId, provider);
-          });
-      });
-      return Promise.all(removedEditors);
-    })
-    .then(function removeProductFromUsers(response) {
-      // Remove the product form the invitees
-      removedInvitees = removedInvitees.map(function(provider) {
-        return invitedDa.getInvitedUser(provider.email)
-          .then(function userFoundInInvitedb(doc) {
-            // User found in invite db
-            if (doc.products.length === 1 && doc.products[0] === productId) {
-              // Remove invited user from the db because they don't have any other products
-              return invitedDa.removeInvitedUser(doc);
-            } else {
-              // Remove product from invited user's product array
-              doc.products = _.difference(doc.products, [productId]);
-              return invitedDa.updateInvitedUser(doc);
-            }
-          })
-          .catch(function userNotFoundInInvitedb(notFoundErr) {
-            logger.warn('Invited user %s to remove from product %s not found in db',
-                        productId, provider);
-          })
-      });
-      return Promise.all(removedInvitees);
-    })
-    .catch(function(err) {
-      throw err
-    });
+
+function joinLocale(user, locales) {
+  user.locales = locales;
+  return da.updateUser(user);
 }
-*/
 
 function getCMMByCountry(countries) {
   let query = {

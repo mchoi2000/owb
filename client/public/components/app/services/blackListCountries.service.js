@@ -20,6 +20,7 @@
         .then(function getLocale(locales) {
           return locales.data.map(function(obj) {
             return {
+              locale: obj.locale,
               country: obj.name.split('-')[0].trim(),
               language: obj.name.split('-')[1].trim()
             };

@@ -40,6 +40,10 @@ var mockUserService = {
       }
     });
     return Promise.all(promises);
+  },
+
+  joinLocale: function(user, locales) {
+    return Promise.resolve(locales);
   }
 };
 
@@ -170,5 +174,19 @@ describe('user service', function() {
       }
     };
     users.removeUsers(req, res);
+  });
+
+  it('should join locale', function() {
+    var req = {
+      body: {
+        locales: [{locale: 'en-us', roles: ['editor']}]
+      }
+    };
+    var res = {
+      status: function(status) {
+        status.should.equal(200);
+      }
+    };
+    users.joinLocale(req, res);
   });
 });
