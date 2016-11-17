@@ -16,7 +16,7 @@ const gulpTypings = plugins.typings;
 const tslint = plugins.tslint;
 
 //Typescript compiler
-gulp.task('typescript', ['installTypings', 'tslint'], function() {
+gulp.task('typescript', ['tslint'], function() {
   var tsResult = gulp.src([
       'client/**/*.ts',
       'typings/globals/**/*.d.ts',

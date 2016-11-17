@@ -12,7 +12,7 @@
     'ngCookies',
     'common.title',
     'common.header',
-    'common.product',
+    'common.user',
     'common.data',
     'common.scroller'
   ]).config(configuration);
