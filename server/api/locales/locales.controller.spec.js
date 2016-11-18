@@ -24,7 +24,7 @@ describe('country controller', function() {
 
   it('fail when sevenseas locale not loaded', function() {
     var _countryController = proxyquire('./locales.controller', {
-      '../../sevenseas' : {
+      '@marketplace/sevenseas' : {
         getWCMLanguageAndViewMap : function() {
           return;
         }
