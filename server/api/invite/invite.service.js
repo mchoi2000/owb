@@ -69,7 +69,7 @@ function createOperator(user) {
   userLocales.forEach(function(locale) {
     let operatorLocale = {};
     operatorLocale.locale = locale;
-    operatorLocale.role = ['owner'];
+    operatorLocale.roles = ['owner'];
     operator.locales.push(operatorLocale);
   });
 
