@@ -16,7 +16,7 @@ var user = {
   'fname': 'userFirstName',
   'lname': 'userLastName',
   'registered': false,
-  'countries': ['country1'],
+  'locales': ['country1'],
   'roles': ['admin']
 };
 var userAudit = {
