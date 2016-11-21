@@ -65,7 +65,8 @@ gulp.task('ref', [
   'copy:client',
   'copy:server',
   'build:package',
-  'copy:deployment'
+  'copy:deployment',
+  'copy:npmrc'
 ], function() {
   return gulp.src('.tmp/**/*.html', {base: '.tmp'})
     .pipe(plugins.useref())
