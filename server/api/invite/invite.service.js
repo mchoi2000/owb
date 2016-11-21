@@ -64,13 +64,13 @@ function createOperator(user) {
     registered : false
   };
 
-  let userCountries = user.countries;
-  operator.countries = [];
-  userCountries.forEach(function(country) {
-    let operatorCountry = {};
-    operatorCountry.name = country;
-    operatorCountry.roles = ['owner'];
-    operator.countries.push(operatorCountry);
+  let userLocales = user.countries;
+  operator.locales = [];
+  userLocales.forEach(function(locale) {
+    let operatorLocale = {};
+    operatorLocale.locale = locale;
+    operatorLocale.role = ['owner'];
+    operator.locales.push(operatorLocale);
   });
 
   operator.roles = ['cmmReviewer', 'operator'];
