@@ -16,7 +16,7 @@ var user = {
   'fname': 'userFirstName',
   'lname': 'userLastName',
   'registered': false,
-  'locales': ['country1'],
+  'locales': ['locale1'],
   'roles': ['admin']
 };
 var userAudit = {
@@ -28,7 +28,7 @@ var invitedUsers = {
     'emailAddress': 'InvitedUserEmail@ibm.com',
     'fname': 'fname',
     'lname': 'lname',
-    'countries': ['country1', 'country2']
+    'locales': ['locale1', 'locale2']
   }],
   'invitedBy': {
     'id': 'userId',

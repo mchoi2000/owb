@@ -64,7 +64,7 @@ function createOperator(user) {
     registered : false
   };
 
-  let userLocales = user.countries;
+  let userLocales = user.locales;
   operator.locales = [];
   userLocales.forEach(function(locale) {
     let operatorLocale = {};
