@@ -43,3 +43,8 @@ gulp.task('copy:deployment', ['clean:dist'], function() {
     .pipe(plugins.rename('manifest.yml'))
     .pipe(gulp.dest('dist'));
 });
+
+gulp.task('copy:npmrc', ['clean:dist'], function() {
+  return gulp.src('./.npmrc')
+    .pipe(gulp.dest('dist'));
+});
