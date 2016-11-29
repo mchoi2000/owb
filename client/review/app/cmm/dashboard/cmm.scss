@@ -5,6 +5,10 @@
 //US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 //Schedule Contract with IBM Corp.
 
+.directory-top-padding {
+  margin-top:20px;
+}
+
 .dynamic-search-box {
   height: 64px;
   button {
@@ -512,14 +516,12 @@ div .cmm-dropdown-container {
   padding: 0px 24px 18px;
 }
 
-.joined-locale {
-  font-size: 14px;
-  &.green {
+.green {
     &::before {
       color: $ibm-Green50;
     }
-  }
 }
+
 
 .right-side-content-section {
   padding: 0px 24px 18px;
@@ -538,7 +540,6 @@ div .cmm-dropdown-container {
 .dashboard-right-side-content {
   position: relative;
   width: 278px;
-  top: -5px;
   transition: all 0.25s ease 0.0s;
 }
 
