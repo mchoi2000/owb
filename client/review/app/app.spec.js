@@ -8,7 +8,7 @@
 describe('review app', function() {
 
   beforeEach(module('review', function($provide) {
-    $provide.value('review.cmmDash', {id: ''});
+    $provide.value('review.cmmDir', {id: ''});
     $provide.value('review.cmm', {id: ''});
   }));
 
