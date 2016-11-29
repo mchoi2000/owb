@@ -7,7 +7,7 @@
 (function() {
   'use strict';
 
-  angular.module('review.cmmDash', [
+  angular.module('review.cmmDir', [
     'ngRoute',
     'ngCookies',
     'common.title',
@@ -19,11 +19,11 @@
 
   function configuration($routeProvider) {
     $routeProvider.when('/review/cmm', {
-      templateUrl: 'review/app/cmm/dashboard/cmmDashboard.html',
-      controller: 'CMMDashboard',
+      templateUrl: 'review/app/cmm/directory/cmmDirectory.html',
+      controller: 'CMMDirectory',
       controllerAs: 'ctrlCMM',
-      pageTitle: 'Globalization Workbench CMM Review Dashboard',
-      pageSlug: 'cmm-dashboard'
+      pageTitle: 'Globalization Workbench CMM Review Directory',
+      pageSlug: 'cmm-directory'
     })
     ;
   }

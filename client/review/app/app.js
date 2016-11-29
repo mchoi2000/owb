@@ -14,7 +14,7 @@
       'common.spinner',
       'common.calendar',
       'review.cmm',
-      'review.cmmDash'
+      'review.cmmDir'
     ]
   ).config(configuration);
 

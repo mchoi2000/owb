@@ -46,7 +46,7 @@ module.exports = function(config) {
       '.tmp/common/app/spinner/spinner.js',
       '.tmp/common/app/spinner/loader.component.js',
       'client/review/app/cmm/cmmReview.js',
-      'client/review/app/cmm/dashboard/cmmDashboard.js',
+      'client/review/app/cmm/directory/cmmDirectory.js',
       'client/review/app/offering/offeringReview.directive.js',
       '.tmp/common/app/**/*.js',
       'client/public/components/**/*.js',

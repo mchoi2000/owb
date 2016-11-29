@@ -8,13 +8,13 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
 <div>
   <div class="header_view" style="margin-bottom:0px !important;" header></div>
 
-  <main id="reviewDashboardWrapper" aria-label="Dashboard of qualified offerings that need to be reviewed." role="main">
+  <main id="reviewDirectoryWrapper" aria-label="Locale directory." role="main">
     <section ng-show="!ctrlDS.loadingPage" class="page-section-container">
       <div class="page-section">
         <div class="page-content clearfix">
 
-          <div class="dashboard-offerings-container">
-            <div class="col-xs-12 dashboard-title-section clearfix directory-top-padding">
+          <div class="directory-offerings-container">
+            <div class="col-xs-12 directory-title-section clearfix directory-top-padding">
               <div class="col-xs-6 page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
                 <!--- Page Title  --->
                 <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
@@ -46,9 +46,9 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
 
             </div>
           </div>
-          <div class="dashboard-right-side-navs directory-top-padding">
-            <div class="col-xs-12 dashboard-right-side-content">
-              <h3 class="dashboard-right-side-header ibm-bold ibmGray-60">My Locales</h3>
+          <div class="directory-right-side-navs directory-top-padding">
+            <div class="col-xs-12 directory-right-side-content">
+              <h3 class="directory-right-side-header ibm-bold ibmGray-60">My Locales</h3>
               <div class="right-side-content-section">
                 <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet. </span>
                 <ul class="cmm-country-list" ng-if="ctrlCMM.currentUser.locales.length > 0">

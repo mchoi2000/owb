@@ -5,8 +5,8 @@
 //US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 //Schedule Contract with IBM Corp.
 'use strict';
-describe('CMM Dashboard Controller Spec', function() {
-  var ctrlDash;
+describe('CMM Directory Controller Spec', function() {
+  var ctrlDir;
   var $httpBackend;
   var $q;
   var $rootScope;
@@ -34,14 +34,14 @@ describe('CMM Dashboard Controller Spec', function() {
     }
   };
 
-  beforeEach(module('review.cmmDash'));
+  beforeEach(module('review.cmmDir'));
 
   beforeEach(inject(function(_$httpBackend_, _$q_, _$rootScope_, _$controller_) {
     $httpBackend = _$httpBackend_;
     $q = _$q_;
     $rootScope = _$rootScope_;
 
-    ctrlDash = _$controller_('CMMDashboard', {
+    ctrlDir = _$controller_('CMMDirectory', {
       BlackListCountriesService: mockBlacklistService,
       UserService: mockUserService
     });
@@ -49,36 +49,36 @@ describe('CMM Dashboard Controller Spec', function() {
   }));
 
   it('should initialize', function() {
-    ctrlDash.initialize();
+    ctrlDir.initialize();
     $rootScope.$apply();
 
-    expect(ctrlDash.localeList).toEqual([
+    expect(ctrlDir.localeList).toEqual([
       {'locale':'es-ar','country':'Argentina','language':'Español'},
       {'locale':'en-aw','country':'Aruba','language':'English'},
       {'locale':'en-au','country':'Australia','language':'English'},
       {'locale':'fr-au','country':'Australia','language':'French'}]);
-    expect(ctrlDash.localeLanguageMap).toEqual({'Argentina':1,'Aruba':1,'Australia':2});
-    expect(ctrlDash.userLocales).toEqual({});
+    expect(ctrlDir.localeLanguageMap).toEqual({'Argentina':1,'Aruba':1,'Australia':2});
+    expect(ctrlDir.userLocales).toEqual({});
   });
 
   it('should join a locale: if locale supports more than one lang', function() {
     userLocalesUndefined = false;
-    ctrlDash.initialize();
+    ctrlDir.initialize();
     $rootScope.$apply();
-    ctrlDash.joinLocale('fr-au', 'editor');
+    ctrlDir.joinLocale('fr-au', 'editor');
     $rootScope.$apply();
-    expect(ctrlDash.userLocales).toEqual({'fr-au':'Australia (French)'});
-    expect(ctrlDash.currentUser.locales).toEqual([{'locale':'fr-au','roles':['editor']}]);
+    expect(ctrlDir.userLocales).toEqual({'fr-au':'Australia (French)'});
+    expect(ctrlDir.currentUser.locales).toEqual([{'locale':'fr-au','roles':['editor']}]);
   });
 
   it('should join a locale: if locale supports only one lang', function() {
     userLocalesUndefined = true;
-    ctrlDash.initialize();
+    ctrlDir.initialize();
     $rootScope.$apply();
-    ctrlDash.joinLocale('es-ar', 'editor');
+    ctrlDir.joinLocale('es-ar', 'editor');
     $rootScope.$apply();
-    expect(ctrlDash.userLocales).toEqual({'es-ar':'Argentina'});
-    expect(ctrlDash.currentUser.locales).toEqual([{'locale':'es-ar','roles':['editor']}]);
+    expect(ctrlDir.userLocales).toEqual({'es-ar':'Argentina'});
+    expect(ctrlDir.currentUser.locales).toEqual([{'locale':'es-ar','roles':['editor']}]);
   });
 
 });
