@@ -7,7 +7,7 @@
 (function() {
   'use strict';
 
-  angular.module('review.cmmDash').controller('CMMDashboard',
+  angular.module('review.cmmDir').controller('CMMDirectory',
     ['$q',
     '$filter',
     '$http',

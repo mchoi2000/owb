@@ -13,6 +13,8 @@ var OIDCStrategy = require('./passport-idaas-openidconnect/lib').IDaaSOIDCStrate
 var roles = require('./roles');
 var userService = require('../../api/user/user.service');
 
+const auditService = require('../../api/audit/audit.user.service');
+
 // Configure sso middleware
 module.exports = {
   middleware: middleware,
@@ -158,6 +160,21 @@ function routes(app, passport) {
         info: req.body.info,
         registered: true
       };
+      var regAudit = {
+        userId: user._id,
+        userEmail: user._id,
+        event: {
+          type: 'register',
+          formData: {
+            fname: user.fname,
+            lname: user.lname,
+            registered: user.registered,
+            info: user.info
+          }
+        }
+      };
+
+      auditService.addUserAudit(regAudit);
 
       return userService.updateUser(user)
         .then(function updateUserSuccessCallback(response) {
