@@ -323,11 +323,16 @@ var mockRoles = {
   is: function is() {}
 };
 
+var mockAudit = {
+  addUserAudit: function() {}
+};
+
 var sso = proxyquire('./idaas', {
   passport: mockPassport,
   './passport-idaas-openidconnect/lib': mockOpenIDConnect,
   '../../api/user/user.service': mockUsers,
-  './roles': mockRoles
+  './roles': mockRoles,
+  '../../api/audit/audit.user.service': mockAudit
 });
 
 describe('oidc', function() {
