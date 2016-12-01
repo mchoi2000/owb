@@ -12,6 +12,8 @@
     '$filter',
     '$http',
     '$cookies',
+    '$anchorScroll',
+    '$timeout',
     'BlackListCountriesService',
     'UserService',
     controller]);
@@ -21,6 +23,8 @@
     $filter,
     $http,
     $cookies,
+    $anchorScroll,
+    $timeout,
     BlackListCountriesService,
     UserService) {
     /* jshint validthis: true */
@@ -31,6 +35,7 @@
     _this.sortOption = 'country';
     _this.sortField = false;
     _this.currentUser = {};
+    _this.selectedIndex = '';
 
     //Build a {locale: number-of-languages} map to determine the displayname
     function buildLocaleLanguageMap() {
@@ -76,6 +81,37 @@
         getUserLocales();
         _this.loadingPage = false;
       });
+    }
+
+    _this.alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    _this.scrollToCountry = scrollToCountry;
+    function scrollToCountry(alphabet) {
+      _this.selectedIndex = alphabet;
+      if (_this.sortOption !== 'country') {
+        _this.sortOption = 'country';
+        _this.sortField = false;
+      }
+      var startIndex = 0;
+      var endIndex = _this.localeList.length - 1;
+      var direction = 1;
+      if (_this.sortField) {
+        startIndex = _this.localeList.length - 1;
+        endIndex = 0;
+        direction = -1;
+      }
+      while (startIndex !== endIndex) {
+        if (_this.localeList[startIndex].country.charAt(0) === alphabet) {
+          $anchorScroll(_this.localeList[startIndex].country);
+          $timeout(function() {
+            // Apply second scroll to allow DOM changes
+            $anchorScroll(_this.localeList[startIndex].country);
+          });
+          break;
+        }
+        startIndex = startIndex + direction;
+      }
     }
 
     _this.initialize = initialize;

@@ -5,8 +5,51 @@
 //US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
 //Schedule Contract with IBM Corp.
 
-.directory-top-padding {
-  margin-top:20px;
+.cmm_header_view {
+  height: $headerHeight;
+  border-bottom: 1px solid $defaultBorderColor;
+}
+
+.locale-list-section{
+  float: left;
+  width: 842px;
+}
+.locale-anchor-section {
+  margin-top: 45px;
+  float: right;
+  padding: 0px 16px 0px;
+  font-size: 14px;
+  ul {
+    li {
+      padding: 0px 0px 8px;
+    }
+  }
+  .index-button {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    color: $ibmGray-20;
+    @include standardTransitions(0.5s, 0s);
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    text-align: center;
+
+    &:hover {
+      color: $ibmGray-60;
+      text-decoration: none;
+      border: none;
+    }
+
+  }
+  .active-index-button {
+    color: $ibm-Green50;
+  }
+}
+
+.directory-top-bottom-padding {
+  margin-top: 60px;
+  margin-bottom: 90px;
 }
 
 .cmmLocaleHead{
@@ -20,7 +63,6 @@
   min-height: 900px;
   float: left;
   width: 902px;
-  margin-bottom: 40px;
 }
 
 .directory-right-side-navs {
@@ -35,9 +77,13 @@
 }
 
 .green {
-    &::before {
-      color: $ibm-Green50;
-    }
+  &::before {
+    position: relative;
+    font-size: 20px;
+    padding-left: 10px;
+    top: 4px;
+    color: $ibm-Green50;
+  }
 }
 
 
@@ -77,4 +123,8 @@
   .search-bar-container {
     padding-right: 20px;
   }
+}
+
+.locale-row:hover, .locale-row.selected{
+  background-color: $ibmNeutral-2
 }
