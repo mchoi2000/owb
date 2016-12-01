@@ -87,8 +87,8 @@
                        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
     _this.scrollToCountry = scrollToCountry;
-    function scrollToCountry(name) {
-      _this.selectedIndex = name;
+    function scrollToCountry(alphabet) {
+      _this.selectedIndex = alphabet;
       if (_this.sortOption !== 'country') {
         _this.sortOption = 'country';
         _this.sortField = false;
@@ -102,7 +102,7 @@
         direction = -1;
       }
       while (startIndex !== endIndex) {
-        if (_this.localeList[startIndex].country.charAt(0) === name) {
+        if (_this.localeList[startIndex].country.charAt(0) === alphabet) {
           $anchorScroll(_this.localeList[startIndex].country);
           $timeout(function() {
             // Apply second scroll to allow DOM changes
