@@ -36,6 +36,7 @@
     _this.sortField = false;
     _this.currentUser = {};
     _this.selectedIndex = '';
+    _this.currentUserFirstVisit = false;
 
     //Build a {locale: number-of-languages} map to determine the displayname
     function buildLocaleLanguageMap() {
@@ -126,6 +127,12 @@
 
         buildLocaleLanguageMap();
         getUserLocales();
+
+        if (_this.currentUser.settings.initialCmmVisit === 0) {
+          _this.currentUserFirstVisit = true;
+          _this.currentUser.settings.initialCmmVisit++;
+          UserService.updateUser(_this.currentUser);
+        }
       });
     }
 

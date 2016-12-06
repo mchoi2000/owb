@@ -44,6 +44,13 @@ var mockUserService = {
 
   joinLocale: function(user, locales) {
     return Promise.resolve(locales);
+  },
+  updateUser: function(user) {
+    if (user._id === 'userId') {
+      return Promise.resolve('updated user info');
+    } else {
+      return Promise.reject('user not found');
+    }
   }
 };
 
@@ -188,5 +195,19 @@ describe('user service', function() {
       }
     };
     users.joinLocale(req, res);
+  });
+
+  it('should update user', function() {
+    var req = {
+      body: {
+        _id: 'userId'
+      }
+    };
+    var res = {
+      status: function(status) {
+        status.should.equal(200);
+      }
+    };
+    users.updateUser(req, res);
   });
 });

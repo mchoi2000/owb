@@ -27,13 +27,16 @@ describe('CMM Directory Controller Spec', function() {
   var mockUserService = {
     get: function() {
       if (userLocalesUndefined) {
-        return $q.resolve({});
+        return $q.resolve({settings: {initialCmmVisit: 1}});
       } else {
-        return $q.resolve({locales: []});
+        return $q.resolve({locales: [], settings: {initialCmmVisit: 0}});
       }
     },
     joinLocale: function(newLocaleArray) {
       return $q.resolve({config: {data: newLocaleArray}});
+    },
+    updateUser: function(user) {
+      return $q.resolve({});
     }
   };
   var $anchorScroll = jasmine.createSpy('anchorScroll');

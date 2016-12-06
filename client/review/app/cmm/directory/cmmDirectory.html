@@ -18,7 +18,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
               <div class="col-xs-6 page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
                 <!--- Page Title  --->
                 <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
-                <span ng-if="ctrlCMM.currentUser.settings.initialCmmVisit == 0">
+                <span ng-if="ctrlCMM.currentUserFirstVisit == true">
                   <div class="top-disclosure-info">
                     <button class="icon-x-circle gray pull-right disclosure_close_btn" onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'/>
                     This is a list of every international IBM Marketplace. Click ‘Join locale team’ next to your country so that you can use the Globalization
@@ -72,7 +72,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                 </ul>
               </div>
               <div class="right-side-content-section">
-                <span ng-if="ctrlCMM.currentUser.settings.initialCmmVisit == 0">
+                <span ng-if="ctrlCMM.currentUserFirstVisit == true">
                   <div class="right-info">
                     <button class="icon-x-circle pull-right disclosure_close_btn" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'/>
                     These are the IBM Marketplace Globalization Workbench locale teams you belong to. You can use the Globalization Workbench to view, monitor, or manage your team's offerings. These locales are also listed in your navigation bar in the upper right.
