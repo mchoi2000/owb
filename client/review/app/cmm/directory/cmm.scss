@@ -69,6 +69,7 @@
   border: 1px solid $defaultBorderColor;
   padding: 30px 31px 30px 30px;
   width: 850px;
+  position: relative;
 }
 
 .directory-right-side-navs {
@@ -98,6 +99,7 @@
   .right-info {
     border: 1px solid $defaultBorderColor;
     padding: 30px 30px 30px;
+    position: relative;
   }
 
   ul {
@@ -111,9 +113,9 @@
   display: inline-block;
   border: none;
   background-color: transparent;
-  position: relative;
-  top: -10px;
-  right: -10px;
+  position: absolute;
+  top: 12px;
+  right: 8px;
   font-size: 20px
 }
 
