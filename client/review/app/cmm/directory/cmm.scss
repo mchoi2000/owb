@@ -65,6 +65,13 @@
   width: 902px;
 }
 
+.top-disclosure-info {
+  border: 1px solid $defaultBorderColor;
+  padding: 30px 31px 30px 30px;
+  width: 850px;
+  position: relative;
+}
+
 .directory-right-side-navs {
   min-height: 900px;
   float: left;
@@ -92,6 +99,7 @@
   .right-info {
     border: 1px solid $defaultBorderColor;
     padding: 30px 30px 30px;
+    position: relative;
   }
 
   ul {
@@ -99,6 +107,16 @@
       padding-left: 0px;
     }
   }
+}
+
+.disclosure_close_btn {
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  font-size: 20px
 }
 
 .directory-right-side-content {

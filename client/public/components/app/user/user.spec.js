@@ -102,4 +102,16 @@ describe('User Service', function() {
       });
     $httpBackend.flush();
   });
+
+  it('should update a user', function (done) {
+    $httpBackend.when('POST', 'api/user/updateUser', {data: 'data'}).respond({});
+    service.updateUser({data: 'data'})
+      .then(function(result) {
+        expect(result.status).toBe(200);
+        done();
+      });
+    $httpBackend.flush();
+  });
+
+
 });

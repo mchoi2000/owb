@@ -74,6 +74,9 @@ function createOperator(user) {
   });
 
   operator.roles = ['cmmReviewer', 'operator'];
+  operator.settings = {
+    initialCmmVisit: 0
+  };
   return operator;
 }
 
