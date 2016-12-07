@@ -27,7 +27,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                 </span>
               </div>
               <div class="locale-list-section col-xs-12">
-                <div ng-class="{'table-sticky': ctrlCMM.tableContent, 'additional-padding': ctrlCMM.addPadding}">
+                <div ng-class="{'table-sticky': ctrlCMM.fixTableContent}">
                   <div class="cmmLocaleHead head-row">
                     <div class="head-cell" ng-click="ctrlCMM.changeSortOption('country');">
                       Country Name
@@ -40,9 +40,8 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                   </div>
                 </div>
                 <table class="table">
-                  <thead ng-if="ctrlCMM.tableContent">
+                  <thead ng-if="ctrlCMM.fixTableContent">
                     <tr>
-                      <th style="background-color:transparent;"></th>
                       <th style="background-color:transparent;"></th>
                     </tr>
                   </thead>
@@ -51,14 +50,14 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                       <td>{{x.country}}</td>
                       <td>{{x.language}}</td>
                       <td>
-                        <div style="overflow:hidden;">
-                          <div style="float: right; padding-left:20px;">
+                        <div class="join-locale">
+                          <div class="open-locale">
                             <input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/>
                           </div>
-                          <div style="float: right; height: 44px; line-height: 44px;" ng-if="ctrlCMM.userLocales[x.locale]">
+                          <div class="join-locale-team joined-locale" ng-if="ctrlCMM.userLocales[x.locale]">
                             Joined<span class="icon-check-circle-new green"></span>
                           </div>
-                          <div style="float: right; height: 44px; line-height: 44px;" ng-if="!ctrlCMM.userLocales[x.locale]">
+                          <div class="join-locale-team" ng-if="!ctrlCMM.userLocales[x.locale]">
                             <a href="" ng-click="ctrlCMM.joinLocale(x.locale, 'editor');">Join Locale team</a>
                           </div>
                         </div>
@@ -68,7 +67,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                 </table>
               </div>
               <div class="locale-anchor-section">
-                <div ng-class="{'locale-anchor-section-sticky': ctrlCMM.tableContent}">
+                <div ng-class="{'locale-anchor-section-sticky': ctrlCMM.fixTableContent}">
                   <ul>
                     <li ng-repeat="anchor in ctrlCMM.alphabets">
                       <button type="button" ng-class="{'active-index-button': ctrlCMM.selectedIndex == anchor}" class="ibm-bold index-button" ng-click="ctrlCMM.scrollToCountry(anchor);">{{anchor}}</button>
@@ -79,7 +78,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
             </div>
           </div>
           <div class="directory-right-side-navs directory-top-bottom-padding">
-            <div class="col-xs-12" ng-class="{'directory-right-side-sticky': ctrlCMM.fixRightNav == true, 'directory-right-side-content': ctrlCMM.fixRightNav == false}">
+            <div class="col-xs-12" ng-class="{'directory-right-side-sticky': ctrlCMM.fixRightNav, 'directory-right-side-content': ctrlCMM.fixRightNav}">
               <h3 class="directory-right-side-header ibm-bold ibmGray-60">My Locales</h3>
               <div class="right-side-content-section">
                 <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet. </span>

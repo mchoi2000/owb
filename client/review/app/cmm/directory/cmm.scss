@@ -10,21 +10,6 @@
   border-bottom: 1px solid $defaultBorderColor;
 }
 
-.cmm_locale_directory_table {
-  table-layout: fixed;
-
-  tbody {
-    overflow-y: auto;
-    height: 901px;
-  }
-  th, td {
-    width: 210px;
-  }
-  thead, tbody {
-    display:block;
-  }
-}
-
 .locale-list-section{
   float: left;
   width: 841px;
@@ -117,6 +102,7 @@
 .right-side-content-section {
   padding: 0px 24px 18px;
   .right-info {
+    width: 230px;
     border: 1px solid $defaultBorderColor;
     padding: 30px 30px 30px;
     position: relative;
@@ -181,6 +167,22 @@
 
   .search-bar-container {
     padding-right: 20px;
+  }
+}
+
+.join-locale {
+  overflow:hidden;
+  .open-locale {
+    float: right;
+    padding-left: 20px;
+  }
+  .joined-locale {
+    color: $ibmGray-40;
+  }
+  .join-locale-team {
+    float: right;
+    height: 44px;
+    line-height: 44px;
   }
 }
 

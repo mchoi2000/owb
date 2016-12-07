@@ -148,10 +148,10 @@
           $rootScope.$apply();
         }
         if ($window.pageYOffset >= localeTableOffset) {
-          _this.tableContent = true;
+          _this.fixTableContent = true;
           $rootScope.$apply();
         } else {
-          _this.tableContent = false;
+          _this.fixTableContent = false;
           $rootScope.$apply();
         }
       });
