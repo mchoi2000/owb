@@ -10,8 +10,11 @@
 'use strict';
 var express = require('express');
 var controller = require('./locales.controller');
+var roles = require('../../middleware/auth/roles');
 
 var router = express.Router();
 router.get('/', controller.getCountriesWithLang);
+router.get('/getOfferingsByLanguage/:language', roles.is('cmmReviewer'),
+           controller.getOfferingsByLanguage);
 
 module.exports = router;

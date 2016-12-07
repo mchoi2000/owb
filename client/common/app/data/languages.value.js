@@ -13,6 +13,7 @@
     {display: 'French', value: 'fr'},
     {display: 'German', value: 'de'},
     {display: 'Portuguese', value: 'pt'},
+    {display: 'Portuguese', value: 'ptbr'},
     {display: 'Polish', value: 'pl'},
     {display: 'Korean', value: 'ko'},
     {display: 'Italian', value: 'it'},
