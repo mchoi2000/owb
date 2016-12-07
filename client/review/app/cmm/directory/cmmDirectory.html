@@ -15,53 +15,68 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
 
           <div class="directory-offerings-container">
             <div class="col-xs-12 directory-title-section clearfix directory-top-bottom-padding">
-              <div class="col-xs-6 page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
+              <div class="col-xs-12 cmm-page-title-container clearfix" role="region" aria-label="Page title and search filter">
                 <!--- Page Title  --->
-                <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
-                <span ng-if="ctrlCMM.currentUserFirstVisit == true">
-                  <div class="top-disclosure-info">
-                    <button class="icon-x-circle icon-btn ibmGray-50 pull-right disclosure_close_btn" onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'><span class="sr-only">Remove</span></button>
-                    This is a list of every international IBM Marketplace. Click ‘Join locale team’ next to your country so that you can use the Globalization
-                    Workbench to view, monitor, or manage the offerings in your local IBM Marketplace.
-                  </div>
-                </span>
+                <h1 class="ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
+                <div class="top-disclosure-info col-xs-12 clearfix" ng-if="!ctrlCMM.disclosureHidden" id="top-disclosure-id">
+                  <button class="icon-x-circle icon-btn ibmGray-50 pull-right disclosure_close_btn" ng-click="ctrlCMM.disclosureHidden=true;"><span class="sr-only">Remove</span></button>
+                  This is a list of every international IBM Marketplace. Click ‘Join locale team’ next to your country so that you can use the Globalization
+                  Workbench to view, monitor, or manage the offerings in your local IBM Marketplace.
+                </div>
               </div>
-
-
               <div class="locale-list-section col-xs-12">
-                <table class="table commerce_review_details_table center_text">
-                  <thead>
-                  <tr>
-                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'country'; ctrlCMM.sortField = !ctrlCMM.sortField; ctrlCMM.selectedIndex = '';">Country Name
+                <div ng-class="{'table-sticky': ctrlCMM.fixTableContent}">
+                  <div class="cmmLocaleHead head-row">
+                    <div class="head-cell" ng-click="ctrlCMM.changeSortOption('country');">
+                      Country Name
                       <img class="upArrow" src="images/icons/sort-arrows.svg"/>
-                    </th>
-                    <th class="center_text cmmLocaleHead" ng-click="ctrlCMM.sortOption = 'language'; ctrlCMM.sortField = !ctrlCMM.sortField; ctrlCMM.selectedIndex = '';">Language
-                       <img class="upArrow" src="images/icons/sort-arrows.svg"/>
-                    </th>
-                  </tr>
+                    </div>
+                    <div class="head-cell" ng-click="ctrlCMM.changeSortOption('language');">
+                      Language
+                      <img class="upArrow" src="images/icons/sort-arrows.svg"/>
+                    </div>
+                  </div>
+                </div>
+                <table class="table">
+                  <thead ng-if="ctrlCMM.fixTableContent">
+                    <tr>
+                      <th style="background-color:transparent;"></th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr class="locale-row" ng-class="{'selected': ctrlCMM.userLocales[x.locale]}" ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortField">
-                    <td id="{{x.country}}">{{x.country}}</td>
-                    <td>{{x.language}}</td>
-                    <td ng-if="ctrlCMM.userLocales[x.locale]">Joined<span class="icon-check-circle-new green"></span></td>
-                    <td ng-if="!ctrlCMM.userLocales[x.locale]"><a href="" ng-click="ctrlCMM.joinLocale(x.locale, 'editor');">Join Locale team</a></td>
-                    <td><input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/></td>
-                  </tr>
+                    <tr id="{{x.country}}" class="locale-row" ng-class="{'selected': ctrlCMM.userLocales[x.locale]}" ng-repeat="x in ctrlCMM.localeList | orderBy: ctrlCMM.sortOption : ctrlCMM.sortField">
+                      <td>{{x.country}}</td>
+                      <td>{{x.language}}</td>
+                      <td>
+                        <div class="join-locale">
+                          <div class="open-locale">
+                            <input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/>
+                          </div>
+                          <div class="join-locale-team joined-locale" ng-if="ctrlCMM.userLocales[x.locale]">
+                            Joined<span class="icon-check-circle-new green"></span>
+                          </div>
+                          <div class="join-locale-team" ng-if="!ctrlCMM.userLocales[x.locale]">
+                            <a href="" ng-click="ctrlCMM.joinLocale(x.locale, 'editor');">Join Locale team</a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
               <div class="locale-anchor-section">
-                <ul>
-                  <li ng-repeat="anchor in ctrlCMM.alphabets">
-                    <button type="button" ng-class="{'active-index-button': ctrlCMM.selectedIndex == anchor}" class="ibm-bold index-button" ng-click="ctrlCMM.scrollToCountry(anchor);">{{anchor}}</button>
-                  </li>
-                </ul>
+                <div ng-class="{'locale-anchor-section-sticky': ctrlCMM.fixTableContent}">
+                  <ul>
+                    <li ng-repeat="anchor in ctrlCMM.alphabets">
+                      <button type="button" ng-class="{'active-index-button': ctrlCMM.selectedIndex == anchor}" class="ibm-bold index-button" ng-click="ctrlCMM.scrollToCountry(anchor);">{{anchor}}</button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
           <div class="directory-right-side-navs directory-top-bottom-padding">
-            <div class="col-xs-12 directory-right-side-content">
+            <div class="col-xs-12" ng-class="{'directory-right-side-sticky': ctrlCMM.fixRightNav, 'directory-right-side-content': ctrlCMM.fixRightNav}">
               <h3 class="directory-right-side-header ibm-bold ibmGray-60">My Locales</h3>
               <div class="right-side-content-section">
                 <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet. </span>
