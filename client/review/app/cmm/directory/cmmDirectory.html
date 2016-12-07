@@ -15,16 +15,14 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
 
           <div class="directory-offerings-container">
             <div class="col-xs-12 directory-title-section clearfix directory-top-bottom-padding">
-              <div class="col-xs-6 page-title-container-alt clearfix" role="region" aria-label="Page title and search filter">
+              <div class="col-xs-12 cmm-page-title-container clearfix" role="region" aria-label="Page title and search filter">
                 <!--- Page Title  --->
-                <h1 class="page_title ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
-                <span ng-if="ctrlCMM.currentUserFirstVisit == true">
-                  <div class="top-disclosure-info">
-                    <button class="icon-x-circle icon-btn ibmGray-50 pull-right disclosure_close_btn" onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'><span class="sr-only">Remove</span></button>
-                    This is a list of every international IBM Marketplace. Click ‘Join locale team’ next to your country so that you can use the Globalization
-                    Workbench to view, monitor, or manage the offerings in your local IBM Marketplace.
-                  </div>
-                </span>
+                <h1 class="ibm-bold ibmTeal-50" id="welcome">Locale directory</h1>
+                <div class="top-disclosure-info col-xs-12 clearfix" ng-if="!ctrlCMM.disclosureHidden" id="top-disclosure-id">
+                  <button class="icon-x-circle icon-btn ibmGray-50 pull-right disclosure_close_btn" ng-click="ctrlCMM.disclosureHidden=true;"><span class="sr-only">Remove</span></button>
+                  This is a list of every international IBM Marketplace. Click ‘Join locale team’ next to your country so that you can use the Globalization
+                  Workbench to view, monitor, or manage the offerings in your local IBM Marketplace.
+                </div>
               </div>
               <div class="locale-list-section col-xs-12">
                 <div ng-class="{'table-sticky': ctrlCMM.fixTableContent}">

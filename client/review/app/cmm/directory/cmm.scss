@@ -10,6 +10,10 @@
   border-bottom: 1px solid $defaultBorderColor;
 }
 
+.cmm-page-title-container {
+  margin-bottom: 30px;
+}
+
 .locale-list-section{
   float: left;
   width: 841px;
@@ -71,10 +75,12 @@
 }
 
 .top-disclosure-info {
+  height: 102px;
   border: 1px solid $defaultBorderColor;
   padding: 30px 31px 30px 30px;
-  width: 850px;
+  width: 841px;
   position: relative;
+  margin-top: 15px;
 }
 
 .directory-right-side-navs {

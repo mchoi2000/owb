@@ -9,9 +9,6 @@
 
   angular.module('review.cmmDir').controller('CMMDirectory',
     ['$q',
-    '$filter',
-    '$http',
-    '$cookies',
     '$anchorScroll',
     '$timeout',
     '$window',
@@ -22,9 +19,6 @@
 
   /*jshint maxstatements: 100 */
   function controller($q,
-    $filter,
-    $http,
-    $cookies,
     $anchorScroll,
     $timeout,
     $window,
@@ -40,7 +34,7 @@
     _this.sortField = false;
     _this.currentUser = {};
     _this.selectedIndex = '';
-    _this.currentUserFirstVisit = false;
+    _this.disclosureHidden = true;
 
     //Build a {locale: number-of-languages} map to determine the displayname
     function buildLocaleLanguageMap() {
@@ -79,13 +73,6 @@
       _this.sortOption = sortValue;
       _this.sortField = !_this.sortField;
       _this.selectedIndex = '';
-      var offset = angular.element(document.querySelector('#table-head')).offset().top;
-      $anchorScroll.yOffset = offset + 51;
-      $anchorScroll(_this.localeList[startIndex].country);
-      $timeout(function() {
-        // Apply second scroll to allow DOM changes
-        $anchorScroll(_this.localeList[startIndex].country);
-      });
     }
 
     _this.joinLocale = joinLocale;
@@ -134,12 +121,14 @@
       }
     }
 
+    _this.initializeStickyService = initializeStickyService;
     function initializeStickyService() {
-      var rightNavOffset = angular.element(document.querySelector('.directory-right-side-header'))
-                           .offset().top - 51;
-      var localeTableOffset = angular.element(document.querySelector('.head-row'))
-                           .offset().top - 51;
+      var rightElem = angular.element(document.querySelector('.directory-right-side-header'));
+      var tableElem = angular.element(document.querySelector('.locale-list-section'));
+      var rightNavOffset = rightElem.offset().top - 51;
+      var localeTableOffset = tableElem.offset().top - 51;
       $window.addEventListener('scroll', function() {
+        var topDisclosureOffset = _this.disclosureHidden ? 0 : 102;
         if ($window.pageYOffset >= rightNavOffset) {
           _this.fixRightNav = true;
           $rootScope.$apply();
@@ -147,7 +136,7 @@
           _this.fixRightNav = false;
           $rootScope.$apply();
         }
-        if ($window.pageYOffset >= localeTableOffset) {
+        if ($window.pageYOffset >= (localeTableOffset + topDisclosureOffset)) {
           _this.fixTableContent = true;
           $rootScope.$apply();
         } else {
@@ -172,7 +161,7 @@
         getUserLocales();
 
         if (_this.currentUser.settings.initialCmmVisit === 0) {
-          _this.currentUserFirstVisit = true;
+          _this.disclosureHidden = false;
           _this.currentUser.settings.initialCmmVisit++;
           UserService.updateUser(_this.currentUser);
         }
