@@ -125,6 +125,9 @@
   }
 }
 
-.locale-row:hover, .locale-row.selected{
-  background-color: $ibmNeutral-2
+.locale-row:hover, .locale-row.selected {
+  td {
+    color: $ibmGray-80 !important;
+  }
+  background-color: $ibmNeutral-2;
 }
