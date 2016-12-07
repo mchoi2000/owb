@@ -90,21 +90,13 @@ Open Git Bash on terminal app (not the Git GUI)
    ```
    >It takes a couple of minutes to complete. Wait. Wait. Wait.
 
-7. Add the line
-   ```sh
-   127.0.0.1   localhost   localhost.ibmserviceengage.com
-   ```
-   to the file
-   ```sh
-   /etc/hosts
-   ```
-   >Note: this file is not part of the project and only applies to OS X and Linux based systems.
 
-8. Follow the instructions in docs/openssl.md to setup openssl
+7. Follow the instructions in docs/openssl.md to setup openssl
 
-9. Set the local environment variables (local.env.json from tech lead) and place it under server/config/
 
-10. Run the project
+8. Set the local environment variables (local.env.json from tech lead) and place it under server/config/
+
+9. Run the project
    ```sh
    gulp serve
    ```

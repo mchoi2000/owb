@@ -16,6 +16,12 @@ $ cd operator-workbench
 $ git branch -v
 ```
 
+# Delete local branch
+
+```sh
+$ git branch -d [branch_name]
+```
+
 # Create a new branch and name it with the RTC story# that you are going to work on, and immediately switch to the branch
 
 ```sh
