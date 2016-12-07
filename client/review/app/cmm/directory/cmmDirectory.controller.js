@@ -35,6 +35,7 @@
     _this.currentUser = {};
     _this.selectedIndex = '';
     _this.disclosureHidden = true;
+    _this.rightDisclosureHidden = true;
 
     //Build a {locale: number-of-languages} map to determine the displayname
     function buildLocaleLanguageMap() {
@@ -162,6 +163,7 @@
 
         if (_this.currentUser.settings.initialCmmVisit === 0) {
           _this.disclosureHidden = false;
+          _this.rightDisclosureHidden = false;
           _this.currentUser.settings.initialCmmVisit++;
           var updateUserSettings = {
             _id: _this.currentUser._id,
