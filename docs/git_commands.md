@@ -24,19 +24,43 @@ $ git checkout -b [branch_name]
 
 # Make changes
 
-# Add changes to the current branch
+# Add updated files to the current branch
 
 ```sh
-$ git add [filename]
+$ git add [file1] [file2] [file3]
+```
+
+# Add all changes to the current branch at once
+
+```sh
+$ git add .
+```
+
+# List changes
+
+```sh
+$ git status
 ```
 
 # Commit changes
 
 ```sh
-$ git commit -m "list changes you made"
+$ git commit -m "description of changes that you made"
 ```
 
-# Merge branch to local master
+# List branches
+
+```sh
+$ git branch
+```
+
+# Checkout master
+
+```sh
+$ git checkout master
+```
+
+# Merge branch to master
 
 ```sh
 $ git merge [branch_name]
@@ -48,10 +72,10 @@ $ git merge [branch_name]
 $ git remote -v
 ```
 
-# Push your changes to a remote repository
+# Push your changes to remote repository
 
 ```sh
-$ git push [repo_alias] master
+$ git push origin master
 ```
 
-# Make a pull request on github web GUI
+# Make a pull request manually on github web GUI
