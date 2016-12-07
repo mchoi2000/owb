@@ -131,7 +131,11 @@
         if (_this.currentUser.settings.initialCmmVisit === 0) {
           _this.currentUserFirstVisit = true;
           _this.currentUser.settings.initialCmmVisit++;
-          UserService.updateUser(_this.currentUser);
+          var updateUserSettings = {
+            _id: _this.currentUser._id,
+            settings: _this.currentUser.settings
+          }
+          UserService.updateUser(updateUserSettings);
         }
       });
     }
