@@ -134,7 +134,7 @@
           var updateUserSettings = {
             _id: _this.currentUser._id,
             settings: _this.currentUser.settings
-          }
+          };
           UserService.updateUser(updateUserSettings);
         }
       });
