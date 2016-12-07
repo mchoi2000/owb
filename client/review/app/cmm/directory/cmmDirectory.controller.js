@@ -14,6 +14,8 @@
     '$cookies',
     '$anchorScroll',
     '$timeout',
+    '$window',
+    '$rootScope',
     'BlackListCountriesService',
     'UserService',
     controller]);
@@ -25,6 +27,8 @@
     $cookies,
     $anchorScroll,
     $timeout,
+    $window,
+    $rootScope,
     BlackListCountriesService,
     UserService) {
     /* jshint validthis: true */
@@ -70,6 +74,20 @@
       }
     }
 
+    _this.changeSortOption = changeSortOption;
+    function changeSortOption(sortValue) {
+      _this.sortOption = sortValue;
+      _this.sortField = !_this.sortField;
+      _this.selectedIndex = '';
+      var offset = angular.element(document.querySelector('#table-head')).offset().top;
+      $anchorScroll.yOffset = offset + 51;
+      $anchorScroll(_this.localeList[startIndex].country);
+      $timeout(function() {
+        // Apply second scroll to allow DOM changes
+        $anchorScroll(_this.localeList[startIndex].country);
+      });
+    }
+
     _this.joinLocale = joinLocale;
     function joinLocale(locale, role) {
       _this.loadingPage = true;
@@ -104,6 +122,7 @@
       }
       while (startIndex !== endIndex) {
         if (_this.localeList[startIndex].country.charAt(0) === alphabet) {
+          $anchorScroll.yOffset = 96;
           $anchorScroll(_this.localeList[startIndex].country);
           $timeout(function() {
             // Apply second scroll to allow DOM changes
@@ -115,11 +134,35 @@
       }
     }
 
+    function initializeStickyService() {
+      var rightNavOffset = angular.element(document.querySelector('.directory-right-side-header'))
+                           .offset().top - 51;
+      var localeTableOffset = angular.element(document.querySelector('.head-row'))
+                           .offset().top - 51;
+      $window.addEventListener('scroll', function() {
+        if ($window.pageYOffset >= rightNavOffset) {
+          _this.fixRightNav = true;
+          $rootScope.$apply();
+        } else {
+          _this.fixRightNav = false;
+          $rootScope.$apply();
+        }
+        if ($window.pageYOffset >= localeTableOffset) {
+          _this.tableContent = true;
+          $rootScope.$apply();
+        } else {
+          _this.tableContent = false;
+          $rootScope.$apply();
+        }
+      });
+    }
+
     _this.initialize = initialize;
     function initialize() {
       var getLocalePromise = BlackListCountriesService.getLocales();
       var getUserInfoPromise = UserService.get();
       var promiseChain = [getLocalePromise, getUserInfoPromise];
+      initializeStickyService();
       $q.all(promiseChain).then(function promisesResolved(results) {
         _this.loadingPage = false;
         _this.localeList = results[0];
