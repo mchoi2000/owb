@@ -10,6 +10,7 @@
   angular.module('review.cmmDashboard', [
     'ngRoute',
     'ngCookies',
+    'ui.bootstrap',
     'common.title',
     'common.header',
     'common.user',

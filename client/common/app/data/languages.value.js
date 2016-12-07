@@ -11,6 +11,7 @@
     {display: 'English', value: 'en'},
     {display: 'Japanese', value: 'ja'},
     {display: 'French', value: 'fr'},
+    {display: 'French', value: 'frca'},
     {display: 'German', value: 'de'},
     {display: 'Portuguese', value: 'pt'},
     {display: 'Portuguese', value: 'ptbr'},
@@ -18,6 +19,7 @@
     {display: 'Korean', value: 'ko'},
     {display: 'Italian', value: 'it'},
     {display: 'Spanish', value: 'es'},
+    {display: 'Spanish', value: 'esla'},
     {display: 'Turkish', value: 'tr'},
     {display: 'Russian', value: 'ru'},
     {display: 'Chinese', value: 'zh'}
