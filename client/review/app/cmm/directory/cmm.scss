@@ -10,18 +10,27 @@
   border-bottom: 1px solid $defaultBorderColor;
 }
 
+.cmm-page-title-container {
+  margin-bottom: 30px;
+}
+
 .locale-list-section{
   float: left;
   width: 841px;
 }
+.locale-anchor-section-sticky {
+  top: 96px;
+  position: fixed;
+}
 .locale-anchor-section {
+  width: 55px;
   margin-top: 45px;
   float: right;
   padding: 0px 16px 0px;
-  font-size: 14px;
   ul {
     li {
-      padding: 0px 0px 8px;
+      padding: 0px 0px 4px;
+      font-size: 12px !important;
     }
   }
   .index-button {
@@ -65,6 +74,15 @@
   width: 902px;
 }
 
+.top-disclosure-info {
+  height: 102px;
+  border: 1px solid $defaultBorderColor;
+  padding: 30px 31px 30px 30px;
+  width: 841px;
+  position: relative;
+  margin-top: 15px;
+}
+
 .directory-right-side-navs {
   min-height: 900px;
   float: left;
@@ -90,8 +108,10 @@
 .right-side-content-section {
   padding: 0px 24px 18px;
   .right-info {
+    width: 230px;
     border: 1px solid $defaultBorderColor;
     padding: 30px 30px 30px;
+    position: relative;
   }
 
   ul {
@@ -101,6 +121,16 @@
   }
 }
 
+.disclosure_close_btn {
+  display: inline-block;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  font-size: 20px
+}
+
 .directory-right-side-content {
   position: relative;
   width: 278px;
@@ -108,13 +138,34 @@
 }
 
 .directory-right-side-sticky {
-  .directory-right-side-content {
-    position: fixed;
-    top: 50px;
-  }
+  background-color: $ibmWhite;
+  position: fixed;
+  width: 278px;
+  transition: all 0.25s ease 0.0s;
+  top: 51px;
+  z-index: 1000;
+}
+
+.table-sticky {
+  top: 0;
+  padding-top: 51px;
+  background-color: $ibmWhite;
+  width: 841px;
+  position: fixed;
+  z-index: 500;
+}
+
+.head-cell {
+  display: table-cell !important;
+  color: $ibmGray-60;
+  font-family: $ibmHelvBold;
+  font-size: 14px;
+  width: 25%;
+  padding: 12px 18px;
 }
 
 .directory-title-section {
+  position: relative;
   .page-title-container {
     margin-top: 6px;
     margin-bottom: 45px;
@@ -125,7 +176,23 @@
   }
 }
 
-.locale-row:hover, .locale-row.selected {
+.join-locale {
+  overflow:hidden;
+  .open-locale {
+    float: right;
+    padding-left: 20px;
+  }
+  .joined-locale {
+    color: $ibmGray-40;
+  }
+  .join-locale-team {
+    float: right;
+    height: 44px;
+    line-height: 44px;
+  }
+}
+
+.locale-row:hover, .locale-row.selected{
   td {
     color: $ibmGray-80 !important;
   }
