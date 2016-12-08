@@ -79,20 +79,18 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
             <div class="col-xs-12" ng-class="{'directory-right-side-sticky': ctrlCMM.fixRightNav, 'directory-right-side-content': ctrlCMM.fixRightNav}">
               <h3 class="directory-right-side-header ibm-bold ibmGray-60">My Locales</h3>
               <div class="right-side-content-section">
-                <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet. </span>
+                <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet.</span>
                 <ul class="cmm-country-list" ng-if="ctrlCMM.currentUser.locales.length > 0">
                   <li ng-repeat="(code, country) in ctrlCMM.userLocales">
                     <a href="">{{country}}</a>
                   </li>
                 </ul>
               </div>
-              <div class="right-side-content-section">
-                <span ng-if="ctrlCMM.currentUserFirstVisit == true">
-                  <div class="right-info">
-                    <button class="icon-x-circle icon-btn pull-right ibmGray-50 disclosure_close_btn" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'><span class="sr-only">Remove</span></button>
-                    These are the IBM Marketplace Globalization Workbench locale teams you belong to. You can use the Globalization Workbench to view, monitor, or manage your team's offerings. These locales are also listed in your navigation bar in the upper right.
-                  </div>
-                </span>
+              <div class="right-side-content-section" ng-if="!ctrlCMM.rightDisclosureHidden">
+                <div class="right-info">
+                  <button class="icon-x-circle icon-btn pull-right ibmGray-50 disclosure_close_btn" ng-click="ctrlCMM.rightDisclosureHidden = true;"><span class="sr-only">Remove</span></button>
+                  These are the IBM Marketplace Globalization Workbench locale teams you belong to. You can use the Globalization Workbench to view, monitor, or manage your team's offerings. These locales are also listed in your navigation bar in the upper right.
+                </div>
               </div>
             </div>
           </div>
