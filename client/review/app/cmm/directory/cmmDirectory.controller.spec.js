@@ -12,6 +12,7 @@ describe('CMM Directory Controller Spec', function() {
   var $rootScope;
   var $timeout;
   var userLocalesUndefined = true;
+  var spy;
 
   var mockBlacklistService = {
     getLocales: function() {
@@ -27,35 +28,61 @@ describe('CMM Directory Controller Spec', function() {
   var mockUserService = {
     get: function() {
       if (userLocalesUndefined) {
-        return $q.resolve({});
+        return $q.resolve({settings: {initialCmmVisit: 1}});
       } else {
-        return $q.resolve({locales: []});
+        return $q.resolve({locales: [], settings: {initialCmmVisit: 0}});
       }
     },
     joinLocale: function(newLocaleArray) {
       return $q.resolve({config: {data: newLocaleArray}});
+    },
+    updateUser: function(user) {
+      return $q.resolve({});
     }
   };
   var $anchorScroll = jasmine.createSpy('anchorScroll');
+  var $window = {
+    addEventListener : function(elem, cb) {
+      if (elem === 'scroll') {
+        cb();
+      }
+    }
+  };
 
   beforeEach(module('review.cmmDir'));
-
   beforeEach(function() {
     module(function($provide) {
+      $provide.value('$window', $window);
       $provide.value('$anchorScroll', $anchorScroll);
     });
-    inject(function(_$httpBackend_, _$q_, _$rootScope_, _$timeout_, _$controller_) {
-      $httpBackend = _$httpBackend_;
-      $q = _$q_;
-      $rootScope = _$rootScope_;
-      $timeout = _$timeout_;
+  });
 
-      ctrlDir = _$controller_('CMMDirectory', {
-        BlackListCountriesService: mockBlacklistService,
-        UserService: mockUserService
-      });
-
+  beforeEach(inject(function(_$httpBackend_, _$q_, _$rootScope_, _$timeout_, _$controller_) {
+    $httpBackend = _$httpBackend_;
+    $q = _$q_;
+    $rootScope = _$rootScope_;
+    $timeout = _$timeout_;
+    spyOn(document, 'querySelector').and.callFake(function (ele) {
+      return 181;
     });
+    spy = spyOn(angular, 'element').and.callFake(function (element) {
+      return {
+        offset: function() {
+          return {
+            top:  element
+          };
+        }
+      };
+    });
+
+    ctrlDir = _$controller_('CMMDirectory', {
+      BlackListCountriesService: mockBlacklistService,
+      UserService: mockUserService
+    });
+  }));
+
+  afterEach(function() {
+    spy.and.callThrough();
   });
 
   it('should initialize', function() {
@@ -75,6 +102,7 @@ describe('CMM Directory Controller Spec', function() {
   });
 
   it('should join a locale: if locale supports more than one lang', function() {
+    $window.pageYOffset = 750;
     userLocalesUndefined = false;
     ctrlDir.initialize();
     $rootScope.$apply();
@@ -85,6 +113,7 @@ describe('CMM Directory Controller Spec', function() {
   });
 
   it('should join a locale: if locale supports only one lang', function() {
+    $window.pageYOffset = 750;
     userLocalesUndefined = true;
     ctrlDir.initialize();
     $rootScope.$apply();
@@ -116,6 +145,27 @@ describe('CMM Directory Controller Spec', function() {
     ctrlDir.scrollToCountry(index);
     $timeout.flush();
     expect($anchorScroll).toHaveBeenCalledWith('Brasil');
+  });
+
+  it('should test anchoring: top disclosure hidden', function() {
+    $window.pageYOffset = 750;
+    ctrlDir.initialize();
+    $rootScope.$apply();
+
+    expect(ctrlDir.fixRightNav).toBeTruthy();
+    expect(ctrlDir.fixTableContent).toBeTruthy();
+  });
+
+  it('should test anchoring: top disclosure shown', function() {
+    ctrlDir.disclosureHidden = false;
+    $window.pageYOffset = 750;
+    ctrlDir.initializeStickyService();
+    expect(ctrlDir.fixTableContent).toBeTruthy();
+  });
+
+  it('should change sort option', function() {
+    ctrlDir.changeSortOption('country');
+    expect(ctrlDir.sortOption).toEqual('country');
   });
 
 });

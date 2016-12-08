@@ -21,7 +21,8 @@
       inviteUser: inviteUser,
       removeUsers: removeUsers,
       resendInvite: resendInvite,
-      joinLocale: joinLocale
+      joinLocale: joinLocale,
+      updateUser: updateUser
     };
 
     return service;
@@ -65,6 +66,10 @@
 
     function joinLocale(locales) {
       return $http.post('api/user/joinLocale' , locales);
+    }
+
+    function updateUser(user) {
+      return $http.post('api/user/updateUser' , user);
     }
   }
 })();

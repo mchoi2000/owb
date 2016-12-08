@@ -14,7 +14,8 @@ module.exports = {
   show: show,
   showAll: showAll,
   removeUsers: removeUsers,
-  joinLocale: joinLocale
+  joinLocale: joinLocale,
+  updateUser: updateUser
 };
 
 function index(req, res) {
@@ -75,4 +76,13 @@ function joinLocale(req, res) {
     }).catch(function joinLocaleFailure(error) {
       return res.status(500).json(error);
     });
+}
+
+function updateUser(req, res) {
+  service.updateUser(req.body)
+    .then(function updateUserSuccess(response) {
+      return res.status(200).json(response);
+    }).catch(function updateUserFailure(error) {
+    return res.status(500).json(error);
+  });
 }

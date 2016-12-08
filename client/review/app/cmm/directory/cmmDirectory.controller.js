@@ -9,22 +9,20 @@
 
   angular.module('review.cmmDir').controller('CMMDirectory',
     ['$q',
-    '$filter',
-    '$http',
-    '$cookies',
     '$anchorScroll',
     '$timeout',
+    '$window',
+    '$rootScope',
     'BlackListCountriesService',
     'UserService',
     controller]);
 
   /*jshint maxstatements: 100 */
   function controller($q,
-    $filter,
-    $http,
-    $cookies,
     $anchorScroll,
     $timeout,
+    $window,
+    $rootScope,
     BlackListCountriesService,
     UserService) {
     /* jshint validthis: true */
@@ -36,6 +34,8 @@
     _this.sortField = false;
     _this.currentUser = {};
     _this.selectedIndex = '';
+    _this.disclosureHidden = true;
+    _this.rightDisclosureHidden = true;
 
     //Build a {locale: number-of-languages} map to determine the displayname
     function buildLocaleLanguageMap() {
@@ -67,6 +67,13 @@
           });
         });
       }
+    }
+
+    _this.changeSortOption = changeSortOption;
+    function changeSortOption(sortValue) {
+      _this.sortOption = sortValue;
+      _this.sortField = !_this.sortField;
+      _this.selectedIndex = '';
     }
 
     _this.joinLocale = joinLocale;
@@ -103,6 +110,7 @@
       }
       while (startIndex !== endIndex) {
         if (_this.localeList[startIndex].country.charAt(0) === alphabet) {
+          $anchorScroll.yOffset = 96;
           $anchorScroll(_this.localeList[startIndex].country);
           $timeout(function() {
             // Apply second scroll to allow DOM changes
@@ -114,11 +122,37 @@
       }
     }
 
+    _this.initializeStickyService = initializeStickyService;
+    function initializeStickyService() {
+      var rightElem = angular.element(document.querySelector('.directory-right-side-header'));
+      var tableElem = angular.element(document.querySelector('.locale-list-section'));
+      var rightNavOffset = rightElem.offset().top - 51;
+      var localeTableOffset = tableElem.offset().top - 51;
+      $window.addEventListener('scroll', function() {
+        var topDisclosureOffset = _this.disclosureHidden ? 0 : 102;
+        if ($window.pageYOffset >= rightNavOffset) {
+          _this.fixRightNav = true;
+          $rootScope.$apply();
+        } else {
+          _this.fixRightNav = false;
+          $rootScope.$apply();
+        }
+        if ($window.pageYOffset >= (localeTableOffset + topDisclosureOffset)) {
+          _this.fixTableContent = true;
+          $rootScope.$apply();
+        } else {
+          _this.fixTableContent = false;
+          $rootScope.$apply();
+        }
+      });
+    }
+
     _this.initialize = initialize;
     function initialize() {
       var getLocalePromise = BlackListCountriesService.getLocales();
       var getUserInfoPromise = UserService.get();
       var promiseChain = [getLocalePromise, getUserInfoPromise];
+      initializeStickyService();
       $q.all(promiseChain).then(function promisesResolved(results) {
         _this.loadingPage = false;
         _this.localeList = results[0];
@@ -126,6 +160,17 @@
 
         buildLocaleLanguageMap();
         getUserLocales();
+
+        if (_this.currentUser.settings.initialCmmVisit === 0) {
+          _this.disclosureHidden = false;
+          _this.rightDisclosureHidden = false;
+          _this.currentUser.settings.initialCmmVisit++;
+          var updateUserSettings = {
+            _id: _this.currentUser._id,
+            settings: _this.currentUser.settings
+          };
+          UserService.updateUser(updateUserSettings);
+        }
       });
     }
 
