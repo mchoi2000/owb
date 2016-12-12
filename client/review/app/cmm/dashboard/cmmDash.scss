@@ -1,0 +1,326 @@
+//Licensed Materials - Property of IBM
+//
+//@ Copyright IBM Corp. 2015 All Rights Reserved
+//
+//US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP
+//Schedule Contract with IBM Corp.
+/**
+ * CMM Only Styles
+ */
+.cmm-dashboard-topmatter {
+  height:210px;
+  width:100%;
+  position:relative;
+  margin-bottom: 30px;
+}
+
+.locale-info {
+  position:absolute;
+  top:50%;
+  transform: translate(0, -50%)
+}
+
+.user-action {
+  position:absolute;
+  top:50%;
+  right:0;
+  transform: translate(0, -50%)
+}
+ .country-info {
+   color: #008571;
+   font-family: $ibmHelvBold;
+   font-size: 35px;
+   font-weight: bold;
+ }
+
+ .cmm-manage-team-button {
+  font-size: $baseSize;
+  width: 160px;
+  height: 40px;
+  text-align: left;
+  color: $ibmGray-60;
+  border: 2px solid $defaultBorderColor;
+  padding-left: 50px;
+  background-color: transparent;
+
+  &::before {
+    position: absolute;
+    left: 18px;
+    top: 8px;
+    font-size: 23px;
+    color:  #008571;
+  }
+
+  &:hover {
+    background-color:  #008571;
+    color: $ibmWhite;
+
+    &::before {
+      color: $ibmWhite;
+    }
+  }
+}
+
+.cmm-join-locale-button {
+  font-size: $baseSize;
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  color: $ibmWhite;
+  font-weight: bold;
+  border: 2px solid $defaultBorderColor;
+  background-color: #008571;
+}
+
+.cmm-search-bar-container {
+  margin-bottom: 30px;
+}
+
+.search-box-btn {
+  float: right;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border: none;
+  background-color: $ibmWhite;
+  width: 40px;
+  height: 40px;
+  font-size: 0px;
+  color: $ibmWhite;
+
+  &::before {
+    right: 1px;
+    position: absolute;
+    top: 9px;
+    color: blue;
+    display: block;
+    width: 33px;
+    height: 30px;
+    font-size: 23px;
+    color: $ibmGray-70;
+  }
+
+  &:hover {
+    &::before {
+      color: $linkHoverColor;
+    }
+  }
+}
+
+.cmm-filters-container {
+  margin-bottom: 30px;
+  border-top: 1px solid $defaultBorderColor;
+  border-bottom: 1px solid $defaultBorderColor;
+}
+
+.total-results-container {
+  width: 360px;
+  float: left;
+  height: 42px;
+
+  span {
+    color: $ibmGray-40 !important;
+    font-weight: lighter !important;
+    position: relative;
+    top: 9px;
+    left: 14px;
+    font-size: 16px;
+  }
+}
+
+.filter-container {
+  width: 550px;
+  float: left;
+  height: 42px;
+  position: relative;
+  border-left: 1px solid $defaultBorderColor;
+  margin-right: 10px;
+
+  .filter-row {
+    display: table-cell;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 22px;
+    padding-right: 0px;
+  }
+
+}
+
+.cmm-sort-container {
+  width: 260px;
+  float: left;
+  height: 42px;
+  position: relative;
+  border-left: 1px solid $defaultBorderColor;
+
+  .cmm-dropdown-container {
+    width: 100%;
+    .dropdown_btn {
+      width: 100%;
+      padding-left: 18px;
+      padding-right: 18px;
+      border: none !important;
+    }
+  }
+}
+
+.cmm-status-dropdown-menu {
+  padding: 20px;
+  li {
+    height: 26px;
+
+    a {
+      color: $ibmGray-60;
+      height: 26px;
+      padding: 0px 9px;
+      border-bottom: none;
+      line-height: 100%;
+
+      &:hover {
+        text-decoration: none;
+        background-color: $ibmWhite;
+      }
+    }
+  }
+}
+
+div .cmm-dropdown-container {
+  .dropdown-menu {
+    top: 42px !important;
+    border-top: none;
+    width: 100%;
+    padding: 14px 0px 14px;
+  }
+
+  .cmm-lang-dropdown-menu {
+    padding: 20px 18px 18px;
+  }
+}
+
+
+.cmm-dashboard-products-container {
+  margin-bottom: 30px;
+  position: relative;
+  background-color: #fff;
+  min-height: 230px;
+  width: 100%;
+  opacity: 1;
+
+  &:hover {
+    cursor: default;
+  }
+
+  .fade_out {
+    opacity: 0;
+  }
+
+  li:nth-child(4n + 4) {
+    margin-right: 0px !important;
+  }
+
+  .needs-review {
+    background-color: #f9f9f9;
+  }
+
+  .cmm-dashboard-product-tile-item {
+    &:hover {
+      @include standardBoxShadow();
+      cursor:pointer;
+    }
+    width: $desktopColumnWidth-OneFourth;
+    margin-right: $desktopColumGutter;
+    margin-bottom: $desktopColumGutter;
+    float:left;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:20px;
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+    border: 1px solid $defaultBorderColor;
+    line-height: 1.3em;
+    cursor: default;
+    margin-bottom: 20px !important;
+
+
+    .h3, h3 {
+      color: $ibmGray-60;
+      clear: both;
+      font-size: $h3Size;
+      line-height: 1.2em;
+      top: 0px;
+      word-break: keep-all;
+      width: 86%;
+    }
+
+    p {
+      color: $ibmGray-60;
+    }
+
+    .link-block {
+      display: block !important;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .cmm-needs-review {
+    font-size: 12px;
+    font-family: $ibmHelvRegular;
+    text-align: center;
+    color: $ibmWhite;
+    background-color: #008571;
+    width: 90px;
+    height: 20px;
+    margin-bottom: 12px;
+  }
+
+  .cmm-offering-name {
+    font-size: 18px;
+    font-family: $ibmHelvRegular;
+    color: $ibmGray-80;
+    margin-bottom: 12px;
+  }
+
+  .cmm-published-listing {
+    a {
+      font-size: 14px;
+      font-family: $ibmHelvRegular;
+      color: $ibmBlue-50;
+      text-decoration: none;
+    }
+  }
+
+  .cmm-tile-footer {
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:84px;
+    display: table-row;
+    .tile-footer-row {
+      width:280px;
+      line-height: 42px;
+      padding-left:20px;
+      padding-right:20px;
+    }
+    .fields-updated {
+      color: $ibmGray-60;
+      background-color:#FDE876;
+    }
+    .row-top-border {
+      border-top: 1px solid $defaultBorderColor;
+      .blacklist-red {
+        color: #E72232;
+      }
+    }
+  }
+
+  .review-product-tile-item {
+    height: 450px;
+
+    .task-content {
+      padding: 20px 0 10px 0;
+    }
+  }
+
+}

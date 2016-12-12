@@ -51,5 +51,14 @@ module.exports = {
     owbTeamEmail: ['owbteam@us.ibm.com'],
     owbTeamName: 'Operator Workbench team',
     noreplyEmail: 'noreply@operatorworkbench.com'
+  },
+
+  pwbConfig: {
+    hostURL: 'https://www.ibm.com',
+    webRoot: '/marketplace/workbench/',
+    secureToken: process.env.PWB_JWT_TOKEN,
+    api: {
+      getDocsWithTranslation: 'api/translation/getDocsWithTranslation'
+    }
   }
 };

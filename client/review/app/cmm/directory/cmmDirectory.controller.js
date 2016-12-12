@@ -147,6 +147,11 @@
       });
     }
 
+    _this.openLocale = openLocale;
+    function openLocale(locale) {
+      $window.location.href = 'review/cmm/dashboard/' + locale;
+    }
+
     _this.initialize = initialize;
     function initialize() {
       var getLocalePromise = BlackListCountriesService.getLocales();

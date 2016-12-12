@@ -1,0 +1,151 @@
+<!--
+Licensed Materials - Property of IBM
+
+@ Copyright IBM Corp. 2015 All Rights Reserved
+
+US Government Users Restricted Rights - Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<div>
+  <div class="cmm_header_view" header></div>
+  <main id="reviewDirectoryWrapper" aria-label="Locale dashboard" role="main">
+    <section class="page-section-container">
+      <div class="page-section">
+        <div class="page-content clearfix">
+
+          <div class="cmm-dashboard-topmatter">
+            <div class="locale-info">
+              <div class="country-info">
+                {{ctrlCMMDash.countryDisplayVal}}
+              </div>
+              <div class="language-info">
+                <label>Language: {{ctrlCMMDash.languageDisplayVal}}</label>
+              </div>
+            </div>
+            <div class="user-action">
+              <button class="cmm-manage-team-button icon-three-peeps">
+                Manage Team
+              </button>
+              &nbsp;&nbsp;
+              <button class="cmm-join-locale-button" ng-if="!ctrlCMMDash.joined" ng-click="ctrlCMMDash.joinLocale();">
+                Join Locale
+              </button>
+            </div>
+          </div>
+
+          <div class="col-xs-12 cmm-search-bar-container"  role="search" aria-labelledby="search_box_description">
+            <ng-form novalidate name="owbSearchForm">
+              <label id="search_box_description" class="sr-only" for="dashboard_search_box">Search for an offering by name, owner.</label>
+              <input class="form-control icon_sprite search_box" placeholder="Search for an offering by name or owner"
+                     type="text" id="dashboard_search_box" aria-controls="dashboard_products_list"
+                     ng-model="ctrlCMMDash.search.offeringName"/>
+              <button type="button" ng-click="" class="search-box-btn icon-search">Search</button>
+            </ng-form>
+          </div>
+
+          <div class="col-xs-12 cmm-filters-container" role="region" aria-label="Filter options for offerings">
+
+            <div class="total-results-container">
+              <span>{{ctrlCMMDash.offerings.length}} offerings</span>
+            </div>
+
+            <div class="filter-container">
+
+              <div class="filter-row">
+                <h4 class="ibm-bold ibmGray-60">Filter:</h4>
+              </div>
+
+              <div class="filter-row checkbox_container">
+                <label>All offerings</label>
+                <div aria-disabled="false" class="icheckbox_square-blue" ng-class="{'checked' : ctrlCMMDash.showAll, 'checkbox_focused': checkBoxFocus}" role="checkbox">
+                  <input type="checkbox" ng-model="ctrlCMMDash.showAll" ng-true-value="true" ng-false-value="false" ng-focus="checkBoxFocus = true;" ng-blur="checkBoxFocus = false;">
+                </div>
+              </div>
+
+              <div class="filter-row checkbox_container">
+                <label>Needs review</label>
+                <div aria-disabled="false" class="icheckbox_square-blue" ng-class="{'checked' : ctrlCMMDash.filterByReview, 'checkbox_focused': checkBoxFocus}" role="checkbox">
+                  <input type="checkbox" ng-model="ctrlCMMDash.filterByReview" ng-true-value="true" ng-false-value="false" ng-focus="checkBoxFocus = true;" ng-blur="checkBoxFocus = false;">
+                </div>
+              </div>
+
+              <div class="filter-row checkbox_container">
+                <label>Blacklisted offerings</label>
+                <div aria-disabled="false" class="icheckbox_square-blue" ng-class="{'checked' : ctrlCMMDash.filterByBlacklist, 'checkbox_focused': checkBoxFocus}" role="checkbox">
+                  <input type="checkbox" ng-model="ctrlCMMDash.filterByBlacklist" ng-true-value="true" ng-false-value="false" ng-focus="checkBoxFocus = true;" ng-blur="checkBoxFocus = false;">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="cmm-sort-container">
+              <div class="select_input_container cmm-dropdown-container btn-group" uib-dropdown keyboard-nav>
+                <button id="status_dropdown"
+                        type="button"
+                        name="status_dropdown"
+                        class="btn dropdown_btn icon-down-arrow"
+                        uib-dropdown-toggle>
+                      <b>Sort:</b> Status
+                </button>
+                <ul uib-dropdown-menu class="cmm-status-dropdown-menu dropdown-menu dropdown_menu_display_options"
+                    role="menu" tabindex=0>
+                  <li role="menuitem">
+                    <a href="#" ng-click=""><span>Test reason A</span></a>
+                  </li>
+                  <li role="menuitem">
+                    <a href="#" ng-click=""><span>Test reason B</span></a>
+                  </li>
+                  <li role="menuitem">
+                    <a href="#" ng-click=""><span>Test reason C</span></a>
+                  </li>
+                  <li role="menuitem">
+                    <a href="#" ng-click=""><span>Test reason D</span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="page-content dashboard-tile-container clearfix" role="region" aria-label="The list of offerings based on your display options">
+            <!--- Empty Tile Message --->
+            <div ng-show="ctrlCMMDash.loading && ctrlCMMDash.offerings.length == 0" class="col-xs-12 empty_products_container" ng-cloak>
+              <p class="no_offerings_msg h3">We couldn't find any results</p>
+            </div>
+
+            <ul id="dashboard_products_list" class="zero_out_block_list cmm-dashboard-products-container clearfix">
+              <li aria-label="Review offering - {{x.offeringName}}" class="cmm-dashboard-product-tile-item"
+                  ng-class="{'needs-review': x.offeringName}"
+                  ng-repeat="x in ctrlCMMDash.offerings | filter:ctrlCMMDash.search"
+                  ng-class="{'published-tile' : x.offeringData.status==='published' ||
+                             x.offeringData.status==='Published' ||
+                             x.offeringData.status==='Published Update'}"
+                  ng-click="ctrlCMMDash.openReviewPage('link');">
+                  <div class="cmm-needs-review" ng-if="true">
+                    Needs Review
+                  </div>
+                  <div class="cmm-offering-name">
+                    {{x.offeringName}}
+                  </div>
+                  <div class="cmm-published-listing" ng-if="true">
+                    <a href="{{x.offeringData.tasks.content.liveURL}}">
+                      View published listing
+                    </a>
+                  </div>
+                  <div class="cmm-tile-footer">
+                    <div class="tile-footer-row fields-updated" ng-if="true">
+                      <span><b>3</b> fields updated<span>
+                    </div>
+                    <div class="tile-footer-row" ng-if="true">
+                      <div class="row-top-border">
+                        <span>Sent for publishing<span>
+                        <span class="blacklist-red">Blacklisted by<span>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

@@ -11,7 +11,8 @@ var proxyquire = require('proxyquire').noCallThru();
 var should = require('should');
 
 var ctrlMock = {
-  getCountriesWithLang: 'getCountriesWithLang'
+  getCountriesWithLang: 'getCountriesWithLang',
+  getOfferingsByLanguage: 'getOfferingsByLanguage'
 };
 
 var expressMock = {
@@ -23,6 +24,8 @@ var expressMock = {
         }
         if (path === '/') {
           func.should.equal(ctrlMock.getCountriesWithLang);
+        } else if (path === '/getOfferingsByLanguage/:language') {
+          func.should.equal(ctrlMock.getOfferingsByLanguage);
         } else {
           should.fail();
         }

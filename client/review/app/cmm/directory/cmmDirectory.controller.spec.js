@@ -46,6 +46,9 @@ describe('CMM Directory Controller Spec', function() {
       if (elem === 'scroll') {
         cb();
       }
+    },
+    location: {
+      href: ''
     }
   };
 
@@ -166,6 +169,11 @@ describe('CMM Directory Controller Spec', function() {
   it('should change sort option', function() {
     ctrlDir.changeSortOption('country');
     expect(ctrlDir.sortOption).toEqual('country');
+  });
+
+  it('should open review dashboard', function() {
+    ctrlDir.openLocale('fr-ca');
+    expect($window.location.href).toEqual('review/cmm/dashboard/fr-ca');
   });
 
 });
