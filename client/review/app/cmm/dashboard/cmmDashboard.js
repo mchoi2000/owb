@@ -7,25 +7,23 @@
 (function() {
   'use strict';
 
-  angular.module('review.cmmDir', [
+  angular.module('review.cmmDashboard', [
     'ngRoute',
     'ngCookies',
+    'ui.bootstrap',
     'common.title',
     'common.header',
     'common.user',
-    'common.data',
-    'common.scroller',
-    'common.countries'
+    'common.data'
   ]).config(configuration);
 
   function configuration($routeProvider) {
-    $routeProvider.when('/review/cmm', {
-      templateUrl: 'review/app/cmm/directory/cmmDirectory.html',
-      controller: 'CMMDirectory',
-      controllerAs: 'ctrlCMM',
-      pageTitle: 'Globalization Workbench CMM Review Directory',
+    $routeProvider.when('/review/cmm/dashboard/:locale', {
+      templateUrl: 'review/app/cmm/dashboard/cmmDashboard.html',
+      controller: 'CMMDashboardController',
+      controllerAs: 'ctrlCMMDash',
+      pageTitle: 'Globalization Workbench',
       pageSlug: 'cmm-directory'
-    })
-    ;
+    });
   }
 })();
