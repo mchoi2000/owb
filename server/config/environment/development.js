@@ -61,5 +61,4 @@ module.exports = {
       getDocsWithTranslation: 'api/translation/getDocsWithTranslation'
     }
   }
-  
 };
