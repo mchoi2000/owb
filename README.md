@@ -141,7 +141,7 @@ Open Git Bash on terminal app (not the Git GUI)
     **HEADERS:**
     
         Key:   Authorization
-        Value: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwicm9sZXMiOlsiYWRtaW4iXSwiZGVzY3JpcHRpb24iOiIifQ.z_ddxudTb_fX9q4x1Itd3bZwyQJiRZmiWvbRsjfwzwI
+        Value: JWT <Obtain JWT token from tech lead>
 
         Key:   Content-Type
         Value: application/json
