@@ -43,7 +43,7 @@ Open Git Bash on terminal app (not the Git GUI)
    ```
 3. Generate a new [SSH Key][Link to generate ssh key]
 
-## Cloning the repository from Github
+## Cloning the repository from Github and running the WebApp
 
 1. Fork from the operator-workbench project (https://github.ibm.com/digital-marketplace/operator-workbench)
 
@@ -74,7 +74,7 @@ Open Git Bash on terminal app (not the Git GUI)
    ```
 
 5. Install  global npm packages
-    bower - Package manager for web app dependencies,   
+    bower - Package manager for web app dependencies,
     gulp - Build framework  
     karma - Test Runner
 
@@ -94,13 +94,79 @@ Open Git Bash on terminal app (not the Git GUI)
 7. Follow the instructions in docs/openssl.md to setup openssl
 
 
-8. Set the local environment variables (local.env.json from tech lead) and place it under server/config/
+8. Set the local environment variables:
 
-9. Run the project
+    Obtain local.env.json from tech lead and place it under *operator-workbench/server/config/*
+    
+    If not using the production Cloudant DB (using local CouchDB or personal Cloudant DB), update the following attributes of the local.env.json file:
+        
+        "CFCI_CLOUDANT_USERNAME"
+        "CFCI_CLOUDANT_PASSWORD"
+        "CFCI_CLOUDANT_URL"
+
+9. Copy localhost.pfx (created in step 3) into operator-workbench/server/certs folder.
+
+10. Create owbuserdb database in your personal Cloudant or local CouchDB and make sure the following document is added:
+
+        {
+            "_id": "5G1234567",
+            "email": "pkadiya@us.ibm.com",
+            "fname": "Pradeep",
+            "lname": "Kadiyala",
+            "registered": false,
+            "countries": [],
+            "roles": ["admin"]
+        }
+
+11. Copy localhost.pfx (created in step 3) into operator-workbench/server/certs folder.
+
+12. Import rootCA.crt (created in step 3)into your browser.
+    
+    **Firefox:**
+        Open Preferences —> Advanced —> View Certificates —> Import
+
+    **Chrome:**
+    Open chrome://settings —> Expand “Show advanced settings…” —> Select “Manage certificates” button —> Choose File —> Import Items
+
+13. Run the project
    ```sh
    gulp serve
    ```
    >This command runs a task named 'serve' defined in the gulpfile.js
+
+14. Use any REST client to send a POST request to the invite API.  Use the following:
+    
+    **API URL:** https://localhost:3000/marketplace/operator/globalization/invite
+    
+    **HEADERS:**
+    
+        Key:   Authorization
+        Value: JWT <Obtain JWT token from tech lead>
+
+        Key:   Content-Type
+        Value: application/json
+
+    **BODY:**  Make sure to update the users information with your appropriate ID, emailAddress, etc.
+    
+        {
+            "users": [
+                {
+                    "id": "XXXXXXXX",
+                    "emailAddress":"userEmail",
+                    "fname":"userFirstName",
+                    "lname":"userLastName",
+                    "locales": ["en-us","en-uk"]
+                }
+            ],
+            "invitedBy": {
+                "id": "5G1234567",
+                "emailAddress": "pkadiya@us.ibm.com",
+                "fname":"Pradeep",
+                "lname":"Kadiyala"
+            }
+        }
+        
+
 
 ## Making changes to the repository
 
