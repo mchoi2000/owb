@@ -50,7 +50,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                       <td>
                         <div class="join-locale">
                           <div class="open-locale">
-                            <input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click=""/>
+                            <input class="btn btn-primary col-xs-12 submit_offering_btn ibm-bold" type="submit" value="Open Locale" ng-click="ctrlCMM.openLocale(x.locale);"/>
                           </div>
                           <div class="join-locale-team joined-locale" ng-if="ctrlCMM.userLocales[x.locale]">
                             Joined<span class="icon-check-circle-new green"></span>
@@ -82,7 +82,7 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                 <span ng-if="!ctrlCMM.currentUser.locales || ctrlCMM.currentUser.locales.length == 0">You haven’t joined any locale teams yet.</span>
                 <ul class="cmm-country-list" ng-if="ctrlCMM.currentUser.locales.length > 0">
                   <li ng-repeat="(code, country) in ctrlCMM.userLocales">
-                    <a href="">{{country}}</a>
+                    <a href="review/cmm/dashboard/{{code}}">{{country}}</a>
                   </li>
                 </ul>
               </div>

@@ -25,5 +25,6 @@ export CF_TARGET=https://api.w3ibm.bluemix.net && \
 	export CFCI_IDAAS_CALLBACK=$STAGE_CFCI_IDAAS_CALLBACK && \
 	export CFCI_IDAAS_CLIENT=$STAGE_CFCI_IDAAS_CLIENT && \
 	export CFCI_IDAAS_SECRET=$STAGE_CFCI_IDAAS_SECRET && \
+	export PWB_JWT_TOKEN=$STAGE_PWB_JWT_TOKEN && \
 	gulp build && \
 	./bin/deploy_to_bluemix.sh
