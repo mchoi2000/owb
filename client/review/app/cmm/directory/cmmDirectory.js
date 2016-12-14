@@ -10,6 +10,7 @@
   angular.module('review.cmmDir', [
     'ngRoute',
     'ngCookies',
+    'ui.bootstrap',
     'common.title',
     'common.header',
     'common.user',

@@ -18,7 +18,35 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
       <div id="pwb-top-main-navs" class="pwb-top-navs clearfix">
         <ul tabindex="0" role="menubar" aria-label="Main menu for application" class="zero_out_block_list clearfix">
           <li role="menuitem" id="pwb-home-link" ng-if="headerCtrl.pageSlug !== 'qualificationForm' && headerCtrl.pageSlug !== 'qualificationConfirmation' && headerCtrl.pageSlug !== 'academy-dashboard' && headerCtrl.pageSlug !== 'cmm-directory' && headerCtrl.pageSlug !== 'cmm-review' && headerCtrl.pageSlug !== 'register'"><a tabindex="0" id="pwb-home-link-tag" ng-class="{'active-nav': headerCtrl.currentpage == 'home'}" class="inert-link ibmGray-80 h3 ibm-bold" href="./" target="_self" aria-label="Operator Workbench homepage">Operator Workbench</a></li>
-          <li role="menuitem" id="pwb-home-link" ng-if="headerCtrl.pageSlug === 'register' || headerCtrl.pageSlug === 'cmm-directory'"><a tabindex="0" id="pwb-home-link-tag" ng-class="{'active-nav': headerCtrl.currentpage == 'home'}" class="inert-link ibmGray-80 h3 ibm-bold" href="./" target="_self" aria-label="Operator Workbench homepage">Globalization Workbench</a></li>
+          <li role="menuitem" id="pwb-home-link" ng-if="headerCtrl.pageSlug === 'register' "><a tabindex="0" id="pwb-home-link-tag" ng-class="{'active-nav': headerCtrl.currentpage == 'home'}" class="inert-link ibmGray-80 h3 ibm-bold" href="./" target="_self" aria-label="Operator Workbench homepage">Globalization Workbench</a></li>
+          <li role="menuitem" id="pwb-home-link" ng-if="headerCtrl.pageSlug === 'cmm-directory' " style="width:100%">
+            <div style="float:left">
+            <a tabindex="0" id="pwb-home-link-tag" ng-class="{'active-nav': headerCtrl.currentpage == 'home'}" class="inert-link ibmGray-80 h3 ibm-bold" href="./" target="_self" aria-label="Operator Workbench homepage">
+              Globalization Workbench
+            </a>
+            </div>
+            <div style="float:right;height:44px;">
+              <div style="padding:26px 0px 0px 5px;">
+                <div class="cmm-locale-container">
+                  <div class="select_input_container cmm-dropdown-container btn-group" uib-dropdown keyboard-nav>
+                    <button id="status_dropdown"
+                            type="button"
+                            name="status_dropdown"
+                            class="btn dropdown_btn icon-down-arrow"
+                            uib-dropdown-toggle>
+                      My Locales
+                    </button>
+                    <ul uib-dropdown-menu class="pull-right cmm-status-dropdown-menu dropdown-menu dropdown_menu_display_options"
+                        role="menu" tabindex=0>
+                      <li role="menuitem" class="cmm-locale-item">
+                        <a href="review/cmm" ng-click="">Locale Directory</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
 

@@ -190,3 +190,42 @@
 .no-langs {
   color: $ibmGray-40;
 }
+
+.cmm-locale-container {
+  width: 123px;
+  height:42px;
+  position:relative;
+  .cmm-dropdown-container {
+    width: 100%;
+    .dropdown_btn {
+      width: 100%;
+      padding-left: 18px;
+      padding-right: 18px;
+      border: none !important;
+    }
+    .dropdown-menu{
+      padding:10px;
+      top:44px !important;
+      border-top:none;
+      width:100%;
+    }
+    .cmm-status-dropdown-menu {
+      width: auto;
+    }
+    .cmm-locale-item {
+      height: 26px !important;
+      margin:0px !important;
+      a {
+        padding: 0px !important;
+        font-size: 14px !important;
+        color: inherit !important;
+        line-height: 26px !important;
+      }
+      a:hover {
+        color: $ibmGray-80 !important;
+      }
+    }
+  }
+}
+
+
