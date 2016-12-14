@@ -109,7 +109,7 @@ Open Git Bash on terminal app (not the Git GUI)
 10. Create owbuserdb database in your personal Cloudant or local CouchDB and make sure the following document is added:
 
         {
-            "_id": "5G8800897",
+            "_id": "5G1234567",
             "email": "pkadiya@us.ibm.com",
             "fname": "Pradeep",
             "lname": "Kadiyala",
@@ -159,7 +159,7 @@ Open Git Bash on terminal app (not the Git GUI)
                 }
             ],
             "invitedBy": {
-                "id": "5G8800897",
+                "id": "5G1234567",
                 "emailAddress": "pkadiya@us.ibm.com",
                 "fname":"Pradeep",
                 "lname":"Kadiyala"
