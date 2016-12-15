@@ -56,7 +56,7 @@ module.exports = {
   pwbConfig: {
     hostURL: 'https://www.ibm.com',
     webRoot: '/marketplace/workbench/',
-    secureToken: process.env.PWB_JWT_TOKEN,
+    secureToken: process.env.CFCI_PWB_JWT_TOKEN,
     api: {
       getDocsWithTranslation: 'api/translation/getDocsWithTranslation'
     }
