@@ -11,6 +11,33 @@ describe('header', function() {
   var rootScope;
   var compile;
   var httpMock;
+  var userLocalesUndefined = false;
+
+  var mockUserService = {
+    get: function() {
+      if (userLocalesUndefined) {
+        return q.resolve({settings: {initialCmmVisit: 1}});
+      } else {
+        return q.resolve({
+            locales: [{locale:'en-au', roles:['owner']},
+              {locale:'fr-au', roles:['owner']},
+              {locale:'es-ar', roles:['editor']}],
+            settings: {initialCmmVisit: 0}
+          });
+      }
+    }
+  };
+  var mockBlackListCountriesService = {
+    getLocales: function() {
+      return q.resolve([
+        {'locale':'es-ar','country':'Argentina','language':'Español'},
+        {'locale':'en-aw','country':'Aruba','language':'English'},
+        {'locale':'en-au','country':'Australia','language':'English'},
+        {'locale':'fr-au','country':'Australia','language':'French'},
+        {'locale':'en-ba','country':'Barbados','language':'English'},
+        {'locale':'pt-br','country':'Brasil','language':'Portugese'}]);
+    }
+  };
 
   beforeEach(module('common.header'));
 
@@ -23,13 +50,7 @@ describe('header', function() {
   }));
 
   it('should init the header controller', function() {
-    var UserService = {
-      get: function() {
-        var deferred = q.defer();
-        deferred.resolve({features: ['some feature']});
-        return deferred.promise;
-      }
-    };
+
     var $route = {
       current: {
         pageSlug: 'someSlug',
@@ -39,17 +60,38 @@ describe('header', function() {
     var $location = {
       path: function() {return '/somepath';}
     };
-    var featureFlags = {
-      set: function(features) {
-        expect(features[0].key).toBe('some feature');
-        expect(features[0].active).toBe(true);
+
+    var controller = $controller('HeaderController', {
+      UserService: mockUserService,
+      BlackListCountriesService: mockBlackListCountriesService,
+      $q: q,
+      $route: $route,
+      $location: $location
+    });
+    rootScope.$apply();
+
+    expect(controller.pageSlug).toBe($route.current.pageSlug);
+    expect(controller.pageTitle).toBe($route.current.pageTitle);
+  });
+
+  it('should init the header controller when user has no locales', function() {
+    userLocalesUndefined = true;
+    var $route = {
+      current: {
+        pageSlug: 'someSlug',
+        pageTitle: 'someTitle'
       }
     };
+    var $location = {
+      path: function() {return '/somepath';}
+    };
+
     var controller = $controller('HeaderController', {
-      UserService: UserService,
+      UserService: mockUserService,
+      BlackListCountriesService: mockBlackListCountriesService,
+      $q: q,
       $route: $route,
-      $location: $location,
-      featureFlags: featureFlags
+      $location: $location
     });
     rootScope.$apply();
 
@@ -58,23 +100,16 @@ describe('header', function() {
   });
 
   it('should init on register page', function() {
-    var UserService = {
-      get: function() {
-        var deferred = q.defer();
-        deferred.resolve({});
-        return deferred.promise;
-      }
-    };
     var $route = {};
     var $location = {
       path: function() {return '/register/register.html';}
     };
-    var featureFlags = {};
     var controller = $controller('HeaderController', {
-      UserService: UserService,
+      UserService: mockUserService,
+      BlackListCountriesService: mockBlackListCountriesService,
+      $q: q,
       $route: $route,
-      $location: $location,
-      featureFlags: featureFlags
+      $location: $location
     });
     rootScope.$apply();
 
