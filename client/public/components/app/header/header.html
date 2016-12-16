@@ -37,8 +37,8 @@ US Government Users Restricted Rights - Use, duplication or disclosure restricte
                     </button>
                     <ul uib-dropdown-menu class="pull-right cmm-status-dropdown-menu dropdown-menu dropdown_menu_display_options"
                         role="menu" tabindex=0>
-                      <li ng-repeat="(code, country) in headerCtrl.userLocales" class="cmm-locale-item">
-                        <a href="review/cmm/dashboard/{{code}}">{{country}}</a>
+                      <li ng-repeat="(code, country) in headerCtrl.userLocales" class="cmm-locale-item" role="menuitem">
+                        <a href="review/cmm/dashboard/{{code}}" role="option">{{country}}</a>
                       </li>
                       <li role="menuitem" class="cmm-locale-item">
                         <a href="review/cmm">Locale Directory</a>
