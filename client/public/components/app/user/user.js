@@ -15,13 +15,13 @@
     var baseURL = 'api/user';
     var service = {
       get: get,
-      getUser: getUser,
       getAll: getAll,
-      updateFeatures: updateFeatures,
+      getUser: getUser,
       inviteUser: inviteUser,
+      joinLocale: joinLocale,
       removeUsers: removeUsers,
       resendInvite: resendInvite,
-      joinLocale: joinLocale,
+      updateFeatures: updateFeatures,
       updateUser: updateUser
     };
 

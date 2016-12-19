@@ -7,7 +7,7 @@
 (function() {
   'use strict';
 
-  angular.module('review.cmmDir', [
+  angular.module('review.cmmDirectory', [
     'ngRoute',
     'ngCookies',
     'ui.bootstrap',
@@ -22,8 +22,8 @@
   function configuration($routeProvider) {
     $routeProvider.when('/review/cmm', {
       templateUrl: 'review/app/cmm/directory/cmmDirectory.html',
-      controller: 'CMMDirectory',
-      controllerAs: 'ctrlCMM',
+      controller: 'CMMDirectoryController',
+      controllerAs: 'ctrlCMMDir',
       pageTitle: 'Globalization Workbench CMM Review Directory',
       pageSlug: 'cmm-directory'
     })

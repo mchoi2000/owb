@@ -8,15 +8,15 @@
   'use strict';
 
   angular.module('common.header').controller('HeaderController', [
-    'UserService',
-    'BlackListCountriesService',
     '$q',
     '$route',
     '$location',
+    'UserService',
+    'BlackListCountriesService',
     headerCtrl
   ]);
 
-  function headerCtrl(UserService, BlackListCountriesService, $q, $route, $location) {
+  function headerCtrl($q, $route, $location, UserService, BlackListCountriesService) {
     /* jshint validthis: true */
     var self = this;
     self.path = $location.path();
