@@ -64,6 +64,6 @@ var cmmData = {
 (function() {
   'use strict';
 
-  angular.module('review.cmmDir').value('cmmData', cmmData);
+  angular.module('review.cmmDirectory').value('cmmData', cmmData);
 
 })();

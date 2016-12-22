@@ -13,7 +13,7 @@
       'common.loading',
       'common.spinner',
       'common.calendar',
-      'review.cmmDir',
+      'review.cmmDirectory',
       'review.cmmDashboard'
     ]
   ).config(configuration);

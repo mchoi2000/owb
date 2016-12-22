@@ -52,7 +52,7 @@ describe('CMM Directory Controller Spec', function() {
     }
   };
 
-  beforeEach(module('review.cmmDir'));
+  beforeEach(module('review.cmmDirectory'));
   beforeEach(function() {
     module(function($provide) {
       $provide.value('$window', $window);
@@ -78,7 +78,7 @@ describe('CMM Directory Controller Spec', function() {
       };
     });
 
-    ctrlDir = _$controller_('CMMDirectory', {
+    ctrlDir = _$controller_('CMMDirectoryController', {
       BlackListCountriesService: mockBlacklistService,
       UserService: mockUserService
     });

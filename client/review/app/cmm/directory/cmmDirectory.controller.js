@@ -7,24 +7,25 @@
 (function() {
   'use strict';
 
-  angular.module('review.cmmDir').controller('CMMDirectory',
+  angular.module('review.cmmDirectory').controller('CMMDirectoryController',
     ['$q',
     '$anchorScroll',
     '$timeout',
     '$window',
     '$rootScope',
-    'BlackListCountriesService',
     'UserService',
-    controller]);
+    'BlackListCountriesService',
+    CMMDirController]);
 
   /*jshint maxstatements: 100 */
-  function controller($q,
+  function CMMDirController (
+    $q,
     $anchorScroll,
     $timeout,
     $window,
     $rootScope,
-    BlackListCountriesService,
-    UserService) {
+    UserService,
+    BlackListCountriesService) {
     /* jshint validthis: true */
     var _this = this;
     var endOfProducts = false;
